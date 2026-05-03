@@ -4,3 +4,5 @@
 paper
 .DS_Store
 theme_track.xlsx
+__pycache__
+.pytest_cache
