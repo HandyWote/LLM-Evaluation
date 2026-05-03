@@ -34,7 +34,7 @@ uv run extract.py       # Extracts metadata from PDFs in extract/paper/ → pape
 
 1. **`original paper/`** — ~44 source PDFs from ACL, EMNLP, NAACL, CHI, JMIR, arXiv, etc.
 2. **`extract/`** — Automated PDF metadata extraction pipeline (LLM-based)
-3. **`pipline.md`** — Master 5-phase research plan (literature review → theoretical critique → pilot experiment → paper writing → revision)
-4. **`评估方法分类表...评估缺陷清单表.md`** — 7 structured coding tables for manually annotating papers (evaluation method categories, dimensions, interaction levels, prompt disclosure, theoretical grounding, inter-rater reliability, defect checklist)
-5. **`theme_track.xlsx`** — Theme tracking spreadsheet
+3. **`docs/plans/pipline.md`** — Master 5-phase research plan (literature review → theoretical critique → pilot experiment → paper writing → revision)
+4. **`docs/评估方法分类表...评估缺陷清单表.md`** — 7 structured coding tables for manually annotating papers (evaluation method categories, dimensions, interaction levels, prompt disclosure, theoretical grounding, inter-rater reliability, defect checklist)
+5. **`docs/theme_track.xlsx`** — Theme tracking spreadsheet
 6. **`paper_metadata.csv`** — Auto-extracted metadata for 52 papers (IDs 28–79)
