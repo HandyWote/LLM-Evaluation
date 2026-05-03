@@ -1,0 +1,6 @@
+.env
+.venv/
+*.csv
+paper
+.DS_Store
+theme_track.xlsx
