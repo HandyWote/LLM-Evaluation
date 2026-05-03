@@ -6,3 +6,5 @@ paper
 theme_track.xlsx
 __pycache__
 .pytest_cache
+paper_back
+eval_reports

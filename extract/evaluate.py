@@ -176,9 +176,10 @@ SYSTEM_PROMPT = """\
 
 ### 信度报告（单选）
 
-- **Yes**: 明确报告了评估者间的一致性（Cohen's kappa, Krippendorff's alpha等）
-- **No**: 使用了人类评估但未报告一致性
-- **N/A**: 没有使用人类评估
+判断是否报告了**标准化的评估者间信度系数**。
+- **Yes**: 明确报告了公认的统计系数（如 Cohen's kappa, Krippendorff's alpha, ICC, Fleiss' kappa, Pearson/Spearman 相关系数用于评估者一致性）。仅报告平均差异、标准差、百分比一致性**不算** Yes。
+- **No**: 使用了人类评估，但仅报告了非标准化的粗略指标（如平均差异、标准差、百分比一致），或完全未报告任何一致性指标。
+- **N/A**: 没有使用人类评估（纯自动指标或纯 LLM 评估）。
 
 ### 评估缺陷（从以下列表中选择1-2个）
 
@@ -195,30 +196,34 @@ LLM裁判问题：LLM judge not validated, evaluation prompt not specified, assu
 
 {
   "title": "论文标题",
-  "eval_human_experts": {"value": "YES", "evidence": "原文引用...", "page": 8, "confidence": 85},
-  "eval_lay_users": {"value": "NO", "evidence": "未发现...", "page": null, "confidence": 90},
-  "eval_user_study": {"value": "YES", "evidence": "原文引用...", "page": 7, "confidence": 80},
-  "eval_llm_judge": {"value": "NO", "evidence": "未发现...", "page": null, "confidence": 95},
-  "eval_automatic": {"value": "YES", "evidence": "原文引用...", "page": 6, "confidence": 88},
-  "dim_realism": {"value": "NO", "evidence": "说明...", "page": null, "confidence": 85},
-  "dim_consistency": {"value": "YES", "evidence": "原文引用...", "page": 7, "confidence": 75},
-  "dim_fidelity": {"value": "NO", "evidence": "说明...", "page": null, "confidence": 90},
-  "dim_utility": {"value": "YES", "evidence": "原文引用...", "page": 8, "confidence": 80},
-  "dim_human_learning": {"value": "NO", "evidence": "说明...", "page": null, "confidence": 88},
-  "dim_emotional_plausibility": {"value": "YES", "evidence": "原文引用...", "page": 7, "confidence": 70},
-  "dim_safety": {"value": "YES", "evidence": "原文引用...", "page": 9, "confidence": 82},
-  "interaction_level": {"value": "Extended", "evidence": "原文引用...", "page": 7, "confidence": 75},
-  "prompt_disclosure": {"value": "Partial", "evidence": "原文引用...", "page": 4, "confidence": 80},
-  "theoretical_grounding": {"value": "Weak", "evidence": "原文引用...", "page": 2, "confidence": 65},
-  "inter_rater_reliability": {"value": "No", "evidence": "原文引用...", "page": 8, "confidence": 70},
-  "defects": {"value": ["lacks evaluation rubric", "metric lacks interpretability"], "evidence": "原文引用...", "page": 8, "confidence": 60}
+  "eval_human_experts": {"value": "YES", "evidence": "Our evaluation team consists of two experts.", "page": 8, "confidence": 85},
+  "eval_lay_users": {"value": "NO", "evidence": "No evidence of non-expert user evaluation found in the paper.", "page": null, "confidence": 90},
+  "eval_user_study": {"value": "YES", "evidence": "We invite six volunteers to interact as clients with the AI psychotherapy models.", "page": 7, "confidence": 80},
+  "eval_llm_judge": {"value": "NO", "evidence": "No evidence of LLM-as-judge evaluation found in the paper.", "page": null, "confidence": 95},
+  "eval_automatic": {"value": "YES", "evidence": "We evaluate the model using BLEU and ROUGE scores.", "page": 6, "confidence": 88},
+  "dim_realism": {"value": "NO", "evidence": "No evidence of evaluating whether outputs appear human-like or natural found in the paper.", "page": null, "confidence": 85},
+  "dim_consistency": {"value": "YES", "evidence": "the model maintains consistent persona across multiple turns of dialogue", "page": 7, "confidence": 75},
+  "dim_fidelity": {"value": "NO", "evidence": "No evidence of evaluating adherence to a preset persona or role found in the paper.", "page": null, "confidence": 90},
+  "dim_utility": {"value": "YES", "evidence": "participants reported the system was helpful for their daily tasks", "page": 8, "confidence": 80},
+  "dim_human_learning": {"value": "NO", "evidence": "No evidence of measuring changes in human knowledge, skills, or behavior found in the paper.", "page": null, "confidence": 88},
+  "dim_emotional_plausibility": {"value": "YES", "evidence": "empathy plays a pivotal therapeutic role in fostering patients' psychological recovery", "page": 7, "confidence": 70},
+  "dim_safety": {"value": "NO", "evidence": "No evidence of systematic safety or harmfulness evaluation found in the paper.", "page": null, "confidence": 82},
+  "interaction_level": {"value": "Extended", "evidence": "The dialogue process lasts for three rounds", "page": 7, "confidence": 75},
+  "prompt_disclosure": {"value": "Partial", "evidence": "The prompts used in our experiments are shown in Figure 2.", "page": 4, "confidence": 80},
+  "theoretical_grounding": {"value": "Weak", "evidence": "we use a 5-point Likert scale to measure helpfulness", "page": 2, "confidence": 65},
+  "inter_rater_reliability": {"value": "No", "evidence": "No evidence of standardized inter-rater reliability coefficients (e.g., Cohen's kappa, Krippendorff's alpha) found in the paper.", "page": null, "confidence": 70},
+  "defects": {"value": ["lacks evaluation rubric", "metric lacks interpretability"], "evidence": "the evaluation criteria are not clearly defined in the paper", "page": 8, "confidence": 60}
 }
 
 重要：
 - 每个字段都必须有值，不允许留空或null（value不能为空）
-- 如果某个评估方法或维度没有被使用，value 应为 "NO"，evidence 说明论文中未使用该方法/未评估该维度
+- 如果某个评估方法或维度没有被使用，value 应为 "NO"，evidence 使用模板："No evidence of [method/dimension] found in the paper."
 - confidence 反映你对判断的确定程度（0-100）
-- evidence 必须来自论文原文，不能编造
+- **evidence 必须是论文原文的逐字引用（verbatim quote），一字不改，一句不编。**
+- 禁止改写、概括、总结、释义或用自己的话重新表述。
+- 如果 value 为 NO，evidence 中写 "No evidence of [具体方法/维度] found in the paper." 即可，不要编造原文。
+- 引用可以省略开头或结尾的片段（用"..."表示），但中间部分必须逐字一致。
+- 页码标记 "--- Page N ---" 会帮助你定位原文，请据此给出准确的 page 值。
 """
 
 
