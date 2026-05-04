@@ -28,6 +28,10 @@ EXTRACT_DIR = PROJECT_ROOT / "extract"
 REPORTS_DIR = EXTRACT_DIR / "eval_reports"
 PAPER_DIR = EXTRACT_DIR / "paper"
 
+# 复用 pdf_index.py 的归一化逻辑，保持验证结果与 pipeline 一致
+sys.path.insert(0, str(EXTRACT_DIR))
+from pdf_index import _normalize_whitespace as normalize, _clean_footnote_breaks
+
 
 def extract_pdf_pages(pdf_path: Path) -> dict[int, str]:
     """Extract PDF text per page, return {page_number: text}."""
@@ -39,10 +43,6 @@ def extract_pdf_pages(pdf_path: Path) -> dict[int, str]:
         pages[i + 1] = page.get_text()
     doc.close()
     return pages
-
-
-def normalize(text: str) -> str:
-    return re.sub(r"\s+", " ", text).lower().strip()
 
 
 def parse_report(md_path: Path) -> list[dict]:
@@ -116,7 +116,7 @@ def verify_evidence(
     if claimed_page is not None and all_exact:
         # Check if evidence appears on the claimed page
         if claimed_page in pages:
-            page_text = normalize(pages[claimed_page])
+            page_text = normalize(_clean_footnote_breaks(pages[claimed_page]))
             first_part_norm = normalize(parts[0]) if parts else ""
             if first_part_norm and first_part_norm in page_text:
                 page_match = True
@@ -124,7 +124,7 @@ def verify_evidence(
             else:
                 # Search all pages for the actual location
                 for pn, pt in pages.items():
-                    if first_part_norm in normalize(pt):
+                    if first_part_norm in normalize(_clean_footnote_breaks(pt)):
                         page_found_on = pn
                         break
                 page_match = page_found_on == claimed_page
@@ -148,8 +148,28 @@ def verify_evidence(
 
 def extract_judgment_hints(pages: dict[int, str]) -> dict:
     """Extract relevant snippets for judgment verification of tricky fields."""
-    full_text = "\n".join(pages.values()).lower()
     hints = {}
+    # 预计算归一化后的页面文本，避免重复计算
+    norm_pages = {pn: normalize(_clean_footnote_breaks(pt)) for pn, pt in pages.items()}
+
+    def _search_keywords(keywords: list[str], max_hits: int = 3, extra_filter: list[str] | None = None) -> list[dict]:
+        hits = []
+        for kw in keywords:
+            kw_norm = kw.replace("-", "").replace("'", "").replace("’", "")
+            for pn, pt_norm in norm_pages.items():
+                if kw_norm in pt_norm:
+                    raw_pt = pages[pn]
+                    sentences = re.split(r'[.!?\n]', raw_pt)
+                    for s in sentences:
+                        s_norm = normalize(s)
+                        if kw_norm in s_norm:
+                            if extra_filter and not any(f.replace("-","") in s_norm for f in extra_filter):
+                                continue
+                            hits.append({"page": pn, "text": s.strip()[:200]})
+                            break
+                    if len(hits) >= max_hits:
+                        return hits
+        return hits
 
     # reliability_reported / coding_options: look for standard coefficients
     reliability_keywords = [
@@ -157,31 +177,15 @@ def extract_judgment_hints(pages: dict[int, str]) -> dict:
         "fleiss", "inter-rater", "inter-annotator agreement",
         "iaa", "annotator agreement",
     ]
-    reliability_hits = []
-    for kw in reliability_keywords:
-        for pn, pt in pages.items():
-            if kw in pt.lower():
-                sentences = re.split(r'[.!?\n]', pt)
-                for s in sentences:
-                    if kw in s.lower():
-                        reliability_hits.append({"page": pn, "text": s.strip()[:200]})
-    if reliability_hits:
-        hints["reliability_reported"] = reliability_hits[:3]
+    hits = _search_keywords(reliability_keywords)
+    if hits:
+        hints["reliability_reported"] = hits
 
     # eval_llm_judge: look for LLM scoring/evaluating
     judge_keywords = ["gpt-4", "gpt-3.5", "claude", "llm-as-judge", "llm as evaluator"]
-    judge_hits = []
-    for kw in judge_keywords:
-        for pn, pt in pages.items():
-            if kw in pt.lower():
-                sentences = re.split(r'[.!?\n]', pt)
-                for s in sentences:
-                    if kw in s.lower() and any(
-                        w in s.lower() for w in ["score", "evaluat", "rate", "judge", "assess"]
-                    ):
-                        judge_hits.append({"page": pn, "text": s.strip()[:200]})
-    if judge_hits:
-        hints["eval_llm_judge"] = judge_hits[:3]
+    hits = _search_keywords(judge_keywords, extra_filter=["score", "evaluat", "rate", "judge", "assess"])
+    if hits:
+        hints["eval_llm_judge"] = hits
 
     # llm_judge_validated: look for correlation/agreement between LLM and human
     validated_keywords = [
@@ -189,16 +193,9 @@ def extract_judgment_hints(pages: dict[int, str]) -> dict:
         "human-llm agreement", "validated against",
         "pearson", "spearman",
     ]
-    validated_hits = []
-    for kw in validated_keywords:
-        for pn, pt in pages.items():
-            if kw in pt.lower():
-                sentences = re.split(r'[.!?\n]', pt)
-                for s in sentences:
-                    if kw in s.lower():
-                        validated_hits.append({"page": pn, "text": s.strip()[:200]})
-    if validated_hits:
-        hints["llm_judge_validated"] = validated_hits[:3]
+    hits = _search_keywords(validated_keywords)
+    if hits:
+        hints["llm_judge_validated"] = hits
 
     # theory_grounding: look for validated scales/theories
     theory_keywords = [
@@ -206,32 +203,18 @@ def extract_judgment_hints(pages: dict[int, str]) -> dict:
         "psychometric", "cbt", "cognitive-behavioral",
         "clinical trial", "established measure",
     ]
-    theory_hits = []
-    for kw in theory_keywords:
-        for pn, pt in pages.items():
-            if kw in pt.lower():
-                sentences = re.split(r'[.!?\n]', pt)
-                for s in sentences:
-                    if kw in s.lower():
-                        theory_hits.append({"page": pn, "text": s.strip()[:200]})
-    if theory_hits:
-        hints["theory_grounding"] = theory_hits[:3]
+    hits = _search_keywords(theory_keywords)
+    if hits:
+        hints["theory_grounding"] = hits
 
     # prompt_disclosure: look for appendix/supplementary with prompts
     prompt_keywords = [
         "appendix", "supplementary", "prompt template",
         "full prompt", "prompt is provided",
     ]
-    prompt_hits = []
-    for kw in prompt_keywords:
-        for pn, pt in pages.items():
-            if kw in pt.lower():
-                sentences = re.split(r'[.!?\n]', pt)
-                for s in sentences:
-                    if kw in s.lower():
-                        prompt_hits.append({"page": pn, "text": s.strip()[:200]})
-    if prompt_hits:
-        hints["prompt_disclosure"] = prompt_hits[:3]
+    hits = _search_keywords(prompt_keywords)
+    if hits:
+        hints["prompt_disclosure"] = hits
 
     return hints
 
@@ -267,7 +250,7 @@ def verify_paper(paper_id: str) -> dict | None:
 
     report = parse_report(report_path)
     pages = extract_pdf_pages(pdf_path)
-    norm_full = normalize("".join(pages.values()))
+    norm_full = normalize(_clean_footnote_breaks("".join(pages.values())))
 
     results = []
     for field_data in report["fields"]:
