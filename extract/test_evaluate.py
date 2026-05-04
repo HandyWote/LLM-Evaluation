@@ -24,9 +24,9 @@ def _make_full_response(**overrides):
         "dim_safety": _make_field("NO"),
         "interaction_level": _make_field("Extended"),
         "prompt_disclosure": _make_field("Partial"),
-        "theoretical_grounding": _make_field("Weak"),
-        "inter_rater_reliability": _make_field("No"),
-        "defects": {"value": ["lacks evaluation rubric"], "evidence": "test", "page": 5, "confidence": 70},
+        "theory_grounding": _make_field("Weak"),
+        "reliability_reported": _make_field("No"),
+        "coding_options": _make_field("No"),
     }
     base.update(overrides)
     return json.dumps(base)
@@ -39,7 +39,6 @@ def test_parse_valid_response():
     assert result["eval_human_experts"]["value"] == "YES"
     assert result["eval_lay_users"]["value"] == "NO"
     assert result["interaction_level"]["value"] == "Extended"
-    assert result["defects"]["value"] == ["lacks evaluation rubric"]
 
 
 def test_parse_strips_code_fences():
@@ -67,35 +66,17 @@ def test_parse_invalid_single_choice_uses_last_default():
     assert result["interaction_level"]["value"] == "Longitudinal"
 
 
-def test_parse_defects_caps_at_two():
-    three_defects = ["lacks evaluation rubric", "limited sample size", "participant expertise unclear"]
-    raw = _make_full_response(defects={"value": three_defects, "evidence": "t", "page": 1, "confidence": 70})
-    result = parse_llm_response(raw)
-    assert len(result["defects"]["value"]) == 2
-
-
-def test_parse_defects_filters_invalid():
-    raw = _make_full_response(defects={"value": ["not a real defect"], "evidence": "t", "page": 1, "confidence": 70})
-    result = parse_llm_response(raw)
-    assert result["defects"]["value"] == ["lacks evaluation rubric"]
-
-
-def _make_parsed():
-    return parse_llm_response(_make_full_response())
-
-
 def test_build_csv_row():
-    parsed = _make_parsed()
+    parsed = parse_llm_response(_make_full_response())
     row = build_csv_row("28", parsed)
-    assert row["id"] == "28"
-    assert row["eval_human_experts"] == "YES"
-    assert row["eval_lay_users"] == "NO"
-    assert row["interaction_level"] == "Extended"
-    assert row["defects"] == "lacks evaluation rubric"
+    assert row["Paper_ID"] == "28"
+    assert row["Eval_Human_Experts"] == "YES"
+    assert row["Eval_Lay_Users"] == "NO"
+    assert row["Interaction_Level"] == "Extended"
 
 
 def test_generate_markdown_contains_title():
-    parsed = _make_parsed()
+    parsed = parse_llm_response(_make_full_response())
     md = generate_markdown("28", parsed)
     assert "Test Paper" in md
     assert "eval_human_experts" in md
@@ -104,6 +85,6 @@ def test_generate_markdown_contains_title():
 
 
 def test_generate_markdown_shows_page():
-    parsed = _make_parsed()
+    parsed = parse_llm_response(_make_full_response())
     md = generate_markdown("28", parsed)
     assert "p.1" in md
