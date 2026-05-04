@@ -1,3 +1,119 @@
+# 评估维度扩充实施计划
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** 扩充评估维度表文档并重写 evaluate.py，使输出严格对齐 theme_track.csv 的 43 列 schema。
+
+**Architecture:** 文档先行（追加表 8-11），然后完整重写 evaluate.py——用 CSV_COLUMNS 元组列表维护字段映射，SYSTEM_PROMPT 按 9 个 section 组织，解析和输出逻辑按字段类型分组处理。
+
+**Tech Stack:** Python 3.12, pymupdf, openai (async), python-dotenv
+
+**Spec:** `docs/specs/2026-05-04-eval-schema-expansion-design.md`
+
+---
+
+### Task 1: 扩充评估维度表文档
+
+**Files:**
+- Modify: `docs/评估维度表.md:113` (在文件末尾追加表 8-11)
+
+- [ ] **Step 1: 在表 7 之后追加表 8-11**
+
+在文件末尾（第 113 行之后）追加以下内容：
+
+```markdown
+
+---
+
+### 表 8：模拟/角色建模
+*注：识别论文中的模拟框架设计和角色建模方式。*
+
+| 字段 | 类型 | 定义 | 选项 |
+| :--- | :--- | :--- | :--- |
+| **Focus_Type** | 开放分类 | 论文的主要研究焦点类型 | SimulationFramework: 提出模拟框架 / EvaluationFramework: 提出评估框架 / Dataset: 构建数据集 / Training System: 训练系统 / Tool: 工具等 |
+| **Simulation_Target** | 单选 | 论文模拟的对象 | Client Agent: 模拟来访者 / Therapist Agent: 模拟咨询师 / Dual-Agent: 双方都模拟 / Human Trainee: 人类受训者 |
+| **Persona_Model_Depth** | 单选 | 模拟用户画像的建模深度 | Surface Persona: 表层描述(如用文字profile) / Behavioral State Model: 行为状态模型 / Cognitive Model: 认知模型(含信念/动机等) / Dynamic Traits: 动态特质(随对话变化) / Expert Principles: 专家定义的原则 |
+| **Uses_Dynamic_State** | YES/NO | 是否使用动态状态建模 | YES=有明确的动态状态追踪机制（如状态转移、会话记忆等） |
+| **Temporal_Modeling_Details** | 自由文本 | 动态状态建模的具体方式描述 | 如 State transitions / Session memory / Dynamic openness / Conversation principles update / Limited |
+
+---
+
+### 表 9：评估深度与理论操作化
+*注：评估论文对行为和理论的深入程度。*
+
+| 字段 | 类型 | 定义 | 选项 |
+| :--- | :--- | :--- | :--- |
+| **Raw_Eval_Metrics** | 自由文本 | 论文实际使用的评估指标名称 | 如 "BLEU, ROUGE-L, BERTScore, human Likert 1-5" |
+| **Theory_Operationalized** | 单选 | 理论是否被用于定义评估标准或指标，不仅仅是提及 | Strong: 评估标准明确源于理论 / Partial: 理论被提及并部分操作化 / None: 理论仅被提及或完全未使用 |
+| **Behavior_Eval_Depth** | 单选 | 论文对交互过程中行为变化的评估深度 | Dynamic: 考虑行为如何随对话轮次演变 / Static: 仅评估单轮或静态输出 / None: 未评估行为 |
+| **Intervention_Sensitivity** | YES/NO | 系统行为是否根据输入/干预发生适当变化 | 仅当论文明确测试了不同输入下行为的变化时标 YES |
+| **Clinical_Theory** | 自由文本 | 具体使用的临床理论或框架名称 | 如 "CBT-inspired", "Motivational Interviewing", "Person-Centered Therapy" |
+
+---
+
+### 表 10：信度与方法论细节
+*注：补充表 6 的信度报告，记录具体方法。*
+
+| 字段 | 类型 | 定义 | 选项 |
+| :--- | :--- | :--- | :--- |
+| **Agreement_Method** | 自由文本 | 具体使用的一致性评测方法 | 如 Cohen's kappa, Krippendorff's alpha。若无则留空 |
+| **Coding_Options** | Yes / No / N/A | 论文是否明确报告了评估者之间的一致性 | Yes: 明确报告了评估者间的 agreement / No: 使用了人类评估但未报告 agreement 或 consistency / N/A: 没有使用人类评估 |
+
+---
+
+### 表 11：评估质量标记
+*注：替代表 7 的汇总缺陷方式，逐项独立判断 YES 或 NO。*
+
+| 字段 | 定义 |
+| :--- | :--- |
+| **Has_Rubric** | 是否提供了明确的评分标准/评分指引 |
+| **LLM_Judge_Validated** | LLM裁判是否经过验证（与人类评估对比等）。若未使用 LLM judge 则标 NO |
+| **Uses_Standard_Metrics** | 是否使用了标准/公认的评估指标（非自创） |
+| **Metric_Interpretable** | 评估指标的含义是否清晰可解释 |
+| **Comparable_To_Prior_Work** | 评估是否可与先前研究进行对比 |
+| **Has_Longitudinal_Eval** | 是否包含纵向/长期评估 |
+| **Has_Robustness_Testing** | 是否在不同条件下进行了鲁棒性测试 |
+| **Has_Failure_Analysis** | 是否分析了失败案例 |
+| **Sim_Behavior_Realistic** | 模拟行为是否真实（非过于顺从或简化）。若未使用模拟则标 NO |
+| **Dataset_Available** | 数据集是否公开可用 |
+```
+
+- [ ] **Step 2: 验证追加内容**
+
+目视检查文件末尾，确认表 8-11 已追加，格式与表 1-7 一致。
+
+- [ ] **Step 3: 提交**
+
+```bash
+git add docs/评估维度表.md
+git commit -m "docs: add tables 8-11 for simulation, eval depth, reliability, and quality flags"
+```
+
+---
+
+### Task 2: 重写 evaluate.py
+
+**Files:**
+- Rewrite: `extract/evaluate.py`
+
+这是完整重写。新文件按以下结构组织：
+1. 配置与常量
+2. CSV 列映射（43 列严格对齐 theme_track.csv）
+3. 字段分组（BOOL / SINGLE_CHOICE / FREE_TEXT）
+4. SYSTEM_PROMPT（9 个 section）
+5. PDF 文本提取
+6. 响应解析
+7. CSV 输出
+8. Markdown 报告
+9. LLM 调用
+10. 幂等性
+11. main
+
+- [ ] **Step 1: 用完整的新文件替换 evaluate.py**
+
+完整文件内容如下（每部分用注释标记）：
+
+```python
 """
 从 PDF 论文中提取评价方法论信息，输出与 theme_track.csv schema 完全对齐的 CSV 和验证 Markdown。
 
@@ -533,3 +649,56 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+```
+
+- [ ] **Step 2: 删除旧的 eval_results.csv（如存在）**
+
+旧 schema 的 CSV 不兼容，需删除后重新运行。
+
+```bash
+rm -f extract/eval_results.csv
+```
+
+- [ ] **Step 3: 提交**
+
+```bash
+git add extract/evaluate.py
+git commit -m "feat: rewrite evaluate.py to align with theme_track.csv 43-column schema"
+```
+
+---
+
+### Task 3: 端到端验证
+
+- [ ] **Step 1: 运行脚本处理一个 PDF**
+
+```bash
+cd extract && uv run evaluate.py
+```
+
+预期：处理 paper/ 目录下的 PDF，输出 eval_results.csv 和 eval_reports/*.md。
+
+- [ ] **Step 2: 检查 CSV header 与 theme_track.csv 一致**
+
+```bash
+head -1 extract/eval_results.csv
+```
+
+预期输出应包含 43 列，header 行与 `docs/theme_track.csv` 的第一行完全一致。
+
+- [ ] **Step 3: 检查数据行的字段值格式**
+
+```bash
+head -2 extract/eval_results.csv | tail -1
+```
+
+预期：布尔字段为 YES/NO，单选字段为选项文本，自由文本字段有内容。
+
+- [ ] **Step 4: 检查 Markdown 报告**
+
+```bash
+ls extract/eval_reports/
+cat extract/eval_reports/<paper_id>.md | head -30
+```
+
+预期：包含所有 section，每个字段有 value、confidence、evidence。

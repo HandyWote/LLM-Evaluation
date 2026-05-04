@@ -60,11 +60,14 @@ Page Match column:
 
 ### Step 3: Review judgment correctness
 
-The script outputs `judgment_hints` — extracted snippets from the PDF containing keywords relevant to the three tricky fields. Use these snippets to assess:
+The script outputs `judgment_hints` — extracted snippets from the PDF containing keywords relevant to tricky fields. Use these snippets to assess:
 
-- **`inter_rater_reliability`**: Does the paper report a *standardized statistical coefficient* (Cohen's kappa, Krippendorff's alpha, ICC), or just average differences / standard deviations / percentage agreement?
+- **`reliability_reported`**: Does the paper report a *standardized statistical coefficient* (Cohen's kappa, Krippendorff's alpha, ICC), or just average differences / standard deviations / percentage agreement? Yes = coefficient reported, No = human eval exists but no coefficient, N/A = no human eval at all.
+- **`coding_options`**: Is there explicit inter-annotator agreement data reported? Yes = agreement explicitly reported, No = human eval but no agreement data, N/A = no human eval.
 - **`eval_llm_judge`**: Is the LLM actually *scoring/comparing* outputs, or just being used for feature extraction / data generation?
-- **`theoretical_grounding`**: Is the evaluation grounded in validated instruments/theories with proper operationalization, or just mentioning concepts?
+- **`llm_judge_validated`**: Is there evidence of *validating* the LLM judge against human ratings (e.g. correlation, agreement scores)?
+- **`theory_grounding`**: Is the evaluation grounded in validated instruments/theories with proper operationalization, or just mentioning concepts? Strong = evaluation criteria derived from theory, Weak = theory mentioned but not operationalized, None = no theory reference.
+- **`prompt_disclosure`**: Are the actual prompts included in the paper or appendix? Full = complete prompts visible, Partial = fragments or description only, No = no prompts shared.
 
 If `judgment_hints` is empty for a field, that means no relevant keywords were found — the field's judgment is likely correct but you should note low confidence.
 
@@ -75,8 +78,12 @@ Format the review:
 
 | Field | Extracted | Verified | Note |
 |-------|-----------|----------|------|
-| inter_rater_reliability | Yes | No | Reports Avg.Diff/Std.Dev, not kappa/alpha |
-| ... | | | |
+| reliability_reported | No | No | Reports Avg.Diff/Std.Dev, not kappa/alpha |
+| coding_options | No | No | Uses human eval but no agreement data |
+| eval_llm_judge | YES | YES | GPT-4 scores empathy on 1-5 Likert scale |
+| llm_judge_validated | NO | — | No LLM judge validation found |
+| theory_grounding | Weak | Weak | Mentions CBT but not operationalized in eval |
+| prompt_disclosure | Partial | Partial | Prompts described but not fully shown |
 ```
 
 ### Step 4: Summary
@@ -101,5 +108,6 @@ For batch verification, also output:
 
 - The script handles PDF hyphenation artifacts (e.g., `psy-\nchological` → `psychological`) via whitespace normalization.
 - Evidence with `...` is split into parts and each part is verified independently.
-- Focus judgment review on the three tricky fields — the script provides hints so you don't need to read the full PDF.
+- The current schema has 39 structured fields across 5 categories: simulation modeling, eval methods, eval dimensions, eval depth, reliability, and quality markers.
+- Focus judgment review on the six tricky fields — the script provides hints so you don't need to read the full PDF.
 - If a paper's PDF or report is missing, the script reports an error — skip it and note it in the summary.

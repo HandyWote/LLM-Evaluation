@@ -66,10 +66,6 @@ def parse_report(md_path: Path) -> list[dict]:
             except ValueError:
                 pass
 
-        # Handle list values (defects)
-        if ", " in value and field == "defects":
-            pass  # keep as-is
-
         fields.append(
             {
                 "field": field,
@@ -155,7 +151,7 @@ def extract_judgment_hints(pages: dict[int, str]) -> dict:
     full_text = "\n".join(pages.values()).lower()
     hints = {}
 
-    # inter_rater_reliability: look for standard coefficients
+    # reliability_reported / coding_options: look for standard coefficients
     reliability_keywords = [
         "cohen", "kappa", "krippendorff", "icc", "intra-class",
         "fleiss", "inter-rater", "inter-annotator agreement",
@@ -165,13 +161,12 @@ def extract_judgment_hints(pages: dict[int, str]) -> dict:
     for kw in reliability_keywords:
         for pn, pt in pages.items():
             if kw in pt.lower():
-                # Extract sentence containing the keyword
                 sentences = re.split(r'[.!?\n]', pt)
                 for s in sentences:
                     if kw in s.lower():
                         reliability_hits.append({"page": pn, "text": s.strip()[:200]})
     if reliability_hits:
-        hints["inter_rater_reliability"] = reliability_hits[:3]
+        hints["reliability_reported"] = reliability_hits[:3]
 
     # eval_llm_judge: look for LLM scoring/evaluating
     judge_keywords = ["gpt-4", "gpt-3.5", "claude", "llm-as-judge", "llm as evaluator"]
@@ -188,7 +183,24 @@ def extract_judgment_hints(pages: dict[int, str]) -> dict:
     if judge_hits:
         hints["eval_llm_judge"] = judge_hits[:3]
 
-    # theoretical_grounding: look for validated scales/theories
+    # llm_judge_validated: look for correlation/agreement between LLM and human
+    validated_keywords = [
+        "correlation with human", "agreement with human",
+        "human-llm agreement", "validated against",
+        "pearson", "spearman",
+    ]
+    validated_hits = []
+    for kw in validated_keywords:
+        for pn, pt in pages.items():
+            if kw in pt.lower():
+                sentences = re.split(r'[.!?\n]', pt)
+                for s in sentences:
+                    if kw in s.lower():
+                        validated_hits.append({"page": pn, "text": s.strip()[:200]})
+    if validated_hits:
+        hints["llm_judge_validated"] = validated_hits[:3]
+
+    # theory_grounding: look for validated scales/theories
     theory_keywords = [
         "validated", "validated instrument", "validated scale",
         "psychometric", "cbt", "cognitive-behavioral",
@@ -203,7 +215,23 @@ def extract_judgment_hints(pages: dict[int, str]) -> dict:
                     if kw in s.lower():
                         theory_hits.append({"page": pn, "text": s.strip()[:200]})
     if theory_hits:
-        hints["theoretical_grounding"] = theory_hits[:3]
+        hints["theory_grounding"] = theory_hits[:3]
+
+    # prompt_disclosure: look for appendix/supplementary with prompts
+    prompt_keywords = [
+        "appendix", "supplementary", "prompt template",
+        "full prompt", "prompt is provided",
+    ]
+    prompt_hits = []
+    for kw in prompt_keywords:
+        for pn, pt in pages.items():
+            if kw in pt.lower():
+                sentences = re.split(r'[.!?\n]', pt)
+                for s in sentences:
+                    if kw in s.lower():
+                        prompt_hits.append({"page": pn, "text": s.strip()[:200]})
+    if prompt_hits:
+        hints["prompt_disclosure"] = prompt_hits[:3]
 
     return hints
 
