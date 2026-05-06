@@ -63,7 +63,7 @@ Page Match column:
 After the detailed table, write a short plain-language summary for the user. Use casual Chinese (大白话). Cover:
 
 1. **页码标错** — which field, claimed p.X but actually on p.Y
-2. **证据是编的** — which fields have FABRICATED evidence. Explain: "结论是对的，但附的那段证据文字不是论文里的原话，是 LLM 自己编的推理。"
+2. **证据是编的** — which fields have FABRICATED evidence. Explain: "结论是对的，但附的那段证据文字不是论文里的原话，是 LLM 自己编的推理。" Note: Step 4b will manually verify YES fields to distinguish true fabrication from false positives.
 3. **PARAPHRASED 不用管** — "这几个是 PDF 分页导致句子被截断，脚本匹配不全，内容本身没问题。"
 
 Keep it short — one sentence per issue type. Only mention issues that exist.
@@ -92,6 +92,57 @@ After fixing, show the user what was changed:
 ```
 
 Then re-run the verification (without `--fix`) to confirm all fixes are clean. Only report remaining non-TEMPLATE issues.
+
+### Step 4b: Manually verify FABRICATED on YES fields
+
+The `--fix` flag only handles NO/N/A fields. For YES fields marked FABRICATED, you must manually check whether it's a **true fabrication** or a **false positive** caused by PDF formatting issues (multi-column layout, line breaks within words, figure/table text not extracted).
+
+For each FABRICATED YES field:
+
+1. **Search the PDF** using `fitz` (PyMuPDF) for the unfound evidence fragment. Extract text from the claimed page and surrounding pages (±1):
+
+```bash
+cd extract && uv run python3 -c "
+import fitz
+doc = fitz.open('paper/{id}.pdf')
+# Search claimed page and neighbors
+for p in [claimed_page - 2, claimed_page - 1, claimed_page - 1, claimed_page, claimed_page + 1]:
+    if 0 <= p < len(doc):
+        text = doc[p].get_text()
+        # Normalize whitespace like the verification script does
+        normalized = text.replace('-\n', '').replace('\n', ' ').replace('  ', ' ')
+        if '<search keyword>' in normalized.lower():
+            print(f'FOUND on page index {p}:')
+            print(normalized)
+            break
+else:
+    print('NOT FOUND')
+"
+```
+
+2. **Classify the result**:
+   - **False positive** — evidence IS in the PDF but the script missed it (due to multi-column layout, hyphenation, figure captions, or appendix pages with different numbering). Report as: "证据实际存在于 PDF p.X，因 [原因] 导致脚本误报 FABRICATED"。No fix needed.
+   - **True fabrication** — evidence is genuinely NOT in the PDF. The LLM hallucinated the quote. You must manually edit the report in `eval_reports/{id}.md`:
+     - If the YES judgment is still correct (evidence exists elsewhere, just not this quote): find the real verbatim evidence from the PDF and replace the fabricated quote, keeping the same page number or correcting it.
+     - If the YES judgment is wrong (should be NO): change the value to NO and replace the evidence with the standard template: "No evidence of [field description] found in the paper."
+
+3. **Report the outcome** in the fix table:
+
+```
+### 修复内容
+
+| Paper | Field | Fix Type | Detail |
+|-------|-------|----------|--------|
+| 83    | has_rubric | 无需修复（误报） | 证据在 PDF p.13 附录 C.2，双栏排版断行导致脚本漏检 |
+| 42    | eval_llm_judge | 证据替换 | FABRICATED → 真实原文（从 p.7 提取） |
+| 55    | theory_grounding | 判断+证据修正 | YES → Weak，替换为实际原文 |
+```
+
+**Common false positive causes**:
+- Two-column PDF layout splits sentences across columns
+- Words hyphenated at line endings (e.g., "inter-\npretations")
+- Evidence in appendix with different page numbering than body
+- Evidence inside table cells or figure captions not cleanly extracted
 
 ### Step 5: Review judgment correctness
 
