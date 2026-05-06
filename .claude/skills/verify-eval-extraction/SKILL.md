@@ -12,7 +12,7 @@ You are verifying the output of `extract/evaluate.py` against the original PDFs.
 
 ## Workflow
 
-### Step 1: Determine scope and run verification script
+### Step 1: Run verification
 
 Run the verification script from the project root. The script extracts PDF text, parses the Markdown reports, and checks every evidence claim against the original paper.
 
@@ -27,9 +27,9 @@ cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_ext
 cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_extraction.py --all
 ```
 
-The script outputs JSON. Save it to a variable or file for Step 2.
+The script outputs JSON. Parse it for Step 2.
 
-### Step 2: Present evidence verification results
+### Step 2: Present detailed evidence table
 
 For each paper, format the JSON results into a table:
 
@@ -49,7 +49,7 @@ For each paper, format the JSON results into a table:
 
 Quality labels:
 - **EXACT** — verbatim match found
-- **TEMPLATE** — NO field using standard template text
+- **TEMPLATE** — NO/N/A field using standard template text
 - **PARAPHRASED** — partial match found, but full quote not verbatim (detail shows what matched and what didn't)
 - **FABRICATED** — quote not found in PDF at all
 
@@ -58,7 +58,42 @@ Page Match column:
 - ❌ p.X→p.Y — evidence found but on a different page
 - — — not applicable (TEMPLATE/PARAPHRASED/FABRICATED)
 
-### Step 3: Review judgment correctness
+### Step 3: Explain issues in plain language
+
+After the detailed table, write a short plain-language summary for the user. Use casual Chinese (大白话). Cover:
+
+1. **页码标错** — which field, claimed p.X but actually on p.Y
+2. **证据是编的** — which fields have FABRICATED evidence. Explain: "结论是对的，但附的那段证据文字不是论文里的原话，是 LLM 自己编的推理。"
+3. **PARAPHRASED 不用管** — "这几个是 PDF 分页导致句子被截断，脚本匹配不全，内容本身没问题。"
+
+Keep it short — one sentence per issue type. Only mention issues that exist.
+
+### Step 4: Auto-fix
+
+Run the verification script with `--fix` to automatically apply fixes:
+
+```bash
+cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_extraction.py {ids} --fix
+```
+
+The `--fix` flag handles two types of issues:
+- **Page fixes**: Corrects page numbers where evidence was found on a different page than claimed
+- **Evidence fixes**: Replaces FABRICATED evidence in NO/N/A fields with standard template text
+
+After fixing, show the user what was changed:
+
+```
+### 修复内容
+
+| Paper | Field | Fix Type | Detail |
+|-------|-------|----------|--------|
+| 18    | temporal_modeling_details | 页码修正 | p.5 → p.4 |
+| 18    | reliability_reported | 证据替换 | FABRICATED → 标准模板 |
+```
+
+Then re-run the verification (without `--fix`) to confirm all fixes are clean. Only report remaining non-TEMPLATE issues.
+
+### Step 5: Review judgment correctness
 
 The script outputs `judgment_hints` — extracted snippets from the PDF containing keywords relevant to tricky fields. Use these snippets to assess:
 
@@ -86,7 +121,7 @@ Format the review:
 | prompt_disclosure | Partial | Partial | Prompts described but not fully shown |
 ```
 
-### Step 4: Summary
+### Step 6: Summary
 
 For each paper:
 ```
@@ -98,10 +133,10 @@ For batch verification, also output:
 ```
 ## Batch Summary
 
-| Paper | EXACT | PARAPHRASED | FABRICATED | TEMPLATE | Page Wrong | Judgment Fix |
-|-------|-------|-------------|------------|----------|------------|--------------|
-| 1     | 14    | 3           | 0          | 0        | 1          | 1            |
-| 28    | 16    | 1           | 0          | 0        | 0          | 0            |
+| Paper | EXACT | PARAPHRASED | FABRICATED | TEMPLATE | Page Wrong | Judgment Fix | Fixed |
+|-------|-------|-------------|------------|----------|------------|--------------|-------|
+| 1     | 14    | 3           | 0          | 0        | 1          | 1            | ✅    |
+| 28    | 16    | 1           | 0          | 0        | 0          | 0            | —     |
 ```
 
 ## Tips

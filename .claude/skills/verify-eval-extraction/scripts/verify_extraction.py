@@ -288,10 +288,107 @@ def verify_paper(paper_id: str) -> dict | None:
     }
 
 
+def _generate_template_evidence(field: str, value: str) -> str:
+    """Generate a standard template evidence text for a NO/N/A field."""
+    templates = {
+        "reliability_reported": "No evidence of inter-rater reliability statistics (e.g., Cohen's kappa, Krippendorff's alpha, ICC) reported in this paper, as no human evaluation involving multiple raters was conducted.",
+        "coding_options": "No evidence of inter-annotator agreement or coding option details reported in this paper, as no human evaluation involving multiple coders was conducted.",
+    }
+    if field in templates:
+        return templates[field]
+    return f"No evidence of {field.replace('_', ' ')} found in the paper."
+
+
+def compute_fixes(result: dict) -> list[dict]:
+    """Compute needed fixes for a single paper's verification result."""
+    fixes = []
+    for field_data in result.get("fields", []):
+        field = field_data["field"]
+        quality = field_data["quality"]
+        claimed_page = field_data["claimed_page"]
+        page_found_on = field_data.get("page_found_on")
+        value = field_data["value"]
+
+        # Fix page number: evidence is EXACT but on wrong page
+        if quality == "EXACT" and claimed_page is not None and page_found_on is not None and claimed_page != page_found_on:
+            fixes.append({
+                "field": field,
+                "type": "page_fix",
+                "old_page": claimed_page,
+                "new_page": page_found_on,
+                "description": f"p.{claimed_page} → p.{page_found_on}",
+            })
+
+        # Fix FABRICATED evidence for NO/N/A/None/Not specified fields
+        if quality == "FABRICATED" and value in ("NO", "N/A", "None", "Not specified"):
+            new_evidence = _generate_template_evidence(field, value)
+            fixes.append({
+                "field": field,
+                "type": "evidence_fix",
+                "old_evidence": field_data.get("detail", ""),
+                "new_evidence": new_evidence,
+                "description": f"Replace fabricated evidence with template text",
+            })
+
+    return fixes
+
+
+def apply_fixes(paper_id: str, report_path: Path, fixes: list[dict]) -> None:
+    """Apply fixes to a report file in-place."""
+    content = report_path.read_text(encoding="utf-8")
+    for fix in fixes:
+        if fix["type"] == "page_fix":
+            # Fix claimed page in evidence line
+            old_pattern = (
+                rf'### {re.escape(fix["field"])}:.*?\n'
+                rf'\*\*Evidence\*\* \(p\.{re.escape(str(fix["old_page"]))}\):'
+            )
+            new_replacement = (
+                f'### {fix["field"]}:'
+            )
+            # Find the evidence line and replace the page number
+            lines = content.split("\n")
+            new_lines = []
+            for line in lines:
+                if f"### {fix['field']}:" in line:
+                    new_lines.append(line)
+                elif f"**Evidence** (p.{fix['old_page']}):" in line:
+                    line = line.replace(f"(p.{fix['old_page']})", f"(p.{fix['new_page']})")
+                    new_lines.append(line)
+                else:
+                    new_lines.append(line)
+            content = "\n".join(new_lines)
+
+        elif fix["type"] == "evidence_fix":
+            # Replace evidence text for a field - find the evidence line after the field heading
+            lines = content.split("\n")
+            new_lines = []
+            found_field = False
+            for line in lines:
+                if f"### {fix['field']}:" in line:
+                    found_field = True
+                    new_lines.append(line)
+                elif found_field and line.startswith("**Evidence**"):
+                    new_lines.append(f"**Evidence** (N/A): {fix['new_evidence']}")
+                    found_field = False
+                else:
+                    new_lines.append(line)
+            content = "\n".join(new_lines)
+
+    report_path.write_text(content, encoding="utf-8")
+
+
 def main():
     args = sys.argv[1:]
     if not args:
-        print("Usage: verify_extraction.py <id> [<id> ...] | --all")
+        print("Usage: verify_extraction.py <id> [<id> ...] | --all [--fix]")
+        sys.exit(1)
+
+    do_fix = "--fix" in args
+    args = [a for a in args if a != "--fix"]
+
+    if not args:
+        print("Usage: verify_extraction.py <id> [<id> ...] | --all [--fix]")
         sys.exit(1)
 
     if args[0] == "--all":
@@ -302,10 +399,18 @@ def main():
         ids = args
 
     all_results = []
+    all_fixes = {}
     for paper_id in ids:
         result = verify_paper(paper_id)
         if result:
             all_results.append(result)
+            if do_fix:
+                report_path = REPORTS_DIR / f"{paper_id}.md"
+                if report_path.exists() and "fields" in result:
+                    fixes = compute_fixes(result)
+                    if fixes:
+                        apply_fixes(paper_id, report_path, fixes)
+                        all_fixes[paper_id] = fixes
 
     output = {
         "papers": all_results,
@@ -328,6 +433,9 @@ def main():
             },
         },
     }
+
+    if do_fix:
+        output["fixes_applied"] = all_fixes
 
     print(json.dumps(output, ensure_ascii=False, indent=2))
 
