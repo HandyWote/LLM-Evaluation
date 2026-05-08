@@ -1,6 +1,6 @@
 .env
 .venv/
-*.csv
+theme_track.csv
 paper
 .DS_Store
 theme_track.xlsx
