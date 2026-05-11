@@ -144,6 +144,40 @@ else:
 - Evidence in appendix with different page numbering than body
 - Evidence inside table cells or figure captions not cleanly extracted
 
+### Step 4c: Sync CSV after any value changes
+
+**CRITICAL**: If any judgment VALUE changed (not just evidence text or page number), you MUST also update `extract/eval_results.csv`. The Markdown reports and the CSV are dual sources of truth — changing one without the other causes data inconsistency.
+
+Fields that commonly need CSV sync after judgment correction:
+- `Reliability_Reported`, `Agreement Method`, `Coding Options`
+- `Eval_LLM_Judge`, `LLM_Judge_Validated`
+- `Theory_Grounding`, `Prompt_Disclosure`
+- Any other field where the VALUE (YES/NO/N/A/Strong/Weak/etc.) changed
+
+Use this pattern to update the CSV:
+
+```bash
+cd extract && uv run python3 -c "
+import csv
+rows = []
+with open('eval_results.csv', 'r', encoding='utf-8-sig') as f:
+    reader = csv.DictReader(f)
+    fieldnames = reader.fieldnames
+    for row in reader:
+        if row['Paper_ID'] == '{id}':
+            row['{CSV_Column_Name}'] = '{new_value}'
+        rows.append(row)
+with open('eval_results.csv', 'w', encoding='utf-8-sig', newline='') as f:
+    writer = csv.DictWriter(f, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(rows)
+"
+```
+
+CSV column names use underscores and Title_Case: `Reliability_Reported`, `Agreement Method`, `Coding Options`, `Eval_LLM_Judge`, etc. Check the header row to confirm exact names.
+
+Report CSV changes alongside Markdown fixes in the fix table.
+
 ### Step 5: Review judgment correctness
 
 The script outputs `judgment_hints` — extracted snippets from the PDF containing keywords relevant to tricky fields. Use these snippets to assess:
@@ -192,6 +226,7 @@ For batch verification, also output:
 
 ## Tips
 
+- **Always sync `eval_results.csv` when judgment values change.** Markdown fix + CSV fix must happen together. A value change in `eval_reports/{id}.md` without the corresponding CSV update will cause data drift.
 - The script handles PDF hyphenation artifacts (e.g., `psy-\nchological` → `psychological`) via whitespace normalization.
 - Evidence with `...` is split into parts and each part is verified independently.
 - The current schema has 39 structured fields across 5 categories: simulation modeling, eval methods, eval dimensions, eval depth, reliability, and quality markers.
