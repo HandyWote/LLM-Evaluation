@@ -6,6 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 MUST USE SUPERPOWER
 ALWAYS SHOW ME SOME PLAN AND ALWAYS RECOMMAND THE LOWER TECH-DEBT ONE
 THINK ABOUT REUSE
+DONT COMMIT WITH CO-AUTHOR
 
 ## Project Overview
 
