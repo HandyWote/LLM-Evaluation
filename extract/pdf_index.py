@@ -42,6 +42,7 @@ def _normalize_whitespace(s: str) -> str:
     s = s.replace("“", '"').replace("”", '"')    # 弯双引号 → 直双引号
     s = re.sub(r'-\s+', '', s)  # 移除 PDF 行尾连字符（如 psychother-\napist → psychologist）
     s = s.replace('-', '')       # 移除所有剩余连字符（统一处理复合词，如 co-authors ↔ co- authors）
+    s = re.sub(r'\n', ' ', s)    # 换行符 → 空格（修复跨行匹配问题）
     return re.sub(r'\s+', ' ', s.strip().lower())
 
 
