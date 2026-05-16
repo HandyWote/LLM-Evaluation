@@ -10,6 +10,23 @@ description: Verify LLM-extracted evaluation methodology results against origina
 1. **证据准确性**：每个 evidence 必须是 PDF 原文逐字引用（没有模板、没有编造）
 2. **判断值正确性**：用已验证的证据 + 字段定义，判断 value 是否正确
 
+## How Verification Works
+
+验证脚本的检查逻辑（理解这个才能写出通过的证据）：
+
+```
+evidence = "段落A ... 段落B ... 段落C"
+                        ↓ split on "..."
+parts = ["段落A", "段落B", "段落C"]
+                        ↓ 每段独立检查
+每个 part 是否是 PDF 全文（所有页拼接）的子串？
+```
+
+- **`...` 是分隔符**：用 `...` 分隔的每段独立验证
+- **子串匹配**：每段必须是归一化后 PDF 全文的连续子串
+- **不能跨段拼接**：如果 PDF 中有 "A 中间文字 B"，你不能写 "A B"（会判 FABRICATED），必须写 "A ... B"
+- **TEMPLATE 判定**：evidence 以 "No evidence of"、"论文中未"、"未发现"、"未涉及" 开头 → 直接判 TEMPLATE
+
 ## Workflow
 
 ### Step 1: 跑脚本
@@ -21,8 +38,6 @@ cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_ext
 脚本输出 JSON，包含每个字段的证据质量标签（EXACT / PARAPHRASED / FABRICATED / TEMPLATE）。
 
 ### Step 2: 按优先级处理
-
-看结果，按优先级分类处理：
 
 | 质量标签 | 优先级 | 处理方式 |
 |----------|--------|----------|
@@ -41,29 +56,15 @@ cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_ext
 
 从候选中选择 verbatim 文本，替换 evidence。**逐字引用！不要总结！**
 
-> ⚠️ **逐字引用铁律**
-> 证据必须是 PDF 原文逐字引用。绝对不能自己写总结、改写、缩写。
-> 如果你写出来的文字不是 PDF 里原封不动抄出来的，就是错的。
->
-> ✅ 正确：`We recruited 7 mental health professionals with professional expertise.`
-> ❌ 错误：`The paper uses human evaluation by mental health professionals.`
-> （第二种是总结，不是原文，会被判为 FABRICATED）
->
-> 使用 `--extract-evidence` 获取候选原文，从中选择，不要自己写。
-
 ### Step 3b: 处理 FABRICATED
 
 1. 先检查是否假阳性（归一化问题）→ 重新跑脚本确认
-2. 不是假阳性？→ 用 `--extract-evidence` 获取候选，选择 verbatim 文本替换
+2. 不是假阳性？→ 用下面的策略获取 verbatim 文本替换
 3. 值可能错了？→ Step 4
 
 ### Step 4: 判断值验证
 
 对每个字段，用已验证的证据 + 字段定义判断值是否正确。
-
-- EXACT 字段：读证据内容 + 字段定义 → 判定值对不对
-- PARAPHRASED 字段：同上，置信度较低
-- FABRICATED / TEMPLATE 字段：用修复后的证据重新判定
 
 如果值错了，修正值 + 同步 CSV：
 
@@ -85,6 +86,8 @@ with open('eval_results.csv', 'w', encoding='utf-8-sig', newline='') as f:
 "
 ```
 
+> **注意**：CSV 列名可能和 markdown 字段名不同（如 `Raw Eval Metrics` vs `raw_eval_metrics`）。先用 `head -1 eval_results.csv` 检查列名。
+
 ### Step 5: 重新跑脚本确认
 
 ```bash
@@ -93,25 +96,99 @@ cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_ext
 
 确认 TEMPLATE = 0，FABRICATED 尽可能低。
 
-### 证据修复示例
+## 获取 Verbatim 证据的策略
 
-#### ✅ 正确做法（TEMPLATE → EXACT）
+> ⚠️ **逐字引用铁律**
+> 证据必须是 PDF 原文逐字引用。绝对不能自己写总结、改写、缩写。
+> 如果你写出来的文字不是 PDF 里原封不动抄出来的，就是错的。
 
-原始 evidence：
-> **Evidence** (N/A): No evidence of using LLM as judge for evaluation found in the paper.
+### 策略 1：使用 `--extract-evidence` 候选（推荐）
 
-用 `--extract-evidence` 获取候选，选择 PDF 原文：
-> p.6: To comprehensively evaluate the model's performance...we adopted a series of automatic evaluation metrics.
-> p.7: Our evaluation team consisted of four senior psychology students and an experienced psychotherapist.
+候选是脚本从 PDF 提取的相关片段。**直接使用，不要扩展。**
 
-修复后（逐字引用）：
-> **Evidence** (p.6-7): To comprehensively evaluate the model's performance...we adopted a series of automatic evaluation metrics. Our evaluation team consisted of four senior psychology students and an experienced psychotherapist.
+候选格式示例：
+```
+{page: 5, text: "accuracy in suicide risk assessment", relevance: 2}
+```
 
-#### ❌ 错误做法（TEMPLATE → FABRICATED）
+直接用 `text` 字段的值作为 evidence 分段，不要试图补全句子。
 
-修复后（AI 总结，不是原文）：
-> **Evidence** (p.6-7): The paper uses automatic metrics and human expert evaluation, with no LLM judge employed.
-> ↑ 这是 AI 总结的，不是 PDF 原文，会被判为 FABRICATED
+### 策略 2：用 PyMuPDF 读取 PDF 原文（精确控制）
+
+当候选不够用时，直接从 PDF 提取精确文本：
+
+```python
+import fitz
+doc = fitz.open("paper/{id}.pdf")
+page = doc[page_num - 1]  # 0-indexed
+text = page.get_text()
+# 搜索关键词，获取包含该关键词的完整句子
+```
+
+提取后做子串归一化检查：去掉换行、合并连字符，确认是 PDF 子串。
+
+### 策略 3：复用同一论文已验证为 EXACT 的文本（NO 字段专用）
+
+对于 NO/No/N/A 字段，最可靠的方法是**复用同一论文中已验证为 EXACT 的文本**。
+
+例如，如果 `focus_type` 的 evidence 是：
+> `**Evidence** (p.1): This review introduces a conceptual taxonomy dividing psychotherapy into interconnected stages–assessment, diagnosis, and treatment–to systematically examine LLM advancements and challenges.`
+
+这段已验证为 EXACT，可以复用于 `eval_human_experts: NO`、`eval_automatic: NO` 等字段。文本内容虽不直接说明"为什么 NO"，但它描述了论文的性质（综述），间接支持 NO 的判断。
+
+### 策略 4：组合多个候选片段（用 `...` 分隔）
+
+如果需要组合多个候选片段，用 ` ... ` 分隔。每个片段独立验证：
+
+```
+**Evidence** (p.6-7): Quantitative Performance Metrics: Our analysis identified three primary performance indicators. ... • Response Quality: This metric assesses the coherence, authenticity, and relevance of CA-generated dialogue. ... • System Reliability: This measures the stability and predictability of CA responses.
+```
+
+**关键**：每个 `...` 之间的片段必须是 PDF 中连续出现的文本。如果 PDF 中两段之间有其他文字，必须用 `...` 分隔。
+
+### ❌ 绝对不要做的事
+
+| 做法 | 结果 | 原因 |
+|------|------|------|
+| 用自己的话总结 | FABRICATED | 不是 PDF 原文 |
+| 扩展候选片段为完整句子 | FABRICATED | 扩展部分不是 PDF 原文 |
+| 把 PDF 中不连续的文本拼成一段 | FABRICATED | 中间有文字不匹配 |
+| 用 "No evidence of..." 开头 | TEMPLATE | 脚本直接判定为模板 |
+
+### ✅ 正确示例
+
+**TEMPLATE → EXACT（NO 字段，复用已验证文本）**：
+```
+# 原始
+**Evidence** (N/A): No evidence of safety evaluation found in the paper.
+
+# 修复：复用 focus_type 已验证的 EXACT 文本
+**Evidence** (p.1): This review introduces a conceptual taxonomy dividing psychotherapy into interconnected stages–assessment, diagnosis, and treatment–to systematically examine LLM advancements and challenges.
+```
+
+**FABRICATED → EXACT（YES 字段，用 `...` 分隔非连续片段）**：
+```
+# 原始（一整段，中间跳过了 PDF 中的文字）
+**Evidence** (p.6): Quantitative Performance Metrics: Our analysis identified three primary performance indicators. • Diagnostic Accuracy: This metric assesses... • Response Quality: This metric assesses... • System Reliability: This measures...
+
+# 修复：用 ... 分隔
+**Evidence** (p.6-7): Quantitative Performance Metrics: Our analysis identified three primary performance indicators. ... • Diagnostic Accuracy: This metric assesses... ... • Response Quality: This metric assesses... ... • System Reliability: This measures...
+```
+
+**FABRICATED → EXACT（用 PyMuPDF 提取精确文本）**：
+```python
+# 找到 PDF 中的精确文本
+import fitz
+doc = fitz.open("paper/96.pdf")
+page = doc[8]  # page 9
+text = page.get_text()
+# 搜索 "The strengths and limitations"
+idx = text.find("The strengths and limitations")
+# 提取到句号
+end = text.find('.', idx)
+exact = text[idx:end+1].strip()
+# "The strengths and limitations of various evaluation approaches explain the field's preference for mixed-method evaluations"
+```
 
 ## Field Definitions Reference
 
@@ -147,3 +224,4 @@ cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_ext
 - 脚本处理 PDF 连字符（`psy-\nchological` → `psychological`）和弯引号归一化。
 - 用 `...` 连接的分段证据，每段独立验证。
 - 43 个结构化字段，7 个类别。重点关注信度、理论、交互层级等边界模糊字段。
+- **NO 字段不需要"解释为什么 NO"的证据**——只需提供论文中已有的、可验证的文本。该文本描述了论文的性质或方法，间接支持 NO 的判断。
