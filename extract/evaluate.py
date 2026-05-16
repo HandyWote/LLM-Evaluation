@@ -148,8 +148,8 @@ def _bibtex_for(paper_id: str) -> str:
 
 def build_csv_row(paper_id: str, parsed: dict) -> dict:
     row = {"Paper_ID": paper_id}
-    row["Citation_Key"] = ""
-    row["Bibtex"] = _bibtex_for(paper_id)
+    row["Citation_Key"] = _bibtex_for(paper_id)
+    row["Bibtex"] = ""
     row["Title"] = parsed.get("title", "")
     row["Year"] = parsed.get("year", "")
     row["Venue"] = parsed.get("venue", "")
@@ -246,8 +246,8 @@ def backfill_bibtex():
     new_fieldnames = [old_fieldnames[0], "Citation_Key", "Bibtex"] + old_fieldnames[1:]
     for row in rows:
         pid = row.get("Paper_ID", "")
-        row["Citation_Key"] = ""
-        row["Bibtex"] = _bibtex_for(pid)
+        row["Citation_Key"] = _bibtex_for(pid)
+        row["Bibtex"] = ""
 
     tmp = OUTPUT_CSV.with_suffix(".tmp")
     with open(tmp, "w", newline="", encoding="utf-8-sig") as f:
