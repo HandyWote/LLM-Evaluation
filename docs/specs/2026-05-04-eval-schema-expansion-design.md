@@ -78,7 +78,7 @@ theme_track.csv 的 schema 包含 43 列，其中 ~22 列超出现有 7 表文�
 
 43 列严格匹配 theme_track.csv header，包括：
 - `Human Learning / Outcomes`（含空格和斜杠）
-- `Interention_Sensitivity`（保留原始拼写）
+- `Intervention_Sensitivity`（已修正拼写）
 - `Agreement Method`、`Coding Options`（含空格）
 
 使用 `CSV_COLUMNS` 元组列表维护 (internal_name → csv_header) 映射，确保顺序一致。

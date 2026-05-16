@@ -71,7 +71,7 @@ CSV_COLUMNS = [
     ("raw_eval_metrics", "Raw Eval Metrics"),
     ("theory_operationalized", "Theory_Operationalized"),
     ("behavior_eval_depth", "Behavior_Eval_Depth"),
-    ("intervention_sensitivity", "Interention_Sensitivity"),
+    ("intervention_sensitivity", "Intervention_Sensitivity"),
     ("interaction_level", "Interaction_Level"),
     ("prompt_disclosure", "Prompt_Disclosure"),
     ("theory_grounding", "Theory_Grounding"),
