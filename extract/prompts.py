@@ -56,7 +56,8 @@ def _build_output_format_section() -> str:
 - evidence 必须是论文原文的逐字引用
 - 允许用 " ... " 连接多个不连续的引用片段（如不同段落或不同句子的证据）
 - 表格中的数据必须逐字引用，禁止重新格式化、添加标签或改写（如禁止将 "test 300 3" 改为 "Cases: 300; Rounds: 3"）
-- NO 字段的 evidence 严格使用模板: "No evidence of [具体方法/维度] found in the paper."，page 设为 null
+- 所有字段（包括 NO/N/A）的 evidence 都必须是论文原文的逐字引用。即使是判断为"不存在"的字段，也要引用论文中让你做出该判断的原文（如评估方法描述、参与者描述等）
+- 仅当论文中确实完全没有相关内容时，才使用模板: "No evidence of [具体方法/维度] found in the paper."，page 设为 null
 - page 为页码数字，若无则 null
 """
 
@@ -122,6 +123,7 @@ def build_correction_message(failures: dict[str, dict]) -> str:
         "- page 必须是引用内容实际所在的页码\n"
         "- 如果在原文中找不到合适的引用，请将 evidence 设为标准模板文本，page 设为 null\n"
         "  - NO/N/A 字段模板: \"No evidence of [具体方法/维度] found in the paper.\"\n"
-        "  - 严禁为 NO/N/A 字段编造或改写 evidence"
+        "  - 严禁为 NO/N/A 字段编造或改写 evidence\n"
+        "- 但如果论文中确实有相关内容（如评估方法描述、参与者描述），必须引用那段原文作为 evidence"
     )
     return "\n".join(parts)
