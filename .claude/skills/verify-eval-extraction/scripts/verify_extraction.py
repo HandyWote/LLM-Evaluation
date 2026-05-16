@@ -435,14 +435,15 @@ def apply_fixes(paper_id: str, report_path: Path, fixes: list[dict]) -> None:
 def main():
     args = sys.argv[1:]
     if not args:
-        print("Usage: verify_extraction.py <id> [<id> ...] | --all [--fix]")
+        print("Usage: verify_extraction.py <id> [<id> ...] | --all [--fix] [--extract-evidence]")
         sys.exit(1)
 
     do_fix = "--fix" in args
-    args = [a for a in args if a != "--fix"]
+    do_extract = "--extract-evidence" in args
+    args = [a for a in args if a not in ("--fix", "--extract-evidence")]
 
     if not args:
-        print("Usage: verify_extraction.py <id> [<id> ...] | --all [--fix]")
+        print("Usage: verify_extraction.py <id> [<id> ...] | --all [--fix] [--extract-evidence]")
         sys.exit(1)
 
     if args[0] == "--all":
@@ -454,6 +455,7 @@ def main():
 
     all_results = []
     all_fixes = {}
+    all_extractions = {}
     for paper_id in ids:
         result = verify_paper(paper_id)
         if result:
@@ -465,6 +467,26 @@ def main():
                     if fixes:
                         apply_fixes(paper_id, report_path, fixes)
                         all_fixes[paper_id] = fixes
+            if do_extract and "fields" in result:
+                pdf_path = PAPER_DIR / f"{paper_id}.pdf"
+                if pdf_path.exists():
+                    pages = extract_pdf_pages(pdf_path)
+                    extractions = []
+                    for field_data in result["fields"]:
+                        if field_data["quality"] in ("TEMPLATE", "FABRICATED"):
+                            candidates = extract_evidence_candidates(
+                                pages, field_data["field"], field_data["value"],
+                                field_data.get("detail", ""), top_n=10
+                            )
+                            if candidates:
+                                extractions.append({
+                                    "field": field_data["field"],
+                                    "value": field_data["value"],
+                                    "quality": field_data["quality"],
+                                    "candidates": candidates,
+                                })
+                    if extractions:
+                        all_extractions[paper_id] = extractions
 
     output = {
         "papers": all_results,
@@ -490,6 +512,8 @@ def main():
 
     if do_fix:
         output["fixes_applied"] = all_fixes
+    if do_extract:
+        output["evidence_candidates"] = all_extractions
 
     print(json.dumps(output, ensure_ascii=False, indent=2))
 
