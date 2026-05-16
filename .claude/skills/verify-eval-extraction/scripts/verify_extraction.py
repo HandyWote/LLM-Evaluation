@@ -380,7 +380,7 @@ def extract_evidence_candidates(pages: dict[int, str], field: str, value: str, e
     return unique[:top_n]
 
 
-def compute_fixes(result: dict) -> list[dict]:
+def compute_fixes(result: dict, pages: dict[int, str] | None = None) -> list[dict]:
     """Compute needed fixes for a single paper's verification result."""
     fixes = []
     for field_data in result.get("fields", []):
@@ -400,21 +400,35 @@ def compute_fixes(result: dict) -> list[dict]:
                 "description": f"p.{claimed_page} → p.{page_found_on}",
             })
 
-        # Mark TEMPLATE and FABRICATED fields for PDF search (not template replacement)
-        if quality in ("TEMPLATE", "FABRICATED"):
+        # Auto-fix TEMPLATE: extract best candidate from PDF
+        if quality == "TEMPLATE" and pages is not None:
+            candidates = extract_evidence_candidates(pages, field, value, "", top_n=10)
+            if candidates:
+                # 用相关度最高的候选构建新 evidence
+                best = candidates[0]
+                new_evidence = f"(p.{best['page']}): {best['text']}"
+                fixes.append({
+                    "field": field,
+                    "type": "template_fix",
+                    "new_evidence": new_evidence,
+                    "description": f"TEMPLATE → auto-fix with best candidate (p.{best['page']})",
+                })
+
+        # Mark FABRICATED for PDF search (no auto-fix)
+        if quality == "FABRICATED":
             fixes.append({
                 "field": field,
                 "type": "needs_pdf_search",
                 "old_quality": quality,
                 "value": value,
-                "description": f"{quality} — need to search PDF for real evidence",
+                "description": f"FABRICATED — need to search PDF for real evidence",
             })
 
     return fixes
 
 
 def apply_fixes(paper_id: str, report_path: Path, fixes: list[dict]) -> None:
-    """Apply fixes to a report file in-place. Only handles page fixes."""
+    """Apply fixes to a report file in-place."""
     content = report_path.read_text(encoding="utf-8")
     for fix in fixes:
         if fix["type"] == "page_fix":
@@ -425,6 +439,26 @@ def apply_fixes(paper_id: str, report_path: Path, fixes: list[dict]) -> None:
                     new_lines.append(line)
                 elif f"**Evidence** (p.{fix['old_page']}):" in line:
                     line = line.replace(f"(p.{fix['old_page']})", f"(p.{fix['new_page']})")
+                    new_lines.append(line)
+                else:
+                    new_lines.append(line)
+            content = "\n".join(new_lines)
+        elif fix["type"] == "template_fix":
+            # 替换 TEMPLATE evidence 为最佳候选
+            lines = content.split("\n")
+            new_lines = []
+            in_target_field = False
+            for line in lines:
+                if f"### {fix['field']}:" in line:
+                    in_target_field = True
+                    new_lines.append(line)
+                elif in_target_field and line.startswith("**Evidence**"):
+                    # 替换 evidence 行
+                    new_evidence = fix["new_evidence"]
+                    new_lines.append(f"**Evidence** {new_evidence} [AUTO-FIXED]")
+                    in_target_field = False
+                elif line.startswith("### ") and in_target_field:
+                    in_target_field = False
                     new_lines.append(line)
                 else:
                     new_lines.append(line)
@@ -463,7 +497,9 @@ def main():
             if do_fix:
                 report_path = REPORTS_DIR / f"{paper_id}.md"
                 if report_path.exists() and "fields" in result:
-                    fixes = compute_fixes(result)
+                    pdf_path = PAPER_DIR / f"{paper_id}.pdf"
+                    pages_for_fix = extract_pdf_pages(pdf_path) if pdf_path.exists() else None
+                    fixes = compute_fixes(result, pages=pages_for_fix)
                     if fixes:
                         apply_fixes(paper_id, report_path, fixes)
                         all_fixes[paper_id] = fixes
