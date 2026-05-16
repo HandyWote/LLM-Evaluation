@@ -90,7 +90,7 @@ def verify_evidence(
     )
 
     if is_template:
-        return {"quality": "TEMPLATE", "page_match": None, "detail": ""}
+        return {"quality": "TEMPLATE", "page_match": None, "detail": "Template text — needs real evidence from PDF"}
 
     # Handle ellipsis: split on "..." and verify each part independently
     parts = [p.strip() for p in evidence.split("...") if p.strip()]
@@ -288,17 +288,6 @@ def verify_paper(paper_id: str) -> dict | None:
     }
 
 
-def _generate_template_evidence(field: str, value: str) -> str:
-    """Generate a standard template evidence text for a NO/N/A field."""
-    templates = {
-        "reliability_reported": "No evidence of inter-rater reliability statistics (e.g., Cohen's kappa, Krippendorff's alpha, ICC) reported in this paper, as no human evaluation involving multiple raters was conducted.",
-        "coding_options": "No evidence of inter-annotator agreement or coding option details reported in this paper, as no human evaluation involving multiple coders was conducted.",
-    }
-    if field in templates:
-        return templates[field]
-    return f"No evidence of {field.replace('_', ' ')} found in the paper."
-
-
 def compute_fixes(result: dict) -> list[dict]:
     """Compute needed fixes for a single paper's verification result."""
     fixes = []
@@ -319,34 +308,24 @@ def compute_fixes(result: dict) -> list[dict]:
                 "description": f"p.{claimed_page} → p.{page_found_on}",
             })
 
-        # Fix FABRICATED evidence for NO/N/A/None/Not specified fields
-        if quality == "FABRICATED" and value in ("NO", "N/A", "None", "Not specified"):
-            new_evidence = _generate_template_evidence(field, value)
+        # Mark TEMPLATE and FABRICATED fields for PDF search (not template replacement)
+        if quality in ("TEMPLATE", "FABRICATED"):
             fixes.append({
                 "field": field,
-                "type": "evidence_fix",
-                "old_evidence": field_data.get("detail", ""),
-                "new_evidence": new_evidence,
-                "description": f"Replace fabricated evidence with template text",
+                "type": "needs_pdf_search",
+                "old_quality": quality,
+                "value": value,
+                "description": f"{quality} — need to search PDF for real evidence",
             })
 
     return fixes
 
 
 def apply_fixes(paper_id: str, report_path: Path, fixes: list[dict]) -> None:
-    """Apply fixes to a report file in-place."""
+    """Apply fixes to a report file in-place. Only handles page fixes."""
     content = report_path.read_text(encoding="utf-8")
     for fix in fixes:
         if fix["type"] == "page_fix":
-            # Fix claimed page in evidence line
-            old_pattern = (
-                rf'### {re.escape(fix["field"])}:.*?\n'
-                rf'\*\*Evidence\*\* \(p\.{re.escape(str(fix["old_page"]))}\):'
-            )
-            new_replacement = (
-                f'### {fix["field"]}:'
-            )
-            # Find the evidence line and replace the page number
             lines = content.split("\n")
             new_lines = []
             for line in lines:
@@ -358,23 +337,6 @@ def apply_fixes(paper_id: str, report_path: Path, fixes: list[dict]) -> None:
                 else:
                     new_lines.append(line)
             content = "\n".join(new_lines)
-
-        elif fix["type"] == "evidence_fix":
-            # Replace evidence text for a field - find the evidence line after the field heading
-            lines = content.split("\n")
-            new_lines = []
-            found_field = False
-            for line in lines:
-                if f"### {fix['field']}:" in line:
-                    found_field = True
-                    new_lines.append(line)
-                elif found_field and line.startswith("**Evidence**"):
-                    new_lines.append(f"**Evidence** (N/A): {fix['new_evidence']}")
-                    found_field = False
-                else:
-                    new_lines.append(line)
-            content = "\n".join(new_lines)
-
     report_path.write_text(content, encoding="utf-8")
 
 
