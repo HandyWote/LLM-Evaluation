@@ -193,4 +193,4 @@ cd extract && uv run ../.claude/skills/summarize-research-notes/scripts/mark_sum
 - 反常信号不必每维度都有，"无明显反常"是正常的。
 - 研究机会不必每维度都有，有些维度可能已经做得很好了。
 - 没有研究笔记的论文跳过，在开头注明。
-- 读取 eval_results.csv 时注意字段拼写差异（如 `Interention_Sensitivity` 应为 `Intervention_Sensitivity`）。
+- 读取 eval_results.csv 时注意字段名与 Markdown 报告中的字段名可能有细微差异（如 CSV 用 `Intervention_Sensitivity`，报告用 `intervention_sensitivity`）。

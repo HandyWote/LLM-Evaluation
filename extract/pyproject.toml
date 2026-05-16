@@ -6,6 +6,7 @@ dependencies = [
     "pymupdf",
     "openai",
     "python-dotenv",
+    "openpyxl",
 ]
 
 [dependency-groups]

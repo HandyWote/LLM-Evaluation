@@ -187,6 +187,9 @@ The script outputs `judgment_hints` — extracted snippets from the PDF containi
 - **`eval_llm_judge`**: Is the LLM actually *scoring/comparing* outputs, or just being used for feature extraction / data generation?
 - **`llm_judge_validated`**: Is there evidence of *validating* the LLM judge against human ratings (e.g. correlation, agreement scores)?
 - **`theory_grounding`**: Is the evaluation grounded in validated instruments/theories with proper operationalization, or just mentioning concepts? Strong = evaluation criteria derived from theory, Weak = theory mentioned but not operationalized, None = no theory reference.
+- **`theory_operationalized`**: How deeply is theory used to define evaluation criteria? Strong = criteria explicitly derived from theory, Partial = theory mentioned and partially operationalized, Mentioned = theory only mentioned without operationalization, None = no theory used.
+- **`behavior_eval_depth`**: How deeply does the paper evaluate behavioral changes? Dynamic = analyzes how behavior changes across turns, Pattern-level = counts behavior frequency/patterns without tracking changes, Static = scores each turn independently, None = no behavioral evaluation.
+- **`interaction_level`**: How much conversational context is evaluated? Single-turn = one response evaluated without history, Short Multi-turn = brief exchange (2-5 turns), Extended Dialogue = longer dialogue (6+ turns), Longitudinal = across multiple sessions/time.
 - **`prompt_disclosure`**: Are the actual prompts included in the paper or appendix? Full = complete prompts visible, Partial = fragments or description only, No = no prompts shared.
 
 If `judgment_hints` is empty for a field, that means no relevant keywords were found — the field's judgment is likely correct but you should note low confidence.
@@ -229,6 +232,6 @@ For batch verification, also output:
 - **Always sync `eval_results.csv` when judgment values change.** Markdown fix + CSV fix must happen together. A value change in `eval_reports/{id}.md` without the corresponding CSV update will cause data drift.
 - The script handles PDF hyphenation artifacts (e.g., `psy-\nchological` → `psychological`) via whitespace normalization.
 - Evidence with `...` is split into parts and each part is verified independently.
-- The current schema has 39 structured fields across 5 categories: simulation modeling, eval methods, eval dimensions, eval depth, reliability, and quality markers.
+- The current schema has 43 structured fields across 7 categories: basic metadata, simulation modeling, eval methods, eval dimensions, eval depth/theory, reliability, and quality markers.
 - Focus judgment review on the six tricky fields — the script provides hints so you don't need to read the full PDF.
 - If a paper's PDF or report is missing, the script reports an error — skip it and note it in the summary.

@@ -22,7 +22,7 @@ def _make_full_response(**overrides):
         "dim_human_learning": _make_field("NO"),
         "dim_emotional_plausibility": _make_field("YES"),
         "dim_safety": _make_field("NO"),
-        "interaction_level": _make_field("Extended"),
+        "interaction_level": _make_field("Extended Dialogue"),
         "prompt_disclosure": _make_field("Partial"),
         "theory_grounding": _make_field("Weak"),
         "reliability_reported": _make_field("No"),
@@ -38,7 +38,7 @@ def test_parse_valid_response():
     assert result["title"] == "Test Paper"
     assert result["eval_human_experts"]["value"] == "YES"
     assert result["eval_lay_users"]["value"] == "NO"
-    assert result["interaction_level"]["value"] == "Extended"
+    assert result["interaction_level"]["value"] == "Extended Dialogue"
 
 
 def test_parse_strips_code_fences():
@@ -72,7 +72,7 @@ def test_build_csv_row():
     assert row["Paper_ID"] == "28"
     assert row["Eval_Human_Experts"] == "YES"
     assert row["Eval_Lay_Users"] == "NO"
-    assert row["Interaction_Level"] == "Extended"
+    assert row["Interaction_Level"] == "Extended Dialogue"
 
 
 def test_generate_markdown_contains_title():
