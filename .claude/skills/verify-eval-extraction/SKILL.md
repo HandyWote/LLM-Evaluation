@@ -5,16 +5,14 @@ description: Verify LLM-extracted evaluation methodology results against origina
 
 # Verify Eval Extraction Results
 
-You are verifying the output of `extract/evaluate.py` against the original PDFs. The goal is to check two things:
+验证 evaluate.py 的提取结果。检查两件事：
 
-1. **Verbatim accuracy**: Every evidence quote in the Markdown reports must be an exact word-for-word quote from the PDF — no paraphrasing, summarizing, or fabrication.
-2. **Judgment correctness**: The YES/NO/single-choice values should be reasonable given the paper content.
+1. **证据准确性**：每个 evidence 必须是 PDF 原文逐字引用（没有模板、没有编造）
+2. **判断值正确性**：用已验证的证据 + 字段定义，判断 value 是否正确
 
 ## Workflow
 
-### Step 1: Run verification
-
-Run the verification script from the project root. The script extracts PDF text, parses the Markdown reports, and checks every evidence claim against the original paper.
+### Step 1: Run verification script
 
 ```bash
 # Single paper
@@ -23,138 +21,105 @@ cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_ext
 # Multiple papers
 cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_extraction.py 1 28 35
 
-# All papers in eval_reports/
+# All papers
 cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_extraction.py --all
 ```
 
-The script outputs JSON. Parse it for Step 2.
+脚本输出 JSON，包含每个字段的证据质量标签。
 
-### Step 2: Present detailed evidence table
-
-For each paper, format the JSON results into a table:
+### Step 2: Present evidence quality table
 
 ```
 ## Verification: Paper {id} — {title}
 
-### Evidence Accuracy
+### Evidence Quality
 
 | Field | Value | Quality | Page Match | Issue |
 |-------|-------|---------|------------|-------|
 | eval_human_experts | YES | EXACT | ✅ p.5 | |
-| eval_lay_users | NO | TEMPLATE | N/A | |
+| eval_lay_users | NO | TEMPLATE | — | 需要从 PDF 找原文 |
 | dim_consistency | YES | PARAPHRASED | — | partial: "consistent and logical" but changed subject |
-| dim_utility | YES | FABRICATED | — | NOT FOUND in PDF |
-| ... | | | | |
+| dim_utility | YES | FABRICATED | — | 证据未在 PDF 中找到 |
 ```
 
 Quality labels:
 - **EXACT** — verbatim match found
-- **TEMPLATE** — NO/N/A field using standard template text
-- **PARAPHRASED** — partial match found, but full quote not verbatim (detail shows what matched and what didn't)
+- **PARAPHRASED** — partial match, content OK but not exact
 - **FABRICATED** — quote not found in PDF at all
+- **TEMPLATE** — 使用模板文本，需要从 PDF 找真实原文（这是缺陷，不是安全状态）
 
-Page Match column:
-- ✅ — evidence found on the claimed page
-- ❌ p.X→p.Y — evidence found but on a different page
-- — — not applicable (TEMPLATE/PARAPHRASED/FABRICATED)
+### Step 3: AI judgment value verification
 
-### Step 3: Explain issues in plain language
+对每个字段，用已验证的证据 + 字段定义判断值是否正确。
 
-After the detailed table, write a short plain-language summary for the user. Use casual Chinese (大白话). Cover:
+**EXACT 字段**：证据已确认存在于 PDF → 读证据内容 + 字段定义 → 判定值对不对
+- 例：`eval_human_experts: YES`，证据 "Two clinical psychologists evaluated..." → 符合 YES 定义（领域专家评估）→ CORRECT
+- 例：`reliability_reported: Yes`，证据 "average agreement was 85%" → 不符合 Yes 定义（需要统计信度系数，百分比不算）→ WRONG → 应为 No
 
-1. **页码标错** — which field, claimed p.X but actually on p.Y
-2. **证据是编的** — which fields have FABRICATED evidence. Explain: "结论是对的，但附的那段证据文字不是论文里的原话，是 LLM 自己编的推理。" Note: Step 4b will manually verify YES fields to distinguish true fabrication from false positives.
-3. **PARAPHRASED 不用管** — "这几个是 PDF 分页导致句子被截断，脚本匹配不全，内容本身没问题。"
+**PARAPHRASED 字段**：证据部分匹配 → 同上，但标注置信度较低
 
-Keep it short — one sentence per issue type. Only mention issues that exist.
+**FABRICATED 字段**：证据未找到 → 用 `fitz` 搜索 PDF 找相关原文 → 用找到的原文重新判定值
 
-### Step 4: Auto-fix
+**TEMPLATE 字段**：声称"无证据" → 用 `fitz` 搜索 PDF 验证是否真的没有 →
+- 确实没有 → 值正确，但证据需改为说明为什么没有（而非模板）
+- 找到了 → 值可能错误，用找到的原文重新判定
 
-Run the verification script with `--fix` to automatically apply fixes:
-
-```bash
-cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_extraction.py {ids} --fix
-```
-
-The `--fix` flag handles two types of issues:
-- **Page fixes**: Corrects page numbers where evidence was found on a different page than claimed
-- **Evidence fixes**: Replaces FABRICATED evidence in NO/N/A fields with standard template text
-
-After fixing, show the user what was changed:
-
-```
-### 修复内容
-
-| Paper | Field | Fix Type | Detail |
-|-------|-------|----------|--------|
-| 18    | temporal_modeling_details | 页码修正 | p.5 → p.4 |
-| 18    | reliability_reported | 证据替换 | FABRICATED → 标准模板 |
-```
-
-Then re-run the verification (without `--fix`) to confirm all fixes are clean. Only report remaining non-TEMPLATE issues.
-
-### Step 4b: Manually verify FABRICATED on YES fields
-
-The `--fix` flag only handles NO/N/A fields. For YES fields marked FABRICATED, you must manually check whether it's a **true fabrication** or a **false positive** caused by PDF formatting issues (multi-column layout, line breaks within words, figure/table text not extracted).
-
-For each FABRICATED YES field:
-
-1. **Search the PDF** using `fitz` (PyMuPDF) for the unfound evidence fragment. Extract text from the claimed page and surrounding pages (±1):
+搜索 PDF 的方法：
 
 ```bash
 cd extract && uv run python3 -c "
 import fitz
 doc = fitz.open('paper/{id}.pdf')
-# Search claimed page and neighbors
-for p in [claimed_page - 2, claimed_page - 1, claimed_page - 1, claimed_page, claimed_page + 1]:
-    if 0 <= p < len(doc):
-        text = doc[p].get_text()
-        # Normalize whitespace like the verification script does
-        normalized = text.replace('-\n', '').replace('\n', ' ').replace('  ', ' ')
-        if '<search keyword>' in normalized.lower():
-            print(f'FOUND on page index {p}:')
-            print(normalized)
-            break
+for i, page in enumerate(doc):
+    text = page.get_text().lower()
+    if '{keyword}' in text:
+        print(f'FOUND on page {i+1}:')
+        print(page.get_text()[:500])
+        break
 else:
     print('NOT FOUND')
 "
 ```
 
-2. **Classify the result**:
-   - **False positive** — evidence IS in the PDF but the script missed it (due to multi-column layout, hyphenation, figure captions, or appendix pages with different numbering). Report as: "证据实际存在于 PDF p.X，因 [原因] 导致脚本误报 FABRICATED"。No fix needed.
-   - **True fabrication** — evidence is genuinely NOT in the PDF. The LLM hallucinated the quote. You must manually edit the report in `eval_reports/{id}.md`:
-     - If the YES judgment is still correct (evidence exists elsewhere, just not this quote): find the real verbatim evidence from the PDF and replace the fabricated quote, keeping the same page number or correcting it.
-     - If the YES judgment is wrong (should be NO): change the value to NO and replace the evidence with the standard template: "No evidence of [field description] found in the paper."
-
-3. **Report the outcome** in the fix table:
+输出判断值验证表：
 
 ```
-### 修复内容
+### Judgment Verification
 
-| Paper | Field | Fix Type | Detail |
-|-------|-------|----------|--------|
-| 83    | has_rubric | 无需修复（误报） | 证据在 PDF p.13 附录 C.2，双栏排版断行导致脚本漏检 |
-| 42    | eval_llm_judge | 证据替换 | FABRICATED → 真实原文（从 p.7 提取） |
-| 55    | theory_grounding | 判断+证据修正 | YES → Weak，替换为实际原文 |
+| Field | Value | Evidence Quality | Judgment | Fix |
+|-------|-------|-----------------|----------|-----|
+| eval_human_experts | YES | EXACT | CORRECT | — |
+| reliability_reported | Yes | EXACT | WRONG → No | 证据是百分比一致，不是信度系数 |
+| eval_lay_users | NO | TEMPLATE | NEEDS PDF SEARCH | — |
+| dim_consistency | YES | FABRICATED | NEEDS PDF SEARCH | — |
 ```
 
-**Common false positive causes**:
-- Two-column PDF layout splits sentences across columns
-- Words hyphenated at line endings (e.g., "inter-\npretations")
-- Evidence in appendix with different page numbering than body
-- Evidence inside table cells or figure captions not cleanly extracted
+### Step 4: Fix — search PDF + correct
 
-### Step 4c: Sync CSV after any value changes
+对 NEEDS PDF SEARCH 和 WRONG 的字段：
 
-**CRITICAL**: If any judgment VALUE changed (not just evidence text or page number), you MUST also update `extract/eval_results.csv`. The Markdown reports and the CSV are dual sources of truth — changing one without the other causes data inconsistency.
+1. 用 `fitz` 搜索 PDF 相关页面，找到真实原文
+2. 替换证据为真实原文
+3. 如果值错了，修正值
+4. 更新 Markdown 报告（`eval_reports/{id}.md`）
+5. 如果值变了，同步 `eval_results.csv`（见 Step 4c）
 
-Fields that commonly need CSV sync after judgment correction:
-- `Reliability_Reported`, `Agreement Method`, `Coding Options`
-- `Eval_LLM_Judge`, `LLM_Judge_Validated`
-- `Theory_Grounding`, `Prompt_Disclosure`
-- Any other field where the VALUE (YES/NO/N/A/Strong/Weak/etc.) changed
+然后重新运行验证脚本确认修复干净：
 
-Use this pattern to update the CSV:
+```bash
+cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_extraction.py {ids}
+```
+
+### Step 4b: Handle false positives
+
+脚本标记 FABRICATED 的字段，可能是误报（PDF 双栏排版、连字符断行、附录页码不同）。用 Step 3 的 `fitz` 搜索确认：
+
+- **误报**：证据实际存在于 PDF → 报告 "脚本误报，证据在 p.X"
+- **真编造**：证据确实不存在 → Step 4 已处理
+
+### Step 4c: Sync CSV after value changes
+
+如果判断值变了，必须同步 `eval_results.csv`：
 
 ```bash
 cd extract && uv run python3 -c "
@@ -174,50 +139,17 @@ with open('eval_results.csv', 'w', encoding='utf-8-sig', newline='') as f:
 "
 ```
 
-CSV column names use underscores and Title_Case: `Reliability_Reported`, `Agreement Method`, `Coding Options`, `Eval_LLM_Judge`, etc. Check the header row to confirm exact names.
+CSV 列名格式：`Reliability_Reported`, `Eval_LLM_Judge`, `Theory_Grounding` 等。查表头确认。
 
-Report CSV changes alongside Markdown fixes in the fix table.
+### Step 5: Summary
 
-### Step 5: Review judgment correctness
-
-The script outputs `judgment_hints` — extracted snippets from the PDF containing keywords relevant to tricky fields. Use these snippets to assess:
-
-- **`reliability_reported`**: Does the paper report a *standardized statistical coefficient* (Cohen's kappa, Krippendorff's alpha, ICC), or just average differences / standard deviations / percentage agreement? Yes = coefficient reported, No = human eval exists but no coefficient, N/A = no human eval at all.
-- **`coding_options`**: Is there explicit inter-annotator agreement data reported? Yes = agreement explicitly reported, No = human eval but no agreement data, N/A = no human eval.
-- **`eval_llm_judge`**: Is the LLM actually *scoring/comparing* outputs, or just being used for feature extraction / data generation?
-- **`llm_judge_validated`**: Is there evidence of *validating* the LLM judge against human ratings (e.g. correlation, agreement scores)?
-- **`theory_grounding`**: Is the evaluation grounded in validated instruments/theories with proper operationalization, or just mentioning concepts? Strong = evaluation criteria derived from theory, Weak = theory mentioned but not operationalized, None = no theory reference.
-- **`theory_operationalized`**: How deeply is theory used to define evaluation criteria? Strong = criteria explicitly derived from theory, Partial = theory mentioned and partially operationalized, Mentioned = theory only mentioned without operationalization, None = no theory used.
-- **`behavior_eval_depth`**: How deeply does the paper evaluate behavioral changes? Dynamic = analyzes how behavior changes across turns, Pattern-level = counts behavior frequency/patterns without tracking changes, Static = scores each turn independently, None = no behavioral evaluation.
-- **`interaction_level`**: How much conversational context is evaluated? Single-turn = one response evaluated without history, Short Multi-turn = brief exchange (2-5 turns), Extended Dialogue = longer dialogue (6+ turns), Longitudinal = across multiple sessions/time.
-- **`prompt_disclosure`**: Are the actual prompts included in the paper or appendix? Full = complete prompts visible, Partial = fragments or description only, No = no prompts shared.
-
-If `judgment_hints` is empty for a field, that means no relevant keywords were found — the field's judgment is likely correct but you should note low confidence.
-
-Format the review:
-
-```
-### Judgment Review
-
-| Field | Extracted | Verified | Note |
-|-------|-----------|----------|------|
-| reliability_reported | No | No | Reports Avg.Diff/Std.Dev, not kappa/alpha |
-| coding_options | No | No | Uses human eval but no agreement data |
-| eval_llm_judge | YES | YES | GPT-4 scores empathy on 1-5 Likert scale |
-| llm_judge_validated | NO | — | No LLM judge validation found |
-| theory_grounding | Weak | Weak | Mentions CBT but not operationalized in eval |
-| prompt_disclosure | Partial | Partial | Prompts described but not fully shown |
-```
-
-### Step 6: Summary
-
-For each paper:
 ```
 Paper {id}: {exact_count} EXACT, {para_count} PARAPHRASED, {fab_count} FABRICATED, {tpl_count} TEMPLATE
-Judgment corrections needed: {count}
+Judgment corrections: {count}
+Evidence replacements: {count}
 ```
 
-For batch verification, also output:
+Batch verification:
 ```
 ## Batch Summary
 
@@ -227,11 +159,37 @@ For batch verification, also output:
 | 28    | 16    | 1           | 0          | 0        | 0          | 0            | —     |
 ```
 
+## Field Definitions Reference
+
+### BOOL fields (YES/NO)
+
+| Field | YES when | NO when |
+|-------|----------|---------|
+| eval_human_experts | 治疗师、临床医生、领域专家、受过训练的标注员进行评估 | 众包工人、无专业知识的学生、LLM 评估 |
+| eval_lay_users | MTurk/Prolific 众包工人、普通用户 | 领域专家、受过训练的标注员 |
+| eval_user_study | 用户与系统发生交互，有明确任务/协议/实验设计 | 简单打分任务（无交互）、静态输出评估 |
+| eval_llm_judge | 使用 GPT-4/Claude 等进行打分、比较、排序 | 提取向量相似度、特征提取、计算指标 |
+| eval_automatic | BLEU, ROUGE, Accuracy, F1 等算法/数学计算 | LLM 打分、人类打分 |
+| has_rubric | 有明确的评分量表、rubric、评分指南 | 仅说"让标注员打分"但无标准 |
+| llm_judge_validated | LLM 打分与人类打分做了相关性/一致性分析 | 未使用 LLM judge，或使用了但未验证 |
+| uses_standard_metrics | 使用 BLEU、ROUGE、BERTScore 等公认指标 | 仅用自创指标且未与标准指标对比 |
+
+### Single-choice fields
+
+| Field | Options | Key distinction |
+|-------|---------|-----------------|
+| reliability_reported | Yes / No / N/A | Yes = 报告了统计信度系数（kappa/alpha/ICC），百分比一致不算 |
+| coding_options | Yes / No / N/A | Yes = 明确报告了评估者间一致性 |
+| theory_grounding | Strong / Weak / None | Strong = 明确使用公认理论定义或测量 |
+| theory_operationalized | Strong / Partial / Mentioned / None | Strong = 评估标准明确源于理论 |
+| interaction_level | Single-turn / Short Multi-turn / Extended Dialogue / Longitudinal | Single-turn = 一次评估一个回复无历史 |
+| prompt_disclosure | Full / Partial / No | Full = 清晰提供了所有必要提示词 |
+| behavior_eval_depth | Dynamic / Pattern-level / Static / None | Dynamic = 分析行为如何随轮次变化 |
+
 ## Tips
 
-- **Always sync `eval_results.csv` when judgment values change.** Markdown fix + CSV fix must happen together. A value change in `eval_reports/{id}.md` without the corresponding CSV update will cause data drift.
-- The script handles PDF hyphenation artifacts (e.g., `psy-\nchological` → `psychological`) via whitespace normalization.
-- Evidence with `...` is split into parts and each part is verified independently.
-- The current schema has 43 structured fields across 7 categories: basic metadata, simulation modeling, eval methods, eval dimensions, eval depth/theory, reliability, and quality markers.
-- Focus judgment review on the six tricky fields — the script provides hints so you don't need to read the full PDF.
-- If a paper's PDF or report is missing, the script reports an error — skip it and note it in the summary.
+- **证据必须是原文，没有例外。** TEMPLATE 不是安全状态，是需要修复的缺陷。
+- **Always sync `eval_results.csv` when judgment values change.** Markdown + CSV 必须同时更新。
+- 脚本处理 PDF 连字符（`psy-\nchological` → `psychological`）和弯引号归一化。
+- 用 `...` 连接的分段证据，每段独立验证。
+- 43 个结构化字段，7 个类别。重点关注信度、理论、交互层级等边界模糊字段。
