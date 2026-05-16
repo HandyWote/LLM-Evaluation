@@ -32,6 +32,48 @@ PAPER_DIR = EXTRACT_DIR / "paper"
 sys.path.insert(0, str(EXTRACT_DIR))
 from pdf_index import _normalize_whitespace as normalize, _clean_footnote_breaks
 
+# 字段 → 搜索关键词映射，用于 --extract-evidence 从 PDF 提取候选证据
+FIELD_KEYWORDS = {
+    "eval_human_experts": ["professional", "expert", "clinician", "therapist", "psychologist", "psychiatrist", "annotator", "rater"],
+    "eval_lay_users": ["volunteer", "participant", "mturk", "prolific", "crowd", "recruit", "user study"],
+    "eval_user_study": ["interact", "session", "participant", "dialogue", "conversation", "task", "protocol"],
+    "eval_llm_judge": ["gpt", "claude", "llm", "language model", "automatic", "score", "judge", "evaluat"],
+    "eval_automatic": ["bleu", "rouge", "bertscore", "meteor", "f1", "accuracy", "precision", "recall", "metric"],
+    "dim_realism": ["realism", "realistic", "natural", "human-like", "authentic", "plausible"],
+    "dim_consistency": ["consist", "coherent", "stable", "maintain"],
+    "dim_fidelity": ["fidelity", "accurate", "faithful", "adhere", "comply", "structure"],
+    "dim_utility": ["useful", "helpful", "effective", "applicab", "beneficial", "practical"],
+    "dim_human_learning": ["learn", "skill", "improve", "progress", "outcome", "training", "educat"],
+    "dim_emotional_plausibility": ["emotion", "empathy", "affect", "sentiment", "mood", "feeling"],
+    "dim_safety": ["safety", "harm", "toxic", "risk", "suicid", "crisis", "confidential"],
+    "has_rubric": ["rubric", "scale", "criteria", "scoring", "rating", "likert", "criterion"],
+    "reliability_reported": ["kappa", "alpha", "icc", "inter-rater", "inter-annotator", "agreement", "cohen", "fleiss"],
+    "coding_options": ["inter-rater", "inter-annotator", "agreement", "cohen", "kappa", "iaa"],
+    "theory_grounding": ["theory", "validated", "psychometric", "cbt", "clinical", "established", "framework"],
+    "theory_operationalized": ["operationaliz", "measure", "assess", "metric", "scale", "instrument"],
+    "interaction_level": ["turn", "round", "dialogue", "session", "multi-turn", "single-turn", "longitudinal"],
+    "prompt_disclosure": ["prompt", "template", "appendix", "supplementary", "instruction"],
+    "llm_judge_validated": ["correlat", "agreement", "pearson", "spearman", "validated", "human judgment"],
+    "uses_standard_metrics": ["bleu", "rouge", "bertscore", "meteor", "standard", "established"],
+    "metric_interpretable": ["interpret", "explain", "meaning", "coherence", "dimension"],
+    "comparable_to_prior_work": ["baseline", "compar", "prior", "previous", "state-of-the-art", "sota"],
+    "has_longitudinal_eval": ["longitudinal", "follow-up", "multiple session", "long-term", "over time"],
+    "has_robustness_testing": ["robust", "adversar", "ablation", "sensitivity", "vary"],
+    "has_failure_analysis": ["failure", "error", "limitation", "weakness", "flag", "incorrect"],
+    "sim_behavior_realistic": ["realistic", "authentic", "simulation", "behavior", "real"],
+    "dataset_available": ["available", "release", "public", "github", "hugging", "code", "data"],
+    "clinical_theory": ["cbt", "dbt", "cognitive", "behavioral", "therapy", "clinical", "psychodynamic"],
+    "focus_type": ["framework", "evaluation", "benchmark", "dataset", "model", "system"],
+    "simulation_target": ["simulate", "agent", "patient", "therapist", "client", "persona"],
+    "persona_model_depth": ["persona", "character", "profile", "trait", "dynamic", "static"],
+    "uses_dynamic_state": ["dynamic", "state", "memory", "context", "temporal", "history"],
+    "behavior_eval_depth": ["behavior", "dynamic", "pattern", "static", "change", "evolv"],
+    "intervention_sensitivity": ["ablation", "intervention", "sensitivity", "component", "removal"],
+    "raw_eval_metrics": ["metric", "score", "measure", "evaluation", "rating"],
+    "temporal_modeling_details": ["temporal", "dynamic", "state", "memory", "iteration", "round"],
+    "agreement_method": ["kappa", "alpha", "icc", "cohen", "fleiss", "agreement"],
+}
+
 
 def extract_pdf_pages(pdf_path: Path) -> dict[int, str]:
     """Extract PDF text per page, return {page_number: text}."""
@@ -286,6 +328,56 @@ def verify_paper(paper_id: str) -> dict | None:
         "judgment_hints": hints,
         "summary": counts,
     }
+
+
+def extract_evidence_candidates(pages: dict[int, str], field: str, value: str, evidence: str, top_n: int = 10) -> list[dict]:
+    """从 PDF 中提取与字段相关的候选 verbatim 原文片段。"""
+    keywords = FIELD_KEYWORDS.get(field, [])
+    if not keywords:
+        return []
+
+    # 从 evidence 中提取额外关键词（去掉模板前缀）
+    extra_kws = []
+    if evidence.startswith("No evidence of") or evidence.startswith("论文中未") or evidence.startswith("未发现"):
+        # TEMPLATE: 从 evidence 中提取有意义的词
+        cleaned = re.sub(r'^(No evidence of |论文中未[^，]*，|未发现[^。]*。|未涉及[^。]*。)', '', evidence)
+        extra_kws = [w for w in cleaned.split() if len(w) > 3][:5]
+    else:
+        # FABRICATED: 从 evidence 中提取名词短语
+        words = evidence.split()
+        extra_kws = [w for w in words if len(w) > 4 and w[0].isupper()][:5]
+
+    all_keywords = keywords + extra_kws
+
+    # 按句子分割 PDF 全文，计算每个句子的相关度
+    candidates = []
+    for pn, page_text in pages.items():
+        # 按句号、感叹号、问号、换行分割
+        sentences = re.split(r'(?<=[.!?])\s+|\n', page_text)
+        for sentence in sentences:
+            sentence = sentence.strip()
+            if len(sentence) < 20 or len(sentence) > 500:
+                continue
+            sentence_lower = sentence.lower()
+            # 计算关键词命中数
+            hits = sum(1 for kw in all_keywords if kw.lower() in sentence_lower)
+            if hits >= 1:
+                candidates.append({
+                    "page": pn,
+                    "text": sentence[:300],
+                    "relevance": hits,
+                })
+
+    # 按相关度降序排序，去重，返回 top_n
+    candidates.sort(key=lambda x: x["relevance"], reverse=True)
+    seen = set()
+    unique = []
+    for c in candidates:
+        key = c["text"][:80]
+        if key not in seen:
+            seen.add(key)
+            unique.append(c)
+    return unique[:top_n]
 
 
 def compute_fixes(result: dict) -> list[dict]:
