@@ -12,114 +12,60 @@ description: Verify LLM-extracted evaluation methodology results against origina
 
 ## Workflow
 
-### Step 1: Run verification script
-
-```bash
-# Single paper
-cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_extraction.py 1
-
-# Multiple papers
-cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_extraction.py 1 28 35
-
-# All papers
-cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_extraction.py --all
-```
-
-脚本输出 JSON，包含每个字段的证据质量标签。
-
-### Step 2: Present evidence quality table
-
-```
-## Verification: Paper {id} — {title}
-
-### Evidence Quality
-
-| Field | Value | Quality | Page Match | Issue |
-|-------|-------|---------|------------|-------|
-| eval_human_experts | YES | EXACT | ✅ p.5 | |
-| eval_lay_users | NO | TEMPLATE | — | 需要从 PDF 找原文 |
-| dim_consistency | YES | PARAPHRASED | — | partial: "consistent and logical" but changed subject |
-| dim_utility | YES | FABRICATED | — | 证据未在 PDF 中找到 |
-```
-
-Quality labels:
-- **EXACT** — verbatim match found
-- **PARAPHRASED** — partial match, content OK but not exact
-- **FABRICATED** — quote not found in PDF at all
-- **TEMPLATE** — 使用模板文本，需要从 PDF 找真实原文（这是缺陷，不是安全状态）
-
-### Step 3: AI judgment value verification
-
-对每个字段，用已验证的证据 + 字段定义判断值是否正确。
-
-**EXACT 字段**：证据已确认存在于 PDF → 读证据内容 + 字段定义 → 判定值对不对
-- 例：`eval_human_experts: YES`，证据 "Two clinical psychologists evaluated..." → 符合 YES 定义（领域专家评估）→ CORRECT
-- 例：`reliability_reported: Yes`，证据 "average agreement was 85%" → 不符合 Yes 定义（需要统计信度系数，百分比不算）→ WRONG → 应为 No
-
-**PARAPHRASED 字段**：证据部分匹配 → 同上，但标注置信度较低
-
-**FABRICATED 字段**：证据未找到 → 用 `fitz` 搜索 PDF 找相关原文 → 用找到的原文重新判定值
-
-**TEMPLATE 字段**：声称"无证据" → 用 `fitz` 搜索 PDF 验证是否真的没有 →
-- 确实没有 → 值正确，但证据需改为说明为什么没有（而非模板）
-- 找到了 → 值可能错误，用找到的原文重新判定
-
-搜索 PDF 的方法：
-
-```bash
-cd extract && uv run python3 -c "
-import fitz
-doc = fitz.open('paper/{id}.pdf')
-for i, page in enumerate(doc):
-    text = page.get_text().lower()
-    if '{keyword}' in text:
-        print(f'FOUND on page {i+1}:')
-        print(page.get_text()[:500])
-        break
-else:
-    print('NOT FOUND')
-"
-```
-
-输出判断值验证表：
-
-```
-### Judgment Verification
-
-| Field | Value | Evidence Quality | Judgment | Fix |
-|-------|-------|-----------------|----------|-----|
-| eval_human_experts | YES | EXACT | CORRECT | — |
-| reliability_reported | Yes | EXACT | WRONG → No | 证据是百分比一致，不是信度系数 |
-| eval_lay_users | NO | TEMPLATE | NEEDS PDF SEARCH | — |
-| dim_consistency | YES | FABRICATED | NEEDS PDF SEARCH | — |
-```
-
-### Step 4: Fix — search PDF + correct
-
-对 NEEDS PDF SEARCH 和 WRONG 的字段：
-
-1. 用 `fitz` 搜索 PDF 相关页面，找到真实原文
-2. 替换证据为真实原文
-3. 如果值错了，修正值
-4. 更新 Markdown 报告（`eval_reports/{id}.md`）
-5. 如果值变了，同步 `eval_results.csv`（见 Step 4c）
-
-然后重新运行验证脚本确认修复干净：
+### Step 1: 跑脚本
 
 ```bash
 cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_extraction.py {ids}
 ```
 
-### Step 4b: Handle false positives
+脚本输出 JSON，包含每个字段的证据质量标签（EXACT / PARAPHRASED / FABRICATED / TEMPLATE）。
 
-脚本标记 FABRICATED 的字段，可能是误报（PDF 双栏排版、连字符断行、附录页码不同）。用 Step 3 的 `fitz` 搜索确认：
+### Step 2: 按优先级处理
 
-- **误报**：证据实际存在于 PDF → 报告 "脚本误报，证据在 p.X"
-- **真编造**：证据确实不存在 → Step 4 已处理
+看结果，按优先级分类处理：
 
-### Step 4c: Sync CSV after value changes
+| 质量标签 | 优先级 | 处理方式 |
+|----------|--------|----------|
+| EXACT | 跳过 | 证据已确认 |
+| PARAPHRASED | 低 | 内容 OK，可接受 |
+| TEMPLATE | **最高** | 必须修复 → Step 3a |
+| FABRICATED | 高 | 先检查假阳性 → Step 3b |
 
-如果判断值变了，必须同步 `eval_results.csv`：
+### Step 3a: 修复 TEMPLATE
+
+用 `--extract-evidence` 获取候选原文：
+
+```bash
+cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_extraction.py {id} --extract-evidence
+```
+
+从候选中选择 verbatim 文本，替换 evidence。**逐字引用！不要总结！**
+
+> ⚠️ **逐字引用铁律**
+> 证据必须是 PDF 原文逐字引用。绝对不能自己写总结、改写、缩写。
+> 如果你写出来的文字不是 PDF 里原封不动抄出来的，就是错的。
+>
+> ✅ 正确：`We recruited 7 mental health professionals with professional expertise.`
+> ❌ 错误：`The paper uses human evaluation by mental health professionals.`
+> （第二种是总结，不是原文，会被判为 FABRICATED）
+>
+> 使用 `--extract-evidence` 获取候选原文，从中选择，不要自己写。
+
+### Step 3b: 处理 FABRICATED
+
+1. 先检查是否假阳性（归一化问题）→ 重新跑脚本确认
+2. 不是假阳性？→ 用 `--extract-evidence` 获取候选，选择 verbatim 文本替换
+3. 值可能错了？→ Step 4
+
+### Step 4: 判断值验证
+
+对每个字段，用已验证的证据 + 字段定义判断值是否正确。
+
+- EXACT 字段：读证据内容 + 字段定义 → 判定值对不对
+- PARAPHRASED 字段：同上，置信度较低
+- FABRICATED / TEMPLATE 字段：用修复后的证据重新判定
+
+如果值错了，修正值 + 同步 CSV：
 
 ```bash
 cd extract && uv run python3 -c "
@@ -139,25 +85,33 @@ with open('eval_results.csv', 'w', encoding='utf-8-sig', newline='') as f:
 "
 ```
 
-CSV 列名格式：`Reliability_Reported`, `Eval_LLM_Judge`, `Theory_Grounding` 等。查表头确认。
+### Step 5: 重新跑脚本确认
 
-### Step 5: Summary
-
-```
-Paper {id}: {exact_count} EXACT, {para_count} PARAPHRASED, {fab_count} FABRICATED, {tpl_count} TEMPLATE
-Judgment corrections: {count}
-Evidence replacements: {count}
+```bash
+cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_extraction.py {ids}
 ```
 
-Batch verification:
-```
-## Batch Summary
+确认 TEMPLATE = 0，FABRICATED 尽可能低。
 
-| Paper | EXACT | PARAPHRASED | FABRICATED | TEMPLATE | Page Wrong | Judgment Fix | Fixed |
-|-------|-------|-------------|------------|----------|------------|--------------|-------|
-| 1     | 14    | 3           | 0          | 0        | 1          | 1            | ✅    |
-| 28    | 16    | 1           | 0          | 0        | 0          | 0            | —     |
-```
+### 证据修复示例
+
+#### ✅ 正确做法（TEMPLATE → EXACT）
+
+原始 evidence：
+> **Evidence** (N/A): No evidence of using LLM as judge for evaluation found in the paper.
+
+用 `--extract-evidence` 获取候选，选择 PDF 原文：
+> p.6: To comprehensively evaluate the model's performance...we adopted a series of automatic evaluation metrics.
+> p.7: Our evaluation team consisted of four senior psychology students and an experienced psychotherapist.
+
+修复后（逐字引用）：
+> **Evidence** (p.6-7): To comprehensively evaluate the model's performance...we adopted a series of automatic evaluation metrics. Our evaluation team consisted of four senior psychology students and an experienced psychotherapist.
+
+#### ❌ 错误做法（TEMPLATE → FABRICATED）
+
+修复后（AI 总结，不是原文）：
+> **Evidence** (p.6-7): The paper uses automatic metrics and human expert evaluation, with no LLM judge employed.
+> ↑ 这是 AI 总结的，不是 PDF 原文，会被判为 FABRICATED
 
 ## Field Definitions Reference
 
