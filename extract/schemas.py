@@ -3,6 +3,8 @@
 # --- CSV Column Mapping (internal_name -> theme_track.csv header, order matters) ---
 CSV_COLUMNS = [
     ("paper_id", "Paper_ID"),
+    ("citation_key", "Citation_Key"),
+    ("bibtex", "Bibtex"),
     ("title", "Title"),
     ("year", "Year"),
     ("venue", "Venue"),

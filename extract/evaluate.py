@@ -37,6 +37,7 @@ load_dotenv()
 
 MAX_CONCURRENCY = 3
 OUTPUT_CSV = Path(__file__).parent / "eval_results.csv"
+PAPER_META_CSV = Path(__file__).parent.parent / "docs" / "paper_metadata.csv"
 REPORTS_DIR = Path(__file__).parent / "eval_reports"
 
 
@@ -97,10 +98,58 @@ def parse_llm_response(content: str) -> dict:
     return result
 
 
+# --- Bibtex Generation ---
+
+def _load_paper_metadata() -> dict[str, dict]:
+    if not PAPER_META_CSV.exists():
+        return {}
+    with open(PAPER_META_CSV, "r", encoding="utf-8-sig") as f:
+        reader = csv.DictReader(f)
+        field_map = {k.strip(): k for k in (reader.fieldnames or [])}
+        meta = {}
+        for row in reader:
+            pid = row.get(field_map.get("ID", ""), "").strip()
+            if pid:
+                meta[pid] = {
+                    "first_author": row.get(field_map.get("First Author", ""), "").strip(),
+                    "year": row.get(field_map.get("Year", ""), "").strip(),
+                    "title": row.get(field_map.get("Title", ""), "").strip(),
+                }
+        return meta
+
+
+def generate_bibtex_key(first_author: str, year: str, title: str) -> str:
+    last_name = first_author.strip().split()[-1] if first_author.strip() else ""
+    first_word_match = re.match(r"[A-Za-z]+", title)
+    first_word = first_word_match.group(0) if first_word_match else ""
+    return f"{last_name}{year}{first_word}"
+
+
+_PAPER_META_CACHE: dict[str, dict] | None = None
+
+
+def _get_paper_meta() -> dict[str, dict]:
+    global _PAPER_META_CACHE
+    if _PAPER_META_CACHE is None:
+        _PAPER_META_CACHE = _load_paper_metadata()
+    return _PAPER_META_CACHE
+
+
+def _bibtex_for(paper_id: str) -> str:
+    meta = _get_paper_meta().get(paper_id, {})
+    return generate_bibtex_key(
+        meta.get("first_author", ""),
+        meta.get("year", ""),
+        meta.get("title", ""),
+    )
+
+
 # --- CSV Output ---
 
 def build_csv_row(paper_id: str, parsed: dict) -> dict:
     row = {"Paper_ID": paper_id}
+    row["Citation_Key"] = ""
+    row["Bibtex"] = _bibtex_for(paper_id)
     row["Title"] = parsed.get("title", "")
     row["Year"] = parsed.get("year", "")
     row["Venue"] = parsed.get("venue", "")
@@ -183,6 +232,32 @@ def load_existing_ids(csv_path: Path) -> set[str]:
         return {row["Paper_ID"] for row in reader if row.get("Paper_ID")}
 
 
+def backfill_bibtex():
+    if not OUTPUT_CSV.exists():
+        return
+    with open(OUTPUT_CSV, "r", encoding="utf-8-sig") as f:
+        reader = csv.DictReader(f)
+        old_fieldnames = list(reader.fieldnames or [])
+        rows = list(reader)
+
+    if "Citation_Key" in old_fieldnames:
+        return
+
+    new_fieldnames = [old_fieldnames[0], "Citation_Key", "Bibtex"] + old_fieldnames[1:]
+    for row in rows:
+        pid = row.get("Paper_ID", "")
+        row["Citation_Key"] = ""
+        row["Bibtex"] = _bibtex_for(pid)
+
+    tmp = OUTPUT_CSV.with_suffix(".tmp")
+    with open(tmp, "w", newline="", encoding="utf-8-sig") as f:
+        writer = csv.DictWriter(f, fieldnames=new_fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+    tmp.replace(OUTPUT_CSV)
+    print(f"已回填 {len(rows)} 行的 Citation_Key 和 Bibtex 列")
+
+
 def parse_id(filename: str) -> str:
     match = re.match(r"(\d+)", filename)
     return match.group(1) if match else filename
@@ -224,6 +299,8 @@ async def main():
     semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
 
     existing_ids = load_existing_ids(OUTPUT_CSV) if not args.force else set()
+
+    backfill_bibtex()
 
     if args.paper:
         pdf_path = paper_dir / f"{args.paper}.pdf"
