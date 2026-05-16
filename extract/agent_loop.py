@@ -43,7 +43,8 @@ def _validate_phase_fields(phase_idx: int, data: dict) -> list[str]:
 
 def _verify_all_evidence(extracted: dict, index: PDFIndex) -> dict[str, dict]:
     """Verify evidence quotes against PDF. Returns {field: {"current": data, "error": detail}}.
-    Only flags FABRICATED quotes (no similar text found); skips PARAPHRASED (partial match)."""
+    For YES fields: verify evidence exists in PDF (positive verification).
+    For NO/N/A fields: verify PDF truly lacks relevant content (negative verification)."""
     failures = {}
     for field, data in extracted.items():
         if not isinstance(data, dict):
@@ -51,8 +52,25 @@ def _verify_all_evidence(extracted: dict, index: PDFIndex) -> dict[str, dict]:
         value = data.get("value", "")
         evidence = data.get("evidence", "")
         page = data.get("page")
-        if value.upper() in ("NO", "N/A") or not evidence.strip() or evidence.startswith("No evidence"):
+
+        if not evidence.strip():
             continue
+
+        # 模板证据（旧数据兼容）：跳过验证，由 verify skill 后续处理
+        if evidence.startswith("No evidence") and value.upper() in ("NO", "N/A"):
+            continue
+
+        # NO/N/A 字段负验证：搜索 PDF 看是否真的没有相关内容
+        if value.upper() in ("NO", "N/A"):
+            has_relevant, found_text = _check_negative_claim(field, index)
+            if has_relevant:
+                failures[field] = {
+                    "current": data,
+                    "error": f"Claimed NO but found relevant text: {found_text[:200]}",
+                }
+            continue
+
+        # YES 字段正验证：确认证据原文存在
         if page is None:
             continue
         result = index.verify_quote(evidence, page)
@@ -63,6 +81,44 @@ def _verify_all_evidence(extracted: dict, index: PDFIndex) -> dict[str, dict]:
         if "No similar text found" in detail:
             failures[field] = {"current": data, "error": detail}
     return failures
+
+
+# 字段 → 搜索关键词映射（用于 NO 字段负验证）
+NEGATIVE_FIELD_KEYWORDS = {
+    "eval_human_experts": ["therapist", "clinician", "psychologist", "psychiatrist", "expert", "professional", "counselor", "practitioner"],
+    "eval_lay_users": ["crowdwork", "mturk", "amazon mechanical", "prolific", "lay user", "naive participant"],
+    "eval_user_study": ["user study", "user experiment", "participant interact", "interaction study"],
+    "eval_llm_judge": ["gpt-4", "gpt-3", "claude", "llm-as-judge", "llm evaluator", "language model evaluat"],
+    "eval_automatic": ["bleu", "rouge", "bertscore", "f1 score", "accuracy", "cosine similarity"],
+    "dim_safety": ["safety", "harmful", "toxic", "bias", "ethical", "risk"],
+    "dim_realism": ["realism", "naturalness", "human-like", "authentic"],
+    "dim_consistency": ["consistency", "coherent", "stable across"],
+    "dim_fidelity": ["fidelity", "adherence", "faithful", "aligned with"],
+    "dim_utility": ["utility", "usefulness", "effective", "helpful"],
+    "dim_human_learning": ["learning outcome", "knowledge gain", "skill improvement", "behavior change"],
+    "dim_emotional_plausibility": ["empathy", "emotional", "affect", "sentiment"],
+    "reliability_reported": ["kappa", "krippendorff", "icc", "inter-rater", "inter-annotator agreement"],
+    "has_rubric": ["rubric", "scoring guide", "rating scale", "evaluation criteria", "scoring criteria"],
+    "theory_grounding": ["cbt", "cognitive-behavioral", "motivational interview", "validated scale", "psychometric"],
+    "has_longitudinal_eval": ["longitudinal", "follow-up", "multiple session", "over time"],
+    "has_failure_analysis": ["failure case", "error analysis", "failure mode", "limitation"],
+}
+
+
+def _check_negative_claim(field: str, index: PDFIndex) -> tuple[bool, str]:
+    """Check if a NO/N/A claim is correct by searching PDF for relevant keywords.
+    Returns (has_relevant_evidence, found_text)."""
+    keywords = NEGATIVE_FIELD_KEYWORDS.get(field, [])
+    if not keywords:
+        return False, ""
+
+    full_text = index.get_full_text().lower()
+    for kw in keywords:
+        if kw.lower() in full_text:
+            idx = full_text.index(kw.lower())
+            context = full_text[max(0, idx - 100):idx + 200]
+            return True, context
+    return False, ""
 
 
 def _parse_correction_response(content: str) -> dict | None:
