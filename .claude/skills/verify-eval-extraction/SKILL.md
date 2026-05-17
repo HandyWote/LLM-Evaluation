@@ -56,17 +56,52 @@ cd extract && uv run ../.claude/skills/verify-eval-extraction/scripts/verify_ext
 
 从候选中选择 verbatim 文本，替换 evidence。**逐字引用！不要总结！**
 
+> ⚠️ **只改 evidence，不改 confidence**
+> 修复 TEMPLATE/FABRICATED 时，只替换证据文本。confidence 反映的是判断值的置信度，不是证据质量。除非你在 Step 4 中改变了判断值，否则不要动 confidence。
+
 ### Step 3b: 处理 FABRICATED
 
 1. 先检查是否假阳性（归一化问题）→ 重新跑脚本确认
 2. 不是假阳性？→ 用下面的策略获取 verbatim 文本替换
 3. 值可能错了？→ Step 4
 
-### Step 4: 判断值验证
+### Step 4: 判断值验证（全量，必须执行）
 
-对每个字段，用已验证的证据 + 字段定义判断值是否正确。
+**这一步不是可选的，也不是只验证修过证据的字段。** 你必须对论文的**所有字段**（包括 EXACT 和 PARAPHRASED 的）用已验证的证据 + 字段定义验证判断值。
 
-如果值错了，修正值 + 同步 CSV：
+为什么全量？因为证据质量高不代表判断值正确。EXACT 的证据可能支持的是另一个值。
+
+#### 必检清单
+
+对每个字段，问自己：**"基于这篇论文实际做了什么，这个值对吗？"**
+
+重点关注以下易错字段：
+
+| 字段 | 常见错误 | 正确判断方法 |
+|------|----------|--------------|
+| `prompt_disclosure` | 论文在附录提供了 prompt 却标 No | 如果附录/补充材料中有完整 prompt → **Full**；部分提供 → **Partial**；完全没有 → **No** |
+| `reliability_reported` | 百分比一致率被当作信度系数 | 只有报告了 kappa/alpha/ICC 等统计系数才是 **Yes**；百分比一致、简单计数 → **No** |
+| `theory_grounding` | 框架被引用但未用于定义/测量 | Strong = 理论明确指导了评估设计；Weak = 提及但未深入使用 |
+| `llm_judge_validated` | 使用了 LLM judge 但未验证就标 YES | YES 必须有 LLM 打分与人类打分的一致性分析 |
+| `eval_user_study` | 静态打分任务被当作用户研究 | 用户必须与系统有交互，有明确任务/协议 |
+| `dim_*` 系列 | 维度不存在就标 NO | NO 是正确的，但要确认论文确实没有评估该维度 |
+
+#### prompt_disclosure 判断规则
+
+这是最容易出错的字段。判断流程：
+
+```
+论文是否在正文/附录/补充材料中提供了 prompt？
+├── 是，完整提供了所有必要 prompt → Full
+├── 是，但只提供了部分或示例 → Partial
+└── 否，完全没有提供 → No
+```
+
+**关键**：附录中的 prompt 模板、Table A5 等都算"提供了"。很多论文会写 "Full prompts are shown in the Appendix"——这就是 Full，不是 No。
+
+#### 如果值错了
+
+修正值 + 同步 CSV：
 
 ```bash
 cd extract && uv run python3 -c "
@@ -214,7 +249,7 @@ exact = text[idx:end+1].strip()
 | theory_grounding | Strong / Weak / None | Strong = 明确使用公认理论定义或测量 |
 | theory_operationalized | Strong / Partial / Mentioned / None | Strong = 评估标准明确源于理论 |
 | interaction_level | Single-turn / Short Multi-turn / Extended Dialogue / Longitudinal | Single-turn = 一次评估一个回复无历史 |
-| prompt_disclosure | Full / Partial / No | Full = 清晰提供了所有必要提示词 |
+| prompt_disclosure | Full / Partial / No | Full = 在正文或附录中清晰提供了所有必要提示词；Partial = 部分提供；No = 完全没有 |
 | behavior_eval_depth | Dynamic / Pattern-level / Static / None | Dynamic = 分析行为如何随轮次变化 |
 
 ## Tips
@@ -225,3 +260,34 @@ exact = text[idx:end+1].strip()
 - 用 `...` 连接的分段证据，每段独立验证。
 - 43 个结构化字段，7 个类别。重点关注信度、理论、交互层级等边界模糊字段。
 - **NO 字段不需要"解释为什么 NO"的证据**——只需提供论文中已有的、可验证的文本。该文本描述了论文的性质或方法，间接支持 NO 的判断。
+
+## 常见错误案例
+
+### prompt_disclosure: 附录有 prompt 却标 No
+
+**错误模式**：论文写 "Full prompts are shown in the Appendix A.1" 或 "Table A5: Template for zero-shot prompting"，但 `prompt_disclosure` 被标为 No。
+
+**正确判断**：附录中的 prompt 模板 = 已提供 = Full 或 Partial，不是 No。
+
+**实际案例**（Paper 47）：
+```
+# 错误
+prompt_disclosure: No
+**Evidence** (p.5): Full prompts are shown in the Appendix A.1.
+# ↑ 证据自己说了 "Full prompts"，值却标 No，矛盾
+
+# 正确
+prompt_disclosure: Full
+```
+
+### confidence: 修证据时被误改
+
+**错误模式**：修复 TEMPLATE/FABRICATED 证据时，把 confidence 从 85/90/95 改成了 100。
+
+**正确做法**：confidence 反映判断值的置信度，不是证据质量。只改 evidence，不改 confidence。除非你在 Step 4 中改变了判断值本身。
+
+### reliability_reported: 百分比一致被当作信度
+
+**错误模式**：论文写 "Three experts agree with the given label" 或 "inter-annotator agreement was 85%"，被标为 Yes。
+
+**正确判断**：百分比一致率不是统计信度系数。只有 kappa/alpha/ICC 等才是 Yes。
