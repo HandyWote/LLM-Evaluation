@@ -37,7 +37,7 @@ def generate_table1(df: pd.DataFrame) -> str:
     categories = ["Strong", "Partial", "Mentioned", "None"]
 
     # 生成LaTeX表格
-    latex = r"""\begin{table}[htbp]
+    latex = r"""\begin{table*}[htbp]
 \centering
 \caption{Statistics of Theory Grounding and Theory Operationalization in Evaluation}
 \label{tab:theory-stats}
@@ -67,7 +67,7 @@ def generate_table1(df: pd.DataFrame) -> str:
 
     latex += r"""\bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 """
     return latex
 
@@ -79,23 +79,16 @@ def generate_table2(df: pd.DataFrame) -> str:
     # 按Theory_Grounding分组
     grouped = df.groupby("Theory_Grounding")["Citation_Key"].apply(list)
 
-    # 生成LaTeX表格 - 使用longtable支持跨页，p{}列自动换行
-    latex = r"""\begin{longtable}{p{2.5cm}p{13cm}}
+    # 生成LaTeX表格 - table*跨两栏，p{}列自动换行
+    latex = r"""\begin{table*}[htbp]
+\centering
 \caption{Papers Classified by Theory Grounding Level}
-\label{tab:theory-grounding} \\
+\label{tab:theory-grounding}
+\small
+\begin{tabular}{p{2.5cm}p{12.4cm}}
 \toprule
 \textbf{Category} & \textbf{Papers (Citation Keys)} \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{Category} & \textbf{Papers (Citation Keys)} \\
-\midrule
-\endhead
-
-\bottomrule
-\endfoot
-\hyphenpenalty=10000\exhyphenpenalty=10000\tolerance=10000\raggedright
 """
 
     for cat in categories:
@@ -106,7 +99,9 @@ def generate_table2(df: pd.DataFrame) -> str:
             papers_str = "---"
         latex += f"{cat} & {papers_str} \\\\\n"
 
-    latex += r"""\end{longtable}
+    latex += r"""\bottomrule
+\end{tabular}
+\end{table*}
 """
     return latex
 
@@ -118,23 +113,16 @@ def generate_table3(df: pd.DataFrame) -> str:
     # 按Theory_Operationalized_In_Evaluation分组
     grouped = df.groupby("Theory_Operationalized_In_Evaluation")["Citation_Key"].apply(list)
 
-    # 生成LaTeX表格 - 使用longtable支持跨页，p{}列自动换行
-    latex = r"""\begin{longtable}{p{2.5cm}p{13cm}}
+    # 生成LaTeX表格 - table*跨两栏，p{}列自动换行
+    latex = r"""\begin{table*}[htbp]
+\centering
 \caption{Papers Classified by Theory Operationalization in Evaluation}
-\label{tab:theory-operationalization} \\
+\label{tab:theory-operationalization}
+\small
+\begin{tabular}{p{2.5cm}p{12.4cm}}
 \toprule
 \textbf{Category} & \textbf{Papers (Citation Keys)} \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{Category} & \textbf{Papers (Citation Keys)} \\
-\midrule
-\endhead
-
-\bottomrule
-\endfoot
-\hyphenpenalty=10000\exhyphenpenalty=10000\tolerance=10000\raggedright
 """
 
     for cat in categories:
@@ -145,7 +133,9 @@ def generate_table3(df: pd.DataFrame) -> str:
             papers_str = "---"
         latex += f"{cat} & {papers_str} \\\\\n"
 
-    latex += r"""\end{longtable}
+    latex += r"""\bottomrule
+\end{tabular}
+\end{table*}
 """
     return latex
 
@@ -173,23 +163,16 @@ def generate_table4(df: pd.DataFrame) -> str:
         if papers:
             type_papers[eval_type] = papers
 
-    # 生成LaTeX表格 - 使用longtable支持跨页，p{}列自动换行
-    latex = r"""\begin{longtable}{p{4cm}p{5cm}p{6cm}}
+    # 生成LaTeX表格 - table*跨两栏，p{}列自动换行
+    latex = r"""\begin{table*}[htbp]
+\centering
 \caption{Evaluation Types Used in Included Studies}
-\label{tab:eval-types} \\
+\label{tab:eval-types}
+\small
+\begin{tabular}{p{3.5cm}p{4.2cm}p{6.4cm}}
 \toprule
 \textbf{Evaluation Type} & \textbf{What It Evaluates} & \textbf{Example Papers} \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{Evaluation Type} & \textbf{What It Evaluates} & \textbf{Example Papers} \\
-\midrule
-\endhead
-
-\bottomrule
-\endfoot
-\hyphenpenalty=10000\exhyphenpenalty=10000\tolerance=10000\raggedright
 """
 
     # 评估类型描述
@@ -209,7 +192,9 @@ def generate_table4(df: pd.DataFrame) -> str:
         papers_str = ", ".join(papers)
         latex += f"{eval_type} & {desc} & {papers_str} \\\\\n"
 
-    latex += r"""\end{longtable}
+    latex += r"""\bottomrule
+\end{tabular}
+\end{table*}
 """
     return latex
 
@@ -219,28 +204,22 @@ def main():
     excel_path = Path(__file__).parent / "theory_eval_refined_coding_refined.xlsx"
     df = read_data(excel_path)
 
-    # 生成Table 1
-    table1 = generate_table1(df)
-    output_path = Path(__file__).parent / "table1.tex"
-    output_path.write_text(table1)
-    print(f"Generated {output_path}")
+    content = r"""% Requires in preamble: \usepackage{booktabs}
 
-    # 生成Table 2
-    table2 = generate_table2(df)
-    output_path = Path(__file__).parent / "table2.tex"
-    output_path.write_text(table2)
-    print(f"Generated {output_path}")
+\section{Statistics}
+"""
 
-    # 生成Table 3
-    table3 = generate_table3(df)
-    output_path = Path(__file__).parent / "table3.tex"
-    output_path.write_text(table3)
-    print(f"Generated {output_path}")
+    content += generate_table1(df)
+    content += "\n\n\\section{Theory Grounding Classification}\n"
+    content += generate_table2(df)
+    content += "\n\n\\section{Theory Operationalization Classification}\n"
+    content += generate_table3(df)
+    content += "\n\n\\section{Evaluation Types}\n"
+    content += generate_table4(df)
+    content += "\n"
 
-    # 生成Table 4
-    table4 = generate_table4(df)
-    output_path = Path(__file__).parent / "table4.tex"
-    output_path.write_text(table4)
+    output_path = Path(__file__).parent / "main.tex"
+    output_path.write_text(content)
     print(f"Generated {output_path}")
 
 
