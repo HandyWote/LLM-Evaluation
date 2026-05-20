@@ -4,11 +4,11 @@
 \centering
 \begin{tabular}{lccccc}
 \toprule
-\textbf{Category} & \textbf{Mentioned} & \textbf{Not Specified} & \textbf{Partial} & \textbf{Strong} & \textbf{Total} \\
+\textbf{Category} & \textbf{Strong} & \textbf{Partial} & \textbf{Mentioned} & \textbf{Not Specified} & \textbf{Total} \\
 \midrule
-Theory Grounding & 2 (3.8\%) & --- & 10 (19.2\%) & 40 (76.9\%) & 52 \\
+Theory Grounding & 40 (76.9\%) & 10 (19.2\%) & 2 (3.8\%) & --- & 52 \\
 \midrule
-Theory Operationalization & --- & 6 (11.5\%) & 16 (30.8\%) & 30 (57.7\%) & 52 \\
+Theory Operationalization & 30 (57.7\%) & 16 (30.8\%) & --- & 6 (11.5\%) & 52 \\
 \bottomrule
 \end{tabular}
 \caption{Statistics of Theory Grounding and Theory Operationalization in Evaluation}
@@ -53,23 +53,30 @@ Partial & \cite{Haydarov2025Towards}, \cite{Liu2023ChatCounselor}, \cite{Hu2024P
 \centering
 \scriptsize
 \renewcommand{\arraystretch}{0.75}
-\begin{tabular}{p{4cm}p{3.2cm}p{6.8cm}}
+\begin{tabular}{p{5cm}p{9cm}}
 \toprule
-\textbf{What It Evaluates} & \textbf{Evaluation Type} & \textbf{Example Papers} \\
+\textbf{Evaluation Type} & \textbf{Example Papers} \\
 \midrule
-Standardized psychological or clinical scales & Validated scale & \cite{Xiao2024HealMe}, \cite{Qiu2025EmoAgent}, \cite{Li2024Understanding}, \cite{Wang2024Towards}, \cite{Schmidmaier2025Using}, \cite{Schmidmaier2025UsingNonverbal}, \cite{Yang2025CAMI}, \cite{Chen2025MIND}, \cite{Wang2025Psychological} \\
+\textbf{Validated scale}\\
+\small{Standardized psychological or clinical scales} & \cite{Xiao2024HealMe}, \cite{Qiu2025EmoAgent}, \cite{Li2024Understanding}, \cite{Wang2024Towards}, \cite{Schmidmaier2025Using}, \cite{Schmidmaier2025UsingNonverbal}, \cite{Yang2025CAMI}, \cite{Chen2025MIND}, \cite{Wang2025Psychological} \\
 \midrule
-Therapy process or outcome coding & Established therapy/counseling coding system & \cite{Xiao2024HealMe}, \cite{Zhang2025CBT-BENCH}, \cite{Lee2024CACTUS}, \cite{Feng2025Reframe}, \cite{Kim2025MIRROR}, \cite{Kim2025Can}, \cite{Tanana2019Development} \\
+\textbf{Established therapy/counseling coding system}\\
+\small{Therapy process or outcome coding} & \cite{Xiao2024HealMe}, \cite{Zhang2025CBT-BENCH}, \cite{Lee2024CACTUS}, \cite{Feng2025Reframe}, \cite{Kim2025MIRROR}, \cite{Kim2025Can}, \cite{Tanana2019Development} \\
 \midrule
-Custom rubrics based on theoretical constructs & Theory-specific rubric & \cite{Xiao2024HealMe}, \cite{Gabriel2024Can}, \cite{Qiu2025EmoAgent}, \cite{Aghakhani2025From}, \cite{Wang2025CARE-Bench}, \cite{Sungarda2025GenAI}, \cite{Liu2023ChatCounselor}, \cite{Chiu2024A}, \cite{Li2024Understanding}, \cite{Wang2024Towards}, \cite{Fouda2026PsychiatryBench}, \cite{Cai2026Exploring}, \cite{Qiu2026PsyCLIENT}, \cite{Nguyen2025Do}, \cite{Zhang2025CBT-BENCH}, \cite{Kim2025KMI}, \cite{Xu2025MentalChat16K}, \cite{Ozgun2025Trustworthy}, \cite{Louie2026Can}, \cite{Louie2024Roleplay-doh}, \cite{Wang2024PATIENT}, \cite{Lee2024CACTUS}, \cite{Basar2024To}, \cite{Yang2025Consistent}, \cite{Yang2025CAMI}, \cite{Basar2025How}, \cite{Feng2025Reframe}, \cite{Kim2025MIRROR}, \cite{Kim2025Can}, \cite{Samuel2025PersonaGym}, \cite{Chen2025MIND}, \cite{Na2024CBT-LLM}, \cite{Sharma2023Cognitive}, \cite{Kang2024Can}, \cite{Wang2025Psychological} \\
+\textbf{Theory-specific rubric}\\
+\small{Custom rubrics based on theoretical constructs} & \cite{Xiao2024HealMe}, \cite{Gabriel2024Can}, \cite{Qiu2025EmoAgent}, \cite{Aghakhani2025From}, \cite{Wang2025CARE-Bench}, \cite{Sungarda2025GenAI}, \cite{Liu2023ChatCounselor}, \cite{Chiu2024A}, \cite{Li2024Understanding}, \cite{Wang2024Towards}, \cite{Fouda2026PsychiatryBench}, \cite{Cai2026Exploring}, \cite{Qiu2026PsyCLIENT}, \cite{Nguyen2025Do}, \cite{Zhang2025CBT-BENCH}, \cite{Kim2025KMI}, \cite{Xu2025MentalChat16K}, \cite{Ozgun2025Trustworthy}, \cite{Louie2026Can}, \cite{Louie2024Roleplay-doh}, \cite{Wang2024PATIENT}, \cite{Lee2024CACTUS}, \cite{Basar2024To}, \cite{Yang2025Consistent}, \cite{Yang2025CAMI}, \cite{Basar2025How}, \cite{Feng2025Reframe}, \cite{Kim2025MIRROR}, \cite{Kim2025Can}, \cite{Samuel2025PersonaGym}, \cite{Chen2025MIND}, \cite{Na2024CBT-LLM}, \cite{Sharma2023Cognitive}, \cite{Kang2024Can}, \cite{Wang2025Psychological} \\
 \midrule
-Expert judgments on custom dimensions & Custom expert rating & \cite{Xiao2024HealMe}, \cite{Gabriel2024Can}, \cite{Haydarov2025Towards}, \cite{Wang2025CARE-Bench}, \cite{Qiu2026PsyCLIENT}, \cite{Kim2025KMI}, \cite{Louie2026Can}, \cite{Louie2024Roleplay-doh}, \cite{Wang2024PATIENT}, \cite{Basar2024To}, \cite{Yang2025Consistent}, \cite{Basar2025How}, \cite{Kim2025MIRROR}, \cite{Liu2025Eeyore}, \cite{Na2024CBT-LLM}, \cite{Sharma2023Cognitive}, \cite{Kang2024Can}, \cite{Schmidgall2025AgentClinic}, \cite{Wang2025Psychological} \\
+\textbf{Custom expert rating}\\
+\small{Expert judgments on custom dimensions} & \cite{Xiao2024HealMe}, \cite{Gabriel2024Can}, \cite{Haydarov2025Towards}, \cite{Wang2025CARE-Bench}, \cite{Qiu2026PsyCLIENT}, \cite{Kim2025KMI}, \cite{Louie2026Can}, \cite{Louie2024Roleplay-doh}, \cite{Wang2024PATIENT}, \cite{Basar2024To}, \cite{Yang2025Consistent}, \cite{Basar2025How}, \cite{Kim2025MIRROR}, \cite{Liu2025Eeyore}, \cite{Na2024CBT-LLM}, \cite{Sharma2023Cognitive}, \cite{Kang2024Can}, \cite{Schmidgall2025AgentClinic}, \cite{Wang2025Psychological} \\
 \midrule
-Emotion recognition or affective computing metrics & Affective/emotional dynamics metric & \cite{Haydarov2025Towards}, \cite{Schmidmaier2025UsingNonverbal}, \cite{Wang2025Feel} \\
+\textbf{Affective/emotional dynamics metric}\\
+\small{Emotion recognition or affective computing metrics} & \cite{Haydarov2025Towards}, \cite{Schmidmaier2025UsingNonverbal}, \cite{Wang2025Feel} \\
 \midrule
-Clinical diagnosis or screening benchmarks & Clinical diagnostic benchmark & \cite{Qiu2025EmoAgent}, \cite{Hu2024PsycoLLM}, \cite{Fouda2026PsychiatryBench}, \cite{Cai2026Exploring}, \cite{Ozgun2025Trustworthy}, \cite{Liu2025Eeyore}, \cite{Chen2023LLM-empowered}, \cite{Schmidgall2025AgentClinic} \\
+\textbf{Clinical diagnostic benchmark}\\
+\small{Clinical diagnosis or screening benchmarks} & \cite{Qiu2025EmoAgent}, \cite{Hu2024PsycoLLM}, \cite{Fouda2026PsychiatryBench}, \cite{Cai2026Exploring}, \cite{Ozgun2025Trustworthy}, \cite{Liu2025Eeyore}, \cite{Chen2023LLM-empowered}, \cite{Schmidgall2025AgentClinic} \\
 \midrule
-Task-specific performance benchmarks & Theory-specific benchmark/task & \cite{Qiu2025EmoAgent}, \cite{Aghakhani2025From}, \cite{Wang2025CARE-Bench}, \cite{Sungarda2025GenAI}, \cite{Chiu2024A}, \cite{Hu2024PsycoLLM}, \cite{Fouda2026PsychiatryBench}, \cite{Nguyen2025Do}, \cite{Zhang2025CBT-BENCH}, \cite{Kim2025KMI}, \cite{Jaiswal2024Building}, \cite{Xu2025MentalChat16K}, \cite{Ozgun2025Trustworthy}, \cite{Wang2024PATIENT}, \cite{Lee2024CACTUS}, \cite{Kermani2025Systematic}, \cite{Feng2025Reframe}, \cite{Kim2025Can}, \cite{Liu2025Eeyore}, \cite{Wang2025Feel}, \cite{Samuel2025PersonaGym}, \cite{Na2024CBT-LLM}, \cite{Sharma2023Cognitive}, \cite{Kang2024Can}, \cite{Chen2023LLM-empowered}, \cite{Tanana2019Development} \\
+\textbf{Theory-specific benchmark/task}\\
+\small{Task-specific performance benchmarks} & \cite{Qiu2025EmoAgent}, \cite{Aghakhani2025From}, \cite{Wang2025CARE-Bench}, \cite{Sungarda2025GenAI}, \cite{Chiu2024A}, \cite{Hu2024PsycoLLM}, \cite{Fouda2026PsychiatryBench}, \cite{Nguyen2025Do}, \cite{Zhang2025CBT-BENCH}, \cite{Kim2025KMI}, \cite{Jaiswal2024Building}, \cite{Xu2025MentalChat16K}, \cite{Ozgun2025Trustworthy}, \cite{Wang2024PATIENT}, \cite{Lee2024CACTUS}, \cite{Kermani2025Systematic}, \cite{Feng2025Reframe}, \cite{Kim2025Can}, \cite{Liu2025Eeyore}, \cite{Wang2025Feel}, \cite{Samuel2025PersonaGym}, \cite{Na2024CBT-LLM}, \cite{Sharma2023Cognitive}, \cite{Kang2024Can}, \cite{Chen2023LLM-empowered}, \cite{Tanana2019Development} \\
 \bottomrule
 \end{tabular}
 \caption{Evaluation Types Used in Included Studies}

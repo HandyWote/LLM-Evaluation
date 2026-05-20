@@ -32,21 +32,25 @@ def generate_table1(df: pd.DataFrame) -> str:
     operational_counts = df_clean["Theory_Operationalized_In_Evaluation"].value_counts()
     operational_total = len(df_clean)
 
-    # 动态获取所有分类
-    all_categories = sorted(set(list(grounding_counts.index) + list(operational_counts.index)))
+    # 强到弱顺序：Strong → Partial → Mentioned → Not Specified
+    all_categories = ["Strong", "Partial", "Mentioned", "Not Specified"]
+
+    # 只保留有数据的列
+    active_categories = [cat for cat in all_categories
+                        if grounding_counts.get(cat, 0) > 0 or operational_counts.get(cat, 0) > 0]
 
     latex = r"""\begin{table*}[tbp]
 \centering
-\begin{tabular}{l""" + "c" * (len(all_categories) + 1) + r"""}
+\begin{tabular}{l""" + "c" * (len(active_categories) + 1) + r"""}
 \toprule
 \textbf{Category}"""
-    for cat in all_categories:
+    for cat in active_categories:
         latex += f" & \\textbf{{{cat}}}"
     latex += " & \\textbf{Total} \\\\\n\\midrule\n"
 
     # Theory Grounding行
     grounding_row = "Theory Grounding"
-    for cat in all_categories:
+    for cat in active_categories:
         count = grounding_counts.get(cat, 0)
         if count > 0:
             pct = count / grounding_total * 100
@@ -58,7 +62,7 @@ def generate_table1(df: pd.DataFrame) -> str:
 
     # Theory Operationalization行
     operational_row = "Theory Operationalization"
-    for cat in all_categories:
+    for cat in active_categories:
         count = operational_counts.get(cat, 0)
         if count > 0:
             pct = count / operational_total * 100
@@ -178,9 +182,9 @@ def generate_table4(df: pd.DataFrame) -> str:
 \centering
 \scriptsize
 \renewcommand{\arraystretch}{0.75}
-\begin{tabular}{p{4cm}p{3.2cm}p{6.8cm}}
+\begin{tabular}{p{5cm}p{9cm}}
 \toprule
-\textbf{What It Evaluates} & \textbf{Evaluation Type} & \textbf{Example Papers} \\
+\textbf{Evaluation Type} & \textbf{Example Papers} \\
 \midrule
 """
 
@@ -188,7 +192,8 @@ def generate_table4(df: pd.DataFrame) -> str:
     for i, (eval_type, papers) in enumerate(items):
         desc = descriptions.get(eval_type, "Other evaluation methods")
         papers_str = ", ".join([f"\\cite{{{p}}}" for p in papers])
-        latex += f"{desc} & {eval_type} & {papers_str} \\\\\n"
+        # 将 Evaluation Type 和 What It Evaluates 合并到第一列
+        latex += f"\\textbf{{{eval_type}}}\\\\\n\\small{{{desc}}} & {papers_str} \\\\\n"
         if i < len(items) - 1:
             latex += "\\midrule\n"
 
