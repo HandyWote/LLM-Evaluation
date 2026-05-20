@@ -180,9 +180,8 @@ def generate_table4(df: pd.DataFrame) -> str:
 
     latex = r"""\begin{table*}[tbp]
 \centering
-\scriptsize
-\renewcommand{\arraystretch}{0.75}
-\begin{tabular}{p{5cm}p{9cm}}
+\small
+\begin{tabular}{p{6cm}p{8cm}}
 \toprule
 \textbf{Evaluation Type} & \textbf{Example Papers} \\
 \midrule
@@ -192,8 +191,7 @@ def generate_table4(df: pd.DataFrame) -> str:
     for i, (eval_type, papers) in enumerate(items):
         desc = descriptions.get(eval_type, "Other evaluation methods")
         papers_str = ", ".join([f"\\cite{{{p}}}" for p in papers])
-        # 将 Evaluation Type 和 What It Evaluates 合并到第一列
-        latex += f"\\textbf{{{eval_type}}}\\\\\n\\small{{{desc}}} & {papers_str} \\\\\n"
+        latex += f"{eval_type}\\newline\\textcolor{{gray}}{{\\footnotesize{{\\textit{{{desc}}}}}}} & {papers_str} \\\\\n"
         if i < len(items) - 1:
             latex += "\\midrule\n"
 
