@@ -25,7 +25,7 @@ def _find_project_root() -> Path:
 
 PROJECT_ROOT = _find_project_root()
 EXTRACT_DIR = PROJECT_ROOT / "extract"
-REPORTS_DIR = EXTRACT_DIR / "eval_reports"
+REPORTS_DIR = PROJECT_ROOT / "eval_reports"
 PAPER_DIR = EXTRACT_DIR / "paper"
 
 # 复用 pdf_index.py 的归一化逻辑，保持验证结果与 pipeline 一致
