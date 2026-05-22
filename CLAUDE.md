@@ -16,26 +16,82 @@ Academic meta-evaluation research project studying the **alignment gap between s
 
 **Language**: Research documentation and coding tables are in Chinese. The academic paper is written in English.
 
-## Running the Extraction Tool
+## Commands
 
-The only executable code is in `extract/`:
-
+### Setup
 ```bash
-cd extract
 cp .env.example .env   # Fill in OPENAI_BASE_URL, OPENAI_API_KEY, OPENAI_MODEL
-uv run extract.py       # Extracts metadata from PDFs in extract/paper/ → paper_metadata.csv
 ```
 
+### Three Pipelines (all use `uv run`)
+
+```bash
+# 1. Extract basic metadata from PDFs (title, year, venue, keywords)
+uv run extract
+
+# 2. Extract evaluation methodology via 6-phase agentic pipeline
+uv run evaluate
+uv run evaluate --paper 1          # single paper
+uv run evaluate --force            # reprocess existing
+uv run evaluate --log-level DEBUG  # verbose logging
+
+# 3. Generate AI research notes appended to eval reports
+uv run note
+uv run note --paper 1
+uv run note --force
+```
+
+### Table Generation
+```bash
+cd table && uv run python generate_tables.py
+```
+
+### Tests
+```bash
+uv run pytest                        # all tests
+uv run pytest extract/test_pdf_index.py  # single file
+uv run pytest -k "test_name"         # single test
+```
+
+## Architecture
+
+```
+lib/            Shared constants, prompts, tools (imported by extract/ and evaluate/)
+├── schemas.py  Field definitions, CSV columns, phase definitions (6 phases, ~40 fields)
+├── prompts.py  System/user prompt builders for the agentic pipeline
+└── tools.py    OpenAI function-calling tool definitions (submit_result)
+
+extract/        PDF metadata extraction + agentic evaluation pipeline
+├── extract.py  Simple metadata extractor (title/year/venue/keywords → paper_metadata.csv)
+├── agent_loop.py   6-phase agentic extraction with tool-use, evidence verification, correction
+├── pdf_index.py    PDF text indexing, quote verification, segmented evidence support
+└── paper/      Source PDFs (gitignored)
+
+evaluate/       Orchestrator for the agentic pipeline
+└── evaluate.py Runs agent_loop on PDFs, outputs eval_results.csv + per-paper markdown reports
+
+note/           Research note generator
+└── notes.py    Appends AI-generated批判性研究笔记 to eval_reports/*.md
+
+table/          LaTeX table generator for the academic paper
+└── generate_tables.py  Reads coding CSV → ACL-format LaTeX tables
+
+docs/           Research plans, coding tables, specs
+eval_reports/   Per-paper markdown reports (generated)
+compare/        Inter-rater evaluation CSVs (manual)
+```
+
+### Key Design Decisions
+
+- **Agentic extraction** (`agent_loop.py`): 6-phase pipeline where each phase extracts a group of related fields. LLM uses `submit_result` tool to submit JSON. Post-extraction verifies evidence quotes against PDF text (positive for YES fields, negative for NO fields). Failed fields trigger a correction round.
+- **Evidence verification** (`pdf_index.py`): Normalizes PDF text (fixes footnote breaks, hyphenation, whitespace) before matching. Supports segmented evidence with `...` separators.
+- **Field types**: Boolean (YES/NO), single-choice (enum), free-text. All structured fields carry `{value, evidence, page, confidence}`.
+- **Shared lib**: `lib/schemas.py` is the single source of truth for all field definitions, CSV column mappings, and phase groupings. Both `extract/` and `evaluate/` import from it.
+- **Idempotency**: All three pipelines skip already-processed papers by default. Use `--force` to reprocess.
+
+## Environment
+
 - Python 3.12, managed by `uv`
-- Dependencies: `pymupdf` (PDF text), `openai` (async API calls), `python-dotenv`
-- The script is idempotent: skips papers whose IDs already exist in the CSV
-- Concurrency is set to 1 (`MAX_CONCURRENCY`) — adjust in `extract.py` if needed
-
-## Research Workflow
-
-1. **`original paper/`** — ~44 source PDFs from ACL, EMNLP, NAACL, CHI, JMIR, arXiv, etc.
-2. **`extract/`** — Automated PDF metadata extraction pipeline (LLM-based)
-3. **`docs/plans/pipline.md`** — Master 5-phase research plan (literature review → theoretical critique → pilot experiment → paper writing → revision)
-4. **`docs/评估方法分类表...评估缺陷清单表.md`** — 7 structured coding tables for manually annotating papers (evaluation method categories, dimensions, interaction levels, prompt disclosure, theoretical grounding, inter-rater reliability, defect checklist)
-5. **`docs/theme_track.xlsx`** — Theme tracking spreadsheet
-6. **`paper_metadata.csv`** — Auto-extracted metadata for 52 papers (IDs 28–79)
+- Dependencies: `pymupdf`, `openai`, `python-dotenv`, `openpyxl`
+- `.env` required: `OPENAI_BASE_URL`, `OPENAI_API_KEY`, `OPENAI_MODEL`, optionally `NOTES_MODEL`
+- Concurrency: `MAX_CONCURRENCY = 3` in evaluate/note, `1` in extract
