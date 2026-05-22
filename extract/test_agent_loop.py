@@ -5,8 +5,8 @@ import pytest
 import asyncio
 from unittest.mock import AsyncMock, MagicMock
 
-from schemas import PHASES
-from agent_loop import agent_loop
+from lib.schemas import PHASES
+from extract.agent_loop import agent_loop
 
 
 def _make_json_message(content: str):
@@ -92,7 +92,7 @@ def _all_phases_responses(overrides: dict[int, list] | None = None) -> list:
 
 class MockIndex:
     def __init__(self):
-        from pdf_index import SearchResult
+        from extract.pdf_index import SearchResult
         self._pages = ["Page 1 text about evaluation.\nIt uses BLEU.", "Page 2 text about safety."]
 
     @property
@@ -106,7 +106,7 @@ class MockIndex:
         return self._pages[page_num - 1] if 1 <= page_num <= len(self._pages) else "Error"
 
     def search(self, query, top_k=5):
-        from pdf_index import SearchResult
+        from extract.pdf_index import SearchResult
         results = []
         if "evaluation" in query.lower():
             results.append(SearchResult(page=1, text=query, context=self._pages[0][:100]))

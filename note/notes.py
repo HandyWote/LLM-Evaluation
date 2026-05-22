@@ -25,8 +25,8 @@ from openai import AsyncOpenAI
 load_dotenv()
 
 MAX_CONCURRENCY = 3
-REPORTS_DIR = Path(__file__).parent / "eval_reports"
-PAPER_DIR = Path(__file__).parent / "paper"
+REPORTS_DIR = Path(__file__).parent.parent / "eval_reports"
+PAPER_DIR = Path(__file__).parent.parent / "extract" / "paper"
 CODING_TABLE_PATH = Path(__file__).parent.parent / "docs" / "评估维度表.md"
 
 

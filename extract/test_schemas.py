@@ -1,7 +1,7 @@
 """Tests for schemas.py constants."""
 
 import pytest
-from schemas import (
+from lib.schemas import (
     CSV_COLUMNS, CSV_HEADER, INTERNAL_TO_CSV,
     METADATA_FIELDS, BOOL_FIELDS, SINGLE_CHOICE_FIELDS,
     FREE_TEXT_FIELDS, STRUCTURED_FIELDS,
@@ -10,7 +10,7 @@ from schemas import (
 
 
 def test_csv_columns_count():
-    assert len(CSV_COLUMNS) == 43
+    assert len(CSV_COLUMNS) == 45
 
 
 def test_csv_header_matches_columns():

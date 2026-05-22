@@ -25,20 +25,20 @@ from pathlib import Path
 from dotenv import load_dotenv
 from openai import AsyncOpenAI
 
-from schemas import (
+from lib.schemas import (
     CSV_COLUMNS, CSV_HEADER, INTERNAL_TO_CSV,
     METADATA_FIELDS, BOOL_FIELDS, SINGLE_CHOICE_FIELDS,
     FREE_TEXT_FIELDS, STRUCTURED_FIELDS,
 )
-from pdf_index import PDFIndex
-from agent_loop import agent_loop
+from extract.pdf_index import PDFIndex
+from extract.agent_loop import agent_loop
 
 load_dotenv()
 
 MAX_CONCURRENCY = 3
 OUTPUT_CSV = Path(__file__).parent / "eval_results.csv"
 PAPER_META_CSV = Path(__file__).parent.parent / "docs" / "paper_metadata.csv"
-REPORTS_DIR = Path(__file__).parent / "eval_reports"
+REPORTS_DIR = Path(__file__).parent.parent / "eval_reports"
 
 
 # --- Response Parsing ---

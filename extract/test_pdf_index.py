@@ -2,7 +2,7 @@
 
 import pytest
 from pathlib import Path
-from pdf_index import PDFIndex, SearchResult
+from extract.pdf_index import PDFIndex, SearchResult
 
 
 PAPER_DIR = Path(__file__).parent / "paper"

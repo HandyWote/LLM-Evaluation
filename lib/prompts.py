@@ -1,7 +1,7 @@
 """Prompt construction for the agentic extraction pipeline."""
 
 import json
-from schemas import PHASES, FIELD_DEFINITIONS, METADATA_FIELDS, BOOL_FIELDS
+from lib.schemas import PHASES, FIELD_DEFINITIONS, METADATA_FIELDS, BOOL_FIELDS
 
 
 def build_system_prompt() -> str:

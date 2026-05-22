@@ -4,8 +4,8 @@ import json
 import pytest
 from unittest.mock import MagicMock
 
-from pdf_index import PDFIndex
-from tools import TOOL_DEFINITIONS, execute_tool
+from extract.pdf_index import PDFIndex
+from lib.tools import TOOL_DEFINITIONS, execute_tool
 
 
 class MockIndex:

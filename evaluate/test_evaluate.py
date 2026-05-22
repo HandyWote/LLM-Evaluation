@@ -1,6 +1,6 @@
 import json
 import pytest
-from evaluate import parse_llm_response, build_csv_row, generate_markdown
+from evaluate.evaluate import parse_llm_response, build_csv_row, generate_markdown
 
 
 def _make_field(value, evidence="test evidence", page=1, confidence=80):

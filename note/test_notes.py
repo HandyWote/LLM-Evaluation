@@ -3,7 +3,7 @@
 import tempfile
 from pathlib import Path
 
-from notes import (
+from note.notes import (
     append_notes,
     build_notes_section,
     build_system_prompt,

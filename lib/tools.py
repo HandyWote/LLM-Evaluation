@@ -1,7 +1,7 @@
 """Tool definitions (OpenAI function calling) and execution for the agentic extraction pipeline."""
 
 import json
-from pdf_index import PDFIndex, SearchResult
+from extract.pdf_index import PDFIndex, SearchResult
 
 TOOL_DEFINITIONS: list[dict] = [
     {

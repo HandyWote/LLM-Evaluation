@@ -1,7 +1,7 @@
 """Tests for prompts.py."""
 
 import pytest
-from prompts import build_system_prompt, build_phase_user_message
+from lib.prompts import build_system_prompt, build_phase_user_message
 
 
 class TestBuildSystemPrompt:
@@ -19,7 +19,7 @@ class TestBuildSystemPrompt:
         assert "verbatim" in prompt.lower() or "逐字" in prompt
 
     def test_contains_all_field_definitions(self):
-        from schemas import METADATA_FIELDS, STRUCTURED_FIELDS
+        from lib.schemas import METADATA_FIELDS, STRUCTURED_FIELDS
         prompt = build_system_prompt()
         for field in METADATA_FIELDS + STRUCTURED_FIELDS:
             assert field in prompt, f"Field {field} not in system prompt"
@@ -40,7 +40,7 @@ class TestBuildPhaseUserMessage:
         assert "元数据" in msg
 
     def test_phase_1_contains_field_names(self):
-        from schemas import PHASES
+        from lib.schemas import PHASES
         msg = build_phase_user_message(1, full_text="text", extracted_so_far={})
         for field in PHASES[1]["fields"]:
             assert field in msg

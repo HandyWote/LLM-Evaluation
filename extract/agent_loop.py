@@ -6,10 +6,10 @@ import logging
 
 from openai import AsyncOpenAI
 
-from schemas import PHASES, METADATA_FIELDS
-from pdf_index import PDFIndex
-from tools import TOOL_DEFINITIONS, execute_tool
-from prompts import build_system_prompt, build_phase_user_message, build_correction_message
+from lib.schemas import PHASES, METADATA_FIELDS
+from extract.pdf_index import PDFIndex
+from lib.tools import TOOL_DEFINITIONS, execute_tool
+from lib.prompts import build_system_prompt, build_phase_user_message, build_correction_message
 
 MAX_TURNS_PER_PHASE = 10
 MAX_PHASE_RETRIES = 3
