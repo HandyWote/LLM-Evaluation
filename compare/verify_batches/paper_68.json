@@ -1,0 +1,53 @@
+{
+  "paper_id": "68",
+  "disagreements": [
+    {
+      "row": 54,
+      "field": "Eval_Automatic",
+      "field_cn": "自动指标评估",
+      "definition": "是否使用算法/数学公式自动计算的指标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "为弥补这一空白，我们设计了七项评估心理健康大语言模型的指标（见表2）。这些创新指标旨在构建一个更契合心理健康咨询应用特殊需求的综合评估框架。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅设计指标，未明确使用算法自动计算"
+    },
+    {
+      "row": 55,
+      "field": "Has_Failure_Analysis",
+      "field_cn": "失败案例分析",
+      "definition": "是否系统性地分析了失败案例或错误模式（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "首先，依赖GPT-3.5 Turbo生成的合成数据可能引入偏差或缺乏真实人类互动的深度。表3显示，在微调过程中结合合成数据与访谈数据并未持续提升模型性能；在某些情况下，反而导致性能下降。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "原始证据明确提及合成数据偏差导致性能下降，属于失败案例分析。"
+    },
+    {
+      "row": 56,
+      "field": "Persona_Model_Depth",
+      "field_cn": "用户画像建模深度",
+      "definition": "用户画像建模深度: 表面人设 / 行为状态模型 / 认知模型 / 动态特质 / 专家原则",
+      "cxt_value": "EXPERT PRINCIPLES/SURFACE PERSONA",
+      "hyh_value": "EXPERT PRINCIPLES",
+      "original_evidence": "推进关于具有同理心、个性化的人工智能解决方案的前沿研究",
+      "cxt_evidence": "",
+      "corrected_judgment": "SURFACE PERSONA",
+      "reason": "原始证据仅提及‘推进具有同理心、个性化的人工智能解决方案’，未描述具体建模深度，符合表面人设。"
+    },
+    {
+      "row": 57,
+      "field": "Prompt_Disclosure",
+      "field_cn": "提示词披露度",
+      "definition": "提示词披露度: Full（清晰提供了所有必要提示词，原则上可复现）/ Partial（展示了部分提示词，不足以复现）/ No（没有可用的提示词信息）",
+      "cxt_value": "FULL",
+      "hyh_value": "NO",
+      "original_evidence": "除了这些问题之外，模型还获得了如下明确的指令。",
+      "cxt_evidence": "",
+      "corrected_judgment": "FULL",
+      "reason": "原始证据指出‘模型还获得了如下明确的指令’，表明prompt已完整披露。"
+    }
+  ]
+}

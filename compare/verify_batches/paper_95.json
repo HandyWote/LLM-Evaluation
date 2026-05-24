@@ -1,0 +1,89 @@
+{
+  "paper_id": "95",
+  "disagreements": [
+    {
+      "row": 144,
+      "field": "Eval_Automatic",
+      "field_cn": "自动指标评估",
+      "definition": "是否使用算法/数学公式自动计算的指标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "表2：由GPT-4O计算的治疗师技能评估得分...表3：由GPT-4O评估的客户联盟评估结果。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "GPT-4O计算得分，属于自动指标。"
+    },
+    {
+      "row": 145,
+      "field": "Persona_Model_Depth",
+      "field_cn": "用户画像建模深度",
+      "definition": "用户画像建模深度: 表面人设 / 行为状态模型 / 认知模型 / 动态特质 / 专家原则",
+      "cxt_value": "COGNITIVE MODEL / BEHAVIORAL STATE",
+      "hyh_value": "BEHAVIORAL STATE MODEL",
+      "original_evidence": "我们进一步为每个客户档案添加四种不同的抵抗类型：认知型、情感型、行为型和非抵抗型，遵循Beal III等人（2013）提出的分类法。与为每个档案分配单一抵抗标签不同，我们为每位客户生成四个变体，每个变体包含",
+      "cxt_evidence": "",
+      "corrected_judgment": "BEHAVIORAL STATE MODEL",
+      "reason": "证据中抵抗类型分类属于行为状态，认知型仅为子类，未达到认知模型深度"
+    },
+    {
+      "row": 146,
+      "field": "Prompt_Disclosure",
+      "field_cn": "提示词披露度",
+      "definition": "提示词披露度: Full（清晰提供了所有必要提示词，原则上可复现）/ Partial（展示了部分提示词，不足以复现）/ No（没有可用的提示词信息）",
+      "cxt_value": "FULL",
+      "hyh_value": "NO",
+      "original_evidence": "治疗师技能采用 Lee 等人（2024a）在官方 COUNSELINGEVAL 代码20中提供的提示进行评估。……各问题的详细评估指南均遵循 Li 等人（2024a）所述，为简洁起见此处不再赘述。",
+      "cxt_evidence": "",
+      "corrected_judgment": "FULL",
+      "reason": "引用官方代码包含完整提示，原则上可复现"
+    },
+    {
+      "row": 147,
+      "field": "Realism",
+      "field_cn": "真实性",
+      "definition": "评估中是否考察输出是否像人类或自然（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "为了指导此类模型的开发与评估，我们定义了两个关键的评估维度，这些维度反映了有效疗法的基本方面：• 治疗师技能评估：评估人工智能治疗师在两大关键类别中的能力，即通用咨询技能和CBT特定技术。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "原始证据未提及真实性评估"
+    },
+    {
+      "row": 148,
+      "field": "Safety",
+      "field_cn": "安全性",
+      "definition": "评估中是否涉及避免有害/偏见输出（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "为了指导此类模型的开发与评估，我们定义了两个关键评估维度，它们反映了有效治疗的核心要素：• 治疗师技能评估：评估AI治疗师在一般咨询技能和CBT特定技术这两类关键能力上的胜任力。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "原始证据未涉及安全性评估"
+    },
+    {
+      "row": 149,
+      "field": "Sim_Behavior_Realistic",
+      "field_cn": "模拟行为真实性",
+      "definition": "模拟行为是否真实可信（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "案例研究表明，MIRRORP+EC通过字幕识别有效识别来访者的情绪状态，并以情感验证¹⁶和开放式问题作为回应，这些是处理阻抗的常见治疗技巧（Miller & Rollnick, 2002）。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅描述模型行为，未明确评估模拟行为真实性"
+    },
+    {
+      "row": 150,
+      "field": "Simulation_Target",
+      "field_cn": "模拟对象",
+      "definition": "模拟的对象: 来访者智能体 / 治疗师智能体 / 双智能体 / 人类受训者",
+      "cxt_value": "THERAPIST AGENT",
+      "hyh_value": "CLIENT AGENT",
+      "original_evidence": "我们采用GPT-3.5-TURBO12作为虚拟客户端，并基于预定义的多模态配置文件进行仿真模拟。",
+      "cxt_evidence": "",
+      "corrected_judgment": "CLIENT AGENT",
+      "reason": "明确使用GPT-3.5作为虚拟客户端"
+    }
+  ]
+}

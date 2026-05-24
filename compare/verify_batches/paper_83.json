@@ -1,0 +1,89 @@
+{
+  "paper_id": "83",
+  "disagreements": [
+    {
+      "row": 93,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "DYNAMIC",
+      "hyh_value": "STATIC",
+      "original_evidence": "最后，我们修改了积极与消极情感量表（PANAS）（Watson等，1988），以从来访者角度评估咨询的有效性，测量咨询前后来访者积极/消极情绪的变化。……我们利用初诊登记表来推断",
+      "cxt_evidence": "",
+      "corrected_judgment": "STATIC",
+      "reason": "PANAS前后测只对比一次咨询前/后状态，是静态比较，不是轮次间变化分析 (校验修正)"
+    },
+    {
+      "row": 94,
+      "field": "Coding Options",
+      "field_cn": "编码者一致性",
+      "definition": "是否明确报告了评估者之间的一致性: Yes / No / N/A",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "对于每项评估，我们邀请了三位人工标注员根据四项指定标准对100个样本进行评估。我们为每位标注员每评估一个样本补偿0.30美元。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅提及三位标注员，未报告Cohen's Kappa等标准化一致性指标。"
+    },
+    {
+      "row": 95,
+      "field": "Emotional Plausibility",
+      "field_cn": "情绪合理性",
+      "definition": "评估中是否考察情绪反应是否真实/恰当（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们从每个数据集中随机抽取100个对话，并依据四项标准对其进行评估：（1）有用性，（2）连贯性，（3）共情能力，以及（4）引导性。……评估一般咨询技能的指标如下：理解力、人际效能、协作能力……指标",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "评估标准包括共情能力，但未明确评估情绪反应真实性。"
+    },
+    {
+      "row": 96,
+      "field": "Eval_Automatic",
+      "field_cn": "自动指标评估",
+      "definition": "是否使用算法/数学公式自动计算的指标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "为评估起见，我们采用G-Eval（Liu et al., 2023b）并依据评分细则对李克特量表各维度进行评定。……CTRS被公认为衡量咨询有效性的黄金标准（Aarons et al., 2012）。……我们修改了积极与消极情感量表（PANAS）（Watson et al.",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "G-Eval是LLM打分，PANAS是人工问卷，CTRS是专家打分，都不是算法自动计算 (校验修正)"
+    },
+    {
+      "row": 97,
+      "field": "Fidelity",
+      "field_cn": "保真度",
+      "definition": "评估中是否考察是否符合预设角色/目标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们从每个数据集中随机抽取100个对话，并根据四个标准对其进行评估：（1）有用性，（2）连贯性，（3）共情能力，以及（4）引导性。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "评估标准为有用性、连贯性等，未涉及角色保真度或目标对齐。"
+    },
+    {
+      "row": 98,
+      "field": "Has_Failure_Analysis",
+      "field_cn": "失败案例分析",
+      "definition": "是否系统性地分析了失败案例或错误模式（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "AI咨询师在CBT技术选择上存在局限性……GPT-4o表现出对CBT技术的偏向性选择，其中“循证提问”在近半数案例中被使用……AI咨询师倾向于建议直接重构来访者的思维……AI来访者则倾向于表达t……",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "分析了AI咨询师在CBT技术选择上的局限性，属于失败案例。"
+    },
+    {
+      "row": 99,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们介绍CACTUS，这是一个多轮对话数据集，采用认知行为疗法（CBT）的目标导向和结构化方法模拟真实生活互动。……通过（1）设计具有多样化、特定人格特征的来访者，以及（2）让咨询师……我们创建了一个多样化和真实的数据集。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅设计多样化人格，未进行多模型或对抗测试等鲁棒性检验。"
+    }
+  ]
+}

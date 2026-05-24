@@ -1,0 +1,29 @@
+{
+  "paper_id": "56",
+  "disagreements": [
+    {
+      "row": 37,
+      "field": "Persona_Model_Depth",
+      "field_cn": "用户画像建模深度",
+      "definition": "用户画像建模深度: 表面人设 / 行为状态模型 / 认知模型 / 动态特质 / 专家原则",
+      "cxt_value": "SURFACE PERSONA",
+      "hyh_value": "EXPERT PRINCIPLES",
+      "original_evidence": "为了从给定Q的大型语言模型M中引出答案，我们采用以下提示策略：\n• 零样本（ZS）：M在无任务特定训练的情况下回答Qh，使用附录表A5中的提示模板。\n• 少样本（FS）：M在查看示范性问题Q1,...,Qn后回答Qh（Brown, 20",
+      "cxt_evidence": "",
+      "corrected_judgment": "SURFACE PERSONA",
+      "reason": "仅采用基础提示策略，未构建深度用户画像。"
+    },
+    {
+      "row": 38,
+      "field": "Reliability_Reported",
+      "field_cn": "信度系数报告",
+      "definition": "是否报告了标准化评估者间信度系数（如 Cohen's kappa, ICC）: Yes / No / N/A。注意：仅报告百分比一致不算",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "这产生了845个两位注释者在能力标注上意见一致的问题，以及767个意见不一致的问题。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅报告一致数量，未报告标准化信度系数。"
+    }
+  ]
+}

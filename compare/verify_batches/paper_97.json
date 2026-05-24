@@ -1,0 +1,17 @@
+{
+  "paper_id": "97",
+  "disagreements": [
+    {
+      "row": 151,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "DYNAMIC",
+      "hyh_value": "PATTERN-LEVEL",
+      "original_evidence": "为了分析LLM治疗师在探索阶段的行为，我们自动标注每个话语的策略，并可视化每个模型所使用的策略分布。",
+      "cxt_evidence": "",
+      "corrected_judgment": "PATTERN-LEVEL",
+      "reason": "标注话语策略并可视化分布，为统计模式分析"
+    }
+  ]
+}

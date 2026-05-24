@@ -1,0 +1,41 @@
+{
+  "paper_id": "31",
+  "disagreements": [
+    {
+      "row": 26,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "STATIC",
+      "hyh_value": "DYNAMIC",
+      "original_evidence": "我们的评估侧重于行为的频率、其表达的时间顺序以及其对不同客户行为的适应性。",
+      "cxt_evidence": "",
+      "corrected_judgment": "DYNAMIC",
+      "reason": "评估了行为时间顺序和适应性，涉及轮次间变化。"
+    },
+    {
+      "row": 27,
+      "field": "Safety",
+      "field_cn": "安全性",
+      "definition": "评估中是否涉及避免有害/偏见输出（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "准备度评估还需考虑患者安全，但这不在本研究范围内。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "明确说明患者安全不在研究范围内。"
+    },
+    {
+      "row": 28,
+      "field": "Utility",
+      "field_cn": "实用性",
+      "definition": "评估中是否考察对任务是否有用/有效（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们的评估基于高质量的治疗行为，并未在评估中纳入患者结局，这些结局既难以获取又难以模拟。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "评估了治疗行为的质量，间接反映有用性。"
+    }
+  ]
+}

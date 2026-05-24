@@ -1,0 +1,41 @@
+{
+  "paper_id": "72",
+  "disagreements": [
+    {
+      "row": 72,
+      "field": "Eval_Human_Experts",
+      "field_cn": "领域专家评估",
+      "definition": "领域专家（治疗师、临床医生、受过训练的标注员）是否参与评估（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "未使用真实的来访者转录或临床医生互动；生态效度必须通过人类受试者进行确认。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "论文明确声明未使用真实临床医生互动，未进行领域专家评估。"
+    },
+    {
+      "row": 73,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "实验评估使用四种主流大语言模型对所提出的框架进行了基准测试：Llama-4-scout-17b、Mistral-Saba-24b、Qwen-QWQ-32b 和 OpenAI GPT-4.1-Nano。……模拟的客户档案涵盖10种主要精神障碍类别：(1) 适应障碍，(2) 焦虑障碍，(3) 双相障碍，",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "在不同LLM和不同障碍类别下测试，进行了鲁棒性测试。"
+    },
+    {
+      "row": 74,
+      "field": "LLM_Judge_Validated",
+      "field_cn": "LLM裁判验证",
+      "definition": "LLM裁判是否经过与人类判断的对比验证（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "自动评估偏差。评分标准依赖于另一大型语言模型（LLM），该模型可能与受测模型共享错误模式或偏见。……需要进一步验证，包括专家人工审查和对诊断推理质量的有针对性评估。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "论文仅讨论LLM评估偏差和未来验证需求，未实际验证LLM裁判与人类判断的一致性。"
+    }
+  ]
+}

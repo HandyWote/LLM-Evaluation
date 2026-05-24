@@ -1,0 +1,53 @@
+{
+  "paper_id": "23",
+  "disagreements": [
+    {
+      "row": 19,
+      "field": "Eval_Human_Experts",
+      "field_cn": "领域专家评估",
+      "definition": "领域专家（治疗师、临床医生、受过训练的标注员）是否参与评估（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "在本节中，我们评估并展示了第IV节提出的咨询技能分类方法的性能，包括上下文学习和基于BERT的方法。",
+      "cxt_evidence": "社会工作专家还与标注者验证并讨论了标注内容。”这些权重是根据MI框架中每个技能与每个阶段的相关性确定的，并由我们的社会工作专家（第五作者）编制。",
+      "corrected_judgment": "YES",
+      "reason": "明确提到社会工作专家参与验证和编制，符合领域专家定义。"
+    },
+    {
+      "row": 20,
+      "field": "Eval_LLM_Judge",
+      "field_cn": "LLM裁判评估",
+      "definition": "是否使用大模型进行打分、比较、排序（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "在本节中，我们评估并展示了在第四节中提出的咨询技巧分类方法的性能，包括上下文学习和基于BERT的方法。",
+      "cxt_evidence": "MI控制器利用大型语言模型（LLM）来评估当前MI阶段的目标是否已实现。",
+      "corrected_judgment": "YES",
+      "reason": "证据显示使用LLM评估MI阶段目标是否实现，属于LLM裁判。"
+    },
+    {
+      "row": 21,
+      "field": "Interaction_Level",
+      "field_cn": "交互层级",
+      "definition": "交互层级: Single-turn（单轮）/ Short Multi-turn（2-5轮简短交流）/ Extended Dialogue（6+轮较长对话）/ Longitudinal（跨多个会话/较长时间）",
+      "cxt_value": "EXTENDED DIALOGUE",
+      "hyh_value": "SINGLE-TURN",
+      "original_evidence": "根据第四部分所述的话语转录语料库，我们收集了4,734个话语对(ci, si)，以形成实验数据集。",
+      "cxt_evidence": "这些动态字段在输出消息生成之前生成。……拥有由大语言模型在每条消息发送后更新的动态字段，能够实现更具适应性的行为。",
+      "corrected_judgment": "EXTENDED DIALOGUE",
+      "reason": "证据表明动态字段每条消息更新，隐含多轮对话，倾向于扩展对话。"
+    },
+    {
+      "row": 22,
+      "field": "Utility",
+      "field_cn": "实用性",
+      "definition": "评估中是否考察对任务是否有用/有效（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "在本节中，我们评估并展示了第四节中提出的咨询技能分类方法的性能，包括上下文学习和基于BERT的方法。",
+      "cxt_evidence": "AI模拟客户可以为学生提供持续接触多样化客户情景的机会……数字化系统成本低廉，因此提供了一种按需解决方案。",
+      "corrected_judgment": "YES",
+      "reason": "证据陈述了系统对学生训练的实用价值，评估了实用性。"
+    }
+  ]
+}

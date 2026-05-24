@@ -1,0 +1,53 @@
+{
+  "paper_id": "81",
+  "disagreements": [
+    {
+      "row": 89,
+      "field": "Has_Failure_Analysis",
+      "field_cn": "失败案例分析",
+      "definition": "是否系统性地分析了失败案例或错误模式（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们对训练效果的评估全部来自参与者在使用PATIENT-Ψ-TRAINER进行两轮练习后所感知到的改进。客观技能提升的测量可以采用纵向随机对照试验（RCTs）的形式。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未系统性分析失败案例，仅依赖主观感知改进。"
+    },
+    {
+      "row": 90,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "在本工作中，我们使用GPT-4评估我们的框架。由于我们并不依赖GPT-4的特定属性，因此我们认为该框架可应用于任何强大的开源大语言模型，例如Llama 3 (Dubey et al., 2024) 和Gemma (Team et al., 2024)。……我们衡量训练有效性的指标是al",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅声称可应用于其他模型，未实际进行鲁棒性测试。"
+    },
+    {
+      "row": 91,
+      "field": "Has_Rubric",
+      "field_cn": "评分标准",
+      "definition": "是否提供了明确的评分标准/评分指引（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "每个测量指标采用1至5分的5点李克特量表，其中5分表示“非常同意”或“极为准确”，1分表示“非常不同意”或“完全不准确”。……对于两两比较，选项为：“A明显优于B”、“A略优于B”、“大致相同”、“B",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "明确使用了5点李克特量表及标签，提供了评分标准。"
+    },
+    {
+      "row": 92,
+      "field": "Interaction_Level",
+      "field_cn": "交互层级",
+      "definition": "交互层级: Single-turn（单轮）/ Short Multi-turn（2-5轮简短交流）/ Extended Dialogue（6+轮较长对话）/ Longitudinal（跨多个会话/较长时间）",
+      "cxt_value": "EXTENDED DIALOGUE",
+      "hyh_value": "SHORT MULTI-TURN",
+      "original_evidence": "每次与模拟患者互动的会话大约需要 10 分钟，包括与 LLM 的对话以及完成认知模型。",
+      "cxt_evidence": "",
+      "corrected_judgment": "EXTENDED DIALOGUE",
+      "reason": "每次会话约10分钟，通常涉及多轮对话，且cxt提供了补充证据倾向此值。"
+    }
+  ]
+}

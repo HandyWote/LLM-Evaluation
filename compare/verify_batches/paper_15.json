@@ -1,0 +1,41 @@
+{
+  "paper_id": "15",
+  "disagreements": [
+    {
+      "row": 6,
+      "field": "Eval_LLM_Judge",
+      "field_cn": "LLM裁判评估",
+      "definition": "是否使用大模型进行打分、比较、排序（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们的工作通过使用大型语言模型（LLMs）自动化PST标注，并利用闭源与开源模型对治疗师话语进行分类，从而填补了这一空白。",
+      "cxt_evidence": "我们引导GPT-4o分析每个治疗师话语中的治疗动态（见附录C.2）。",
+      "corrected_judgment": "YES",
+      "reason": "GPT-4o分析每个治疗师话语的治疗动态，属于LLM评估判断"
+    },
+    {
+      "row": 7,
+      "field": "Fidelity",
+      "field_cn": "保真度",
+      "definition": "评估中是否考察是否符合预设角色/目标（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "采用此方法，我们将这些模型的效率和准确性与我们标注的500条话语进行了比较。……GPT-4o优于所有模型，在识别所有策略方面达到了最高准确率（0.76）。",
+      "cxt_evidence": "不认可在治疗环境中使用大语言模型，也不声称它们已准备好应用于此类场景。",
+      "corrected_judgment": "NO",
+      "reason": "评估的是标注分类准确性，不是角色保真度"
+    },
+    {
+      "row": 8,
+      "field": "LLM_Judge_Validated",
+      "field_cn": "LLM裁判验证",
+      "definition": "LLM裁判是否经过与人类判断的对比验证（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们的工作通过使用LLMs自动化PST注释来弥补这一空白，同时使用闭源和开源模型对治疗师的发言进行分类。",
+      "cxt_evidence": "我们采用Cohen's Kappa系数评估了不同类别PST策略的标注者间一致性。研究结果显示，本编码手册中各策略的一致性评分介于0.69至0.88之间，表明具有较高的一致性水平。",
+      "corrected_judgment": "YES",
+      "reason": "有Cohen's Kappa验证标注一致性，得分0.69-0.88"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "paper_id": "49",
+  "disagreements": [
+    {
+      "row": 36,
+      "field": "Coding Options",
+      "field_cn": "编码者一致性",
+      "definition": "是否明确报告了评估者之间的一致性: Yes / No / N/A",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "三位专业咨询师一致将此量表评为7分。...三位专家同意给定的标签。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "报告三位专家一致评分，明确说明一致同意。"
+    }
+  ]
+}

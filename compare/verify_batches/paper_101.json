@@ -1,0 +1,53 @@
+{
+  "paper_id": "101",
+  "disagreements": [
+    {
+      "row": 164,
+      "field": "Eval_Automatic",
+      "field_cn": "自动指标评估",
+      "definition": "是否使用算法/数学公式自动计算的指标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "PersonaScore是一种基于决策理论的人类对齐自动评估指标，能够实现全面的大规模评估。……PersonaScore使用专家策划的评分标准来评估这些回答。……为了使PersonaScore与人类偏好对齐，我们首先在每个评分标准上生成示例回答。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "PersonaScore是自动计算的指标，符合算法公式自动算。"
+    },
+    {
+      "row": 165,
+      "field": "Sim_Behavior_Realistic",
+      "field_cn": "模拟行为真实性",
+      "definition": "模拟行为是否真实可信（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "为了测试PersonaScore与人类判断的一致性，我们在实验中选取了三个模型（GPT-3.5、LLAMA-2-13B和LLAMA-2-70B）生成的100个人格子样本进行了一项人类研究，总计1500个模型响应。... PersonaScore与人类判断高度相关，表3显示。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "论文评估的是指标与人类判断的一致性，未直接评估模拟行为真实性。"
+    },
+    {
+      "row": 166,
+      "field": "Simulation_Target",
+      "field_cn": "模拟对象",
+      "definition": "模拟的对象: 来访者智能体 / 治疗师智能体 / 双智能体 / 人类受训者",
+      "cxt_value": "HUMAN TRAINEE/DUAL-AGENT",
+      "hyh_value": "PERSONA AGENT",
+      "original_evidence": "角色代理是一种大语言模型代理，其行为被约束为根据指定角色进行行动，能够在教育和医疗等领域实现情境丰富且与用户对齐的交互。",
+      "cxt_evidence": "",
+      "corrected_judgment": "PERSONA AGENT",
+      "reason": "论文明确研究角色代理（Persona Agent）。"
+    },
+    {
+      "row": 167,
+      "field": "Uses_Standard_Metrics",
+      "field_cn": "标准指标使用",
+      "definition": "是否使用了标准/公认的评估指标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "PersonaScore，据我们所知，是首个用于量化角色智能体在五项智能体评估任务中能力的自动评估指标……这五项任务均基于决策理论，并共同构成角色智能体不同的决策层面。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "PersonaScore是作者新提出的指标，非公认标准。"
+    }
+  ]
+}

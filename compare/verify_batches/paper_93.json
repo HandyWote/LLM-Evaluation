@@ -1,0 +1,65 @@
+{
+  "paper_id": "93",
+  "disagreements": [
+    {
+      "row": 131,
+      "field": "Emotional Plausibility",
+      "field_cn": "情绪合理性",
+      "definition": "评估中是否考察情绪反应是否真实/恰当（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "INT（交互式叙事治疗师）通过规划治疗阶段、引导反思层次以及生成上下文恰当的专业式回应，模拟专家叙事治疗师。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "原始证据未提及评估情绪反应的真实性。"
+    },
+    {
+      "row": 132,
+      "field": "Has_Failure_Analysis",
+      "field_cn": "失败案例分析",
+      "definition": "是否系统性地分析了失败案例或错误模式（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "INT（交互式叙事治疗师）通过规划治疗阶段、引导反思层次以及生成符合情境的专家级回应，模拟了专家叙事治疗师的行为。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "原始证据未涉及失败案例分析。"
+    },
+    {
+      "row": 133,
+      "field": "Has_Longitudinal_Eval",
+      "field_cn": "纵向评估",
+      "definition": "是否包含跨时间/多次会话的纵向评估（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "需要进一步的纵向研究来确认叙事转变标记是否可转化为可衡量的福祉结果。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅提及未来需要纵向研究，当前评估未包含。"
+    },
+    {
+      "row": 134,
+      "field": "Realism",
+      "field_cn": "真实性",
+      "definition": "评估中是否考察输出是否像人类或自然（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "INT（交互式叙事治疗师）通过规划治疗阶段、引导反思层次并生成情境适宜的专家式回应，模拟专家叙事治疗师。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未明确评估输出是否像人类。"
+    },
+    {
+      "row": 135,
+      "field": "Sim_Behavior_Realistic",
+      "field_cn": "模拟行为真实性",
+      "definition": "模拟行为是否真实可信（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "INT（交互式叙事治疗师）通过规划治疗阶段、引导反思层次并生成语境恰当的专家式回应，模拟专家叙事治疗师。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未明确评估模拟行为的真实性。"
+    }
+  ]
+}

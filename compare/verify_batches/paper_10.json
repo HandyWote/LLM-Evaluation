@@ -1,0 +1,17 @@
+{
+  "paper_id": "10",
+  "disagreements": [
+    {
+      "row": 3,
+      "field": "Fidelity",
+      "field_cn": "保真度",
+      "definition": "评估中是否考察是否符合预设角色/目标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "基于三个关键标准的评估框架：",
+      "cxt_evidence": "我们利用大型语言模型（LLMs）强大的情境学习能力，在无需显式微调的情况下生成治疗性干预措施。",
+      "corrected_judgment": "NO",
+      "reason": "评估标准为适用性/共情/全面性，未考察角色保真度"
+    }
+  ]
+}

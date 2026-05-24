@@ -1,0 +1,41 @@
+{
+  "paper_id": "91",
+  "disagreements": [
+    {
+      "row": 123,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们的实验表明，在微调、提示工程和检索增强生成（RAG）方法之间，性能存在显著差异。然而，本研究未在扰动或对抗性输入条件下进行鲁棒性测试。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "原文明确声明未进行扰动或对抗性输入下的鲁棒性测试。"
+    },
+    {
+      "row": 124,
+      "field": "Has_Rubric",
+      "field_cn": "评分标准",
+      "definition": "是否提供了明确的评分标准/评分指引（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "分类评估使用F1分数、精确率和召回率作为主要指标。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅使用F1等指标，未提供明确的评分标准或打分指引。"
+    },
+    {
+      "row": 125,
+      "field": "Safety",
+      "field_cn": "安全性",
+      "definition": "评估中是否涉及避免有害/偏见输出（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "分类评估使用F1分数、精确率和召回率作为主要指标。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅涉及分类指标，未评估有害或偏见输出。"
+    }
+  ]
+}

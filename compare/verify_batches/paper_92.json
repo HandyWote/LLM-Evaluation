@@ -1,0 +1,65 @@
+{
+  "paper_id": "92",
+  "disagreements": [
+    {
+      "row": 126,
+      "field": "Coding Options",
+      "field_cn": "编码者一致性",
+      "definition": "是否明确报告了评估者之间的一致性: Yes / No / N/A",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "每位参与者均在3个随机分配的对话情境中，对反思内容进行了独立评估与排序评估。最终，每个情境至少由3名不同的参与者进行了评估。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "描述了评估过程但未报告评估者间一致性。"
+    },
+    {
+      "row": 127,
+      "field": "Reliability_Reported",
+      "field_cn": "信度系数报告",
+      "definition": "是否报告了标准化评估者间信度系数（如 Cohen's kappa, ICC）: Yes / No / N/A。注意：仅报告百分比一致不算",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "每位参与者在3个随机分配的对话情境中，对反思进行了独立评估和排序评估。最终，每个情境至少由3名不同的参与者进行了评估。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未报告任何标准化信度系数（如Cohen's kappa或ICC）。"
+    },
+    {
+      "row": 128,
+      "field": "Safety",
+      "field_cn": "安全性",
+      "definition": "评估中是否涉及避免有害/偏见输出（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "适当性衡量的是，如果在给定对话之后将反思实际说出给客户，该反思是否（在情感上和道德上）适当。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "评估了反思在情感和道德上的适当性，涉及安全性。"
+    },
+    {
+      "row": 129,
+      "field": "Theory_Grounding",
+      "field_cn": "理论支撑度",
+      "definition": "理论支撑度: Strong（明确使用公认理论来定义或测量）/ Weak（提及了概念但未在评估中实际操作化）/ None（没有真正的理论支撑）",
+      "cxt_value": "STRONG",
+      "hyh_value": "WEAK",
+      "original_evidence": "选择这些标准时，考虑了它们与治疗性咨询的相关性和重要性，以及它们在自然语言生成领域的普遍使用。例如，我们关注适当性，因为不适当的反映可能会阻碍来访者朝着行为改变目标前进（Miller and Rolln）。",
+      "cxt_evidence": "",
+      "corrected_judgment": "WEAK",
+      "reason": "引用了理论但未详细操作化评估标准。"
+    },
+    {
+      "row": 130,
+      "field": "Utility",
+      "field_cn": "实用性",
+      "definition": "评估中是否考察对任务是否有用/有效（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "参与旨在考察反思是否能提供进一步对话的机会并提高参与度。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "评估考察了反思是否能提高参与度，即有用性。"
+    }
+  ]
+}

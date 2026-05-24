@@ -1,0 +1,17 @@
+{
+  "paper_id": "34",
+  "disagreements": [
+    {
+      "row": 29,
+      "field": "Prompt_Disclosure",
+      "field_cn": "提示词披露度",
+      "definition": "提示词披露度: Full（清晰提供了所有必要提示词，原则上可复现）/ Partial（展示了部分提示词，不足以复现）/ No（没有可用的提示词信息）",
+      "cxt_value": "FULL",
+      "hyh_value": "PARTIAL",
+      "original_evidence": "示例提示如附录C中的图5所示……该提示包含四个关键部分：评估任务的定义、待评估的咨询对话、评估问题及相应的指导原则。",
+      "cxt_evidence": "",
+      "corrected_judgment": "PARTIAL",
+      "reason": "仅展示示例提示，未披露完整提示词。"
+    }
+  ]
+}

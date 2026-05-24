@@ -1,0 +1,65 @@
+{
+  "paper_id": "75",
+  "disagreements": [
+    {
+      "row": 75,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "DYNAMIC",
+      "hyh_value": "PATTERN-LEVEL",
+      "original_evidence": "对于每个转录文本，我们计算了表现出强技能使用（� = �长处/�总数）或需要改进（� = �改进/�总数）的话语比例……为检验前后变化（�0, �1），我们采用了配对�检验和Cohen's �效应量。为比较P组与P+F组（�� 1 − �� 0 vs.",
+      "cxt_evidence": "",
+      "corrected_judgment": "DYNAMIC",
+      "reason": "采用配对检验分析干预前后的变化，属于动态分析。"
+    },
+    {
+      "row": 76,
+      "field": "Emotional Plausibility",
+      "field_cn": "情绪合理性",
+      "definition": "评估中是否考察情绪反应是否真实/恰当（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "我们使用多个7点李克特量表条目测量了参与者在每次聊天后（干预前、实践干预、干预后）对每个AI患者的感知。真实性。参与者对“AI患者在其角色中是真实的”进行评分。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "评估了角色真实性，未专门评估情绪反应的真实性。"
+    },
+    {
+      "row": 77,
+      "field": "Eval_LLM_Judge",
+      "field_cn": "LLM裁判评估",
+      "definition": "是否使用大模型进行打分、比较、排序（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "我们开发了基于LLM的二元分类器，用于标记转录文本中的技能使用。例如，一个分类器判断哪些话语展示了强烈的问题使用。为了微调和评估这些分类器，我们将先前发表的一个专家注释的反馈数据集[18]转换成了16-cl。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "使用LLM作为分类器进行技能标注，属于LLM裁判评估。"
+    },
+    {
+      "row": 78,
+      "field": "Reliability_Reported",
+      "field_cn": "信度系数报告",
+      "definition": "是否报告了标准化评估者间信度系数（如 Cohen's kappa, ICC）: Yes / No / N/A。注意：仅报告百分比一致不算",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "虽然我们最初探索了诸如Cohen's kappa之类的指标，但严重的类别不平衡使得它们不那么相关。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "虽探索过Cohen's kappa但未报告，因类别不平衡未使用。"
+    },
+    {
+      "row": 79,
+      "field": "Uses_Dynamic_State",
+      "field_cn": "是否使用动态状态建模",
+      "definition": "是否使用动态状态建模（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "患者模拟并未根据共情陈述调整其行为……模拟患者被指示抵制建议，因此咨询师减少了建议的使用，而患者模拟并未根据共情陈述调整其行为……一个自然的后续问题是",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "患者模拟未根据交互调整行为，无动态状态建模。"
+    }
+  ]
+}

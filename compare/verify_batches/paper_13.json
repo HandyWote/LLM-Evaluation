@@ -1,0 +1,29 @@
+{
+  "paper_id": "13",
+  "disagreements": [
+    {
+      "row": 4,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "DYNAMIC",
+      "hyh_value": "STATIC",
+      "original_evidence": "每个用户代理均使用心理测量工具（见第3.1.3节）进行自我心理健康评估，以确定初始心理状态。……交互结束后，用户代理再次使用初始化阶段相同的工具重新评估其心理健康状态。",
+      "cxt_evidence": "模拟患者与基于角色的智能体人格进行结构化、话题驱动的对话。每次对话被划分为明确的话题，每个话题最多10个对话轮次……在对话过程中，一旦某个话题超过3个对话轮次，对话",
+      "corrected_judgment": "DYNAMIC",
+      "reason": "前后测对比+交互中持续评估，分析状态随交互变化"
+    },
+    {
+      "row": 5,
+      "field": "Uses_Dynamic_State",
+      "field_cn": "是否使用动态状态建模",
+      "definition": "是否使用动态状态建模（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "每个用户代理使用心理测量工具（见第3.1.3节）进行自我心理健康评估，以建立初始心理状态。……在交互之后，用户代理使用初始化时应用的相同工具重新评估其心理健康状态。",
+      "cxt_evidence": "安全防护代理每经过三轮对话后分析对话内容，提供结构化反馈以优化基于角色的代理的响应，并缓解潜在风险。",
+      "corrected_judgment": "YES",
+      "reason": "前后测+每3轮持续分析，符合动态状态建模"
+    }
+  ]
+}

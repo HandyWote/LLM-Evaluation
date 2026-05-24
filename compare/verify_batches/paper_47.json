@@ -1,0 +1,53 @@
+{
+  "paper_id": "47",
+  "disagreements": [
+    {
+      "row": 32,
+      "field": "Eval_Automatic",
+      "field_cn": "自动指标评估",
+      "definition": "是否使用算法/数学公式自动计算的指标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们采用LLM作为评判者的方法，该方法基于心理干预原则，利用专家定义的推理链进行上下文评估。为确保可解释性，我们设计了专家思维链推理，并在多个安全维度上应用二元逐点评分。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "使用LLM自动评分，属于算法计算指标。"
+    },
+    {
+      "row": 33,
+      "field": "Fidelity",
+      "field_cn": "保真度",
+      "definition": "评估中是否考察是否符合预设角色/目标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们设计专家思维链推理，并在多个安全维度上应用二元逐点评分。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "评估侧重安全维度，未评估角色保真度或目标对齐。"
+    },
+    {
+      "row": 34,
+      "field": "Persona_Model_Depth",
+      "field_cn": "用户画像建模深度",
+      "definition": "用户画像建模深度: 表面人设 / 行为状态模型 / 认知模型 / 动态特质 / 专家原则",
+      "cxt_value": "EXPERT PRINCIPLES",
+      "hyh_value": "SURFACE PERSONA",
+      "original_evidence": "输入(x)取自表达心理危机或风险的现实世界社交媒体帖子。",
+      "cxt_evidence": "",
+      "corrected_judgment": "SURFACE PERSONA",
+      "reason": "仅使用现实世界社交媒体帖子作为输入，未引入专家原则。"
+    },
+    {
+      "row": 35,
+      "field": "Utility",
+      "field_cn": "实用性",
+      "definition": "评估中是否考察对任务是否有用/有效（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "D = {dk}5 k=1, f : X × Y →{0, 1}5 ... d1 共情与关系立场 ... d2 基于证据的情绪调节策略 ... d3 来访者关切的探索 ... d4 风险评估与识别 ... d5 外部资源转介",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "评估了共情、策略等实用维度，直接考察有用性。"
+    }
+  ]
+}

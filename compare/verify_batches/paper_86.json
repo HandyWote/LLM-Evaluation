@@ -1,0 +1,41 @@
+{
+  "paper_id": "86",
+  "disagreements": [
+    {
+      "row": 110,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "STATIC",
+      "hyh_value": "PATTERN-LEVEL",
+      "original_evidence": "我们最终评估了不同方法下模拟客户与真实客户之间动作分布的KL散度。",
+      "cxt_evidence": "",
+      "corrected_judgment": "PATTERN-LEVEL",
+      "reason": "评估了动作分布的KL散度，属于统计频率模式，而非动态变化。"
+    },
+    {
+      "row": 111,
+      "field": "Persona_Model_Depth",
+      "field_cn": "用户画像建模深度",
+      "definition": "用户画像建模深度: 表面人设 / 行为状态模型 / 认知模型 / 动态特质 / 专家原则",
+      "cxt_value": "BEHAVIORAL STATE MODEL/DYNAMIC TRAITS",
+      "hyh_value": "BEHAVIORAL STATE MODEL",
+      "original_evidence": "与先前的方法不同，我们的框架明确建模了客户画像的四个方面，即动机、信念、偏好的改变计划以及接受性。",
+      "cxt_evidence": "",
+      "corrected_judgment": "BEHAVIORAL STATE MODEL",
+      "reason": "建模了动机、信念、偏好、接受性等方面，属于行为状态模型，未明确体现动态特质。"
+    },
+    {
+      "row": 112,
+      "field": "Safety",
+      "field_cn": "安全性",
+      "definition": "评估中是否涉及避免有害/偏见输出（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们邀请了四位合著者担任标注员，他们均为心理学专家且具备动机性访谈（MI）咨询的丰富经验。……具体而言，我们采用GPT-4以少样本方式执行蕴含关系评估。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未提及有害或偏见输出的评估，仅涉及专家评估MI能力。"
+    }
+  ]
+}

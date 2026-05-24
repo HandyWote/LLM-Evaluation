@@ -1,0 +1,29 @@
+{
+  "paper_id": "106",
+  "disagreements": [
+    {
+      "row": 184,
+      "field": "Fidelity",
+      "field_cn": "保真度",
+      "definition": "评估中是否考察是否符合预设角色/目标（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "(2) CBT结构度量，评估答案是否遵循特定的CBT结构和原则，评分范围为0-2，表示从完全不遵循结构到完全遵循；",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "评估是否遵循CBT结构，符合目标对齐"
+    },
+    {
+      "row": 185,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们的实验证明了CBT-LLM模型在心理健康支持问答任务中的优越性，优于三个先进的基准模型。... 表4：CBT QA数据集上的自动评估结果",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "与多个基准模型比较，进行多条件测试"
+    }
+  ]
+}

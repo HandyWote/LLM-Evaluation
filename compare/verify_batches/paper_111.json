@@ -1,0 +1,77 @@
+{
+  "paper_id": "111",
+  "disagreements": [
+    {
+      "row": 210,
+      "field": "Dataset_Available",
+      "field_cn": "数据集公开性",
+      "definition": "数据集是否公开可用（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们承诺在论文被接收后公开分享所有数据。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "承诺在论文被接收后公开数据，当前未公开，因此不是实际可用。"
+    },
+    {
+      "row": 211,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们介绍了一个用于多会话心理咨询对话的数据集（MusPsy-Dataset）……我们还开发了我们的MusPsy-Model，旨在追踪来访者的进展并随时间调整咨询方向。实验表明，我们的模型在各项指标上均优于基线模型。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅在单个数据集上测试模型，未提及其他模型或不同条件测试。"
+    },
+    {
+      "row": 212,
+      "field": "Human Learning / Outcomes",
+      "field_cn": "人类学习/成效",
+      "definition": "评估中是否考察人类学习或行为改变（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "我们采用积极与消极情感量表（PANAS）测量来访者情绪状态的变化……长期来看，我们的音乐心理模型（MusPsy-Model）能有效减少消极情绪并增强积极情绪……MusPsy-Model显示出对来访者状态的持续改善。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "使用PANAS测量来访者情绪变化，显示模型减少消极情绪、增强积极情绪，考察人类行为改变。"
+    },
+    {
+      "row": 213,
+      "field": "Persona_Model_Depth",
+      "field_cn": "用户画像建模深度",
+      "definition": "用户画像建模深度: 表面人设 / 行为状态模型 / 认知模型 / 动态特质 / 专家原则",
+      "cxt_value": "COGNITIVE MODEL/DYNAMIC TRAITS",
+      "hyh_value": "DYNAMIC TRAITS",
+      "original_evidence": "来访者档案由静态特征与动态状态构成。……静态特征：包括化名、性别、年龄、职业以及初次访谈时报告的最初心理问题。……动态状态：这些捕捉每次咨询的变化，包括来访者不断演变的近期生活经历等。",
+      "cxt_evidence": "",
+      "corrected_judgment": "DYNAMIC TRAITS",
+      "reason": "明确指出动态状态捕捉每次咨询变化，包括不断演变的近期生活经历等。"
+    },
+    {
+      "row": 214,
+      "field": "Realism",
+      "field_cn": "真实性",
+      "definition": "评估中是否考察输出是否像人类或自然（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "连贯性：对话中的逻辑一致性。...大语言模型引发的真实性关切：我们承认，尽管我们通过使用真实案例报告力求实现真实性，但仍无法完全解决真实性问题。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "证据指出模型输出不真实，如给出无关回答，且承认真实性关切，未评估像人类。"
+    },
+    {
+      "row": 215,
+      "field": "Simulation_Target",
+      "field_cn": "模拟对象",
+      "definition": "模拟的对象: 来访者智能体 / 治疗师智能体 / 双智能体 / 人类受训者",
+      "cxt_value": "DUAL-AGENT",
+      "hyh_value": "THERAPIST AGENT",
+      "original_evidence": "我们使用MusPsy-Dataset训练了一个自动心理咨询模型，以进行多轮次咨询。",
+      "cxt_evidence": "",
+      "corrected_judgment": "THERAPIST AGENT",
+      "reason": "训练自动心理咨询模型，模拟治疗师角色进行多轮咨询。"
+    }
+  ]
+}

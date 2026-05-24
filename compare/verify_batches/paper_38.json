@@ -1,0 +1,29 @@
+{
+  "paper_id": "38",
+  "disagreements": [
+    {
+      "row": 30,
+      "field": "Prompt_Disclosure",
+      "field_cn": "提示词披露度",
+      "definition": "提示词披露度: Full（清晰提供了所有必要提示词，原则上可复现）/ Partial（展示了部分提示词，不足以复现）/ No（没有可用的提示词信息）",
+      "cxt_value": "FULL",
+      "hyh_value": "PARTIAL",
+      "original_evidence": "对于客户端模拟，所使用的提示显示在图6中。",
+      "cxt_evidence": "",
+      "corrected_judgment": "PARTIAL",
+      "reason": "提示集中展示于图6，但可能不完整。"
+    },
+    {
+      "row": 31,
+      "field": "Uses_Dynamic_State",
+      "field_cn": "是否使用动态状态建模",
+      "definition": "是否使用动态状态建模（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "提供给大语言模型的心理画像应显著影响咨询过程，并有助于识别特定来访者。受Schneider等（2000）及Chen等（2023）的启发，我们考虑以下信息：（1）问题与就诊原因……（2）D",
+      "cxt_evidence": "“我们考虑了大五人格特质、情绪波动（EF）、不愿表达情绪（UWE）以及对治疗师的抗拒（RT）。”",
+      "corrected_judgment": "NO",
+      "reason": "仅提供静态心理画像，未追踪动态变化。"
+    }
+  ]
+}

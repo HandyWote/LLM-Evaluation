@@ -1,0 +1,137 @@
+{
+  "paper_id": "104",
+  "disagreements": [
+    {
+      "row": 173,
+      "field": "Coding Options",
+      "field_cn": "编码者一致性",
+      "definition": "是否明确报告了评估者之间的一致性: Yes / No / N/A",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "经过多轮讨论，专家们对每个类别提供了评分和理由。每一轮结束后，主持人将回应整理汇总，从而呈现专家小组评分和理由的匿名摘要。……计算出了每个类别的平均分。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未报告任何评估者间一致性系数（如Kappa/ICC），仅平均分。"
+    },
+    {
+      "row": 174,
+      "field": "Dataset_Available",
+      "field_cn": "数据集公开性",
+      "definition": "数据集是否公开可用（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "数据可用性声明：数据包含于文章内。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "数据可用性声明指出数据包含于文章内，可获取。"
+    },
+    {
+      "row": 175,
+      "field": "Fidelity",
+      "field_cn": "保真度",
+      "definition": "评估中是否考察是否符合预设角色/目标（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "表1. 我们定制GPT在职业治疗若干类别中的性能评估……作为治疗工具的整体有效性 4.1……对治疗的有意义贡献 4.0……对不同患者群体的适用性 3.3……临床使用推荐度 3.8",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "评估的是有效性而非角色保真度"
+    },
+    {
+      "row": 176,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "本表展示了十位治疗师使用不同提示语评估ChatGPT在这些治疗中的有效性时，其在各项标准指标上的表现。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "不同提示语属于不同条件测试"
+    },
+    {
+      "row": 177,
+      "field": "Has_Rubric",
+      "field_cn": "评分标准",
+      "definition": "是否提供了明确的评分标准/评分指引（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "采用1分（代表表现较差）至5分（代表表现优异）的评分量表来量化模型的表现。经过多轮评估，专家们为每个类别提供了评分及理由。每轮结束后，一名协调员汇总了反馈意见，t",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "有明确的1-5分量表"
+    },
+    {
+      "row": 178,
+      "field": "Interaction_Level",
+      "field_cn": "交互层级",
+      "definition": "交互层级: Single-turn（单轮）/ Short Multi-turn（2-5轮简短交流）/ Extended Dialogue（6+轮较长对话）/ Longitudinal（跨多个会话/较长时间）",
+      "cxt_value": "SINGLE-TURN",
+      "hyh_value": "SHORT MULTI-TURN",
+      "original_evidence": "他们通过一个专门的界面与问题和模拟事件进行交互，从而评估每个类别。该界面提供了机器人对特定输入（包括儿童表现出的行为事件或通过机器人助手输入的指令）如何反应的逼真模拟。",
+      "cxt_evidence": "",
+      "corrected_judgment": "SINGLE-TURN",
+      "reason": "未明确多轮交互，视为单轮评估"
+    },
+    {
+      "row": 179,
+      "field": "Prompt_Disclosure",
+      "field_cn": "提示词披露度",
+      "definition": "提示词披露度: Full（清晰提供了所有必要提示词，原则上可复现）/ Partial（展示了部分提示词，不足以复现）/ No（没有可用的提示词信息）",
+      "cxt_value": "PARTIAL",
+      "hyh_value": "NO",
+      "original_evidence": "它详细说明了所需信息，包括治疗师姓名、定制版ChatGPT的功能描述、作为指令的初始提示，以及以PDF文件形式提供的补充知识。",
+      "cxt_evidence": "",
+      "corrected_judgment": "PARTIAL",
+      "reason": "披露了初始提示和补充知识，但不足以完全复现"
+    },
+    {
+      "row": 180,
+      "field": "Realism",
+      "field_cn": "真实性",
+      "definition": "评估中是否考察输出是否像人类或自然（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "表1. 我们的定制GPT在职业治疗多个类别中的表现评估。... \n沟通的清晰性与可理解性 4.7 ... \n对话的连贯性与相关性 4.6 ... \n语言使用的吸引力与激励性 4.7",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "评估了清晰性、连贯性等人类语言特征"
+    },
+    {
+      "row": 181,
+      "field": "Sim_Behavior_Realistic",
+      "field_cn": "模拟行为真实性",
+      "definition": "模拟行为是否真实可信（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "组建了一个由十位在儿童ADHD治疗领域享有盛誉的专家组成的小组，并向他们提供了多种提示，以评估ChatGPT的表现。专家们通过一个专门界面与问题及模拟事件进行互动，该界面提供了逼真的模拟环境，从而对每个类别进行了评估。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "使用了逼真模拟环境，评估了模拟行为真实性"
+    },
+    {
+      "row": 182,
+      "field": "Theory_Operationalized",
+      "field_cn": "理论操作化程度",
+      "definition": "理论操作化程度: Strong（评估标准明确源于理论）/ Partial（理论被提及并部分操作化）/ Mentioned（理论仅被提及，未操作化）/ None（没有使用任何理论）",
+      "cxt_value": "MENTIONED",
+      "hyh_value": "PARTIAL",
+      "original_evidence": "评估ChatGPT的结果汇总于表1。该表展示了十位治疗师在使用不同提示词时，ChatGPT在各项标准指标下对治疗效果评估的表现[48,49]。……德尔菲法[47]被严谨地应用于评估过程中。",
+      "cxt_evidence": "",
+      "corrected_judgment": "MENTIONED",
+      "reason": "提及德尔菲法和引用文献，但未明确理论操作化"
+    },
+    {
+      "row": 183,
+      "field": "Uses_Standard_Metrics",
+      "field_cn": "标准指标使用",
+      "definition": "是否使用了标准/公认的评估指标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "该表展示了十位治疗师在使用不同提示词时，ChatGPT在各项标准指标下对治疗效果评估的表现[48,49]。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "使用标准指标并引用文献[48,49]"
+    }
+  ]
+}

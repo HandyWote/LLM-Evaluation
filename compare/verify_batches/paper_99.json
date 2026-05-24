@@ -1,0 +1,89 @@
+{
+  "paper_id": "99",
+  "disagreements": [
+    {
+      "row": 152,
+      "field": "Coding Options",
+      "field_cn": "编码者一致性",
+      "definition": "是否明确报告了评估者之间的一致性: Yes / No / N/A",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "总体而言，85.2%的提取特征被验证为准确提取。其中，57.6%承认模型做出了间接但合理的推断。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "85.2%准确率为提取验证，非编码者间一致性"
+    },
+    {
+      "row": 153,
+      "field": "Has_Failure_Analysis",
+      "field_cn": "失败案例分析",
+      "definition": "是否系统性地分析了失败案例或错误模式（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "首先，我们的人工评估由十五位人类专家进行。其次，我们没有对每个对齐组件对最终模型有效性的单独贡献进行消融实验，主要因为我们面临两难困境——人工评估成本高昂，而自动e",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未分析失败案例，仅提及未进行消融实验"
+    },
+    {
+      "row": 154,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "首先，我们的人工评估由十五位人类专家进行。其次，我们未对各对齐组件对最终模型有效性的单独贡献进行消融实验，这主要是因为面临两难困境——人工评估成本高昂，而自动评估",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未进行多模型/条件鲁棒性测试"
+    },
+    {
+      "row": 155,
+      "field": "LLM_Judge_Validated",
+      "field_cn": "LLM裁判验证",
+      "definition": "LLM裁判是否经过与人类判断的对比验证（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "然而，正如我们的研究结果所示，自动评估难以捕捉模型之间的细微差异，凸显了专家评估不可或缺的作用……未观察到显著差异，因为面试官（interviewer agent）始终给予高分评价，未能捕捉到其",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未将LLM裁判与人类判断对比"
+    },
+    {
+      "row": 156,
+      "field": "Prompt_Disclosure",
+      "field_cn": "提示词披露度",
+      "definition": "提示词披露度: Full（清晰提供了所有必要提示词，原则上可复现）/ Partial（展示了部分提示词，不足以复现）/ No（没有可用的提示词信息）",
+      "cxt_value": "FULL",
+      "hyh_value": "PARTIAL",
+      "original_evidence": "Eeyore 及所有标注数据已在 https://github.com/MichiganNLP/Eeyore 开源。... 图2：用于指令微调的输入数据流水线。... 表7：访谈代理在三个维度上使用的结构化提问框架。... 附录B：训练与推理细节。",
+      "cxt_evidence": "",
+      "corrected_judgment": "PARTIAL",
+      "reason": "开源数据并提供框架，但未完全披露所有提示词"
+    },
+    {
+      "row": 157,
+      "field": "Reliability_Reported",
+      "field_cn": "信度系数报告",
+      "definition": "是否报告了标准化评估者间信度系数（如 Cohen's kappa, ICC）: Yes / No / N/A。注意：仅报告百分比一致不算",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "尽管进行了对齐努力，模型仍可能产生不准确性，潜在地导致教育错误。此外，幻觉仍然是一个问题，需要在临床培训环境中谨慎使用。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未报告Cohen's kappa等标准化信度系数"
+    },
+    {
+      "row": 158,
+      "field": "Uses_Standard_Metrics",
+      "field_cn": "标准指标使用",
+      "definition": "是否使用了标准/公认的评估指标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "评估人员使用5点李克特量表在五个维度上评估模型。……前四个维度关注真实性的不同方面，而最后一个维度评估画像遵循性：与类AI响应的对比、语言真实性、认知模式真实性。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "使用5点Likert量表等标准评估指标"
+    }
+  ]
+}

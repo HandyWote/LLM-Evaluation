@@ -1,0 +1,77 @@
+{
+  "paper_id": "18",
+  "disagreements": [
+    {
+      "row": 9,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "DYNAMIC",
+      "hyh_value": "STATIC",
+      "original_evidence": "我们使用BERT-score（Zhang等人，2020）评估模拟器话语与真实寻求者话语的一致性，以此作为拟人化的评价指标。... 每种方法创建的虚拟寻求者的最终人格保真度由公式(5)得出。",
+      "cxt_evidence": "",
+      "corrected_judgment": "STATIC",
+      "reason": "系统有动态设计，但评估只用聚合分数，未分析轮次间变化"
+    },
+    {
+      "row": 10,
+      "field": "Eval_Human_Experts",
+      "field_cn": "领域专家评估",
+      "definition": "领域专家（治疗师、临床医生、受过训练的标注员）是否参与评估（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们通过从不同角度评估模拟器与实际搜寻者之间的行为一致性，定量比较了不同方法在搜寻者模拟中的性能。",
+      "cxt_evidence": "我们邀请了三位具有心理学背景的专家来审查数据。首先要求他们根据求助者的档案、咨询师的报告以及对话，标记主诉链条是否合理。随后，如果超过两位标注者认为需要，则对这些链条进行手动修正。",
+      "corrected_judgment": "NO",
+      "reason": "专家审查修正主诉链条属数据准备，非评估系统输出。评估环节完全自动化(BERT-score/G-Eval) (校验修正)"
+    },
+    {
+      "row": 11,
+      "field": "Has_Longitudinal_Eval",
+      "field_cn": "纵向评估",
+      "definition": "是否包含跨时间/多次会话的纵向评估（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "以Qwen2.5-7B-Instruct作为主干大语言模型，我们比较了AnnaAgent与基线方法在与不同咨询师模型对话时的拟人化表现。……我们比较了AnnaAgent与基线方法在与不同咨询师模型对话时的拟人化表现。",
+      "cxt_evidence": "“多会话记忆挑战……我们将多会话记忆建模为一种三级记忆机制。……长期记忆指更早时期的经验，包括先前会话的尺度与对话。”",
+      "corrected_judgment": "YES",
+      "reason": "原始证据提及多会话记忆和长期记忆，涉及跨会话评估，属于纵向评估。"
+    },
+    {
+      "row": 12,
+      "field": "Interaction_Level",
+      "field_cn": "交互层级",
+      "definition": "交互层级: Single-turn（单轮）/ Short Multi-turn（2-5轮简短交流）/ Extended Dialogue（6+轮较长对话）/ Longitudinal（跨多个会话/较长时间）",
+      "cxt_value": "LONGITUDINAL",
+      "hyh_value": "EXTENDED DIALOGUE",
+      "original_evidence": "此外，我们使用D4数据集（Yao等人，2022）和DAIC-WOZ数据集（Gratch等人，2014）中的记录作为先前会话的基础。……具体而言，我们设计了一系列与用于人格保真度的问题类似的问题，以验证长期记忆的有效性。",
+      "cxt_evidence": "如图3所示，截至并包括上一会话的内容被定义为长期记忆，当前会话开始之前的内容为实时记忆，而两者之间的内容则被定义为短期记忆。",
+      "corrected_judgment": "LONGITUDINAL",
+      "reason": "证据显示使用先前会话数据构建长期记忆，跨会话评估，符合纵向要求。"
+    },
+    {
+      "row": 13,
+      "field": "Safety",
+      "field_cn": "安全性",
+      "definition": "评估中是否涉及避免有害/偏见输出（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "本文的主要目的是更真实地模拟搜索者。为此，我们通过从不同角度评估模拟器与真实搜索者之间的行为一致性，定量比较了搜索者模拟中不同方法的性能。……拟人化…… Pe",
+      "cxt_evidence": "我们组织了一个由经验丰富的咨询师组成的伦理审查委员会……以避免其他潜在的伦理风险。”我们将仅开源合成会话的对话内容及处理代码……我们不会无条件开源直接源自用户的数据。",
+      "corrected_judgment": "NO",
+      "reason": "伦理审查委员会和数据开源限制为伦理声明/措施，非对有害输出的评估 (校验修正)"
+    },
+    {
+      "row": 14,
+      "field": "Utility",
+      "field_cn": "实用性",
+      "definition": "评估中是否考察对任务是否有用/有效（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "本文的主要目的是更逼真地模拟搜寻者。因此，我们通过从不同角度评估模拟器与真实搜寻者之间的行为一致性，定量比较了不同方法在搜寻者模拟中的性能。……拟人化……Pe",
+      "cxt_evidence": "这项研究提供了创新性解决方案，以缓解全球心理健康资源短缺的问题。通过模拟更真实的求助者行为，AnnaAgent为心理学开辟了新的路径。",
+      "corrected_judgment": "NO",
+      "reason": "cxt补充仅为系统有用性声明/愿景，非对实用性的评估 (校验修正)"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "paper_id": "110",
+  "disagreements": [
+    {
+      "row": 202,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "DYNAMIC",
+      "hyh_value": "STATIC",
+      "original_evidence": "每个模型的准确率如图2所示：Claude-3.5 62.1% ± 3.3 ... 医生代理在必须做出诊断前，允许进行N=20次患者与测量交互。",
+      "cxt_evidence": "",
+      "corrected_judgment": "STATIC",
+      "reason": "原始证据仅报告整体准确率，未分析轮次间行为变化。"
+    },
+    {
+      "row": 203,
+      "field": "Coding Options",
+      "field_cn": "编码者一致性",
+      "definition": "是否明确报告了评估者之间的一致性: Yes / No / N/A",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们报告了三位临床医生（医学博士）对AgentClinic-MedQA中20个智能体对话的评分结果，评分范围为1-10分，涵盖四个维度……各维度评估者的平均评分如下：医生维度6.2分，患者维度6.7分，测量维度6.3分，同理心维度5.8分。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅报告平均评分，未提供标准化信度系数（如Kappa/ICC）。"
+    },
+    {
+      "row": 204,
+      "field": "Eval_Automatic",
+      "field_cn": "自动指标评估",
+      "definition": "是否使用算法/数学公式自动计算的指标（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "各模型的准确率如图2所示：Claude-3.5为62.1% ± 3.3，OpenBioLLM-70B为58.3 ± 4.2，人类医生为54 ± 28.5，GPT-4为51.6% ± 3.3。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "准确率由算法自动计算，属于自动指标。"
+    },
+    {
+      "row": 205,
+      "field": "Has_Longitudinal_Eval",
+      "field_cn": "纵向评估",
+      "definition": "是否包含跨时间/多次会话的纵向评估（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "各模型的准确率如图2所示：Claude-3.5为62.1%±3.3，OpenBioLLM-70B为58.3%±4.2，人类医生为54%±28.5，GPT-4为51.6%±3.3……我们将时间缩短至N=10和N=15，同时将时间延长至N=25和N=30。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "证据中明确提到将时间缩短至N=10和N=15，延长至N=25和N=30，表明进行了跨时间/多次会话的纵向评估。"
+    },
+    {
+      "row": 206,
+      "field": "Reliability_Reported",
+      "field_cn": "信度系数报告",
+      "definition": "是否报告了标准化评估者间信度系数（如 Cohen's kappa, ICC）: Yes / No / N/A。注意：仅报告百分比一致不算",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们报告了三位临床医生（拥有医学博士学位的个体）对AgentClinic-MedQA中20个智能体对话的评分结果，评分范围为1-10分，涵盖四个维度……我们发现各评估者对每个类别的平均评分如下：医生维度6.2分，患者维度6.7分，测量维度6.3分，共情维度5.8分。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "报告了三位医生的平均评分，但未报告标准化信度系数如kappa或ICC，仅百分比一致不算。"
+    },
+    {
+      "row": 207,
+      "field": "Theory_Grounding",
+      "field_cn": "理论支撑度",
+      "definition": "理论支撑度: Strong（明确使用公认理论来定义或测量）/ Weak（提及了概念但未在评估中实际操作化）/ None（没有真正的理论支撑）",
+      "cxt_value": "STRONG",
+      "hyh_value": "WEAK",
+      "original_evidence": "认知偏差是判断中偏离规范或理性的系统性模式，个体以不合逻辑的方式对情境进行推断（Blumenthal-Barby & Krieger, 2015）。……内隐偏见是个体持有的、无意识运作的关联，可影响……",
+      "cxt_evidence": "",
+      "corrected_judgment": "STRONG",
+      "reason": "直接引用Blumenthal-Barby & Krieger (2015)定义认知偏差，使用了公认理论。"
+    },
+    {
+      "row": 208,
+      "field": "Theory_Operationalized",
+      "field_cn": "理论操作化程度",
+      "definition": "理论操作化程度: Strong（评估标准明确源于理论）/ Partial（理论被提及并部分操作化）/ Mentioned（理论仅被提及，未操作化）/ None（没有使用任何理论）",
+      "cxt_value": "STRONG",
+      "hyh_value": "PARTIAL",
+      "original_evidence": "认知偏差是指个体在判断中以不合逻辑的方式对情境进行推断时，系统性地偏离规范或理性的模式（Blumenthal-Barby & Krieger, 2015）。……内隐偏差是个体所持有的、在无意识状态下运作的关联，能够影响……",
+      "cxt_evidence": "",
+      "corrected_judgment": "MENTIONED",
+      "reason": "仅提及认知偏差和内隐偏差的定义，未展示如何操作化为评估标准。"
+    },
+    {
+      "row": 209,
+      "field": "Uses_Dynamic_State",
+      "field_cn": "是否使用动态状态建模",
+      "definition": "是否使用动态状态建模（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "AgentClinic基准测试中使用了四种语言代理：患者代理、医生代理、测量代理和主持人（图1）。每个语言代理都有特定的指令，并仅被提供该代理专用的独有信息。…医生代理被允许",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "描述各代理指令和角色，未涉及动态状态建模或随时间更新的状态。"
+    }
+  ]
+}

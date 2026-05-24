@@ -1,0 +1,101 @@
+{
+  "paper_id": "94",
+  "disagreements": [
+    {
+      "row": 136,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "STATIC",
+      "hyh_value": "PATTERN-LEVEL",
+      "original_evidence": "图3展示了不同方法所获得的策略分布。……我们提出的MultiAgentESC在策略选择上呈现出更均衡和多样化的分布，有效降低了过度依赖有限策略集的风险。Multi中的所有策略……",
+      "cxt_evidence": "",
+      "corrected_judgment": "PATTERN-LEVEL",
+      "reason": "分析了策略分布，属于模式级别。"
+    },
+    {
+      "row": 137,
+      "field": "Eval_Lay_Users",
+      "field_cn": "普通用户评估",
+      "definition": "非专家/普通用户是否参与评估（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们提出了一种面向情感支持对话（ESC）的无训练多智能体协作框架（MultiAgentESC）。该框架旨在通过三个阶段模拟类似于人类提供情感支持的过程：对话分析、策略商议和回复生成。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未提及普通用户参与评估。"
+    },
+    {
+      "row": 138,
+      "field": "Eval_User_Study",
+      "field_cn": "用户交互实验",
+      "definition": "是否有结构化实验让用户与系统发生交互（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们从ESConv数据集的测试集中随机抽取了100个对话，并指示标注者在这些对话场景中扮演求助者的角色。每位标注者的任务是在这100个对话中，将我们的方法生成的所有回答与其他方法生成的回答进行分别比较。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "标注者静态比较，非真实交互。"
+    },
+    {
+      "row": 139,
+      "field": "Fidelity",
+      "field_cn": "保真度",
+      "definition": "评估中是否考察是否符合预设角色/目标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们提出了一种面向ESC的无训练多智能体协作框架（MultiAgentESC）。该框架旨在通过三个阶段模拟提供情感支持的类人过程：对话分析、策略斟酌与响应生成。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未明确评估保真度。"
+    },
+    {
+      "row": 140,
+      "field": "Reliability_Reported",
+      "field_cn": "信度系数报告",
+      "definition": "是否报告了标准化评估者间信度系数（如 Cohen's kappa, ICC）: Yes / No / N/A。注意：仅报告百分比一致不算",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们招募了三名具有心理学背景的研究生作为标注员，以评估我们提出的MultiAgentESC框架及其他方法的性能。……符号检验，*表示p值<0.05。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "只报告符号检验，未报告kappa或ICC。"
+    },
+    {
+      "row": 141,
+      "field": "Safety",
+      "field_cn": "安全性",
+      "definition": "评估中是否涉及避免有害/偏见输出（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "在没有适当保护措施的情况下，它们可能会生成有害内容。因此，我们的目标是在日常对话中提供情感支持，而不取代专业心理治疗。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅背景说明，未实际测试有害输出。"
+    },
+    {
+      "row": 142,
+      "field": "Theory_Grounding",
+      "field_cn": "理论支撑度",
+      "definition": "理论支撑度: Strong（明确使用公认理论来定义或测量）/ Weak（提及了概念但未在评估中实际操作化）/ None（没有真正的理论支撑）",
+      "cxt_value": "STRONG",
+      "hyh_value": "WEAK",
+      "original_evidence": "大多数现有方法倾向于直接生成回复，对社会互依理论（Johnson, 2003）和助人技能理论（Hill and O'Brien, 1999）的关注有限，而这两种理论强调了在提供过程中领域特定推理与专家协作的重要性。",
+      "cxt_evidence": "",
+      "corrected_judgment": "WEAK",
+      "reason": "提及理论但未在评估中操作化。"
+    },
+    {
+      "row": 143,
+      "field": "Theory_Operationalized",
+      "field_cn": "理论操作化程度",
+      "definition": "理论操作化程度: Strong（评估标准明确源于理论）/ Partial（理论被提及并部分操作化）/ Mentioned（理论仅被提及，未操作化）/ None（没有使用任何理论）",
+      "cxt_value": "STRONG",
+      "hyh_value": "MENTIONED",
+      "original_evidence": "目前大多数现有方法倾向于直接生成回应，对于社会相互依赖理论（Johnson, 2003）和帮助技能理论（Hill and O'Brien, 1999）的考虑有限，这些理论强调了在提供过程中领域特定的推理和专家合作。",
+      "cxt_evidence": "",
+      "corrected_judgment": "MENTIONED",
+      "reason": "仅提及理论，未操作化。"
+    }
+  ]
+}

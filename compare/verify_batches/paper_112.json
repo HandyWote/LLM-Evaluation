@@ -1,0 +1,53 @@
+{
+  "paper_id": "112",
+  "disagreements": [
+    {
+      "row": 216,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "DYNAMIC",
+      "hyh_value": "STATIC",
+      "original_evidence": "在本研究过程中，分别在6个不同时间点评估了倾听技能的表现：训练开始前、开放式提问训练期间、反思训练期间、反思与开放式提问联合训练期间、反馈移除后，以及后测固定提示上的表现。",
+      "cxt_evidence": "",
+      "corrected_judgment": "DYNAMIC",
+      "reason": "在6个不同时间点评估倾听技能表现，分析行为随轮次的变化。"
+    },
+    {
+      "row": 217,
+      "field": "Coding Options",
+      "field_cn": "编码者一致性",
+      "definition": "是否明确报告了评估者之间的一致性: Yes / No / N/A",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "每个转录本均使用MI技能编码（MISC）[39]进行评估……机器与人类评分之间的kappa系数介于0.39至0.79之间。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "明确报告了机器与人类评分之间的kappa系数范围为0.39至0.79。"
+    },
+    {
+      "row": 218,
+      "field": "Comparable_To_Prior_Work",
+      "field_cn": "与先前研究可比性",
+      "definition": "评估是否可与先前研究进行对比（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "有充分证据表明，通过行为编码向治疗师提供持续的基于绩效的反馈，可促进其技能习得与保持（例如，[8]）。然而，此过程缓慢且劳动密集（例如，在某些情况下，其耗时是治疗会话时长的4至5倍）[9]。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "引用先前研究强调反馈重要性，但本研究未直接与先前结果进行比较。"
+    },
+    {
+      "row": 219,
+      "field": "Fidelity",
+      "field_cn": "保真度",
+      "definition": "评估中是否考察是否符合预设角色/目标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "研究参与者普遍认为，模拟患者无法真实替代真人。计算机化对话模型有时会给出分散注意力或无关的回答……它会相对频繁地回应“我不知道”这一短语。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "指出模拟患者有时给出无关回答，不符合真实替代角色，考察了保真度。"
+    }
+  ]
+}

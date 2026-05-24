@@ -1,0 +1,77 @@
+{
+  "paper_id": "107",
+  "disagreements": [
+    {
+      "row": 186,
+      "field": "Coding Options",
+      "field_cn": "编码者一致性",
+      "definition": "是否明确报告了评估者之间的一致性: Yes / No / N/A",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们招募了三位心理健康从业者，请他们基于可靠性和有用性，对模型在测试集样本上的输出进行1至5分的评分。……研究发现，我们提出的模型在相关性和有用性评分上均取得了最高分。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未报告评分者一致性标准化系数"
+    },
+    {
+      "row": 187,
+      "field": "Emotional Plausibility",
+      "field_cn": "情绪合理性",
+      "definition": "评估中是否考察情绪反应是否真实/恰当（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "为了衡量共情，我们基于Sharma等人（2020b）提出的共情分类模型进行构建。该基于RoBERTa的模型利用了一个具有理论基础的共情框架，该框架包含三种共情沟通机制（情感反应、解释和探索）以及预",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "评估共情且基于理论框架，涉及情绪反应"
+    },
+    {
+      "row": 188,
+      "field": "Fidelity",
+      "field_cn": "保真度",
+      "definition": "评估中是否考察是否符合预设角色/目标（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "我们评估了重构的两个关键结果指标：可关联性（重构后的想法在多大程度上能引起共鸣）和有用性（重构后的想法在多大程度上有助于克服消极思维）。我们招募了三位心理健康从业者，请他们对测试集示例中模型的输出进行评分。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "评估的是重构结果质量而非角色保真度"
+    },
+    {
+      "row": 189,
+      "field": "Human Learning / Outcomes",
+      "field_cn": "人类学习/成效",
+      "definition": "评估中是否考察人类学习或行为改变（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "心理治疗文献（Beck, 1976）强调成功重构的三个理想结果：（a）重构后的想法必须与个体相关联，（b）必须帮助其克服消极思维，以及（c）当下次出现类似的消极思维模式时，该想法必须具有可记忆性。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "评估模型输出质量，未考察人类学习效果"
+    },
+    {
+      "row": 190,
+      "field": "Reliability_Reported",
+      "field_cn": "信度系数报告",
+      "definition": "是否报告了标准化评估者间信度系数（如 Cohen's kappa, ICC）: Yes / No / N/A。注意：仅报告百分比一致不算",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们招募了三位心理健康从业者。要求他们根据可靠性和有用性，在1到5分的范围内对模型在测试集样本上的输出进行评分。我们发现我们提出的模型在相关性和有用性评分上达到了最高水平。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未报告标准化信度系数（如Cohen's kappa或ICC），仅描述评分过程。"
+    },
+    {
+      "row": 191,
+      "field": "Simulation_Target",
+      "field_cn": "模拟对象",
+      "definition": "模拟的对象: 来访者智能体 / 治疗师智能体 / 双智能体 / 人类受训者",
+      "cxt_value": "HUMAN TRAINEE/REFRAMING ASSISTANT",
+      "hyh_value": "HUMAN TRAINEE",
+      "original_evidence": "我们开展了一项以人为中心的研究，探讨语言模型如何帮助人们重构消极思维。……我们在美国心理健康协会（MHA；一个分享心理健康资源与工具的知名在线平台）上实施了一项为期一个月的随机实地研究，共有2067名知情同意的参与者参与。",
+      "cxt_evidence": "",
+      "corrected_judgment": "HUMAN TRAINEE/REFRAMING ASSISTANT",
+      "reason": "原始证据显示模型作为重述助手帮助人类重构思维，模拟对象既是人类受训者也是重述助手。"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "paper_id": "77",
+  "disagreements": [
+    {
+      "row": 80,
+      "field": "Coding Options",
+      "field_cn": "编码者一致性",
+      "definition": "是否明确报告了评估者之间的一致性: Yes / No / N/A",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "参与者使用李克特量表从1到5进行评分，其中1表示非常不同意，5表示非常同意。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅描述评分方式，未报告评估者间一致性。"
+    },
+    {
+      "row": 81,
+      "field": "Has_Failure_Analysis",
+      "field_cn": "失败案例分析",
+      "definition": "是否系统性地分析了失败案例或错误模式（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "参与者使用1到5的李克特量表进行评分，其中1代表非常不同意，5代表非常同意。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "论文未分析失败案例或错误模式。"
+    },
+    {
+      "row": 82,
+      "field": "Interaction_Level",
+      "field_cn": "交互层级",
+      "definition": "交互层级: Single-turn（单轮）/ Short Multi-turn（2-5轮简短交流）/ Extended Dialogue（6+轮较长对话）/ Longitudinal（跨多个会话/较长时间）",
+      "cxt_value": "SHORT MULTI-TURN",
+      "hyh_value": "EXTENDED DIALOGUE",
+      "original_evidence": "本研究的另一个局限是转录文本的简短特性（时长约5分钟），以及其在问题探索过程中仅关注积极倾听的有限聚焦。",
+      "cxt_evidence": "",
+      "corrected_judgment": "SHORT MULTI-TURN",
+      "reason": "转录文本时长约5分钟，属于简短多轮对话。"
+    },
+    {
+      "row": 83,
+      "field": "Theory_Grounding",
+      "field_cn": "理论支撑度",
+      "definition": "理论支撑度: Strong（明确使用公认理论来定义或测量）/ Weak（提及了概念但未在评估中实际操作化）/ None（没有真正的理论支撑）",
+      "cxt_value": "STRONG",
+      "hyh_value": "WEAK",
+      "original_evidence": "我们选取了来自三本不同的CBT书籍中的四段治疗记录作为我们的基础（Beck, 2011; Ellis, 1995; Sommers-Flanagan & Sommers-Flanagan, 2018）。……为了评估沟通技巧，我们使用了以下问题：“治疗师的沟通清晰准确”以及“治疗师展示出”",
+      "cxt_evidence": "",
+      "corrected_judgment": "WEAK",
+      "reason": "虽提及CBT理论作为基础，但评估问题未明确源于理论。"
+    },
+    {
+      "row": 84,
+      "field": "Theory_Operationalized",
+      "field_cn": "理论操作化程度",
+      "definition": "理论操作化程度: Strong（评估标准明确源于理论）/ Partial（理论被提及并部分操作化）/ Mentioned（理论仅被提及，未操作化）/ None（没有使用任何理论）",
+      "cxt_value": "PARTIAL",
+      "hyh_value": "MENTIONED",
+      "original_evidence": "在各种治疗方法中，认知行为疗法（CBT）是这些聊天机器人设计的关键要素（Rathnayaka 等，2022）。……我们从三本关于 CBT 的书中选取了四份治疗记录作为基础（Beck, 2011; Ellis, 1995; Sommers-Fla",
+      "cxt_evidence": "",
+      "corrected_judgment": "MENTIONED",
+      "reason": "论文仅提及CBT理论，但未将评估标准明确操作化。"
+    }
+  ]
+}

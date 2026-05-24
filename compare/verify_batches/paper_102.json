@@ -1,0 +1,65 @@
+{
+  "paper_id": "102",
+  "disagreements": [
+    {
+      "row": 168,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "DYNAMIC",
+      "hyh_value": "PATTERN-LEVEL",
+      "original_evidence": "我们计算了参与者在与三种不同系统（EmoLLM（Yang等，2024）、CACTUS（Lee等，2024）、MIND以及一个对照组）交互时的平均积极和消极情绪波动。...在70个样本（7个主题，每个主题10个样本）中，失败案例的比例",
+      "cxt_evidence": "",
+      "corrected_judgment": "PATTERN-LEVEL",
+      "reason": "计算平均情绪波动，属于模式层面，未详细分析轮次间变化。"
+    },
+    {
+      "row": 169,
+      "field": "Has_Longitudinal_Eval",
+      "field_cn": "纵向评估",
+      "definition": "是否包含跨时间/多次会话的纵向评估（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "参与者进入一个真实的咨询室，并通过计算机与指定的模型进行了五轮基于文本的对话。对话内容被严格保密，模型在对话结束后立即停止记录。……为了评估c的变化",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "五轮对话属于单次会话内，非跨会话纵向评估。"
+    },
+    {
+      "row": 170,
+      "field": "Prompt_Disclosure",
+      "field_cn": "提示词披露度",
+      "definition": "提示词披露度: Full（清晰提供了所有必要提示词，原则上可复现）/ Partial（展示了部分提示词，不足以复现）/ No（没有可用的提示词信息）",
+      "cxt_value": "FULL",
+      "hyh_value": "PARTIAL",
+      "original_evidence": "每个代理使用的详细提示模板见附录F。……在本节中，我们展示了本工作中使用的一些提示模板及其消融版本。",
+      "cxt_evidence": "",
+      "corrected_judgment": "FULL",
+      "reason": "论文声称附录F包含每个代理的详细提示模板，可复现。"
+    },
+    {
+      "row": 171,
+      "field": "Theory_Grounding",
+      "field_cn": "理论支撑度",
+      "definition": "理论支撑度: Strong（明确使用公认理论来定义或测量）/ Weak（提及了概念但未在评估中实际操作化）/ None（没有真正的理论支撑）",
+      "cxt_value": "STRONG",
+      "hyh_value": "WEAK",
+      "original_evidence": "情感缓解：“评估该框架的有效性：判断该框架是否成功缓解了用户的情绪。”参考文献：(Gross, 1998)。  \n沉浸感：衡量用户是否感到完全投入并被互动所吸引。  \n关注游戏场景构建。",
+      "cxt_evidence": "",
+      "corrected_judgment": "WEAK",
+      "reason": "引用了理论但未明确操作化。"
+    },
+    {
+      "row": 172,
+      "field": "Theory_Operationalized",
+      "field_cn": "理论操作化程度",
+      "definition": "理论操作化程度: Strong（评估标准明确源于理论）/ Partial（理论被提及并部分操作化）/ Mentioned（理论仅被提及，未操作化）/ None（没有使用任何理论）",
+      "cxt_value": "STRONG",
+      "hyh_value": "PARTIAL",
+      "original_evidence": "情绪缓解度量：如果交互能够降低用户压力或焦虑，则衡量框架的有效性：判断该框架是否成功缓解了用户的情绪。(Gross;, 1998) … 沉浸度量：衡量用户是否感到完全投入并被其吸引。",
+      "cxt_evidence": "",
+      "corrected_judgment": "PARTIAL",
+      "reason": "理论被提及并部分用于定义度量，但操作化不完整。"
+    }
+  ]
+}

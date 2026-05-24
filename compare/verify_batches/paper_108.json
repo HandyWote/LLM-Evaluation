@@ -1,0 +1,77 @@
+{
+  "paper_id": "108",
+  "disagreements": [
+    {
+      "row": 192,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "DYNAMIC",
+      "hyh_value": "STATIC",
+      "original_evidence": "我们从三个测试集（Dt）中随机抽取100个对话样本，确保多样性（如策略），并请三位标注员对每个比较结果判定胜/平/负……此外，我们要求三位标注员采用1-5李克特量表对每个样本进行评估，并提供具体的评分细则。",
+      "cxt_evidence": "",
+      "corrected_judgment": "STATIC",
+      "reason": "原始证据描述每轮独立评分，未分析行为随轮次变化。"
+    },
+    {
+      "row": 193,
+      "field": "Eval_Human_Experts",
+      "field_cn": "领域专家评估",
+      "definition": "领域专家（治疗师、临床医生、受过训练的标注员）是否参与评估（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们采用人工评估方式，将评估回复质量的任务外包至亚马逊土耳其机器人（AMT）。……与四位心理学家合作，我们制定了一套专门评估回复是否提供有效情感支持的标准。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "领域专家仅参与制定标准，未直接参与评分，评估由AMT普通用户完成。"
+    },
+    {
+      "row": 194,
+      "field": "Eval_Lay_Users",
+      "field_cn": "普通用户评估",
+      "definition": "非专家/普通用户是否参与评估（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "我们采用人工评估，将评估响应质量的任务外包至Amazon Mechanical Turk (AMT)。……每次评估中，我们邀请三位人工标注员各自依据四项指定标准对100个样本进行评定。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "普通用户（AMT标注员）参与评估。"
+    },
+    {
+      "row": 195,
+      "field": "Eval_User_Study",
+      "field_cn": "用户交互实验",
+      "definition": "是否有结构化实验让用户与系统发生交互（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们采用人工评估的方法，将评估回答质量的任务外包给亚马逊土耳其机器人（AMT）平台。……在每次评估中，我们邀请三名人工标注员，分别根据四项既定标准对100个样本进行独立评估。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "用户仅对模型输出进行评分，未与系统进行交互实验。"
+    },
+    {
+      "row": 196,
+      "field": "Interaction_Level",
+      "field_cn": "交互层级",
+      "definition": "交互层级: Single-turn（单轮）/ Short Multi-turn（2-5轮简短交流）/ Extended Dialogue（6+轮较长对话）/ Longitudinal（跨多个会话/较长时间）",
+      "cxt_value": "EXTENDED DIALOGUE",
+      "hyh_value": "SHORT MULTI-TURN",
+      "original_evidence": "我们将对话随机截取为5-15轮次的样本。随后，为每个样本标注阶段，并根据其阶段对样本进行分类。",
+      "cxt_evidence": "",
+      "corrected_judgment": "EXTENDED DIALOGUE",
+      "reason": "对话样本为5-15轮，属于6轮以上扩展对话。"
+    },
+    {
+      "row": 197,
+      "field": "Persona_Model_Depth",
+      "field_cn": "用户画像建模深度",
+      "definition": "用户画像建模深度: 表面人设 / 行为状态模型 / 认知模型 / 动态特质 / 专家原则",
+      "cxt_value": "EXPERT PRINCIPLES",
+      "hyh_value": "SURFACE PERSONA",
+      "original_evidence": "我们将情感支持回应生成任务定义为基于支持策略生成回应。形式化地，给定对话背景I、求助者的对话前调查（例如情绪、情境）以及对话上下文C，模型θ首先预测策略S，然后生成",
+      "cxt_evidence": "",
+      "corrected_judgment": "EXPERT PRINCIPLES",
+      "reason": "模型基于专家定义的支持策略生成回应，体现了专家原则。"
+    }
+  ]
+}

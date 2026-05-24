@@ -1,0 +1,29 @@
+{
+  "paper_id": "6",
+  "disagreements": [
+    {
+      "row": 1,
+      "field": "Eval_Lay_Users",
+      "field_cn": "普通用户评估",
+      "definition": "非专家/普通用户是否参与评估（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们首先与两位持证临床心理学家进行了一项专家评估。这两位临床医生均具备成人心理学背景，专攻抑郁症、焦虑障碍及认知行为疗法。",
+      "cxt_evidence": "我们利用Amazon Mechanical Turk开展了一项随机对照实验，以众包方式获取同伴支持回应……每位Mechanical Turk工作人员会看到一条帖子，并要求其提供回复，如同回复朋友一般。",
+      "corrected_judgment": "NO",
+      "reason": "MTurk用户用于生成数据，不是评估"
+    },
+    {
+      "row": 2,
+      "field": "Prompt_Disclosure",
+      "field_cn": "提示词披露度",
+      "definition": "提示词披露度: Full（清晰提供了所有必要提示词，原则上可复现）/ Partial（展示了部分提示词，不足以复现）/ No（没有可用的提示词信息）",
+      "cxt_value": "FULL",
+      "hyh_value": "PARTIAL",
+      "original_evidence": "对于GPT-4的回复，我们总共测试了3种不同的处理角色设置：",
+      "cxt_evidence": "“下面显示了一个SMP角色提示示例：”",
+      "corrected_judgment": "PARTIAL",
+      "reason": "只展示了部分提示词示例，不是全部"
+    }
+  ]
+}

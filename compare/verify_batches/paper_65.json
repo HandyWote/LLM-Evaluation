@@ -1,0 +1,41 @@
+{
+  "paper_id": "65",
+  "disagreements": [
+    {
+      "row": 51,
+      "field": "Persona_Model_Depth",
+      "field_cn": "用户画像建模深度",
+      "definition": "用户画像建模深度: 表面人设 / 行为状态模型 / 认知模型 / 动态特质 / 专家原则",
+      "cxt_value": "SURFACE PERSONA/DYNAMIC TRAITS",
+      "hyh_value": "DYNAMIC TRAITS",
+      "original_evidence": "人格特征基于针对大五人格特质[2]微调的文本分类模型结果，该模型的分类准确率为96%。",
+      "cxt_evidence": "",
+      "corrected_judgment": "DYNAMIC TRAITS",
+      "reason": "基于大五人格特质建模，属于动态特质"
+    },
+    {
+      "row": 52,
+      "field": "Prompt_Disclosure",
+      "field_cn": "提示词披露度",
+      "definition": "提示词披露度: Full（清晰提供了所有必要提示词，原则上可复现）/ Partial（展示了部分提示词，不足以复现）/ No（没有可用的提示词信息）",
+      "cxt_value": "PARTIAL",
+      "hyh_value": "NO",
+      "original_evidence": "我们自行部署了一个开源大语言模型，该模型通过提示工程利用了积累的人格信息。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未展示任何提示词内容，不足以复现"
+    },
+    {
+      "row": 53,
+      "field": "Theory_Operationalized",
+      "field_cn": "理论操作化程度",
+      "definition": "理论操作化程度: Strong（评估标准明确源于理论）/ Partial（理论被提及并部分操作化）/ Mentioned（理论仅被提及，未操作化）/ None（没有使用任何理论）",
+      "cxt_value": "PARTIAL",
+      "hyh_value": "MENTIONED",
+      "original_evidence": "人格特征档案基于针对大五人格特质[2]微调的文本分类模型结果，该模型的分类准确率达到96%。",
+      "cxt_evidence": "",
+      "corrected_judgment": "PARTIAL",
+      "reason": "大五人格理论被用于构建文本分类模型，实现了部分操作化"
+    }
+  ]
+}

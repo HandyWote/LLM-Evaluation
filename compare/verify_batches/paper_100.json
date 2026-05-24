@@ -1,0 +1,65 @@
+{
+  "paper_id": "100",
+  "disagreements": [
+    {
+      "row": 159,
+      "field": "Consistency",
+      "field_cn": "一致性",
+      "definition": "评估中是否考察跨轮次行为是否稳定（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "合成对话流畅且结构连贯，但在关键情感属性上与真实对话存在差异：真实会话展现出更大的情感变异性、更富有情感的语言，以及更真实的反应与调节模式。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未明确评估跨轮次行为一致性"
+    },
+    {
+      "row": 160,
+      "field": "Prompt_Disclosure",
+      "field_cn": "提示词披露度",
+      "definition": "提示词披露度: Full（清晰提供了所有必要提示词，原则上可复现）/ Partial（展示了部分提示词，不足以复现）/ No（没有可用的提示词信息）",
+      "cxt_value": "FULL",
+      "hyh_value": "NO",
+      "original_evidence": "我们采用了三种最先进的语言模型（即ChatGPT-4o Mini、Grok-v3和Gemini 2.0 Flash）来独立推断每个对话的这些标签。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "原始证据未披露任何提示词，无法复现。"
+    },
+    {
+      "row": 161,
+      "field": "Sim_Behavior_Realistic",
+      "field_cn": "模拟行为真实性",
+      "definition": "模拟行为是否真实可信（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "合成对话虽然流畅且结构连贯，但在关键情绪属性上与真实对话存在差异：真实会话表现出更大的情绪变异性、更多富含情绪的语言以及更真实的反应与调节模式……这些发现强调了局限性。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "论文明确指出合成对话在情绪真实性与真实对话存在差异，表明模拟行为不真实。"
+    },
+    {
+      "row": 162,
+      "field": "Theory_Operationalized",
+      "field_cn": "理论操作化程度",
+      "definition": "理论操作化程度: Strong（评估标准明确源于理论）/ Partial（理论被提及并部分操作化）/ Mentioned（理论仅被提及，未操作化）/ None（没有使用任何理论）",
+      "cxt_value": "STRONG",
+      "hyh_value": "MENTIONED",
+      "original_evidence": "表1提供了每个类别的代表性示例，以及基于关键心理治疗理论（例如情绪调节（Gross, 1998）、校准共情（Elliott等人，2018, 2013）、情感共调节（Butler和Randall, 2013）和治疗联盟理论）的解释性评论。",
+      "cxt_evidence": "",
+      "corrected_judgment": "MENTIONED",
+      "reason": "理论仅被用于解释性评论，未明确操作化为评估标准。"
+    },
+    {
+      "row": 163,
+      "field": "Uses_Dynamic_State",
+      "field_cn": "是否使用动态状态建模",
+      "definition": "是否使用动态状态建模（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们采用话语情绪动态（UED）框架，从话语序列中计算情绪指标，将每个角色（咨询师或来访者）视为独立的人物轨迹。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "采用UED框架分析话语序列情绪动态，属于动态状态建模。"
+    }
+  ]
+}

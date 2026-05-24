@@ -1,0 +1,53 @@
+{
+  "paper_id": "109",
+  "disagreements": [
+    {
+      "row": 198,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "DYNAMIC",
+      "hyh_value": "STATIC",
+      "original_evidence": "",
+      "cxt_evidence": "",
+      "corrected_judgment": "DYNAMIC",
+      "reason": "无原始证据，依据cxt补充证据。"
+    },
+    {
+      "row": 199,
+      "field": "Dataset_Available",
+      "field_cn": "数据集公开性",
+      "definition": "数据集是否公开可用（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "症状列表由ChatGPT总结并经精神科医生修订。详见附录C。……完整列表将在附录中提供。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "数据集仅声明将在附录提供，未公开可用。"
+    },
+    {
+      "row": 200,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们专注于探索ChatGPT在驱动精神科医生与患者模拟聊天机器人方面的潜力。……我们的研究结果证明了将基于ChatGPT的聊天机器人应用于精神科场景的可行性，并探讨了提示设计对聊天机器人行为及用户体验的影响。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅探索单一模型ChatGPT，未进行多模型或多条件鲁棒性测试。"
+    },
+    {
+      "row": 201,
+      "field": "Uses_Dynamic_State",
+      "field_cn": "是否使用动态状态建模",
+      "definition": "是否使用动态状态建模（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们专注于探索ChatGPT在驱动精神科医生与患者模拟聊天机器人方面的潜力。...系统消息作为ChatGPT的指令，提供关于任务的信息以及生成适当响应所需的一些具体要求。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "论文未提及前后测或持续状态追踪，仅使用静态系统消息。"
+    }
+  ]
+}

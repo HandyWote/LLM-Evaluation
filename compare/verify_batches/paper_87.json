@@ -1,0 +1,65 @@
+{
+  "paper_id": "87",
+  "disagreements": [
+    {
+      "row": 113,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "STATIC",
+      "hyh_value": "PATTERN-LEVEL",
+      "original_evidence": "我们报告以下行为计数：1）反思问题比（R/Q），定义为咨询师代理的反思次数除以咨询师提出的问题数量；2）开放式问题比例（%OQ），定义为咨询师提出的开放式问题数量除以",
+      "cxt_evidence": "",
+      "corrected_judgment": "PATTERN-LEVEL",
+      "reason": "报告了反思问题比、开放式问题比例等行为计数，属于频率模式统计。"
+    },
+    {
+      "row": 114,
+      "field": "Emotional Plausibility",
+      "field_cn": "情绪合理性",
+      "definition": "评估中是否考察情绪反应是否真实/恰当（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "共情，衡量咨询师尝试理解来访者视角与体验的程度，本质上即试图\"代入\"来访者的感受或思维。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "评估了共情维度，涉及情绪反应的真实性与恰当性。"
+    },
+    {
+      "row": 115,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "对于咨询师角色，我们分别采用gpt-4o-2024-08-06和Llama-3.1-70B两种大语言模型作为骨干网络进行实验。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "使用了两个不同的大语言模型进行实验，属于不同模型条件下的鲁棒性测试。"
+    },
+    {
+      "row": 116,
+      "field": "Human Learning / Outcomes",
+      "field_cn": "人类学习/成效",
+      "definition": "评估中是否考察人类学习或行为改变（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "成功改变谈话是动机性访谈（MI）的主要目标。因此，我们引入成功率，定义为咨询代理成功引发改变谈话的来访者比例，从而在会谈结束时提升其改变动机。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "评估的是代理的成功率，而非人类学习或行为改变。"
+    },
+    {
+      "row": 117,
+      "field": "Persona_Model_Depth",
+      "field_cn": "用户画像建模深度",
+      "definition": "用户画像建模深度: 表面人设 / 行为状态模型 / 认知模型 / 动态特质 / 专家原则",
+      "cxt_value": "DYNAMIC TRAITS",
+      "hyh_value": "BEHAVIORAL STATE MODEL",
+      "original_evidence": "为界定来访者的状态（Prochaska and Velicer, 1997; Hashemzadeh et al., 2019），我们采用健康行为改变的跨理论模型（Prochaska and DiClemente, 2005; Prochaska et al., 2008），该模型定义了五种可能的状态：前意向阶段、意向阶段、准备阶段、行动阶段以及",
+      "cxt_evidence": "",
+      "corrected_judgment": "BEHAVIORAL STATE MODEL",
+      "reason": "使用跨理论模型定义了五种离散状态，属于行为状态模型。"
+    }
+  ]
+}

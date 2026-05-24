@@ -1,0 +1,65 @@
+{
+  "paper_id": "89",
+  "disagreements": [
+    {
+      "row": 118,
+      "field": "Eval_Lay_Users",
+      "field_cn": "普通用户评估",
+      "definition": "非专家/普通用户是否参与评估（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们的评估团队由四名心理学专业高年级研究生和一名经验丰富的心理治疗师组成，以确保评估的准确性和专业性。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "评估团队由心理学专业研究生和治疗师组成，是专家而非普通用户。"
+    },
+    {
+      "row": 119,
+      "field": "Has_Failure_Analysis",
+      "field_cn": "失败案例分析",
+      "definition": "是否系统性地分析了失败案例或错误模式（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们的框架仅构建具有特定咨询风格的心理咨询师数字孪生，这满足了寻求特定咨询风格的来访者的个性化需求，但无法保证解决其心理问题或满足所有来访者的咨询需求。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅提到框架局限性，未系统分析具体失败案例或错误模式。"
+    },
+    {
+      "row": 120,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "为验证我们的合成多轮对话数据集PsyDTCorpus整合了语言风格、治疗技术和来访者人格，我们设计了三个消融人工评估。……我们综合这16组对话，每次排除以下元素之一：语言风",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "进行了消融实验，属于不同条件下的鲁棒性测试。"
+    },
+    {
+      "row": 121,
+      "field": "LLM_Judge_Validated",
+      "field_cn": "LLM裁判验证",
+      "definition": "LLM裁判是否经过与人类判断的对比验证（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "鉴于利用大语言模型评估文本生成质量的潜力（Chiang and Lee, 2023），我们尝试自动评估相似度……我们采用两种最先进的大语言模型作为评估器：GPT-4o和Claude 3.5。我们将两个大语言模型给出的相似度得分平均值作为最终结果。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "使用了两种LLM评估，但未与人类判断进行对比验证。"
+    },
+    {
+      "row": 122,
+      "field": "Persona_Model_Depth",
+      "field_cn": "用户画像建模深度",
+      "definition": "用户画像建模深度: 表面人设 / 行为状态模型 / 认知模型 / 动态特质 / 专家原则",
+      "cxt_value": "COGNITIVE MODEL/EXPERT PRINCIPLES",
+      "hyh_value": "SURFACE PERSONA",
+      "original_evidence": "我们采用GPT-4根据用户问题模拟其大五人格特质（Costa and McCrae, 1999）。",
+      "cxt_evidence": "",
+      "corrected_judgment": "SURFACE PERSONA",
+      "reason": "仅用GPT模拟大五人格特质，没有深入认知过程或动态特质。"
+    }
+  ]
+}

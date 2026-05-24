@@ -1,0 +1,29 @@
+{
+  "paper_id": "60",
+  "disagreements": [
+    {
+      "row": 45,
+      "field": "Eval_Lay_Users",
+      "field_cn": "普通用户评估",
+      "definition": "非专家/普通用户是否参与评估（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "完成后，对话由专家根据上述标准采用5点李克特量表进行评估。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "评估由专家进行，未涉及普通用户"
+    },
+    {
+      "row": 46,
+      "field": "Human Learning / Outcomes",
+      "field_cn": "人类学习/成效",
+      "definition": "评估中是否考察人类学习或行为改变（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "训练聊天机器人的局限性，导致[AUTO-FIXED]",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未评估人类学习或行为改变，仅提及训练局限性"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "paper_id": "69",
+  "disagreements": [
+    {
+      "row": 58,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "STATIC",
+      "hyh_value": "PATTERN-LEVEL",
+      "original_evidence": "总体而言，用户每次对话发送的中位消息数为10.0条（四分位距=8.0−14.0）。中位任务完成时间为9.2分钟（四分位距=6.4−10.7）。……为评估用户在对话中的参与度，我们还分析了用户消息数量、每条消息的字符数（CPM）以及每条消息的单词数。",
+      "cxt_evidence": "",
+      "corrected_judgment": "PATTERN-LEVEL",
+      "reason": "原始证据统计了用户消息数量、字符数等分布，属于模式级分析。"
+    },
+    {
+      "row": 59,
+      "field": "Dataset_Available",
+      "field_cn": "数据集公开性",
+      "definition": "数据集是否公开可用（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "总体而言，用户每次对话发送的中位消息数为10.0条（四分位距=8.0−14.0）。中位任务完成时间为9.2分钟（四分位距=6.4−10.7）。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "原始证据仅描述统计结果，未提及数据集公开可用。"
+    },
+    {
+      "row": 60,
+      "field": "Has_Failure_Analysis",
+      "field_cn": "失败案例分析",
+      "definition": "是否系统性地分析了失败案例或错误模式（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "总体而言，用户每次对话发送的中位消息数为10.0条（IQR = 8.0−14.0）。任务完成时间的中位数为9.2分钟（IQR = 6.4−10.7）。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "原始证据未涉及失败案例分析。"
+    },
+    {
+      "row": 61,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们应用了技术感知共情量表（PETS）[69]来检验以下假设：H1a 展示代理的内在共情共鸣会提升整体感知共情。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "原始证据仅使用单一量表测试假设，未进行多模型/条件鲁棒性测试。"
+    },
+    {
+      "row": 62,
+      "field": "Interaction_Level",
+      "field_cn": "交互层级",
+      "definition": "交互层级: Single-turn（单轮）/ Short Multi-turn（2-5轮简短交流）/ Extended Dialogue（6+轮较长对话）/ Longitudinal（跨多个会话/较长时间）",
+      "cxt_value": "SHORT MULTI-TURN",
+      "hyh_value": "EXTENDED DIALOGUE",
+      "original_evidence": "总体而言，用户每轮对话发送消息的中位数为10.0条（IQR = 8.0−14.0）。",
+      "cxt_evidence": "",
+      "corrected_judgment": "EXTENDED DIALOGUE",
+      "reason": "用户消息中位数10条，属于6轮以上对话。"
+    },
+    {
+      "row": 63,
+      "field": "Theory_Grounding",
+      "field_cn": "理论支撑度",
+      "definition": "理论支撑度: Strong（明确使用公认理论来定义或测量）/ Weak（提及了概念但未在评估中实际操作化）/ None（没有真正的理论支撑）",
+      "cxt_value": "STRONG",
+      "hyh_value": "WEAK",
+      "original_evidence": "我们应用了技术感知共情量表(PETS)[69]来检验以下假设: H1a 显示代理的内部共情共振会提升整体感知共情。",
+      "cxt_evidence": "",
+      "corrected_judgment": "STRONG",
+      "reason": "使用了公认的PETS量表进行测量，理论操作化明确。"
+    }
+  ]
+}

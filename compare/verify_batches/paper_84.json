@@ -1,0 +1,125 @@
+{
+  "paper_id": "84",
+  "disagreements": [
+    {
+      "row": 100,
+      "field": "Coding Options",
+      "field_cn": "编码者一致性",
+      "definition": "是否明确报告了评估者之间的一致性: Yes / No / N/A",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "每个对话语境由至少3名参与者进行评估。以固定顺序呈现模型可能因引入潜在顺序效应而损害可靠性（van der Lee等，2021）。为尽量减小这一影响，我们采用了平衡拉丁方抵消法，使每个模型出现次数相等。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未报告评估者间一致性系数，仅提及多评估者和平衡设计。"
+    },
+    {
+      "row": 101,
+      "field": "Consistency",
+      "field_cn": "一致性",
+      "definition": "评估中是否考察跨轮次行为是否稳定（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们评估了基于前5轮对话上下文生成的单个聊天机器人反思。更长上下文或对话记忆的整合能更精准地指示大型语言模型在多大程度上能够增加变化，使咨询环节更具吸引力，从而使用户愿意...",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未考察跨轮次行为稳定性，仅讨论上下文长度的影响。"
+    },
+    {
+      "row": 102,
+      "field": "Dataset_Available",
+      "field_cn": "数据集公开性",
+      "definition": "数据集是否公开可用（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "目前这些数据未公开发布。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "明确声明数据未公开发布。"
+    },
+    {
+      "row": 103,
+      "field": "Eval_Human_Experts",
+      "field_cn": "领域专家评估",
+      "definition": "领域专家（治疗师、临床医生、受过训练的标注员）是否参与评估（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "根据先前一项研究表明，非专家可以提供与MI专家一样可靠的反思评估（Wu等，2023），我们采用了非专家作为我们评估研究的参与者。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "使用非专家评估，而非领域专家。"
+    },
+    {
+      "row": 104,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "我们使用GPT-4、BLOOM和FLAN-T5模型，基于通过旨在支持戒烟和性健康的聊天机器人收集的真实对话数据，生成动机性访谈式反思。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "使用了多个模型（GPT-4、BLOOM、FLAN-T5）和真实对话数据，进行了不同条件测试。"
+    },
+    {
+      "row": 105,
+      "field": "Reliability_Reported",
+      "field_cn": "信度系数报告",
+      "definition": "是否报告了标准化评估者间信度系数（如 Cohen's kappa, ICC）: Yes / No / N/A。注意：仅报告百分比一致不算",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "单因素方差分析显示，所有四个标准均具有显著效应（适当性：F(3, 184) = 29.956, p < 0.001；具体性：F(3, 184) = 46.02, p < 0.001；自然度：F(3, 184) = 14.874, p < 0.001；参与度：F(3, 184) = 29.926, p < 0.001）。针对多重比较的Tukey HSD事后检验表明……",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "报告了ANOVA和事后检验，但未报告Kappa或ICC等标准化信度系数。"
+    },
+    {
+      "row": 106,
+      "field": "Sim_Behavior_Realistic",
+      "field_cn": "模拟行为真实性",
+      "definition": "模拟行为是否真实可信（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们定义了自然性标准，即回应是否听起来像是由人所说。……BLOOM和FLAN-T5模型经常生成重复序列，我们在后续处理步骤中自动将其缩减为最简形式。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "定义了自然性标准并评估了模型输出的真实感，涉及模拟行为真实性。"
+    },
+    {
+      "row": 107,
+      "field": "Theory_Grounding",
+      "field_cn": "理论支撑度",
+      "definition": "理论支撑度: Strong（明确使用公认理论来定义或测量）/ Weak（提及了概念但未在评估中实际操作化）/ None（没有真正的理论支撑）",
+      "cxt_value": "STRONG",
+      "hyh_value": "WEAK",
+      "original_evidence": "动机性访谈（MI）是一种旨在促进行为改变的咨询风格，咨询师通过处理并解决个体的矛盾心理，引导他们激发内在动机（Miller and Rollnick, 2012）。MI咨询师运用的一项关键技术是反思性...",
+      "cxt_evidence": "",
+      "corrected_judgment": "STRONG",
+      "reason": "明确基于动机访谈（MI）理论，并引用了经典文献。"
+    },
+    {
+      "row": 108,
+      "field": "Theory_Operationalized",
+      "field_cn": "理论操作化程度",
+      "definition": "理论操作化程度: Strong（评估标准明确源于理论）/ Partial（理论被提及并部分操作化）/ Mentioned（理论仅被提及，未操作化）/ None（没有使用任何理论）",
+      "cxt_value": "STRONG",
+      "hyh_value": "PARTIAL",
+      "original_evidence": "咨询研究表明，参与度与积极治疗结果和改善之间存在直接关系（Boardman et al., 2006）。",
+      "cxt_evidence": "",
+      "corrected_judgment": "PARTIAL",
+      "reason": "提及理论（咨询研究）但评估标准未完全源于该理论，仅部分操作化。"
+    },
+    {
+      "row": 109,
+      "field": "Uses_Standard_Metrics",
+      "field_cn": "标准指标使用",
+      "definition": "是否使用了标准/公认的评估指标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们采用了一种7点对称李克特量表，从非常不同意（-3）到非常同意（3）（Amidei et al., 2019）。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "使用了7点李克特量表这一公认评估指标，并引用了相关文献。"
+    }
+  ]
+}

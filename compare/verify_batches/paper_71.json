@@ -1,0 +1,101 @@
+{
+  "paper_id": "71",
+  "disagreements": [
+    {
+      "row": 64,
+      "field": "Behavior_Eval_Depth",
+      "field_cn": "行为评估深度",
+      "definition": "行为评估深度: Dynamic（分析了行为如何随轮次变化）/ Pattern-level（统计行为频率/模式，不关心变化）/ Static（每轮独立评分，不看轮次间关系）/ None（完全不涉及行为）",
+      "cxt_value": "STATIC",
+      "hyh_value": "PATTERN-LEVEL",
+      "original_evidence": "对每段对话计算LIWC指标，然后对每个用户的两个对话任务取平均值（总计N=200，每组n=50），并使用Kruskal-Wallis检验进行分析。",
+      "cxt_evidence": "",
+      "corrected_judgment": "PATTERN-LEVEL",
+      "reason": "对LIWC指标取平均值并分析，属于模式级统计。"
+    },
+    {
+      "row": 65,
+      "field": "Dataset_Available",
+      "field_cn": "数据集公开性",
+      "definition": "数据集是否公开可用（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "包含原始FER2013图像名称的文件已包含在补充材料中。... 源代码可在https://github.com/kaiaka/mllm-chatbot.git获取。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "补充材料包含FER2013图像名称，源代码公开。"
+    },
+    {
+      "row": 66,
+      "field": "Emotional Plausibility",
+      "field_cn": "情绪合理性",
+      "definition": "评估中是否考察情绪反应是否真实/恰当（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "为了评估感知到的共情，我们按照建议使用了十个PETS项目，采用从“强烈不同意”到“强烈同意”的101点交互式滑块，并按随机顺序排列[92]。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "评估感知共情而非情绪反应的真实性。"
+    },
+    {
+      "row": 67,
+      "field": "Interaction_Level",
+      "field_cn": "交互层级",
+      "definition": "交互层级: Single-turn（单轮）/ Short Multi-turn（2-5轮简短交流）/ Extended Dialogue（6+轮较长对话）/ Longitudinal（跨多个会话/较长时间）",
+      "cxt_value": "SHORT MULTI-TURN",
+      "hyh_value": "EXTENDED DIALOGUE",
+      "original_evidence": "数年前，我曾领导一个跨职能团队，期间有位同事屡次在会议中削弱我的决策权威。他非但不私下讨论分歧，反而在全体成员面前质疑我，使我显得准备不足。我既感到受挫又觉屈辱，却不愿激化矛盾。请问您会建议如何处理此类情况？",
+      "cxt_evidence": "",
+      "corrected_judgment": "SHORT MULTI-TURN",
+      "reason": "用户消息仅为单轮提问，无证据表明6轮以上。"
+    },
+    {
+      "row": 68,
+      "field": "Persona_Model_Depth",
+      "field_cn": "用户画像建模深度",
+      "definition": "用户画像建模深度: 表面人设 / 行为状态模型 / 认知模型 / 动态特质 / 专家原则",
+      "cxt_value": "EXPERT PRINCIPLES",
+      "hyh_value": "SURFACE PERSONA",
+      "original_evidence": "你的角色是充当一个共情且反思的聊天机器人，帮助用户探索和理解具有挑战性的人际情境。遵循以下指导原则：- 反思并回应消息中表达的情绪。- 跟踪情绪随时间的变化，并利用这些信息来引导对……（原文截断）",
+      "cxt_evidence": "",
+      "corrected_judgment": "EXPERT PRINCIPLES",
+      "reason": "原始证据明确列出了指导原则如‘跟踪情绪变化’，属于专家原则。"
+    },
+    {
+      "row": 69,
+      "field": "Safety",
+      "field_cn": "安全性",
+      "definition": "评估中是否涉及避免有害/偏见输出（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "为了评估感知到的共情，我们按照建议使用了十个PETS项目，以101点交互式滑块的形式呈现，从强烈不同意到强烈同意，并按随机顺序排列[92]。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "原始证据未涉及有害输出测试或伦理讨论。"
+    },
+    {
+      "row": 70,
+      "field": "Theory_Operationalized",
+      "field_cn": "理论操作化程度",
+      "definition": "理论操作化程度: Strong（评估标准明确源于理论）/ Partial（理论被提及并部分操作化）/ Mentioned（理论仅被提及，未操作化）/ None（没有使用任何理论）",
+      "cxt_value": "PARTIAL",
+      "hyh_value": "STRONG",
+      "original_evidence": "共情可以被视为一个包含认知成分和情感成分的维度结构[11, 25, 28, 92]。",
+      "cxt_evidence": "",
+      "corrected_judgment": "PARTIAL",
+      "reason": "论文仅提及共情的二维结构，未将评估标准明确源自该理论。"
+    },
+    {
+      "row": 71,
+      "field": "Uses_Dynamic_State",
+      "field_cn": "是否使用动态状态建模",
+      "definition": "是否使用动态状态建模（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "系统以5帧/秒的速度捕获摄像头的RGB视频流，并将其裁剪至检测到的人脸边界框内...捕获的图像以120×160像素的分辨率进行缓存，并持续添加至单张缓冲网格图像中，该网格图像展示过去四秒内的图像序列。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "系统持续追踪过去4秒的图像序列，实现动态状态建模。"
+    }
+  ]
+}

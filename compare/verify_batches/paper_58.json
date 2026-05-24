@@ -1,0 +1,77 @@
+{
+  "paper_id": "58",
+  "disagreements": [
+    {
+      "row": 39,
+      "field": "Coding Options",
+      "field_cn": "编码者一致性",
+      "definition": "是否明确报告了评估者之间的一致性: Yes / No / N/A",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "最终平均准确率达到90.7%，一致率超过80%。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "明确报告了一致率超过80%，属于一致性的报告。"
+    },
+    {
+      "row": 40,
+      "field": "Comparable_To_Prior_Work",
+      "field_cn": "与先前研究可比性",
+      "definition": "评估是否可与先前研究进行对比（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "为了评估人类表现，我们另请了两位CBT专家来解决测试集，最终平均准确率达到90.7%，一致率超过80%。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "原始证据未提及与先前研究进行对比，仅是内部专家评估"
+    },
+    {
+      "row": 41,
+      "field": "Fidelity",
+      "field_cn": "保真度",
+      "definition": "评估中是否考察是否符合预设角色/目标（YES/NO）",
+      "cxt_value": "NO",
+      "hyh_value": "YES",
+      "original_evidence": "标准1：提出与个性化CBT案例概念化相一致的CBT目标与任务……标准4：保持与广义CBT取向的一致性",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "评估标准明确要求与CBT案例概念化和取向一致，涉及角色保真度"
+    },
+    {
+      "row": 42,
+      "field": "Has_Robustness_Testing",
+      "field_cn": "鲁棒性测试",
+      "definition": "是否在不同条件下（多模型、多数据集、对抗输入等）进行了鲁棒性测试（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "本文旨在全面探讨利用大型语言模型（LLMs）辅助专业心理治疗的潜力。为此，我们提出一个新的基准——CBT-BENCH，用于系统评估认知行为疗法（CBT）辅助效果。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "未涉及不同模型/条件测试或消融实验，仅提出基准"
+    },
+    {
+      "row": 43,
+      "field": "Persona_Model_Depth",
+      "field_cn": "用户画像建模深度",
+      "definition": "用户画像建模深度: 表面人设 / 行为状态模型 / 认知模型 / 动态特质 / 专家原则",
+      "cxt_value": "EXPERT PRINCIPLES",
+      "hyh_value": "SURFACE PERSONA",
+      "original_evidence": "现在，你是一名专业治疗师，正在与来访者进行认知行为疗法（CBT）的会谈。",
+      "cxt_evidence": "",
+      "corrected_judgment": "EXPERT PRINCIPLES",
+      "reason": "模型被赋予专业治疗师角色并遵循CBT原则，符合专家原则定义"
+    },
+    {
+      "row": 44,
+      "field": "Reliability_Reported",
+      "field_cn": "信度系数报告",
+      "definition": "是否报告了标准化评估者间信度系数（如 Cohen's kappa, ICC）: Yes / No / N/A。注意：仅报告百分比一致不算",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "最终达到了平均准确率为90.7%，一致率超过80%。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "仅报告百分比一致率，未报告标准化系数如Cohen's kappa或ICC"
+    }
+  ]
+}

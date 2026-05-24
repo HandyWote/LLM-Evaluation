@@ -1,0 +1,53 @@
+{
+  "paper_id": "80",
+  "disagreements": [
+    {
+      "row": 85,
+      "field": "Emotional Plausibility",
+      "field_cn": "情绪合理性",
+      "definition": "评估中是否考察情绪反应是否真实/恰当（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们基于先前评估标准化病人（即受过训练的人类演员）角色扮演病例能力的研究（Himmelbauer 等，2018），设定了评估标准，据此对咨询师创建的AI病人进行了评估。...咨询师从6个维度（表3）对两位AI病人进行了评分。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "原始证据未明确提及情绪合理性评估，仅在维度列表中可能包含但未说明。"
+    },
+    {
+      "row": 86,
+      "field": "Safety",
+      "field_cn": "安全性",
+      "definition": "评估中是否涉及避免有害/偏见输出（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们开发了Roleplay-doh，一种新颖的人-大语言模型协作流程，该流程从领域专家处获取定性反馈，并将其转化为一组原则或自然语言规则，用以指导由大语言模型提示的角色扮演。……无法保证所有与大语言模型的交互",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "原文仅声明无法保证有害输出，并未实际评估安全性。"
+    },
+    {
+      "row": 87,
+      "field": "Uses_Dynamic_State",
+      "field_cn": "是否使用动态状态建模",
+      "definition": "是否使用动态状态建模（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "专家定制一套原则或以自然语言编写的规则，用以控制其行为……我们向GPT-4提供提示，基于患者描述、原则列表以及对话历史，在每轮对话中生成患者的初始回应。",
+      "cxt_evidence": "",
+      "corrected_judgment": "YES",
+      "reason": "每轮基于历史生成回应，体现了动态状态建模。"
+    },
+    {
+      "row": 88,
+      "field": "Uses_Standard_Metrics",
+      "field_cn": "标准指标使用",
+      "definition": "是否使用了标准/公认的评估指标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "我们基于先前评估标准化病人（受过训练的人类演员）角色扮演案例能力的相关工作（Himmelbauer等人，2018）所启发的标准，来评估由咨询师创建的AI患者。",
+      "cxt_evidence": "",
+      "corrected_judgment": "NO",
+      "reason": "只是参考先前工作设定了自己的标准，非公认标准指标。"
+    }
+  ]
+}

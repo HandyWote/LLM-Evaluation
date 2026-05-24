@@ -1,0 +1,17 @@
+{
+  "paper_id": "1",
+  "disagreements": [
+    {
+      "row": 0,
+      "field": "Eval_Automatic",
+      "field_cn": "自动指标评估",
+      "definition": "是否使用算法/数学公式自动计算的指标（YES/NO）",
+      "cxt_value": "YES",
+      "hyh_value": "NO",
+      "original_evidence": "治疗师的回复从三个方面（共情、逻辑连贯性和引导）以及一个总体分数进行评估（Larsson et al., 2016），每个评估指标分数范围从0到3。",
+      "cxt_evidence": "关于AI治疗师，我们采用双重评估方法：人工评估与自动评估。我们的领域专家合著者设计",
+      "corrected_judgment": "NO",
+      "reason": "人打分后算指标，不是算法自动计算"
+    }
+  ]
+}
