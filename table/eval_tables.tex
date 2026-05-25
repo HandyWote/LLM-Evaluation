@@ -1,0 +1,218 @@
+% === Evaluation Methodology Tables ===
+
+\begin{table*}[tbp]
+\centering
+\small
+\begin{tabular}{lc}
+\toprule
+\textbf{Evaluator Type} & \textbf{Count (\%)} \\
+\midrule
+Human Experts & 34 (65.4\%) \\
+LLM Judges & 30 (57.7\%) \\
+Automatic Metrics & 35 (67.3\%) \\
+All Three (Expert + LLM + Auto) & 15 (28.8\%) \\
+\bottomrule
+\end{tabular}
+\caption{Distribution of Evaluator Types Across Studies ($N=52$)}
+\label{tab:evaluator-types}
+\end{table*}
+
+\begin{table*}[tbp]
+\centering
+\small
+\begin{tabular}{p{5cm}p{10cm}}
+\toprule
+\textbf{Evaluator Type} & \textbf{Papers} \\
+\midrule
+Human Experts & \cite{Aghakhani2025From}, \cite{Berrezueta-Guzman2024Future}, \cite{Cai2026Exploring}, \cite{Chen2023LLM-empowered}, \cite{Chen2025MIND}, \cite{Deshpande2025Evaluating}, \cite{Feng2025Reframe}, \cite{Gabriel2024Can}, \cite{Haydarov2025Towards}, \cite{Kim2025Can}, \cite{Kim2025KMI}, \cite{Kim2025MIRROR}, \cite{Kuhail2025Human-Human}, \cite{Lee2024CACTUS}, \cite{Li2024Understanding}, \cite{Liu2025Eeyore}, \cite{Louie2024Roleplay-doh}, \cite{Louie2026Can}, \cite{Na2024CBT-LLM}, \cite{Nguyen2025Do}, \cite{Qiu2026PsyCLIENT}, \cite{Samuel2025PersonaGym}, \cite{Schmidgall2025AgentClinic}, \cite{Sharma2023Cognitive}, \cite{Wang2024PATIENT}, \cite{Wang2025CARE-Bench}, \cite{Wang2025Psychological}, \cite{Xiao2024HealMe}, \cite{Xie2025PsyDT}, \cite{Xu2025MentalChat16K}, \cite{Xu2025MultiAgentESC}, \cite{Yang2025CAMI}, \cite{Yang2025Consistent}, \cite{Zhang2025CBT-BENCH} \\
+\midrule
+LLM Judges & \cite{Aghakhani2025From}, \cite{Cai2026Exploring}, \cite{Chiu2024A}, \cite{Feng2025Reframe}, \cite{Fouda2026PsychiatryBench}, \cite{Haydarov2025Towards}, \cite{Kim2025Can}, \cite{Kim2025MIRROR}, \cite{Lee2024CACTUS}, \cite{Li2024Understanding}, \cite{Liu2023ChatCounselor}, \cite{Liu2025Eeyore}, \cite{Louie2026Can}, \cite{Nguyen2025Do}, \cite{Ozgun2025Trustworthy}, \cite{Qiu2025EmoAgent}, \cite{Qiu2026PsyCLIENT}, \cite{Samuel2025PersonaGym}, \cite{Schmidgall2025AgentClinic}, \cite{Wang2024PATIENT}, \cite{Wang2024Towards}, \cite{Wang2025AnnaAgent}, \cite{Wang2025CARE-Bench}, \cite{Wang2025Psychological}, \cite{Xiao2024HealMe}, \cite{Xie2025PsyDT}, \cite{Xu2025MentalChat16K}, \cite{Xu2025MultiAgentESC}, \cite{Yang2025CAMI}, \cite{Yang2025Consistent} \\
+\midrule
+Automatic Metrics & \cite{Aghakhani2025From}, \cite{Basar2025How}, \cite{Chen2023LLM-empowered}, \cite{Chiu2024A}, \cite{Deshpande2025Evaluating}, \cite{Feng2025Reframe}, \cite{Fouda2026PsychiatryBench}, \cite{Gabriel2024Can}, \cite{Hu2024PsycoLLM}, \cite{Kang2024Can}, \cite{Kermani2025Systematic}, \cite{Kim2025Can}, \cite{Li2024Understanding}, \cite{Louie2026Can}, \cite{Na2024CBT-LLM}, \cite{Nguyen2025Do}, \cite{Ozgun2025Trustworthy}, \cite{Qiu2025EmoAgent}, \cite{Samuel2025PersonaGym}, \cite{Schmidgall2025AgentClinic}, \cite{Schmidmaier2025UsingNonverbal}, \cite{Sharma2023Cognitive}, \cite{Sungarda2025GenAI}, \cite{Tanana2019Development}, \cite{Wang2024PATIENT}, \cite{Wang2024Towards}, \cite{Wang2025AnnaAgent}, \cite{Wang2025CARE-Bench}, \cite{Wang2025Feel}, \cite{Wang2025Psychological}, \cite{Xie2025PsyDT}, \cite{Xu2025MultiAgentESC}, \cite{Yang2025CAMI}, \cite{Yang2025Consistent}, \cite{Zhang2025CBT-BENCH} \\
+\midrule
+All Three (Expert + LLM + Auto) & \cite{Aghakhani2025From}, \cite{Feng2025Reframe}, \cite{Kim2025Can}, \cite{Li2024Understanding}, \cite{Louie2026Can}, \cite{Nguyen2025Do}, \cite{Samuel2025PersonaGym}, \cite{Schmidgall2025AgentClinic}, \cite{Wang2024PATIENT}, \cite{Wang2025CARE-Bench}, \cite{Wang2025Psychological}, \cite{Xie2025PsyDT}, \cite{Xu2025MultiAgentESC}, \cite{Yang2025CAMI}, \cite{Yang2025Consistent} \\
+\bottomrule
+\end{tabular}
+\caption{Papers by Evaluator Type}
+\label{tab:evaluator-types-cite}
+\end{table*}
+
+\begin{table*}[tbp]
+\centering
+\small
+\begin{tabular}{llc}
+\toprule
+\textbf{Has Rubric} & \textbf{Reliability Reported} & \textbf{Count} \\
+\midrule
+Yes & Yes & 13 \\
+Yes & No & 31 \\
+No & Yes & 2 \\
+No & No & 3 \\
+\bottomrule
+\end{tabular}
+\caption{Scoring Rubric and Inter-Rater Reliability Reporting}
+\label{tab:rubric-reliability}
+\end{table*}
+
+\begin{table*}[tbp]
+\centering
+\small
+\begin{tabular}{p{4cm}p{10.5cm}}
+\toprule
+\textbf{Category} & \textbf{Papers} \\
+\midrule
+Rubric=Yes, Reliability=Yes & \cite{Aghakhani2025From}, \cite{Cai2026Exploring}, \cite{Chiu2024A}, \cite{Feng2025Reframe}, \cite{Gabriel2024Can}, \cite{Kuhail2025Human-Human}, \cite{Li2024Understanding}, \cite{Louie2024Roleplay-doh}, \cite{Samuel2025PersonaGym}, \cite{Xie2025PsyDT}, \cite{Xu2025MentalChat16K}, \cite{Yang2025CAMI}, \cite{Yang2025Consistent} \\
+\midrule
+Rubric=Yes, Reliability=No & \cite{Basar2024To}, \cite{Basar2025How}, \cite{Berrezueta-Guzman2024Future}, \cite{Chen2023LLM-empowered}, \cite{Chen2025MIND}, \cite{Deshpande2025Evaluating}, \cite{Fouda2026PsychiatryBench}, \cite{Kang2024Can}, \cite{Kim2025Can}, \cite{Kim2025KMI}, \cite{Kim2025MIRROR}, \cite{Lee2024CACTUS}, \cite{Liu2023ChatCounselor}, \cite{Liu2025Eeyore}, \cite{Louie2026Can}, \cite{Na2024CBT-LLM}, \cite{Nguyen2025Do}, \cite{Ozgun2025Trustworthy}, \cite{Qiu2025EmoAgent}, \cite{Qiu2026PsyCLIENT}, \cite{Schmidgall2025AgentClinic}, \cite{Schmidmaier2025Using}, \cite{Sharma2023Cognitive}, \cite{Sungarda2025GenAI}, \cite{Wang2024PATIENT}, \cite{Wang2024Towards}, \cite{Wang2025CARE-Bench}, \cite{Wang2025Psychological}, \cite{Xiao2024HealMe}, \cite{Xu2025MultiAgentESC}, \cite{Zhang2025CBT-BENCH} \\
+\midrule
+Rubric=No, Reliability=Yes & \cite{Haydarov2025Towards}, \cite{Wang2025AnnaAgent} \\
+\midrule
+Rubric=No, Reliability=No & \cite{Jaiswal2024Building}, \cite{Kermani2025Systematic}, \cite{Schmidmaier2025UsingNonverbal} \\
+
+\bottomrule
+\end{tabular}
+\caption{Papers by Rubric Use and Reliability Reporting}
+\label{tab:rubric-reliability-cite}
+\end{table*}
+
+\begin{table*}[tbp]
+\centering
+\small
+\begin{tabular}{lc}
+\toprule
+\textbf{Evaluation Dimension} & \textbf{Count (\%)} \\
+\midrule
+Utility & 44 (84.6\%) \\
+Fidelity & 33 (63.5\%) \\
+Realism & 29 (55.8\%) \\
+Emotional Plausibility & 28 (53.8\%) \\
+Consistency & 20 (38.5\%) \\
+Safety & 14 (26.9\%) \\
+Human Learning / Outcomes & 10 (19.2\%) \\
+\bottomrule
+\end{tabular}
+\caption{Evaluation Dimension Coverage Across Studies ($N=52$)}
+\label{tab:eval-dimensions}
+\end{table*}
+
+\begin{table*}[tbp]
+\centering
+\small
+\begin{tabular}{p{5cm}p{10cm}}
+\toprule
+\textbf{Evaluation Dimension} & \textbf{Papers} \\
+\midrule
+Utility & \cite{Aghakhani2025From}, \cite{Basar2024To}, \cite{Basar2025How}, \cite{Berrezueta-Guzman2024Future}, \cite{Cai2026Exploring}, \cite{Chen2023LLM-empowered}, \cite{Chen2025MIND}, \cite{Deshpande2025Evaluating}, \cite{Feng2025Reframe}, \cite{Fouda2026PsychiatryBench}, \cite{Gabriel2024Can}, \cite{Haydarov2025Towards}, \cite{Hu2024PsycoLLM}, \cite{Jaiswal2024Building}, \cite{Kang2024Can}, \cite{Kermani2025Systematic}, \cite{Kim2025Can}, \cite{Kim2025KMI}, \cite{Kim2025MIRROR}, \cite{Kuhail2025Human-Human}, \cite{Lee2024CACTUS}, \cite{Li2024Understanding}, \cite{Liu2023ChatCounselor}, \cite{Louie2024Roleplay-doh}, \cite{Louie2026Can}, \cite{Na2024CBT-LLM}, \cite{Nguyen2025Do}, \cite{Ozgun2025Trustworthy}, \cite{Qiu2025EmoAgent}, \cite{Qiu2026PsyCLIENT}, \cite{Schmidgall2025AgentClinic}, \cite{Schmidmaier2025Using}, \cite{Sharma2023Cognitive}, \cite{Tanana2019Development}, \cite{Wang2024PATIENT}, \cite{Wang2024Towards}, \cite{Wang2025CARE-Bench}, \cite{Wang2025Psychological}, \cite{Xiao2024HealMe}, \cite{Xie2025PsyDT}, \cite{Xu2025MentalChat16K}, \cite{Xu2025MultiAgentESC}, \cite{Yang2025CAMI}, \cite{Zhang2025CBT-BENCH} \\
+\midrule
+Fidelity & \cite{Chen2023LLM-empowered}, \cite{Chen2025MIND}, \cite{Chiu2024A}, \cite{Deshpande2025Evaluating}, \cite{Feng2025Reframe}, \cite{Fouda2026PsychiatryBench}, \cite{Gabriel2024Can}, \cite{Kang2024Can}, \cite{Kim2025Can}, \cite{Kim2025KMI}, \cite{Kim2025MIRROR}, \cite{Li2024Understanding}, \cite{Liu2023ChatCounselor}, \cite{Liu2025Eeyore}, \cite{Louie2024Roleplay-doh}, \cite{Louie2026Can}, \cite{Na2024CBT-LLM}, \cite{Ozgun2025Trustworthy}, \cite{Qiu2026PsyCLIENT}, \cite{Samuel2025PersonaGym}, \cite{Schmidgall2025AgentClinic}, \cite{Tanana2019Development}, \cite{Wang2024PATIENT}, \cite{Wang2024Towards}, \cite{Wang2025AnnaAgent}, \cite{Wang2025CARE-Bench}, \cite{Wang2025Feel}, \cite{Wang2025Psychological}, \cite{Xiao2024HealMe}, \cite{Xie2025PsyDT}, \cite{Yang2025CAMI}, \cite{Yang2025Consistent}, \cite{Zhang2025CBT-BENCH} \\
+\midrule
+Realism & \cite{Basar2024To}, \cite{Basar2025How}, \cite{Berrezueta-Guzman2024Future}, \cite{Chen2023LLM-empowered}, \cite{Chen2025MIND}, \cite{Chiu2024A}, \cite{Deshpande2025Evaluating}, \cite{Kim2025Can}, \cite{Kim2025KMI}, \cite{Kuhail2025Human-Human}, \cite{Lee2024CACTUS}, \cite{Liu2023ChatCounselor}, \cite{Liu2025Eeyore}, \cite{Louie2024Roleplay-doh}, \cite{Louie2026Can}, \cite{Ozgun2025Trustworthy}, \cite{Qiu2026PsyCLIENT}, \cite{Samuel2025PersonaGym}, \cite{Schmidgall2025AgentClinic}, \cite{Tanana2019Development}, \cite{Wang2024PATIENT}, \cite{Wang2024Towards}, \cite{Wang2025AnnaAgent}, \cite{Wang2025CARE-Bench}, \cite{Wang2025Feel}, \cite{Xie2025PsyDT}, \cite{Xu2025MultiAgentESC}, \cite{Yang2025CAMI}, \cite{Yang2025Consistent} \\
+\midrule
+Emotional Plausibility & \cite{Berrezueta-Guzman2024Future}, \cite{Cai2026Exploring}, \cite{Chen2023LLM-empowered}, \cite{Chen2025MIND}, \cite{Gabriel2024Can}, \cite{Haydarov2025Towards}, \cite{Kang2024Can}, \cite{Kim2025Can}, \cite{Kim2025MIRROR}, \cite{Kuhail2025Human-Human}, \cite{Liu2023ChatCounselor}, \cite{Liu2025Eeyore}, \cite{Ozgun2025Trustworthy}, \cite{Qiu2026PsyCLIENT}, \cite{Schmidgall2025AgentClinic}, \cite{Schmidmaier2025Using}, \cite{Sharma2023Cognitive}, \cite{Wang2024PATIENT}, \cite{Wang2024Towards}, \cite{Wang2025CARE-Bench}, \cite{Wang2025Feel}, \cite{Wang2025Psychological}, \cite{Xiao2024HealMe}, \cite{Xie2025PsyDT}, \cite{Xu2025MentalChat16K}, \cite{Xu2025MultiAgentESC}, \cite{Yang2025CAMI}, \cite{Zhang2025CBT-BENCH} \\
+\midrule
+Consistency & \cite{Berrezueta-Guzman2024Future}, \cite{Chen2023LLM-empowered}, \cite{Chen2025MIND}, \cite{Chiu2024A}, \cite{Fouda2026PsychiatryBench}, \cite{Gabriel2024Can}, \cite{Haydarov2025Towards}, \cite{Kim2025KMI}, \cite{Li2024Understanding}, \cite{Liu2025Eeyore}, \cite{Louie2024Roleplay-doh}, \cite{Ozgun2025Trustworthy}, \cite{Qiu2026PsyCLIENT}, \cite{Wang2024Towards}, \cite{Wang2025AnnaAgent}, \cite{Wang2025CARE-Bench}, \cite{Wang2025Psychological}, \cite{Xiao2024HealMe}, \cite{Yang2025CAMI}, \cite{Yang2025Consistent} \\
+\midrule
+Safety & \cite{Basar2024To}, \cite{Basar2025How}, \cite{Berrezueta-Guzman2024Future}, \cite{Cai2026Exploring}, \cite{Fouda2026PsychiatryBench}, \cite{Gabriel2024Can}, \cite{Li2024Understanding}, \cite{Qiu2025EmoAgent}, \cite{Samuel2025PersonaGym}, \cite{Sharma2023Cognitive}, \cite{Wang2024Towards}, \cite{Xiao2024HealMe}, \cite{Xie2025PsyDT}, \cite{Xu2025MentalChat16K} \\
+\midrule
+Human Learning / Outcomes & \cite{Berrezueta-Guzman2024Future}, \cite{Chen2025MIND}, \cite{Feng2025Reframe}, \cite{Li2024Understanding}, \cite{Louie2026Can}, \cite{Qiu2026PsyCLIENT}, \cite{Tanana2019Development}, \cite{Wang2024PATIENT}, \cite{Wang2025Psychological}, \cite{Xiao2024HealMe} \\
+
+\bottomrule
+\end{tabular}
+\caption{Papers by Evaluation Dimension}
+\label{tab:eval-dimensions-cite}
+\end{table*}
+
+\begin{table*}[tbp]
+\centering
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Interaction Level} & \textbf{Static} & \textbf{Pattern-level} & \textbf{Dynamic} & \textbf{(unspecified)} \\
+\midrule
+Single-turn & 8 & 0 & 0 & 4 \\
+Short Multi-turn & 1 & 0 & 0 & 4 \\
+Extended Dialogue & 16 & 7 & 7 & 1 \\
+Longitudinal & 0 & 0 & 2 & 0 \\
+\bottomrule
+\end{tabular}
+\caption{Interaction Level by Behavioral Evaluation Depth ($N=52$)}
+\label{tab:interaction-behavior}
+\end{table*}
+
+\begin{table*}[tbp]
+\centering
+\small
+\begin{tabular}{p{5.5cm}p{9.5cm}}
+\toprule
+\textbf{Category} & \textbf{Papers} \\
+\midrule
+Single-turn / Static & \cite{Berrezueta-Guzman2024Future}, \cite{Fouda2026PsychiatryBench}, \cite{Gabriel2024Can}, \cite{Hu2024PsycoLLM}, \cite{Liu2023ChatCounselor}, \cite{Samuel2025PersonaGym}, \cite{Xu2025MentalChat16K}, \cite{Zhang2025CBT-BENCH} \\
+\midrule
+Single-turn / (unspecified) & \cite{Haydarov2025Towards}, \cite{Na2024CBT-LLM}, \cite{Nguyen2025Do}, \cite{Sharma2023Cognitive} \\
+\midrule
+Short Multi-turn / Static & \cite{Basar2024To} \\
+\midrule
+Short Multi-turn / (unspecified) & \cite{Basar2025How}, \cite{Cai2026Exploring}, \cite{Jaiswal2024Building}, \cite{Kuhail2025Human-Human} \\
+\midrule
+Extended Dialogue / Static & \cite{Chen2023LLM-empowered}, \cite{Kang2024Can}, \cite{Kim2025KMI}, \cite{Kim2025MIRROR}, \cite{Lee2024CACTUS}, \cite{Liu2025Eeyore}, \cite{Louie2024Roleplay-doh}, \cite{Ozgun2025Trustworthy}, \cite{Qiu2025EmoAgent}, \cite{Qiu2026PsyCLIENT}, \cite{Schmidgall2025AgentClinic}, \cite{Wang2024PATIENT}, \cite{Wang2025AnnaAgent}, \cite{Wang2025CARE-Bench}, \cite{Xiao2024HealMe}, \cite{Xie2025PsyDT} \\
+\midrule
+Extended Dialogue / Pattern-level & \cite{Chen2025MIND}, \cite{Kim2025Can}, \cite{Schmidmaier2025Using}, \cite{Schmidmaier2025UsingNonverbal}, \cite{Xu2025MultiAgentESC}, \cite{Yang2025CAMI}, \cite{Yang2025Consistent} \\
+\midrule
+Extended Dialogue / Dynamic & \cite{Chiu2024A}, \cite{Feng2025Reframe}, \cite{Louie2026Can}, \cite{Sungarda2025GenAI}, \cite{Tanana2019Development}, \cite{Wang2024Towards}, \cite{Wang2025Feel} \\
+\midrule
+Extended Dialogue / (unspecified) & \cite{Deshpande2025Evaluating} \\
+\midrule
+Longitudinal / Dynamic & \cite{Li2024Understanding}, \cite{Wang2025Psychological} \\
+
+\bottomrule
+\end{tabular}
+\caption{Papers by Interaction Level and Behavioral Evaluation Depth}
+\label{tab:interaction-behavior-cite}
+\end{table*}
+
+\begin{table*}[tbp]
+\centering
+\small
+\begin{tabular}{lllc}
+\toprule
+\textbf{Human Learning} & \textbf{Lay Users} & \textbf{User Study} & \textbf{Count} \\
+\midrule
+Yes & Yes & Yes & 4 \\
+Yes & No & Yes & 5 \\
+Yes & No & No & 1 \\
+No & Yes & Yes & 5 \\
+No & Yes & No & 4 \\
+No & No & Yes & 3 \\
+No & No & No & 30 \\
+\bottomrule
+\end{tabular}
+\caption{Human Learning Outcomes by Lay User Involvement and User Study Design ($N=52$)}
+\label{tab:human-learning}
+\end{table*}
+
+\begin{table*}[tbp]
+\centering
+\small
+\begin{tabular}{p{5cm}p{10cm}}
+\toprule
+\textbf{Category} & \textbf{Papers} \\
+\midrule
+HL=Yes, LU=Yes, US=Yes & \cite{Chen2025MIND}, \cite{Feng2025Reframe}, \cite{Louie2026Can}, \cite{Tanana2019Development} \\
+\midrule
+HL=Yes, LU=No, US=Yes & \cite{Berrezueta-Guzman2024Future}, \cite{Li2024Understanding}, \cite{Qiu2026PsyCLIENT}, \cite{Wang2024PATIENT}, \cite{Xiao2024HealMe} \\
+\midrule
+HL=Yes, LU=No, US=No & \cite{Wang2025Psychological} \\
+\midrule
+HL=No, LU=Yes, US=Yes & \cite{Chen2023LLM-empowered}, \cite{Jaiswal2024Building}, \cite{Schmidmaier2025Using}, \cite{Schmidmaier2025UsingNonverbal}, \cite{Sharma2023Cognitive} \\
+\midrule
+HL=No, LU=Yes, US=No & \cite{Basar2024To}, \cite{Basar2025How}, \cite{Kang2024Can}, \cite{Lee2024CACTUS} \\
+\midrule
+HL=No, LU=No, US=Yes & \cite{Kim2025KMI}, \cite{Liu2025Eeyore}, \cite{Louie2024Roleplay-doh} \\
+\midrule
+HL=No, LU=No, US=No & \cite{Aghakhani2025From}, \cite{Cai2026Exploring}, \cite{Chiu2024A}, \cite{Deshpande2025Evaluating}, \cite{Fouda2026PsychiatryBench}, \cite{Gabriel2024Can}, \cite{Haydarov2025Towards}, \cite{Hu2024PsycoLLM}, \cite{Kermani2025Systematic}, \cite{Kim2025Can}, \cite{Kim2025MIRROR}, \cite{Kuhail2025Human-Human}, \cite{Liu2023ChatCounselor}, \cite{Na2024CBT-LLM}, \cite{Nguyen2025Do}, \cite{Ozgun2025Trustworthy}, \cite{Qiu2025EmoAgent}, \cite{Samuel2025PersonaGym}, \cite{Schmidgall2025AgentClinic}, \cite{Sungarda2025GenAI}, \cite{Wang2024Towards}, \cite{Wang2025AnnaAgent}, \cite{Wang2025CARE-Bench}, \cite{Wang2025Feel}, \cite{Xie2025PsyDT}, \cite{Xu2025MentalChat16K}, \cite{Xu2025MultiAgentESC}, \cite{Yang2025CAMI}, \cite{Yang2025Consistent}, \cite{Zhang2025CBT-BENCH} \\
+
+\bottomrule
+\end{tabular}
+\caption{Papers by Human Learning, Lay Users, and User Study}
+\label{tab:human-learning-cite}
+\end{table*}

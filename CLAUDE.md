@@ -3,10 +3,11 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## TOP RULES
-MUST USE SUPERPOWER
-ALWAYS SHOW ME SOME PLAN AND ALWAYS RECOMMAND THE LOWER TECH-DEBT ONE
+HAVE TO USE SUPERPOWER
 THINK ABOUT REUSE
-DONT COMMIT WITH CO-AUTHOR
+ASKING BEFORE DOING
+superpower's docs should directly put in docs/, not /superpower/plans or /specs.
+WHEN YOU WRITE COMMIT NOTES, DONT WRITE CO-AUTHOR-BY
 
 ## Project Overview
 

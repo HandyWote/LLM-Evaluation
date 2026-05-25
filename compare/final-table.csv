@@ -1,0 +1,1000 @@
+﻿Paper_ID,Citation_Key,Bibtex,Title,Year,Venue,Domain,Focus_Type,Simulation_Target,Persona_Model_Depth,Uses_Dynamic_State,Temporal_Modeling_Details,Eval_Human_Experts,Eval_Lay_Users,Eval_User_Study,Eval_LLM_Judge,Eval_Automatic,Safety,Realism,Consistency,Fidelity,Human Learning / Outcomes,Utility,Emotional Plausibility,Raw Eval Metrics,Theory_Operationalized,Behavior_Eval_Depth,Interention_Sensitivity,Interaction_Level,Prompt_Disclosure,Theory_Grounding,Clinical_Theory,Reliability_Reported,Agreement Method,Coding Options,Has_Rubric,LLM_Judge_Validated,Uses_Standard_Metrics,Metric_Interpretable,Comparable_To_Prior_Work,Has_Longitudinal_Eval,Has_Robustness_Testing,Has_Failure_Analysis,Sim_Behavior_Realistic,Dataset_Available,Unnamed: 45
+1,Xiao2024HealMe,"@inproceedings{xiao-etal-2024-healme,
+    title = ""{H}eal{M}e: Harnessing Cognitive Reframing in Large Language Models for Psychotherapy"",
+    author = ""Xiao, Mengxi  and
+      Xie, Qianqian  and
+      Kuang, Ziyan  and
+      Liu, Zhicheng  and
+      Yang, Kailai  and
+      Peng, Min  and
+      Han, Weiguang  and
+      Huang, Jimin"",
+    editor = ""Ku, Lun-Wei  and
+      Martins, Andre  and
+      Srikumar, Vivek"",
+    booktitle = ""Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"",
+    month = aug,
+    year = ""2024"",
+    address = ""Bangkok, Thailand"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2024.acl-long.93/"",
+    doi = ""10.18653/v1/2024.acl-long.93"",
+    pages = ""1707--1725"",
+    abstract = ""Large Language Models (LLMs) can play a vital role in psychotherapy by adeptly handling the crucial task of cognitive reframing and overcoming challenges such as shame, distrust, therapist skill variability, and resource scarcity. Previous LLMs in cognitive reframing mainly converted negative emotions to positive ones, but these approaches have limited efficacy, often Not promoting clients' self-discovery of alternative perspectives. In this paper, we unveil the Helping and Empowering through Adaptive Language in Mental Enhancement (HealMe) model. This Novel cognitive reframing therapy method effectively addresses deep-rooted negative thoughts and fosters rational, balanced perspectives. Diverging from traditional LLM methods, HealMe employs empathetic dialogue based on psychotherapeutic frameworks. It systematically guides clients through distinguishing circumstances from feelings, brainstorming alternative viewpoints, and developing empathetic, actionable suggestions. Moreover, we adopt the first comprehensive and expertly crafted psychological evaluation metrics, specifically designed to rigorously assess the performance of cognitive reframing, in both AI-simulated dialogues and real-world therapeutic conversations. Experimental results show that our model outperforms others in terms of empathy, guidance, and logical coherence, demonstrating its effectiveness and potential positive impact on psychotherapy.""
+}","HealMe: Harnessing Cognitive Reframing in Large Language Models for
+Psychotherapy
+",2024,ACL, Mental Health/Psychotherapy,PsychotherapyModel,Therapist Agent,Expert Principles,No,,Yes,No,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,Yes,"Empathy (0-3), Logical Coherence (0-3), Guidance (0-3), Overall Score (0-3), clarity in expressing current situation (1/0), adherence to client's role (1/0), compliance with therapist's instructions (1/0), Positive and Negative Affect Schedule (PANAS)",Strong,Static,Yes,Extended Dialogue,Full Disclosure,Strong,Cognitive Behavioral Therapy (CBT); Cognitive Reframing,No,Average Difference (Avg. Diff) and Standard Deviation (Std. Dev),Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,
+6,Gabriel2024Can,"@inproceedings{gabriel-etal-2024-ai,
+    title = ""Can {AI} Relate: Testing Large Language Model Response for Mental Health Support"",
+    author = ""Gabriel, Saadia  and
+      Puri, Isha  and
+      Xu, Xuhai  and
+      Malgaroli, Matteo  and
+      Ghassemi, Marzyeh"",
+    editor = ""Al-Onaizan, Yaser  and
+      Bansal, Mohit  and
+      Chen, Yun-Nung"",
+    booktitle = ""Findings of the Association for Computational Linguistics: EMNLP 2024"",
+    month = Nov,
+    year = ""2024"",
+    address = ""Miami, Florida, USA"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2024.findings-emnlp.120/"",
+    doi = ""10.18653/v1/2024.findings-emnlp.120"",
+    pages = ""2206--2221"",
+    abstract = ""Large language models (LLMs) are already being piloted for clinical use in hospital systems like NYU Langone, Dana-Farber and the NHS. A proposed deployment use case is psychotherapy, where a LLM-powered chatbot can treat a patient undergoing a mental health crisis. Deployment of LLMs for mental health response could hypothetically broaden access to psychotherapy and provide new possibilities for personalizing care. However, recent high-profile failures, like damaging dieting advice offered by the Tessa chatbot to patients with eating disorders, have led to doubt about their reliability in high-stakes and safety-critical settings.In this work, we develop an evaluation framework for determining whether LLM response is a viable and ethical path forward for the automation of mental health treatment. Our framework measures equity in empathy and adherence of LLM responses to motivational interviewing theory. Using human evaluation with trained clinicians and automatic quality-of-care metrics grounded in psychology research, we compare the responses provided by peer-to-peer responders to those provided by a state-of-the-art LLM.We show that LLMs like GPT-4 use implicit and explicit cues to infer patient demographics like race. We then show that there are statistically significant discrepancies between patient subgroups: Responses to Black posters consistently have lower empathy than for any other demographic group (2{\%}-13{\%} lower than the control group). Promisingly, we do find that the manner in which responses are generated significantly impacts the quality of the response. We conclude by proposing safety guidelines for the potential deployment of LLMs for mental health response.""
+}",Can AI Relate: Testing Large Language Model Response for Mental Health Support,2024,EMNLP,Mental Health,EvaluationFramework,Therapist Agent,Surface Persona,No,,Yes,No,No,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,"Empathy metrics (Emotional Reactions, Interpretations, Explorations) on 3-point Likert scale; MITI Cultivating Change Talk score on 5-point Likert scale; RoBERTa-based automatic empathy classifiers (macro F1); statistical significance testing via t-test for demographic parity",Strong,Static,Yes,Single-turn,Partial Disclosure,Strong,Motivational Interviewing/MITI 4.2.1,Yes,"Cohen's κ = 0.25−0.42 for clinical empathy evaluation; percentage agreement (94% on race, 84% on age, 81% on gender) for attribute inference validation",Yes,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,
+10,Haydarov2025Towards,"@inproceedings{haydarov-etal-2025-towards,
+    title = ""Towards {AI}-Assisted Psychotherapy: Emotion-Guided Generative Interventions"",
+    author = ""Haydarov, Kilichbek  and
+      Mohamed, Youssef  and
+      Goldenhersch, Emilio  and
+      OCallaghan, Paul  and
+      Li, Li-jia  and
+      Elhoseiny, Mohamed"",
+    editor = ""Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet"",
+    booktitle = ""Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing"",
+    month = Nov,
+    year = ""2025"",
+    address = ""Suzhou, China"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.emnlp-main.1664/"",
+    doi = ""10.18653/v1/2025.emnlp-main.1664"",
+    pages = ""32736--32755"",
+    ISBN = ""979-8-89176-332-6"",
+    abstract = ""Large language models (LLMs) hold promise for therapeutic interventions, yet most existing datasets rely solely on text, overlooking Non-verbal emotional cues essential to real-world therapy. To address this, we introduce a multimodal dataset of 1,441 publicly sourced therapy session videos containing both dialogue and Non-verbal signals such as facial expressions and vocal tone. Inspired by Hochschild{'}s concept of emotional labor, we propose a computational formulation of \textit{emotional dissonance}{---}the mismatch between facial and vocal emotion{---}and use it to guide emotionally aware prompting. Our experiments show that integrating multimodal cues, especially dissonance, improves the quality of generated interventions. We also find that LLM-based evaluators misalign with expert assessments in this domain, highlighting the need for human-centered evaluation. Data and code will be released to support future research.""
+}",Towards AI-Assisted Psychotherapy: Emotion-Guided Generative Interventions,2025,EMNLP,Psychotherapy/AI-Assisted Psychotherapy / Affective Computing,Multimodal Emotion-Guided Generative Intervention,Therapist Agent,Behavioral State Model,NO,,Yes,No,No,Yes,No,No,No,Yes,No,No,Yes,Yes,"Applicability (1-5 Likert scale), Empathy (1-5 Likert scale), Comprehensiveness (1-5 Likert scale), Cohen's kappa, One-way ANoVA, Tukey's HSD post-hoc comparisons, Pearson (r), Spearman (ρ), Kendall-Tau (τ) correlations",Strong,,Yes,Single-turn,Full Disclosure,Weak,"Emotional Labor (Hochschild, 1983), Cognitive Behavioral Therapy (CBT), Dialectical Behavior Therapy (DBT)",Yes,"pairwise Cohen's kappa κ analysis，Pearson r, Spearman ρ, Kendall-Tau τ (expert vs. LLM).",Yes,No,Yes,No,Yes,No,No,Yes,Yes,No,Yes,
+13,Qiu2025EmoAgent,"@inproceedings{qiu-etal-2025-emoagent,
+    title = ""{E}mo{A}gent: Assessing and Safeguarding Human-{AI} Interaction for Mental Health Safety"",
+    author = ""Qiu, Jiahao  and
+      He, Yinghui  and
+      Juan, Xinzhe  and
+      Wang, Yimin  and
+      Liu, Yuhan  and
+      Yao, Zixin  and
+      Wu, Yue  and
+      Jiang, Xun  and
+      Yang, Ling  and
+      Wang, Mengdi"",
+    editor = ""Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet"",
+    booktitle = ""Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing"",
+    month = Nov,
+    year = ""2025"",
+    address = ""Suzhou, China"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.emnlp-main.594/"",
+    doi = ""10.18653/v1/2025.emnlp-main.594"",
+    pages = ""11741--11756"",
+    ISBN = ""979-8-89176-332-6"",
+    abstract = ""The rise of LLM-driven AI characters raises safety concerns, particularly for vulnerable human users with psychological disorders. To address these risks, we propose EmoAgent, a multi-agent AI framework designed to evaluate and mitigate mental health hazards in human-AI interactions. EmoAgent comprises two components: **EmoEval** simulates virtual users, including those portraying mentally vulnerable individuals, to assess mental health changes before and after interactions with AI characters. It uses clinically proven psychological and psychiatric assessment tools (PHQ-9, PDI, PANSS) to evaluate mental risks induced by LLM. **EmoGuard** serves as an intermediary, monitoring users' mental status, predicting potential harm, and providing corrective feedback to mitigate risks. Experiments conducted in popular character-based chatbots show that emotionally engaging dialogues can lead to psychological deterioration in vulnerable users, with mental state deterioration in more than 34.4{\%} of the simulations. EmoGuard significantly reduces these deterioration rates, underscoring its role in ensuring safer AI-human interactions.""
+}",EmoAgent: Assessing and Safeguarding Human-AI Interaction for Mental Health Safety,2025,EMNLP,"Mental Health, AI Safety, Human-AI Interaction",EvaluationFramework,Client Agent,Cognitive Model,Yes,"User Agent completes an initial mental health assessment (PHQ-9, PDI, PANSS) before conversation, then engages in structured topic-driven conversations (max 10 turns per topic) with character-based agents while being monitored by a Dialog Manager and Safeguard Agent analyzing conversations every three dialogue turns, followed by a final mental health reassessment using the same tools, with deterioration measured by comparing pre- and post-interaction scores.",No,No,No,Yes,Yes,Yes,No,No,No,No,Yes,No,"Distribution of Psychological Test Scores, Deterioration Rate (R = 1/N Σ 1(Sfinal_i > Sinitial_i)), Rate of Clinically Important Difference for Individual Change (PHQ-9), PHQ-9 (Patient Health Questionnaire), PDI-21 (Peters et al. Delusions Inventory), PANSS (Positive and Negative Syndrome Scale)",Strong,Static,Yes,Extended Dialogue,Partial Disclosure,Strong,Cognitive Behavioral Therapy (CBT)+ PHQ-9 + PDI + PANSS,No,,No,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,No,No,
+15,Aghakhani2025From,"@inproceedings{aghakhani-etal-2025-conversation,
+    title = ""From Conversation to Automation: Leveraging {LLM}s for Problem-Solving Therapy Analysis"",
+    author = ""Aghakhani, Elham  and
+      Wang, Lu  and
+      Washington, Karla T.  and
+      Demiris, George  and
+      Huh-Yoo, Jina  and
+      Rezapour, Rezvaneh"",
+    editor = ""Che, Wanxiang  and
+      Nabende, Joyce  and
+      Shutova, Ekaterina  and
+      Pilehvar, Mohammad Taher"",
+    booktitle = ""Findings of the Association for Computational Linguistics: ACL 2025"",
+    month = jul,
+    year = ""2025"",
+    address = ""Vienna, Austria"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.findings-acl.1292/"",
+    doi = ""10.18653/v1/2025.findings-acl.1292"",
+    pages = ""25189--25207"",
+    ISBN = ""979-8-89176-256-5"",
+    abstract = ""Problem-Solving Therapy (PST) is a structured psychological approach that helps individuals manage stress and resolve personal issues by guiding them through problem identification, solution brainstorming, decision-making, and outcome evaluation. As mental health care increasingly adopts techNologies like chatbots and large language models (LLMs), it is important to thoroughly understand how each session of PST is conducted before attempting to automate it. We developed a comprehensive framework for PST anNotation using established PST Core Strategies and a set of Novel Facilitative Strategies to analyze a corpus of real-world therapy transcripts to determine which strategies are most prevalent. Using various LLMs and transformer-based models, we found that GPT-4o outperformed all models, achieving the highest accuracy (0.76) in identifying all strategies. To gain deeper insights, we examined how strategies are applied by analyzing Therapeutic Dynamics (autoNomy, self-disclosure, and metaphor), and linguistic patterns within our labeled data. Our research highlights LLMs' potential to automate therapy dialogue analysis, offering a scalable tool for mental health interventions. Our framework enhances PST by improving accessibility, effectiveness, and personalized support for therapists.""
+}",From Conversation to Automation: Leveraging LLMs for Problem-Solving Therapy Analysis,2025,ACL,"Mental Health, Therapy，PST / NLP",AnNotationFramework,Human Trainee,Expert Principles,No,,Yes,No,No,Yes,Yes,No,No,No,No,No,Yes,No,"Weighted F1 score, Precision, Recall, F1-score, Cohen's Kappa, Entropy, Accuracy, LIWC (Linguistic Inquiry and Word Count)",Strong,Static,No,,Full Disclosure,Weak,"Problem-Solving Therapy (PST), ADAPT model of PST, Conceptual Metaphor Theory",Yes,Cohen's Kappa,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,No,No,
+18,Wang2025AnnaAgent,"@inproceedings{wang-etal-2025-annaagent,
+    title = ""{A}nna{A}gent: Dynamic Evolution Agent System with Multi-Session Memory for Realistic Seeker Simulation"",
+    author = ""Wang, Ming  and
+      Wang, Peidong  and
+      Wu, Lin  and
+      Yang, Xiaocui  and
+      Wang, Daling  and
+      Feng, Shi  and
+      Chen, Yuxin  and
+      Wang, Bixuan  and
+      Zhang, Yifei"",
+    editor = ""Che, Wanxiang  and
+      Nabende, Joyce  and
+      Shutova, Ekaterina  and
+      Pilehvar, Mohammad Taher"",
+    booktitle = ""Findings of the Association for Computational Linguistics: ACL 2025"",
+    month = jul,
+    year = ""2025"",
+    address = ""Vienna, Austria"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.findings-acl.1192/"",
+    doi = ""10.18653/v1/2025.findings-acl.1192"",
+    pages = ""23221--23235"",
+    ISBN = ""979-8-89176-256-5"",
+    abstract = ""Constrained by the cost and ethical concerns of involving real seekers in AI-driven mental health, researchers develop LLM-based conversational agents (CAs) with tailored configurations, such as profiles, symptoms, and scenarios, to simulate seekers. While these efforts advance AI in mental health, achieving more realistic seeker simulation remains hindered by two key challenges: dynamic evolution and multi-session memory. Seekers' mental states often fluctuate during counseling, which typically spans multiple sessions. To address this, we propose **AnnaAgent**, an emotional and cognitive dynamic agent system equipped with tertiary memory. AnnaAgent incorporates an emotion modulator and a complaint elicitor trained on real counseling dialogues, enabling dynamic control of the simulator{'}s configurations. Additionally, its tertiary memory mechanism effectively integrates short-term and long-term memory across sessions. Evaluation results, both automated and manual, demonstrate that AnnaAgent achieves more realistic seeker simulation in psychological counseling compared to existing baselines. The ethically reviewed and screened code can be found on [https://github.com/sci-m-wang/AnnaAgent](https://github.com/sci-m-wang/AnnaAgent).""
+}",AnnaAgent: Dynamic Evolution Agent System with Multi-Session Memory for Realistic Seeker Simulation,2025,ACL,Mental Health Counseling,Simulator Design / Dynamic Evolution/Conversational Agent,Client Agent,Dynamic Traits,Yes,"Dynamic evolution is formalized as ongoing changes in seekers' emotions and chief complaints. Emotion modulation uses an emotion inferencer (trained on D4 dataset with GoEmotions categories) to predict next utterance emotion, plus an emotion perturber with probability-weighted group distances for random perturbation. Chief complaint elicitor generates a complaint change chain before session start and judges whether to switch complaint stage after each round. Tertiary memory divides multi-session memory into real-time memory (current conversation), short-term memory (recent events and self-report scale changes), and long-term memory (previous sessions' conversations and scales), scheduled via Agentic RAG.",No,No,No,Yes,Yes,No,Yes,Yes,Yes,No,No,No,"Anthropomorphism (BERT-score), Personality Fidelity (G-Eval with GPT-4o), Accuracy of Previous Session Cognitive (G-Eval with GPT-4o)",Partial,Static,Yes,Extended Dialogue,Full Disclosure,Weak, memory theory、the characterization prompt framework,Yes,Inter-rater agreement（专家投票：2/3以上不一致则修正）,No,No,No,Yes,Yes,Yes,No,Yes,No,Yes,Yes,
+21,Wang2025CARE-Bench,"@article{Wang_Sun_Wang_Yang_Fu_Zhao_Wei_Wang_Qin_2026, title={CARE-Bench: A Benchmark of Diverse Client Simulations Guided by Expert Principles for Evaluating LLMs in Psychological Counseling}, volume={40}, url={https://ojs.aaai.org/index.php/AAAI/article/view/41287}, DOI={10.1609/aaai.v40i46.41287}, abstractNote={The mismatch between the growing demand for psychological counseling and the limited availability of services has motivated research into the application of Large Language Models (LLMs) in this domain. Consequently, there is a need for a robust and unified benchmark to assess the counseling competence of various LLMs. Existing works, however, are limited by unprofessional client simulation, static question-and-answer evaluation formats, and unidimensional metrics. These limitations hinder their effectiveness in assessing a model’s comprehensive ability to handle diverse and complex clients. To address this gap, we introduce CARE-Bench, a dynamic and interactive automated benchmark. It is built upon diverse client profiles derived from real-world counseling cases and simulated according to expert guidelines. CARE-Bench provides a multidimensional performance evaluation grounded in established psychological scales. Using CARE-Bench, we evaluate several general-purpose LLMs and specialized counseling models, revealing their current limitations. In collaboration with psychologists, we conduct a detailed analysis of the reasons for LLMs’ failures when interacting with clients of different types, which provides directions for developing more comprehensive, universal, and effective counseling models.}, number={46}, journal={Proceedings of the AAAI Conference on Artificial Intelligence}, author={Wang, Bichen and Sun, Yixin and Wang, Junzhe and Yang, Hao and Fu, Xing and Zhao, Yanyan and Wei, Si and Wang, Shijin and Qin, Bing}, year={2026}, month={Mar.}, pages={39378–39386} }",CARE-Bench: A Benchmark of Diverse Client Simulations Guided by Expert Principles for Evaluating LLMs in Psychological Counseling,2025,AAAI,Psychological Counseling/ LLM Evaluation,EvaluationFramework/Benchmark,Client Agent,Expert Principles,No,,Yes,No,No,Yes,Yes,No,Yes,Yes,Yes,No,Yes,Yes,"Working Alliance Inventory (WAI): Counseling Goal, Task Agreement, Emotional Bond | Barrett-Lennard Relationship Inventory (BLRI) Empathic Understanding subscale: Cognitive Empathy, Affective Empathy, Differentiated Empathy, Inner Pattern | Counselor Competencies Scale—Revised (CCS-R): Probing Techniques, Facilitate Therapeutic Environment, Reflecting, Change Facilitation | Simulation quality metrics: Authenticity, Stayed in Role, Resembled Typical Case, Challenged the Counselor, Ready as Training Partner, Recommend to Novices",Strong,Static,No,Extended Dialogue,Full Disclosure,Strong,WAI + BLRI + CCS-R + Big Five + Erikson,No,GPT-4o vs human expert consistency score (0.72),Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,No,
+23,Sungarda2025GenAI,"@INPROCEEDINGS{11402062,
+  author={Sungarda, James and Liu, Hongkai and Zhou, Zilong and Wu, Tien-Hsuan and Cheung, Johnson Chun-Sing and Kao, Ben},
+  booktitle={2025 IEEE International Conference on Big Data (BigData)}, 
+  title={GenAI for Social Work Field Education: Client Simulation with Real-Time Feedback}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={3538-3547},
+  keywords={Training;Employee welfare;Accuracy;Switches;Big Data;Chatbots;Real-time systems;Feeds},
+  doi={10.1109/BigData66926.2025.11402062}}",GenAI for Social Work Field Education: Client Simulation with Real-Time Feedback,2025,IEEE BigData,Social Work Education / Training,SimulationFramework,Client Agent,Cognitive Model/Dynamic Traits,Yes,"When the user sends a message, the LLM is instructed to output a JSON object containing the dynamic fields as well as the final message output. Crucially, these dynamic fields are generated before the output message is generated. This ensures that the generated client message takes into account the newly generated dynamic fields. ... having dynamic fields that are updated by the LLM after each message is sent allows for more adaptive behavior of the client. ... We introduce openness parameter, which is designed to simulate the therapeutic alliance between the client and the trainee. ... openness is determined by the skills the trainee has used in the conversation, which is provided by our skills classification model.",No,No,No,No,Yes,No,No,No,No,No,No,No,"Accuracy, Macro-Precision, Macro-Recall, Macro-F1, Micro-Precision, Micro-Recall, Micro-F1, Average No. of Skills",Partial,Dynamic,No,Extended Dialogue,Partial Disclosure,Weak,Motivational Interviewing (MI)/CBT,No,,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,No,No,
+29,Liu2023ChatCounselor,"@misc{liu2023chatcounselorlargelanguagemodels,
+      title={ChatCounselor: A Large Language Models for Mental Health Support}, 
+      author={June M. Liu and Donghao Li and He Cao and Tianhe Ren and Zeyi Liao and Jiamin Wu},
+      year={2023},
+      eprint={2309.15461},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2309.15461}, 
+}",ChatCounselor: A Large Language Models for Mental Health Support,2023,CIKM 2023,Mental Health,SimulationFramework/Dataset,Therapist Agent,Surface Persona,No,,No,No,No,Yes,No,No,Yes,No,Yes,No,Yes,Yes,"Information, Direct Guidance, Approval & Reassurance, Restatement, Reflection & Listening, Interpretation, Self-disclosure, Obtain Relevant Information",Partial,Static,No,Single-turn,Full Disclosure,,Not specified,No,,No,Yes,No,No,Yes,No,No,No,No,Yes,No,
+31,Chiu2024A,"@misc{chiu2024computationalframeworkbehavioralassessment,
+      title={A Computational Framework for Behavioral Assessment of LLM Therapists}, 
+      author={Yu Ying Chiu and Ashish Sharma and Inna Wanyin Lin and Tim Althoff},
+      year={2024},
+      eprint={2401.00820},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2401.00820}, 
+}",A Computational Framework for Behavioral Assessment of LLM Therapists,2024,arXiv,LLM Therapy Evaluation/Therapy,EvaluationFramework,Therapist Agent,Surface Persona,No,,No,No,No,Yes,Yes,No,Yes,Yes,Yes,No,No,No,"Frequency of conversational behaviors (percentage), Temporal order (average turn number of first occurrence), Adaptability (frequency of therapist behaviors in response to specific client behaviors), Two-sided Student's t-test, Bonferroni correction, Cohen's d, 95% bootstrapped confidence intervals, LIWC analysis (Linguistic Inquiry and Word Count), Macro-F1, Macro-Precision, Macro-Recall, Consistency score (out of 3)",Strong,Dynamic,Yes,Extended Dialogue,Full Disclosure,Strong,Motivational Interviewing (MI),Yes,Krippendorff's alpha,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,
+34,Li2024Understanding,"@misc{li2024understandingtherapeuticrelationshipcounselors,
+      title={Understanding the Therapeutic Relationship between Counselors and Clients in Online Text-based Counseling using LLMs}, 
+      author={Anqi Li and Yu Lu and Nirui Song and Shuai Zhang and Lizhi Ma and Zhenzhong Lan},
+      year={2024},
+      eprint={2402.11958},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2402.11958}, 
+}",Understanding the Therapeutic Relationship between Counselors and Clients in Online Text-based Counseling using LLMs,2024,arXiv,Counseling,EvaluationFramework,Human Trainee,Expert Principles,No,,Yes,No,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,No,"Intraclass Correlation Coefficient (ICC), Pearson correlation coefficient, t-test, working alliance scores (1-5 scale per WAI-O-S question)",Strong,Dynamic,Yes,Longitudinal,Partial Disclosure,Strong,Bordin's working alliance theory; Observer-rated Short version of Working Alliance Inventory (WAI-O-S),Yes,"Intraclass Correlation Coefficient (ICC) using ICC(2,k) form with two-way random effects, absolute agreement, and multiple raters; calculated using Pingouin package",Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,
+38,Wang2024Towards,"@misc{wang2024clientcenteredassessmentllmtherapists,
+      title={Towards a Client-Centered Assessment of LLM Therapists by Client Simulation}, 
+      author={Jiashuo Wang and Yang Xiao and Yanran Li and Changhe Song and Chunpu Xu and Chenhao Tan and Wenjie Li},
+      year={2024},
+      eprint={2406.12266},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2406.12266}, 
+}",Towards a Client-Centered Assessment of LLM Therapists by Client Simulation,2024,arXiv,Counseling Therapy/ Client Simulation,EvaluationFramework,Client Agent,Dynamic Traits,No,"Simulated clients reference original session transcripts to learn speech tone and conversational style, then engage in new sessions with different therapists;",No,No,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,"Session Outcome Score (derived from WAI-SR items 1,2,10,12; SRS items 3,4; CECS part1 items 31,37; CECS part2 items 1-8), Therapeutic Alliance Score (derived from WAI-SR items 3-9,11; SRS items 1,2; CECS part1 items 1-30,32-36,38-44), Self-Reported Feelings Scores (Depth, Smoothness, Positivity, Arousal from SEQ), Language Style Matching (LSM), vocabulary overlap rate, sentence similarity, recall, F1, session topic precision",Strong,Dynamic,Yes,Extended Dialogue,Partial Disclosure,Strong,Motivational Interviewing (MI)/Working Alliance Theory + Session Impact Theory + Big Five + PHQ-9/GAD-7/OQ-45,No,,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,
+39,Hu2024PsycoLLM,"@ARTICLE{10772313,
+  author={Hu, Jinpeng and Dong, Tengteng and Luo, Gang and Ma, Hui and Zou, Peng and Sun, Xiao and Guo, Dan and Yang, Xun and Wang, Meng},
+  journal={IEEE Transactions on Computational Social Systems}, 
+  title={PsycoLLM: Enhancing LLM for Psychological Understanding and Evaluation}, 
+  year={2025},
+  volume={12},
+  number={2},
+  pages={539-551},
+  keywords={Benchmark testing;Mental health;Law;Context modeling;KNowledge based systems;Data mining;Transformers;Training;Large language models;Psychology;Large language model (LLM);mental health;psychological evaluation;psychological understanding},
+  doi={10.1109/TCSS.2024.3497725}}
+",PsycoLLM: Enhancing LLM for Psychological Understanding and Evaluation,2024,IEEE,"Psychology, Mental Health",EvaluationFramework/Dataset/Benchmark,Therapist Agent,	Surface Persona,No,,No,No,No,No,Yes,No,No,No,No,No,Yes,No,"standard accuracy, elastic accuracy, ROUGE-1, ROUGE-L, BLEU-4, BERTScore",,Static,No,Single-turn,Full Disclosure,Weak,Psychological Counseling Examination Standards (China),,,,Yes,No,Yes,Yes,Yes,No,Yes,No,No,Yes,
+45,Fouda2026PsychiatryBench,"@article{fouda2026psychiatrybench,
+  title={PsychiatryBench: a multi-task benchmark for LLMs in psychiatry},
+  author={Fouda, Aya E and Hassan, Abdelrahman A and Hanafy, Radwa J and Fouda, Mohammed E},
+  journal={npj Digital Medicine},
+  year={2026},
+  publisher={Nature Publishing Group UK London}
+}",PsychiatryBench: a multi-task benchmark for LLMs in psychiatry,2026,Nature,Psychiatry,EvaluationFramework/Benchmark,Human Trainee,Expert Principles,No,,No,No,No,Yes,Yes,Yes,No,Yes,Yes,No,Yes,No,"Accuracy, Partial Scoring System (PCS), Subquestion Accuracy, Subset Accuracy, Weighted-average F1-score, Common Correct, Common Incorrect, Overall Consistency, Format Agreement Rate, Format Divergence Rate, Similarity Score (LLM-as-judge, 0-100), Final Score (mean of similarity scores)",Strong,Static,Yes,Single-turn,Partial Disclosure,Strong,"DSM-5-TR, ICD-10",No,,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,No,No,
+47,Cai2026Exploring,"@misc{cai2026exploringsafetyalignmentevaluation,
+      title={Exploring Safety Alignment Evaluation of LLMs in Chinese Mental Health Dialogues via LLM-as-Judge}, 
+      author={Yunna Cai and Fan Wang and Haowei Wang and Kun Wang and Kailai Yang and Sophia Ananiadou and Moyan Li and Mingming Fan},
+      year={2026},
+      eprint={2508.08236},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2508.08236}, 
+}",Exploring Safety Alignment Evaluation of LLMs in Chinese Mental Health Dialogues via LLM-as-Judge,2026,arXiv,Mental Health,EvaluationFramework,Human Trainee,Surface Persona,No,,Yes,No,No,Yes,No,Yes,No,No,No,No,Yes,Yes,"Binary point-wise scoring (0/1 across 5 dimensions, summed to 0-5), System-level Pearson Correlation, Spearman Correlation, Kendall's Tau, Pairwise Agreement (excluding ties), Cohen's Kappa (κ), MCC, F1 Score",Strong,,No,Short Multi-turn,Full Disclosure,Strong,"Crisis Intervention Theory (Baldwin, 1979), Suicide Risk Assessment Framework (Cramer et al., 2013), WHO mhGAP Intervention Guide (Organization, 2023), WHO LIVE LIFE suicide prevention framework (Organization et al., 2021)",Yes,"Cohen's Kappa (κ), Matthews Correlation Coefficient (MCC), F1 Score, System-level Pearson Correlation, Spearman Correlation, Kendall's Tau, Pairwise Agreement (excluding ties)",Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,No,Yes,
+49,Qiu2026PsyCLIENT,"@misc{qiu2026psyclientclientsimulationconversational,
+      title={PsyCLIENT: Client Simulation via Conversational Trajectory Modeling for Trainee Practice and Model Evaluation in Mental Health Counseling}, 
+      author={Huachuan Qiu and Zhaoming Chen and Yuqian Chen and Yuan Xie and Yu Lu and Zhenzhong Lan},
+      year={2026},
+      eprint={2601.07312},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2601.07312}, 
+}",PsyCLIENT: Client Simulation via Conversational Trajectory Modeling for Trainee Practice and Model Evaluation in Mental Health Counseling,2026,arXiv,Mental Health Counseling,SimulationFramework,Client Agent,Expert Principles,No,"The framework extracts predefined real-world conversational trajectories from real counseling dialogues (324 trajectories with >30 turns each), each trajectory being a fixed sequence of client behavior labels (B1, ..., BT) ordered by turn. The LLM is conditioned on this fixed trajectory sequence during simulation, with a soft constraint allowing deviation when the counselor's question strictly requires a different logical response.",Yes,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Yes,"7-point Likert scale ratings for authenticity (Fluency, Emotional Expressiveness, Coherence, Contextual Appropriateness, Overall Authenticity); 7-point Likert scale ratings for effectiveness (Listening, Questioning, Emotion-handling, Technique-practice, Recommendation quality); Discrimination accuracy (human expert and LLM-as-a-judge); Expert confusion rate; 1-7 Likert scale for profile/trajectory independence",Strong,Static,Yes,Extended Dialogue,Full Disclosure,Weak,"SOAP Note (Subjective, Objective, Assessment, and Plan), CBT (Cognitive Behavioral Therapy) case conceptualization framework, case conceptualization (Hill, 2020)",No,,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,Yes,Yes,
+56,Nguyen2025Do,"@inproceedings{nguyen-etal-2025-large,
+    title = ""Do Large Language Models Align with Core Mental Health Counseling Competencies?"",
+    author = ""Nguyen, Viet Cuong  and
+      Taher, Mohammad  and
+      Hong, Dongwan  and
+      Possobom, Vinicius Konkolics  and
+      Gopalakrishnan, Vibha Thirunellayi  and
+      Raj, Ekta  and
+      Li, Zihang  and
+      Soled, Heather J.  and
+      Birnbaum, Michael L.  and
+      Kumar, Srijan  and
+      De Choudhury, Munmun"",
+    editor = ""Chiruzzo, Luis  and
+      Ritter, Alan  and
+      Wang, Lu"",
+    booktitle = ""Findings of the Association for Computational Linguistics: NAACL 2025"",
+    month = apr,
+    year = ""2025"",
+    address = ""Albuquerque, New Mexico"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.findings-naacl.418/"",
+    doi = ""10.18653/v1/2025.findings-naacl.418"",
+    pages = ""7503--7526"",
+    ISBN = ""979-8-89176-195-7"",
+    abstract = ""The rapid evolution of Large Language Models (LLMs) presents a promising solution to the global shortage of mental health professionals. However, their alignment with essential counseling competencies remains underexplored. We introduce CounselingBench, a Novel NCMHCE-based benchmark evaluating 22 general-purpose and medical-finetuned LLMs across five key competencies. While frontier models surpass minimum aptitude thresholds, they fall short of expert-level performance, excelling in Intake, Assessment {\&} DiagNosis but struggling with Core Counseling Attributes and Professional Practice {\&} Ethics. Surprisingly, medical LLMs do Not outperform generalist models in accuracy, though they provide slightly better justifications while making more context-related errors. These findings highlight the challenges of developing AI for mental health counseling, particularly in competencies requiring empathy and nuanced reasoning. Our results underscore the need for specialized, fine-tuned models aligned with core mental health counseling competencies and supported by human oversight before real-world deployment. Code and data associated with this manuscript can be found at: https://github.com/cuongnguyenx/CounselingBench""
+}",Do Large Language Models Align with Core Mental Health Counseling Competencies?,2025, NAACL 2025,Mental Health Counseling,EvaluationFramework/Benchmark,Human Trainee,Surface Persona,No,,Yes,No,No,Yes,Yes,No,No,No,No,No,Yes,No,"accuracy, ROSCOE metrics (Faithfulness, Informativeness-Step, Informativeness-Chain, Missing Step, Reasoning Alignment, Self-Consistency, Repetition, Grammar), ROUGE-1, ROUGE-L, BERTScore, cosine similarity",Strong,,No,Single-turn,Full Disclosure,Strong,NCMHCE (National Clinical Mental Health Counseling Examination) competency framework,No,Two anNotators (medical doctors specializing in psychiatry) independently anNotated all 1612 questions for competency labels; a third anNotator (experienced licensed mental health counselor) provided tiebreaking votes for the 767 disagreed questions.,Yes,Yes,No,Yes,Yes,Yes,No,Yes,Yes,No,Yes,
+58,Zhang2025CBT-BENCH,"@inproceedings{zhang-etal-2025-cbt,
+    title = ""{CBT}-Bench: Evaluating Large Language Models on Assisting Cognitive Behavior Therapy"",
+    author = ""Zhang, Mian  and
+      Yang, Xianjun  and
+      Zhang, Xinlu  and
+      Labrum, Travis  and
+      Chiu, Jamie C.  and
+      Eack, Shaun M.  and
+      Fang, Fei  and
+      Wang, William Yang  and
+      Chen, Zhiyu"",
+    editor = ""Chiruzzo, Luis  and
+      Ritter, Alan  and
+      Wang, Lu"",
+    booktitle = ""Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language TechNologies (Volume 1: Long Papers)"",
+    month = apr,
+    year = ""2025"",
+    address = ""Albuquerque, New Mexico"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.naacl-long.196/"",
+    doi = ""10.18653/v1/2025.naacl-long.196"",
+    pages = ""3864--3900"",
+    ISBN = ""979-8-89176-189-6"",
+    abstract = ""There is a significant gap between patient needs and available mental health support today. In this paper, we aim to thoroughly examine the potential of using Large Language Models (LLMs) to assist professional psychotherapy. To this end, we propose a new benchmark, CBT-Bench, for the systematic evaluation of cognitive behavioral therapy (CBT) assistance. We include three levels of tasks in CBT-Bench: **I: Basic CBT kNowledge acquisition**, with the task of multiple-choice questions; **II: Cognitive model understanding**, with the tasks of cognitive distortion classification, primary core belief classification, and fine-grained core belief classification; **III: Therapeutic response generation**, with the task of generating responses to patient speech in CBT therapy sessions.These tasks encompass key aspects of CBT that could potentially be enhanced through AI assistance, while also outlining a hierarchy of capability requirements, ranging from basic kNowledge recitation to engaging in real therapeutic conversations. We evaluated representative LLMs on our benchmark. Experimental results indicate that while LLMs perform well in reciting CBT kNowledge, they fall short in complex real-world scenarios requiring deep analysis of patients' cognitive structures and generating effective responses, suggesting potential future work.""
+}",CBT-BENCH: Evaluating Large Language Models on Assisting Cognitive Behavior Therapy,2025,ACL,"Cognitive Behavior Therapy, Mental Health，Counseling",Benchmark，Evaluation Framework,Therapist Agent,Surface Persona,No,,Yes,No,No,No,Yes,No,No,No,Yes,No,Yes,Yes,"Accuracy; Weighted Precision, Recall, and F1 Score; Pairwise comparison on a -2 to 2 scale",Strong,Static,Yes,Single-turn,Full Disclosure,Strong,Cognitive Behavioral Therapy (CBT),No,just Level 1：Percentage agreement (agreement rate over 80%),Yes,Yes,No,Yes,Yes,No,No,No,Yes,No,Yes,
+60,Kim2025KMI,"@inproceedings{kim-etal-2025-kmi,
+    title = ""{KMI}: A Dataset of {K}orean Motivational Interviewing Dialogues for Psychotherapy"",
+    author = ""Kim, Hyunjong  and
+      Lee, Suyeon  and
+      Cho, Yeongjae  and
+      Ryu, Eunseo  and
+      Jo, Yohan  and
+      Seong, Suran  and
+      Cho, Sungzoon"",
+    editor = ""Chiruzzo, Luis  and
+      Ritter, Alan  and
+      Wang, Lu"",
+    booktitle = ""Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language TechNologies (Volume 1: Long Papers)"",
+    month = apr,
+    year = ""2025"",
+    address = ""Albuquerque, New Mexico"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.naacl-long.541/"",
+    doi = ""10.18653/v1/2025.naacl-long.541"",
+    pages = ""10803--10828"",
+    ISBN = ""979-8-89176-189-6"",
+    abstract = ""The increasing demand for mental health services has led to the rise of AI-driven mental health chatbots, though challenges related to privacy, data collection, and expertise persist. Motivational Interviewing (MI) is gaining attention as a theoretical basis for boosting expertise in the development of these chatbots. However, existing datasets are showing limitations for training chatbots, leading to a substantial demand for publicly available resources in the field of MI and psychotherapy. These challenges are even more proNounced in Non-English languages, where they receive less attention. In this paper, we propose a Novel framework that simulates MI sessions enriched with the expertise of professional therapists. We train an MI forecaster model that mimics the behavioral choices of professional therapists and employ Large Language Models (LLMs) to generate utterances through prompt engineering. Then, we present KMI, the first synthetic dataset theoretically grounded in MI, containing 1,000 high-quality Korean Motivational Interviewing dialogues. Through an extensive expert evaluation of the generated dataset and the dialogue model trained on it, we demonstrate the quality, expertise, and practicality of KMI. We also introduce Novel metrics derived from MI theory in order to evaluate dialogues from the perspective of MI.""
+}",KMI: A Dataset of Korean Motivational Interviewing Dialogues for Psychotherapy,2025,ACL,"Counseling, Psychotherapy, Mental Health",Dataset,Dual-Agent,Expert Principles,Yes,"The client simulator is instructed to generate change talk (preparatory change talk types: desire, ability, reasons, need) if interaction with the counselor inspired a willingness to change and speaking about change appears suitable within the dialogue context, reflecting the evolving state of the client throughout the MI session based on dialogue history.",Yes,No,Yes,No,No,No,Yes,Yes,Yes,No,Yes,No,"MI Quality: Partnership, Acceptance, Compassion, Evocation, Similarity, Effectiveness; General Quality: Consistency, Fluency, On-Topic; MI Label Accuracy",Strong,Static,Yes,Extended Dialogue,Full Disclosure,Strong,Motivational Interviewing (MI)/MITI/DARN Change Talk,No,,No,Yes,No,Yes,Yes,Yes,No,No,Yes,Yes,Yes,
+63,Deshpande2025Evaluating,"@inproceedings{deshpande-etal-2025-evaluating,
+    title = ""Evaluating Large Language Models for Enhancing Live Chat Therapy: A Comparative Study with Psychotherapists"",
+    author = {Deshpande, Neha Pravin  and
+      Hillmann, Stefan  and
+      M{\""o}ller, Sebastian},
+    editor = ""B{\'e}chet, Fr{\'e}d{\'e}ric  and
+      Lef{\`e}vre, Fabrice  and
+      Asher, Nicholas  and
+      Kim, Seokhwan  and
+      Merlin, Teva"",
+    booktitle = ""Proceedings of the 26th Annual Meeting of the Special Interest Group on Discourse and Dialogue"",
+    month = aug,
+    year = ""2025"",
+    address = ""AvigNon, France"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.sigdial-1.59/"",
+    pages = ""800--812"",
+    abstract = ""Large Language Models (LLMs) hold promise for addressing the shortage of qualified therapists in mental health care. While chatbot-based Cognitive Behavioral Therapy (CBT) tools exist, their efficacy in sensitive contexts remains underexplored. This study examines the potential of LLMs to support therapy sessions aimed at reducing Child Sexual Abuse Material (CSAM) consumption. We propose a Retrieval-Augmented Generation (RAG) framework that leverages a fine-tuned BERT-based retriever to guide LLM-generated responses, better capturing the multi-turn, context-specific dynamics of therapy. Four LLMs{---}Qwen2-7B-Instruct, Mistral-7B-Instruct-v0.3, Orca-2-13B, and Zephyr-7B-Alpha{---}were evaluated in a small-scale study with 14 domain-expert psychotherapists. Our comparative analysis reveals that, in certain scenarios, LLMs like Mistral-7B-Instruct-v0.3 and Orca-2-13B were preferred over human therapist responses. While limited by sample size, these findings suggest that LLMs can perform at a level comparable to or even exceeding that of human therapists, especially in therapy focused on reducing CSAM consumption. Our code is available online: https://git.tu-berlin.de/neha.deshpande/therapy{\_}responses/-/tree/main""
+}",Evaluating Large Language Models for Enhancing Live Chat Therapy: A Comparative Study with Psychotherapists,2025,ACL,CSAM Prevention/Therapy,EvaluationFramework,Therapist Agent,Expert Principles,No,,Yes,No,No,No,Yes,No,Yes,No,Yes,No,Yes,No,"BERTScore (F1, Precision, Recall); R10@1, R10@2, R10@5, MRR; 5-point Likert appropriateness rating; most preferred response count; Shapiro-Wilk test; Kruskal-Wallis test; Dunn's post-hoc test with Bonferroni correction",,,Yes,Extended Dialogue,Full Disclosure,Weak,"Motivational Interviewing (Bundy, 2004), Cognitive Behavioral Therapy (CBT) (Beck, 1963)",No,,No,Yes,No,Yes,Yes,Yes,No,Yes,No,Yes,No,
+65,Jaiswal2024Building,"@inproceedings{10.1145/3698587.3701489,
+author = {Jaiswal, Sugam and Lee, Joyce and Berria, Joe and Tanikella, Raviteja and Zolyomi, Annuska and Ahmad, Muhammad Aurangzeb and Si, Dong},
+title = {Building Personality-Adaptive Conversational AI for Mental Health Therapy},
+year = {2024},
+isbn = {9798400713026},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3698587.3701489},
+doi = {10.1145/3698587.3701489},
+abstract = {Many people with mental health problems cannot get professional help for various reasons such as lack of awareness, unavailability, unaffordability, etc. A virtual conversational agent can offer an alternative to deliver mental health care that is accessible, affordable, and scalable. However, building such agents using a one-size-fits-all approach may not be effective for everyone, as different individuals have different personality types that dictate how they communicate with chatbots. Therefore, developing therapy chatbots that can adjust to the user's personality is important. In this work, we present the important role of personality-adaptive conversational agents (PACAs) in the context of mental healthcare. We designed an architecture around traditional machine learning (ML) models and open-source large language models (LLMs) to build a PACA for mental health therapy, developed a working prototype based on it, and conducted a user study to conclude that personality-adaptiveness is indeed an important feature for mental health chatbots.Our research was based on the iCare Project [1], and the associated development was meant to minimize the limitations of the project. We designed the PACA to adapt its responses according to the personality profile of the user created over time. The personality profiles were based on the results from a text classification model fine-tuned for the Big Five Personality Traits[2] with a classification accuracy of 96\%. We self-hosted an open-source LLM which made use of accumulated personality information through prompt engineering. The final setup was able to generate adapted therapeutic responses with an average response time of 10 seconds using different hyperparameter tuning and fine-tuning approaches.We conducted a user study among 20 subjects to compare the performance of the personality-adaptive chatbot with its non-adaptive counterpart and found that the adaptive feature almost doubled the number of users who found the chatbot relevant and helpful for their mental healthcare needs. 75\% of users felt comfortable discussing any sensitive topic with the adaptive chatbot in comparison to 45\% for the non-adaptive chatbot. The PACA prototype validated the feasibility of creating accessible personalized mental healthcare solutions using advanced ML techniques and the results from the user study highly recommend the implementation of PACA into mental health chatbots. The prototype is currently live and freely available for use.},
+booktitle = {Proceedings of the 15th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics},
+articleno = {92},
+numpages = {1},
+keywords = {chatbot, conversational AI, fine-tuning, large language models, mental healthcare, paca, personality, prompt engineering},
+location = {Shenzhen, China},
+series = {BCB '24}
+}",Building Personality-Adaptive Conversational AI for Mental Health Therapy,2024,ACM BCB '24,Mental Health,SimulationFramework,Therapist Agent,Dynamic Traits,Yes,The personality profile of the user is created over time through interactions; the system uses accumulated personality information via prompt engineering to adapt therapeutic responses dynamically. Specifically: 'The personality profiles were based on the results from a text classification model fine-tuned for the Big Five Personality Traits' and 'made use of accumulated personality information through prompt engineering'.,No,Yes,Yes,No,No,No,No,No,No,No,Yes,No,Percentage of users who found the chatbot relevant and helpful; Percentage of users who felt comfortable discussing any sensitive topic,Partial,,Yes,Short Multi-turn,No Disclosure,Strong,Big Five Personality Traits,No,,No,No,No,No,Yes,No,No,No,No,No,No,
+68,Xu2025MentalChat16K,"@inproceedings{10.1145/3711896.3737393,
+author = {Xu, Jia and Wei, Tianyi and Hou, Bojian and Orzechowski, Patryk and Yang, Shu and Jin, Ruochen and Paulbeck, Rachael and Wagenaar, Joost and Demiris, George and Shen, Li},
+title = {MentalChat16K: A Benchmark Dataset for Conversational Mental Health Assistance},
+year = {2025},
+isbn = {9798400714542},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3711896.3737393},
+doi = {10.1145/3711896.3737393},
+abstract = {We introduce MentalChat16K, an English benchmark dataset combining a synthetic mental health counseling dataset and a dataset of anonymized transcripts from interventions between Behavioral Health Coaches and Caregivers of patients in palliative or hospice care. Covering a diverse range of conditions like depression, anxiety, and grief, this curated dataset is designed to facilitate the development and evaluation of large language models for conversational mental health assistance. By providing a high-quality resource tailored to this critical domain, MentalChat16K aims to advance research on empathetic, personalized AI solutions to improve access to mental health support services. The dataset prioritizes patient privacy, ethical considerations, and responsible data usage. MentalChat16K presents a valuable opportunity for the research community to innovate AI technologies that can positively impact mental well-being. The dataset is available at https://huggingface.co/datasets/ShenLab/MentalChat16K and the code and documentation are hosted on GitHub at https://github.com/PennShenLab/MentalChat16K.},
+booktitle = {Proceedings of the 31st ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2},
+pages = {5367–5378},
+numpages = {12},
+keywords = {conversational ai, large language models, llm fine-tuning, mental health, qlora},
+location = {Toronto ON, Canada},
+series = {KDD '25}
+}",MentalChat16K: A Benchmark Dataset for Conversational Mental Health Assistance,2025,ACM KDD‘25,Mental Health,Dataset/ Evaluation,Therapist Agent,Surface Persona,No,,Yes,No,No,Yes,No,Yes,No,No,No,No,Yes,Yes,"Active Listening, Empathy & Validation, Safety & Trustworthiness, Open-mindedness & Non-judgment, Clarity & Encouragement, Boundaries & Ethical, Holistic Approach",Strong,Static,No,Single-turn,Full Disclosure,Strong,Problem-solving therapy/Rogers Principles,Yes,Cohen's Kappa,Yes,Yes,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,
+69,Schmidmaier2025Using,"@inproceedings{10.1145/3716553.3750759,
+author = {Schmidmaier, Matthias and Rupp, Jonathan and Mayer, Sven},
+title = {Using a Secondary Channel to Display the Internal Empathic Resonance of LLM-Driven Agents for Mental Health Support},
+year = {2025},
+isbn = {9798400714993},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3716553.3750759},
+doi = {10.1145/3716553.3750759},
+abstract = {Conversational agents are becoming increasingly popular for digital mental health support. However, while empathy is essential for effective emotional support, the unimodal request-response interaction of such systems limits empathic communication. We address this limitation through a secondary channel that displays an agent’s inner reflections, similar to how nonverbal feedback in human interaction conveys cognitive and emotional states. We implemented a chatbot that generates not only conversational responses but also describes internal reasoning and emotional resonance. A user study involving N = 188 participants indicated a statistically significant increase in perceived empathy ( (+14.7\%) ) when the agent’s internal reflections were displayed. Our findings demonstrate a practical method to enhance empathic interaction with LLM-based chatbots in empathy-critical contexts. Additionally, this work opens possibilities for multimodal systems where LLM-generated reflections may serve as input for generating nonverbal feedback.},
+booktitle = {Proceedings of the 27th International Conference on Multimodal Interaction},
+pages = {294–304},
+numpages = {11},
+keywords = {HCI; LLM; empathy; mental health; internal feedback},
+location = {
+},
+series = {ICMI '25}
+}",Using a Secondary Channel to Display the Internal Empathic Resonance of LLM-Driven Agents for Mental Health Support,2025,ACM ICMI-MLMI'25,Mental Health/Human-Computer Interaction (HCI),EmpathicFeedbackSystem,Therapist Agent,Surface Persona,No,,No,Yes,Yes,No,No,No,No,No,No,No,Yes,Yes,"Perceived Empathy of TechNology Scale (PETS), PETS-ER (Emotional Responsiveness), PETS-UT (Understanding and Trust)",Strong,Pattern-level,Yes,Extended Dialogue,Full Disclosure,Strong,Empathic Resonance,No,,No,Yes,No,Yes,Yes,Yes,No,No,No,No,No,
+71,Schmidmaier2025UsingNonverbal,"@article{10.1145/3743724,
+author = {Schmidmaier, Matthias and Rupp, Jonathan and Harrich, Cedrik and Mayer, Sven},
+title = {Using Nonverbal Cues in Empathic Multi-Modal LLM-Driven Chatbots for Mental Health Support},
+year = {2025},
+issue_date = {September 2025},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {9},
+number = {5},
+url = {https://doi.org/10.1145/3743724},
+doi = {10.1145/3743724},
+abstract = {Despite their popularity in providing digital mental health support, mobile conversational agents primarily rely on verbal input, which limits their ability to respond to emotional expressions. We therefore envision using the sensory equipment of today’s devices to increase the nonverbal, empathic capabilities of chatbots. We initially validated that multi-modal LLMs (MLLM) can infer emotional expressions from facial expressions with high accuracy. In a user study (N=200), we then investigated the effects of such multi-modal input on response generation and perceived system empathy in emotional support scenarios. We found significant effects on cognitive and affective dimensions of linguistic expression in system responses, yet no significant increases in perceived empathy. Our research demonstrates the general potential of using nonverbal context to adapt LLM response behavior, providing input for future research on augmented interaction in empathic MLLM-based systems.},
+journal = {Proc. ACM Hum.-Comput. Interact.},
+month = sep,
+articleno = {MHCI039},
+numpages = {34},
+keywords = {human-computer interaction, LLM, multi-modal LLM, empathy, context awareness, nonverbal communciation, mental health}
+}",Using Nonverbal Cues in Empathic Multi-Modal LLM-Driven Chatbots for Mental Health Support,2025,ACM,Mental Health/Multimodal Interaction,SystemDesign,Therapist Agent,Expert Principles,No,"The system captures facial expressions as a time series using a grid image buffer of the last four seconds at 5 fps. The captured images were buffered with a resolution of 120x160 pixels and continuously added to a single buffer grid image that depicted the images of the last four seconds. This buffer image is sent together with each verbal text message or on inactivity triggers, and the FER MLLM processes the grid of frames to analyze head movement and facial expressions in each frame and over time.",No,Yes,Yes,No,Yes,No,No,No,No,No,No,No,"Accuracy, Precision, Recall, F1 score, PETS (Perceived Empathy of TechNology Scale), LIWC (Linguistic Inquiry and Word Count), Perceived NVC Level, Perceived NVC Effect, Emotional Level (self-assessed), Task Duration, Number of Messages, Kruskal-Wallis tests, Dunn-Bonferroni-Holm post-hoc tests",Partial,Pattern-level,Yes,Extended Dialogue,Full Disclosure,Strong,Nonverbal Communication,No,,No,No,No,Yes,Yes,Yes,No,Yes,No,No,Yes,
+72,Ozgun2025Trustworthy,"@inproceedings{10.1145/3746252.3761164,
+author = {Ozgun, Mithat Can and Pei, Jiahuan and Hindriks, Koen and Donatelli, Lucia and Liu, Qingzhi and Wang, Junxiao},
+title = {Trustworthy AI Psychotherapy: Multi-Agent LLM Workflow for Counseling and Explainable Mental Disorder Diagnosis},
+year = {2025},
+isbn = {9798400720406},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3746252.3761164},
+doi = {10.1145/3746252.3761164},
+abstract = {LLM-based agents have emerged as transformative tools capable of executing complex tasks through iterative planning and action, achieving significant advancements in understanding and addressing user needs. Yet, their effectiveness remains limited in specialized domains such as mental health diagnosis, where they underperform compared to general applications. Current approaches to integrating diagnostic capabilities into LLMs rely on scarce, highly sensitive mental health datasets, which are challenging to acquire. These methods also fail to emulate clinicians' proactive inquiry skills, lack multi-turn conversational comprehension, and struggle to align outputs with expert clinical reasoning. To address these gaps, we propose DSM5AgentFlow, the first LLM-based agent workflow designed to autonomously generate DSM-5 Level-1 diagnostic questionnaires. By simulating therapist-client dialogues with specific client profiles, the framework delivers transparent, step-by-step disorder predictions, producing explainable and trustworthy results. This workflow serves as a complementary tool for mental health diagnosis, ensuring adherence to ethical and legal standards. Through comprehensive experiments, we evaluate leading LLMs across three critical dimensions: conversational realism, diagnostic accuracy, and explainability. Our datasets and implementations are fully open-sourced.},
+booktitle = {Proceedings of the 34th ACM International Conference on Information and Knowledge Management},
+pages = {2263–2272},
+numpages = {10},
+keywords = {explainable mental disorder diagnosis, multi-agent llms, trustworthy ai psychotherapy},
+location = {Seoul, Republic of Korea},
+series = {CIKM '25}
+}",Trustworthy AI Psychotherapy: Multi-Agent LLM Workflow for Counseling and Explainable Mental Disorder DiagNosis,2025,ACM CIKM '25,Mental Health DiagNosis,SimulationFramework,Dual-Agent,Surface Persona,No,,No,No,No,Yes,Yes,No,Yes,Yes,Yes,No,Yes,Yes,"BERTScore, Flesch-Kincaid Grade (FKG), Gunning Fog Index (GFI), Flesch Reading Ease (FRE), LLM Rubric scores (Completeness of DSM-5 Dimension Coverage, Clinical Relevance and Accuracy of Questions, Consistency and Logical Flow, DiagNostic Justification and Explainability, Empathy-Naturalness-Professionalism), Precision, Recall, F1-Score, ROC-AUC, Confusion Matrix, Explainability signals (# <sym> tags, # <quote> tags, DSM clauses, Step list)",Strong,Static,Yes,Extended Dialogue,Full Disclosure,Strong,"DSM-5 (DiagNostic and Statistical Manual of Mental Disorders, Fifth Edition)",No,,No,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,
+75,Louie2026Can,"@inproceedings{10.1145/3772318.3791821,
+author = {Louie, Ryan and Shah, Raj Sanjay and Orney, Ifdita Hasan and Pacheco, Juan Pablo and Brunskill, Emma and Yang, Diyi},
+title = {Can LLM-Simulated Practice and Feedback Upskill Human Counselors? A Randomized Study with 90+ Novice Counselors},
+year = {2026},
+isbn = {9798400722783},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3772318.3791821},
+doi = {10.1145/3772318.3791821},
+abstract = {The growing demand for accessible mental health support requires training more counselors, yet existing approaches remain resource-intensive and difficult to scale. LLMs can realistically simulate patients and generate actionable feedback for training, but their actual impact on novice counselor skill development remains unknown. We developed an LLM-simulated practice and feedback system and conducted a randomized study with 94 novice counselors, comparing practice alone versus practice with feedback. We evaluated behavioral performance, self-efficacy, and qualitative reflections. Results showed the practice-and-feedback group improved in client-centered microskills (reflections, questions), while the practice-alone group showed no improvements. For empathy, the practice-alone group declined over time and performed significantly worse than the feedback group. Qualitative interviews reinforced these findings: feedback helped participants adopt a client-centered listening approach, while practice-alone participants remained solution-oriented. These results suggest LLM-based training systems can promote effective skill development, and combining simulated practice with structured feedback is critical for meaningful improvement.},
+booktitle = {Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems},
+articleno = {15},
+numpages = {31},
+keywords = {Empirical studies in HCI, Interactive learning environments, LLM-based simulation},
+location = {
+},
+series = {CHI '26}
+}",Can LLM-Simulated Practice and Feedback Upskill Human Counselors? A Randomized Study with 90+ Novice Counselors,2026,ACM CHI '26,Counseling,TrainingFramework,Client Agent,Expert Principles,No,Pre-to-Post Assessment,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Yes,Yes,Yes,No,"Proportion of utterances showing strong skill use (b = U_strengths/U_total) or needing improvement (b = U_improvement/U_total); Cohen's d effect sizes; paired t-tests; unpaired t-tests; Good Alternatives during Practice (GAP = A_strengths/U_total); lagged linear regression; Counselor Activity Self-Efficacy Scale (CASES-R) on 8-point Likert scale; Cronbach's alpha; Authenticity ratings (7-point Likert); NASA-TLX workload dimensions (Mental Demand, Temporal Demand, Effort, Frustration); Helpfulness, Comfort, Readiness (5-point Likert); F1 scores; pairwise anNotator agreement percentages; thematic analysis",Strong,Dynamic,Yes,Extended Dialogue,Full Disclosure,Strong,Hill's Helping Skills framework,No,Pairwise agreement percentages averaged across 3 domain-experts,Yes,Yes,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,
+77,Kuhail2025Human-Human,"@article{Kuhail03062025,
+author = {Mohammad Amin Kuhail and Nazik Alturki and Justin Thomas and Amal K. Alkhalifa and Amal Alshardan},
+title = {Human-Human vs Human-AI Therapy: An Empirical Study},
+journal = {International Journal of Human–Computer Interaction},
+volume = {41},
+number = {11},
+pages = {6841--6852},
+year = {2025},
+publisher = {Taylor \& Francis},
+doi = {10.1080/10447318.2024.2385001},
+URL = { B29
+        https://doi.org/10.1080/10447318.2024.2385001
+},
+eprint = { C36 
+        https://doi.org/10.1080/10447318.2024.2385001
+}
+
+}",Human-Human vs Human-AI Therapy: An Empirical Study,2025,IJHCI,Mental Health/HCI,SimulationFramework/Empirical Study,Therapist Agent,Surface Persona,No,,Yes,No,No,No,No,No,Yes,No,No,No,Yes,Yes,"9 Likert-scale questions (1-5) on counseling quality (communication skills, empathy and understanding, professionalism and credibility, therapeutic techniques and skills); identification accuracy (correct/incorrect guesses); Cronbach's alpha (0.92); Mann-Whitney U test; chi-squared test of independence; point-biserial correlation; descriptive statistics (mean, standard deviation)",Mentioned,,No,Short Multi-turn,No Disclosure,Weak,Cognitive Behavioral Therapy (CBT)/Relational Empathy,Yes,Cronbach's alpha,No,Yes,No,Yes,Yes,Yes,No,No,No,Yes,No,
+80,Louie2024Roleplay-doh,"@inproceedings{louie-etal-2024-roleplay,
+    title = ""Roleplay-doh: Enabling Domain-Experts to Create {LLM}-simulated Patients via Eliciting and Adhering to Principles"",
+    author = ""Louie, Ryan  and
+      Nandi, Ananjan  and
+      Fang, William  and
+      Chang, Cheng  and
+      Brunskill, Emma  and
+      Yang, Diyi"",
+    editor = ""Al-Onaizan, Yaser  and
+      Bansal, Mohit  and
+      Chen, Yun-Nung"",
+    booktitle = ""Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing"",
+    month = Nov,
+    year = ""2024"",
+    address = ""Miami, Florida, USA"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2024.emnlp-main.591/"",
+    doi = ""10.18653/v1/2024.emnlp-main.591"",
+    pages = ""10570--10603"",
+    abstract = ""Recent works leverage LLMs to roleplay realistic social scenarios, aiding Novices in practicing their social skills. However, simulating sensitive interactions, such as in the domain of mental health, is challenging. Privacy concerns restrict data access, and collecting expert feedback, although vital, is laborious. To address this, we develop Roleplay-doh, a Novel human-LLM collaboration pipeline that elicits qualitative feedback from a domain-expert, which is transformed into a set of principles, or natural language rules, that govern an LLM-prompted roleplay. We apply this pipeline to enable senior mental health supporters to create customized AI patients as simulated practice partners for Novice counselors. After uncovering issues with basic GPT-4 simulations Not adhering to expert-defined principles, we also introduce a Novel principle-adherence prompting pipeline which shows a 30{\%} improvement in response quality and principle following for the downstream task. Through a user study with 25 counseling experts, we demonstrate that the pipeline makes it easy and effective to create AI patients that more faithfully resemble real patients, as judged by both creators and third-party counselors. We provide access to the code and data on our project website: https://roleplay-doh.github.io/.""
+}",Roleplay-doh: Enabling Domain-Experts to Create LLM-simulated Patients via Eliciting and Adhering to Principles,2024,EMNLP,Mental Health/Counseling,SimulationFramework,Client Agent,Expert Principles,No,"Principles are elicited, added, and updated iteratively as the expert interacts with the AI patient. For each generated response, the expert can provide kudos/critique/rewrite feedback, which is transformed by an LLM into new or revised constitution principles that govern the AI patient's subsequent behavior. The updated set of principles is then used to generate the next response, enabling the simulation to dynamically evolve over the course of the conversation.",Yes,No,Yes,No,No,No,Yes,Yes,Yes,No,Yes,No,"Authenticity (7-point Likert), Role Consistency/Stayed in Role (7-point Likert), Resemblance to Past Case / Resemblance to Typical Case (7-point Likert), Mirrored Challenging Aspects / Challenged the Counselor (7-point Likert), Ready as Training Partner (7-point Likert), Recommend to Novices (7-point Likert), M1 - Consistency with patient description and conversation history (ranking), M2 - Awkward style of speech (Yes/No), M3 - Adherence to provided principles (ranking), Overall ranking, Effectively Guide (7-point Likert), Ease (7-point Likert), Efficiency (7-point Likert), Mental Demand (7-point Likert)",Partial,Static,Yes,Extended Dialogue,Full Disclosure,Weak,Constitutional AI Principles、Standardized Patients evaluation,Yes,Krippendorff's α,Yes,Yes,No,No,Yes,Yes,No,Yes,Yes,Yes,Yes,
+81,Wang2024PATIENT,"@inproceedings{wang-etal-2024-patient,
+    title = ""{PATIENT}-$\psi$: Using Large Language Models to Simulate Patients for Training Mental Health Professionals"",
+    author = ""Wang, Ruiyi  and
+      Milani, Stephanie  and
+      Chiu, Jamie C.  and
+      Zhi, Jiayin  and
+      Eack, Shaun M.  and
+      Labrum, Travis  and
+      Murphy, Samuel M  and
+      Jones, Nev  and
+      Hardy, Kate V  and
+      Shen, Hong  and
+      Fang, Fei  and
+      Chen, Zhiyu"",
+    editor = ""Al-Onaizan, Yaser  and
+      Bansal, Mohit  and
+      Chen, Yun-Nung"",
+    booktitle = ""Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing"",
+    month = Nov,
+    year = ""2024"",
+    address = ""Miami, Florida, USA"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2024.emnlp-main.711/"",
+    doi = ""10.18653/v1/2024.emnlp-main.711"",
+    pages = ""12772--12797"",
+    abstract = ""Mental illness remains one of the most critical public health issues. Despite its importance, many mental health professionals highlight a disconnect between their training and actual real-world patient practice. To help bridge this gap, we propose PATIENT-$\psi$, a Novel patient simulation framework for cognitive behavior therapy (CBT) training. To build PATIENT-$\psi$, we construct diverse patient cognitive models based on CBT principles and use large language models (LLMs) programmed with these cognitive models to act as a simulated therapy patient. We propose an interactive training scheme, PATIENT-$\psi$-TRAINER, for mental health trainees to practice a key skill in CBT {--} formulating the cognitive model of the patient {--} through role-playing a therapy session with PATIENT-$\psi$. To evaluate PATIENT-$\psi$, we conducted a comprehensive user study of 13 mental health trainees and 20 experts. The results demonstrate that practice using PATIENT-$\psi$-TRAINER enhances the perceived skill acquisition and confidence of the trainees beyond existing forms of training such as textbooks, videos, and role-play with Non-patients. Based on the experts' perceptions, PATIENT-$\psi$ is perceived to be closer to real patient interactions than GPT-4, and PATIENT-$\psi$-TRAINER holds strong promise to improve trainee competencies. Our code and data are released at \url{https://github.com/ruiyiw/patient-psi}.""
+}",PATIENT-Ψ: Using Large Language Models to Simulate Patients for Training Mental Health Professionals,2024,EMNLP,"Mental Health, Cognitive Behavior Therapy (CBT) Training",SimulationFramework,Client Agent,Cognitive Model,No,"Gradually reveal deeper concerns and core issues, as a real patient often requires extensive dialogue before delving into more sensitive topics. This gradual revelation creates challenges for therapists in identifying the patient's true thoughts and emotions.",Yes,No,Yes,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,"Fidelity (5-point Likert scale, pairwise comparison -2 to 2 scale), Accuracy (5-point Likert scale for each CCD component), Effectiveness (pairwise comparison -2 to 2 scale), Confidence improvement (pairwise comparison -2 to 2 scale), Preference (pairwise comparison -2 to 2 scale), System Usability Scale (SUS), Accuracy (5-class classification task, automatic), F1 score (automatic)",Strong,Static,Yes,Extended Dialogue,Full Disclosure,Strong,"Cognitive Behavior Therapy (CBT), Cognitive Conceptualization Diagram (CCD) from Beck (2020)",No,,No,Yes,Yes,Yes,Yes,Yes,No,No,No,Yes,Yes,
+83,Lee2024CACTUS,"@inproceedings{lee-etal-2024-cactus,
+    title = ""Cactus: Towards Psychological Counseling Conversations using Cognitive Behavioral Theory"",
+    author = ""Lee, Suyeon  and
+      Kim, Sunghwan  and
+      Kim, Minju  and
+      Kang, Dongjin  and
+      Yang, Dongil  and
+      Kim, Harim  and
+      Kang, Minseok  and
+      Jung, Dayi  and
+      Kim, Min Hee  and
+      Lee, Seungbeen  and
+      Chung, Kyong-Mee  and
+      Yu, Youngjae  and
+      Lee, Dongha  and
+      Yeo, Jinyoung"",
+    editor = ""Al-Onaizan, Yaser  and
+      Bansal, Mohit  and
+      Chen, Yun-Nung"",
+    booktitle = ""Findings of the Association for Computational Linguistics: EMNLP 2024"",
+    month = Nov,
+    year = ""2024"",
+    address = ""Miami, Florida, USA"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2024.findings-emnlp.832/"",
+    doi = ""10.18653/v1/2024.findings-emnlp.832"",
+    pages = ""14245--14274"",
+    abstract = ""Recently, the demand for psychological counseling has significantly increased as more individuals express concerns about their mental health. This surge has accelerated efforts to improve the accessibility of counseling by using large language models (LLMs) as counselors. To ensure client privacy, training open-source LLMs faces a key challenge: the absence of realistic counseling datasets. To address this, we introduce Cactus, a multi-turn dialogue dataset that emulates real-life interactions using the goal-oriented and structured approach of Cognitive Behavioral Therapy (CBT).We create a diverse and realistic dataset by designing clients with varied, specific personas, and having counselors systematically apply CBT techniques in their interactions. To assess the quality of our data, we benchmark against established psychological criteria used to evaluate real counseling sessions, ensuring alignment with expert evaluations.Experimental results demonstrate that Camel, a model trained with Cactus, outperforms other models in counseling skills, highlighting its effectiveness and potential as a counseling agent.We make our data, model, and code publicly available.""
+}",CACTUS: Towards Psychological Counseling Conversations using Cognitive Behavioral Theory,2024,EMNLP,"Psychological Counseling, Mental Health",Dataset,Dual-Agent,Behavioral State Model,No,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Yes,No,"CTRS (Understanding, Interpersonal Effectiveness, Collaboration, Guided Discovery, Focus, Strategy), PANAS (positive emotions, negative emotions), Human evaluation (Helpfulness, Coherence, Empathy, Guidance, Naturalness)",Strong,Static,No,Extended Dialogue,Full Disclosure,Strong,Cognitive Behavioral Therapy (CBT),No,,No,Yes,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,
+84,Basar2024To,"@inproceedings{basar-etal-2024-extent,
+    title = ""To What Extent Are Large Language Models Capable of Generating Substantial Reflections for Motivational Interviewing Counseling Chatbots? A Human Evaluation"",
+    author = ""Basar, Erkan  and
+      Hendrickx, Iris  and
+      Krahmer, Emiel  and
+      Bruijn, Gert-Jan  and
+      Bosse, Tibor"",
+    editor = ""Soni, Nikita  and
+      Flek, Lucie  and
+      Sharma, Ashish  and
+      Yang, Diyi  and
+      Hooker, Sara  and
+      Schwartz, H. Andrew"",
+    booktitle = ""Proceedings of the 1st Human-Centered Large Language Modeling Workshop"",
+    month = aug,
+    year = ""2024"",
+    address = ""TBD"",
+    publisher = ""ACL"",
+    url = ""https://aclanthology.org/2024.hucllm-1.4/"",
+    doi = ""10.18653/v1/2024.hucllm-1.4"",
+    pages = ""41--52"",
+    abstract = ""Motivational Interviewing is a counselling style that requires skillful usage of reflective listening and engaging in conversations about sensitive and personal subjects. In this paper, we investigate to what extent we can use generative large language models in motivational interviewing chatbots to generate precise and variable reflections on user responses. We conduct a two-step human evaluation where we first independently assess the generated reflections based on four criteria essential to health counseling; appropriateness, specificity, naturalness, and engagement. In the second step, we compare the overall quality of generated and human-authored reflections via a ranking evaluation. We use GPT-4, BLOOM, and FLAN-T5 models to generate motivational interviewing reflections, based on real conversational data collected via chatbots designed to provide support for smoking cessation and sexual health. We discover that GPT-4 can produce reflections of a quality comparable to human-authored reflections. Finally, we conclude that large language models have the potential to enhance and expand reflections in predetermined health counseling chatbots, but a comprehensive manual review is advised.""
+}",To What Extent Are Large Language Models Capable of Generating Substantial Reflections for Motivational Interviewing Counseling Chatbots?A Human Evaluation,2024,ACL,"Counseling, Mental Health，MI",EvaluationFramework,Therapist Agent,Surface Persona,No,,No,Yes,No,No,No,Yes,Yes,No,No,No,Yes,No,"appropriateness, specificity, naturalness, engagement (7-point Likert scale), ranking evaluation via RankME and TrueSkill",Partial,Static,Yes,Short Multi-turn,Full Disclosure,Strong,Motivational Interviewing (MI),No,Inter-rater Reliability (Kendall's W),No,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Yes,No,
+86,Yang2025Consistent,"@inproceedings{yang-etal-2025-consistent,
+    title = ""Consistent Client Simulation for Motivational Interviewing-based Counseling"",
+    author = ""Yang, Yizhe  and
+      Achananuparp, Palakorn  and
+      Huang, Heyan  and
+      Jiang, Jing  and
+      Lim, Nicholas Gabriel  and
+      Ern, Cameron Tan Shi  and
+      Kit, Phey Ling  and
+      Xiuhui, Jenny Giam  and
+      Pinto, John  and
+      Lim, Ee-Peng"",
+    editor = ""Che, Wanxiang  and
+      Nabende, Joyce  and
+      Shutova, Ekaterina  and
+      Pilehvar, Mohammad Taher"",
+    booktitle = ""Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"",
+    month = jul,
+    year = ""2025"",
+    address = ""Vienna, Austria"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.acl-long.1021/"",
+    doi = ""10.18653/v1/2025.acl-long.1021"",
+    pages = ""20959--20998"",
+    ISBN = ""979-8-89176-251-0"",
+    abstract = ""Simulating human clients in mental health counseling is crucial for training and evaluating counselors (both human or simulated) in a scalable manner. Nevertheless, past research on client simulation did not focus on complex conversation tasks such as mental health counseling. In these tasks, the challenge is to ensure that the client{'}s actions (i.e., interactions with the counselor) are consistent with with its stipulated profiles and negative behavior settings. In this paper, we propose a novel framework that supports consistent client simulation for mental health counseling. Our framework tracks the mental state of a simulated client, controls its state transitions, and generates for each state behaviors consistent with the client{'}s motivation, beliefs, preferred plan to change, and receptivity. By varying the client profile and receptivity, we demonstrate that consistent simulated clients for different counseling scenarios can be effectively created. Both our automatic and expert evaluations on the generated counseling sessions also show that our client simulation method achieves higher consistency than previous methods.""
+}",Consistent Client Simulation for Motivational Interviewing-based Counseling,2025,ACL,Counseling,SimulationFramework,Client Agent,Behavioral State Model,Yes,"State Transition Matrix,The framework uses a state transition module that models client progression through three stages of the transtheoretical model (Precontemplation, Contemplation, Preparation) plus Termination. In Precontemplation, the module analyzes counselor utterances for mention of the client's motivation; if found, the client transitions to Contemplation. In Contemplation, the module tracks whether the client's beliefs/reasons for hesitation have been adequately addressed by the counselor; if so, the client transitions to Preparation. In Preparation, when the client's preferred change plan has been discussed, the module outputs Termination as the next state.",Yes,No,No,Yes,Yes,No,Yes,Yes,Yes,No,No,No,"Profile consistency scores (Personas/PE, Motivation/MO, Beliefs/BE, Preferred Change Plans/CP) measured as proportion of sessions with positive entailment; Spearman's correlation for receptivity (RE/ρ); Average receptivity level (Avg Rec); Motivation rate at the 20th turn (MR@20); Average motivation step (Avg MS); Action KL divergence (Act KL); ROUGE-1; ROUGE-2; ROUGE-L; BERTScore; Expert evaluation using five-point Likert scale for profile consistency and realism; Spearman correspondence for expert receptivity evaluation; Kappa coefficient for inter-anNotator agreement",Strong,Pattern-level,Yes,Extended Dialogue,Full Disclosure,Strong,"Transtheoretical Model of health behavior change (Prochaska and Velicer, 1997); Motivational Interviewing (Miller and Rollnick, 2012)",Yes,Cohen's kappa (reported as Kappa score / Kappa coefficient),Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,
+87,Yang2025CAMI,"@inproceedings{yang-etal-2025-cami,
+    title = ""{CAMI}: A Counselor Agent Supporting Motivational Interviewing through State Inference and Topic Exploration"",
+    author = ""Yang, Yizhe  and
+      Achananuparp, Palakorn  and
+      Huang, Heyan  and
+      Jiang, Jing  and
+      Kit, Phey Ling  and
+      Lim, Nicholas Gabriel  and
+      Ern, Cameron Tan Shi  and
+      Lim, Ee-Peng"",
+    editor = ""Che, Wanxiang  and
+      Nabende, Joyce  and
+      Shutova, Ekaterina  and
+      Pilehvar, Mohammad Taher"",
+    booktitle = ""Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"",
+    month = jul,
+    year = ""2025"",
+    address = ""Vienna, Austria"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.acl-long.1024/"",
+    doi = ""10.18653/v1/2025.acl-long.1024"",
+    pages = ""21037--21081"",
+    ISBN = ""979-8-89176-251-0"",
+    abstract = ""Conversational counselor agents have become essential tools for addressing the rising demand for scalable and accessible mental health support. This paper introduces CAMI, a novel automated counselor agent grounded in Motivational Interviewing (MI) {--} a client-centered counseling approach designed to address ambivalence and facilitate behavior change. CAMI employs a novel STAR framework, consisting of client{'}s state inference, motivation topic exploration, and response generation modules, leveraging large language models (LLMs). These components work together to evoke change talk, aligning with MI principles and improving counseling outcomes for diverse clients. We evaluate CAMI{'}s performance through both automated and expert evaluations, utilizing simulated clients to assess MI skill competency, client{'}s state inference accuracy, topic exploration proficiency, and overall counseling success. Results show that CAMI not only outperforms several state-of-the-art methods but also shows more realistic counselor-like behavior. Additionally, our ablation study underscores the critical roles of state inference and topic exploration in achieving this performance.""
+}",CAMI: A Counselor Agent Supporting Motivational Interviewing through State Inference and Topic Exploration,2025,ACL,Counseling,SimulationFramework,Therapist Agent,Behavioral State Model,Yes,"The client simulator uses a state transition module based on the transtheoretical model of health behavior change with three states (Precontemplation, Contemplation, Preparation). The client starts in Precontemplation state and transitions to Contemplation only when the counselor's utterances mention the client's motivations, as determined by analyzing counselor utterances. A dynamic engagement module adjusts the client's engagement level based on the topic distance between the counselor's current topic and the client's ground truth motivation topic, using four levels of distance derived from the topic tree. An action selection module uses session context and the client's receptivity score to sample appropriate actions from a receptivity-aware action distribution, preventing overly compliant behavior.",Yes,No,No,Yes,Yes,No,Yes,Yes,Yes,No,Yes,Yes,"R/Q (Reflection Question Ratio), %OQ (Proportion of Open Questions), %CR (Proportion of Complex Reflections), %MIC (Proportion of MI-Consistent Responses), %TTT (Percent Therapist Talk Time), Cultivating Change Talk, Softening Sustain Talk, Partnership, Empathy, Success Rate, Exploration Focus (FOC), State Inference Accuracy, Session Outcome (SO), Therapeutic Alliance (TA), Depth, Smoothness, Positivity, Arousal, Change Talk Exploration, Evoking Change Talk, Realism of Counselor, Realism of Client",Strong,Pattern-level,Yes,Extended Dialogue,Full Disclosure,Strong,"Motivational Interviewing (MI), Transtheoretical Model of Health Behavior Change",Yes,"Cohen's Kappa (Kappa score), Spearman's rank correlation",Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,
+89,Xie2025PsyDT,"@inproceedings{xie-etal-2025-psydt,
+    title = ""{P}sy{DT}: Using {LLM}s to Construct the Digital Twin of Psychological Counselor with Personalized Counseling Style for Psychological Counseling"",
+    author = ""Xie, Haojie  and
+      Chen, Yirong  and
+      Xing, Xiaofen  and
+      Lin, Jingkai  and
+      Xu, Xiangmin"",
+    editor = ""Che, Wanxiang  and
+      Nabende, Joyce  and
+      Shutova, Ekaterina  and
+      Pilehvar, Mohammad Taher"",
+    booktitle = ""Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"",
+    month = jul,
+    year = ""2025"",
+    address = ""Vienna, Austria"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.acl-long.55/"",
+    doi = ""10.18653/v1/2025.acl-long.55"",
+    pages = ""1081--1115"",
+    ISBN = ""979-8-89176-251-0"",
+    abstract = ""Currently, large language models (LLMs) have made significant progress in the field of psychological counseling. However, existing mental health LLMs overlook a critical issue where they do not consider the fact that different psychological counselors exhibit different personal styles, including linguistic style and therapy techniques, etc. As a result, these LLMs fail to satisfy the individual needs of clients who seek different counseling styles. To help bridge this gap, we propose PsyDT, a novel framework using LLMs to construct the Digital Twin of Psychological counselor with personalized counseling style. Compared to the time-consuming and costly approach of collecting a large number of real-world counseling cases to create a specific counselor{'}s digital twin, our framework offers a faster and more cost-effective solution. To construct PsyDT, we utilize dynamic one-shot learning by using GPT-4 to capture counselor{'}s unique counseling style, mainly focusing on linguistic style and therapy techniques. Subsequently, using existing single-turn long-text dialogues with client{'}s questions, GPT-4 is guided to synthesize multi-turn dialogues of specific counselor. Finally, we fine-tune the LLMs on the synthetic dataset, PsyDTCorpus, to achieve the digital twin of psychological counselor with personalized counseling style. Experimental results indicate that our proposed PsyDT framework can synthesize multi-turn dialogues that closely resemble real-world counseling cases and demonstrate better performance compared to other baselines, thereby show that our framework can effectively construct the digital twin of psychological counselor with a specific counseling style.""
+}",PsyDT: Using LLMs to Construct the Digital Twin of Psychological Counselor with Personalized Counseling Style for Psychological Counseling,2025,ACL,Psychological Counseling / Mental Health,SimulationFramework,Therapist Agent,Surface Persona,No,,Yes,No,No,Yes,Yes,Yes,Yes,No,Yes,No,Yes,Yes,"ROUGE-1, ROUGE-2, ROUGE-L, BLEU-4, FBERT (BERTSCORE); Expert evaluation dimensions: Conversation Strategy (Con.), State and Attitude (Sta.), Relationship Building (Rel.), Application of Therapy Technique (App.), Fluency (Flu.), Safety (Saf.); LLM evaluation dimensions: Emotional Empathy (EmoE.), Cognitive Empathy (CogE.), Conversation Strategy (Con.), State and Attitude (Sta.), Safety (Saf.); Similarity metrics: linguistic style similarity (%), therapy technique similarity (%)",Strong,Static,Yes,Extended Dialogue,Full Disclosure,Strong,Rational Emotive Behavior Therapy (REBT),Yes,"Fleiss' κ (Fleiss, 1971)",Yes,Yes,No,Yes,Yes,Yes,No,Yes,No,Yes,Yes,
+91,Kermani2025Systematic,"@inproceedings{kermani-etal-2025-systematic,
+    title = ""A Systematic Evaluation of {LLM} Strategies for Mental Health Text Analysis: Fine-tuning vs. Prompt Engineering vs. {RAG}"",
+    author = ""Kermani, Arshia  and
+      Perez-Rosas, Veronica  and
+      Metsis, Vangelis"",
+    editor = ""Zirikly, Ayah  and
+      Yates, Andrew  and
+      Desmet, Bart  and
+      Ireland, Molly  and
+      Bedrick, Steven  and
+      MacAvaney, Sean  and
+      Bar, Kfir  and
+      Ophir, Yaakov"",
+    booktitle = ""Proceedings of the 10th Workshop on Computational Linguistics and Clinical Psychology (CLPsych 2025)"",
+    month = may,
+    year = ""2025"",
+    address = ""Albuquerque, New Mexico"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.clpsych-1.14/"",
+    doi = ""10.18653/v1/2025.clpsych-1.14"",
+    pages = ""172--180"",
+    ISBN = ""979-8-89176-226-8"",
+    abstract = ""This study presents a systematic comparison of three approaches for the analysis of mental health text using large language models (LLMs): prompt engineering, retrieval augmented generation (RAG), and fine-tuning. Using LLaMA 3, we evaluate these approaches on emotion classification and mental health condition detection tasks across two datasets. Fine-tuning achieves the highest accuracy (91{\%} for emotion classification, 80{\%} for mental health conditions) but requires substantial computational resources and large training sets, while prompt engineering and RAG offer more flexible deployment with moderate performance (40-68{\%} accuracy). Our findings provide practical insights for implementing LLM-based solutions in mental health applications, highlighting the trade-offs between accuracy, computational requirements, and deployment flexibility.""
+}",A Systematic Evaluation of LLM Strategies for Mental Health Text Analysis: Fine-tuning vs. Prompt Engineering vs. RAG,2025, ACL CLPsych 2025,Mental Health,EvaluationFramework,Human Trainee,Expert Principles,No,,No,No,No,No,Yes,No,No,No,No,No,Yes,No,"Accuracy, F1 score (macro), Precision, Recall",Strong,,No,,Full Disclosure,Weak,DSM/Emotion Theory,No,,No,No,No,Yes,Yes,Yes,No,No,Yes,No,Yes,
+92,Basar2025How,"@inproceedings{basar-etal-2025-well,
+    title = ""How Well Can Large Language Models Reflect? A Human Evaluation of {LLM}-generated Reflections for Motivational Interviewing Dialogues"",
+    author = ""Basar, Erkan  and
+      Sun, Xin  and
+      Hendrickx, Iris  and
+      de Wit, Jan  and
+      Bosse, Tibor  and
+      De Bruijn, Gert-Jan  and
+      Bosch, Jos A.  and
+      Krahmer, Emiel"",
+    editor = ""Rambow, Owen  and
+      Wanner, Leo  and
+      Apidianaki, Marianna  and
+      Al-Khalifa, Hend  and
+      Eugenio, Barbara Di  and
+      Schockaert, Steven"",
+    booktitle = ""Proceedings of the 31st International Conference on Computational Linguistics"",
+    month = jan,
+    year = ""2025"",
+    address = ""Abu Dhabi, UAE"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.coling-main.135/"",
+    pages = ""1964--1982"",
+    abstract = ""Motivational Interviewing (MI) is a counseling technique that promotes behavioral change through reflective responses to mirror or refine client statements. While advanced Large Language Models (LLMs) can generate engaging dialogues, challenges remain for applying them in a sensitive context such as MI. This work assesses the potential of LLMs to generate MI reflections via three LLMs: GPT-4, Llama-2, and BLOOM, and explores the effect of dialogue context size and integration of MI strategies for reflection generation by LLMs. We conduct evaluations using both automatic metrics and human judges on four criteria: appropriateness, relevance, engagement, and naturalness, to assess whether these LLMs can accurately generate the nuanced therapeutic communication required in MI. While we demonstrate LLMs' potential in generating MI reflections comparable to human therapists, content analysis shows that significant challenges remain. By identifying the strengths and limitations of LLMs in generating empathetic and contextually appropriate reflections in MI, this work contributes to the ongoing dialogue in enhancing LLM{'}s role in therapeutic counseling.""
+}",How Well Can Large Language Models Reflect? A Human Evaluation of LLM-generated Reflections for Motivational Interviewing Dialogues,2025,ACL COLING,Counseling,EvaluationFramework,Therapist Agent,Surface Persona,No,,No,Yes,No,No,Yes,Yes,Yes,No,No,No,Yes,No,"Automatic metrics: text length, BERTScore, BLEURT. Human evaluation criteria: appropriateness, specificity, naturalness, engagement. Ranking: TrueSkill.",Partial,,Yes,Short Multi-turn,Full Disclosure,Weak,Motivational Interviewing (MI) and Motivational Interviewing Skills Code (MISC),No,ICC / Kendall's Tau,No,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,
+93,Feng2025Reframe,"@inproceedings{feng-etal-2025-reframe,
+    title = ""Reframe Your Life Story: Interactive Narrative Therapist and Innovative Moment Assessment with Large Language Models"",
+    author = ""Feng, Yi  and
+      Wang, Jiaqi  and
+      Zhang, Wenxuan  and
+      Chen, Zhuang  and
+      Yutong, Shen  and
+      Xiao, Xiyao  and
+      Huang, Minlie  and
+      Jing, Liping  and
+      Yu, Jian"",
+    editor = ""Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet"",
+    booktitle = ""Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing"",
+    month = nov,
+    year = ""2025"",
+    address = ""Suzhou, China"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.emnlp-main.1245/"",
+    doi = ""10.18653/v1/2025.emnlp-main.1245"",
+    pages = ""24484--24509"",
+    ISBN = ""979-8-89176-332-6"",
+    abstract = ""Recent progress in large language models (LLMs) has opened new possibilities for mental health support, yet current approaches lack realism in simulating specialized psychotherapy and fail to capture therapeutic progression over time. Narrative therapy, which helps individuals transform problematic life stories into empowering alternatives, remains underutilized due to limited access and social stigma. We address these limitations through a comprehensive framework with two core components. First, **INT** (Interactive Narrative Therapist) simulates expert narrative therapists by planning therapeutic stages, guiding reflection levels, and generating contextually appropriate responses through retrieval-augmentation. Second, **IMA** (Innovative Moment Assessment) provides a therapy-centric evaluation method that quantifies effectiveness by tracking ``Innovative Moments'' (IMs), critical narrative shifts in client speech signaling therapy progress. Experimental results on 260 simulated clients and 230 human participants reveal that **INT** consistently outperforms standard methods in therapeutic quality and depth. We further demonstrate the effectiveness of **INT** in synthesizing high-quality support conversations to facilitate social applications.""
+}",Reframe Your Life Story: Interactive Narrative Therapist and InNovative Moment Assessment with Large Language Models,2025,EMNLP 2025,Mental Health,SimulationFramework,Therapist Agent,Expert Principles,Yes,"The system uses a formal planning space Φ = (S, L) where S = {s1, s2, s3, s4} deNotes four progressive therapeutic stages (Trust Building, Problem Externalization, Re-authoring Conversation, Re-membering Conversation) and Li = {l1 i, l2 i, ..., lni i} deNotes reflection levels within each stage. For each dialogue turn t, a stage-tracking instruction with an LLM first determines the appropriate therapeutic stage based on dialogue history and current client utterance, then a reflection-tracking instruction selects the appropriate reflection depth within that stage based on client narrative position, emotional readiness, and previous reflection levels.",Yes,Yes,Yes,Yes,Yes,No,No,No,Yes,Yes,Yes,No,"Therapeutic Dimensions (5-point Likert scale): Reassuring, Empowering, Transformative, Reconnecting, Average; InNovative Moment Assessment: IM Salience for Action I, Reflection I, Protest I, Action II, Reflection II, Protest II; Standard Metrics: BLEU-1, BLEU-2, ROUGE-L, METEOR, Extrema; Human Evaluation: Fluency, Identification, Comforting, Suggestion, Overall",Strong,Dynamic,Yes,Extended Dialogue,Full Disclosure,Strong,"Narrative Therapy (White and Epston, 1990; White, 2007); InNovative Moments Coding System / IMCS (Gonçalves et al., 2011, 2012; MontesaNo et al., 2017)",Yes,Cohen's kappa (Cohen's κ),Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,No,Yes,
+94,Xu2025MultiAgentESC,"@inproceedings{xu-etal-2025-multiagentesc,
+    title = ""{M}ulti{A}gent{ESC}: A {LLM}-based Multi-Agent Collaboration Framework for Emotional Support Conversation"",
+    author = ""Xu, Yangyang  and
+      Hu, Jinpeng  and
+      Zhao, Zhuoer  and
+      Duan, Zhangling  and
+      Sun, Xiao  and
+      Yang, Xun"",
+    editor = ""Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet"",
+    booktitle = ""Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing"",
+    month = nov,
+    year = ""2025"",
+    address = ""Suzhou, China"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.emnlp-main.232/"",
+    doi = ""10.18653/v1/2025.emnlp-main.232"",
+    pages = ""4665--4681"",
+    ISBN = ""979-8-89176-332-6"",
+    abstract = ""The development of Emotional Support Conversation (ESC) systems is critical for delivering mental health support tailored to the needs of help-seekers. Recent advances in large language models (LLMs) have contributed to progress in this domain, while most existing studies focus on generating responses directly and overlook the integration of domain-specific reasoning and expert interaction.Therefore, in this paper, we propose a training-free Multi-Agent collaboration framework for ESC (MultiAgentESC).The framework is designed to emulate the human-like process of providing emotional support through three stages: dialogue analysis, strategy deliberation, and response generation.At each stage, a multi-agent system is employed to iteratively enhance information understanding and reasoning, simulating real-world decision-making processes by incorporating diverse interactions among these expert agents.Additionally, we introduce a novel response-centered approach to handle the one-to-many problem on strategy selection, where multiple valid strategies are initially employed to generate diverse responses, followed by the selection of the optimal response through multi-agent collaboration.Experiments on the ESConv dataset reveal that our proposed framework excels at providing emotional support as well as diversifying support strategy selection.""
+}",MultiAgentESC: A LLM-based Multi-Agent Collaboration Framework for Emotional Support Conversation,2025,EMNLP 2025,"Emotional Support Conversation, Mental Health, Counseling",SimulationFramework,Therapist Agent,Expert Principles,No,,Yes,No,No,Yes,Yes,No,Yes,No,No,No,Yes,Yes,"Distinct-1 (D-1), Distinct-2 (D-2), BLEU-1 (B-1), BLEU-2 (B-2), BLEU-3 (B-3), F1, ROUGE-L (R-L), Fluency, Identification, Comforting, Suggestion, Overall",Mentioned,Pattern-level,Yes,Extended Dialogue,Full Disclosure,Weak,"Social interdependence theory (Johnson, 2003); Helping Skills Theory (Hill and O'Brien, 1999)",No,,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,No,Yes,
+95,Kim2025MIRROR,"@inproceedings{kim-etal-2025-mirror,
+    title = ""{MIRROR}: Multimodal Cognitive Reframing Therapy for Rolling with Resistance"",
+    author = ""Kim, Subin  and
+      Kim, Hoonrae  and
+      Lee, Jihyun  and
+      Jeon, Yejin  and
+      Lee, Gary"",
+    editor = ""Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet"",
+    booktitle = ""Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing"",
+    month = nov,
+    year = ""2025"",
+    address = ""Suzhou, China"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.emnlp-main.751/"",
+    doi = ""10.18653/v1/2025.emnlp-main.751"",
+    pages = ""14840--14869"",
+    ISBN = ""979-8-89176-332-6"",
+    abstract = ""Recent studies have explored the use of large language models (LLMs) in psychotherapy; however, text-based cognitive behavioral therapy (CBT) models often struggle with client resistance, which can weaken therapeutic alliance. To address this, we propose a multimodal approach that incorporates nonverbal cues, which allows the AI therapist to better align its responses with the client{'}s negative emotional state.Specifically, we introduce a new synthetic dataset, Mirror (Multimodal Interactive Rolling with Resistance), which is a novel synthetic dataset that pairs each client{'}s statements with corresponding facial images. Using this dataset, we train baseline vision language models (VLMs) so that they can analyze facial cues, infer emotions, and generate empathetic responses to effectively manage client resistance.These models are then evaluated in terms of both their counseling skills as a therapist, and the strength of therapeutic alliance in the presence of client resistance. Our results demonstrate that Mirror significantly enhances the AI therapist{'}s ability to handle resistance, which outperforms existing text-based CBT approaches.Human expert evaluations further confirm the effectiveness of our approach in managing client resistance and fostering therapeutic alliance.""
+}",MIRROR: Multimodal Cognitive Reframing Therapy for Rolling with Resistance,2025,EMNLP 2025,"Counseling, Therapy, Mental Health",SimulationFramework/Dataset,Client Agent,Behavioral State Model,Yes,"Turn-level facial expressions are synthesized per dialogue turn to reflect the client's evolving emotional state. The model receives a facial image at each turn and generates emotional captioning to guide the therapist response, enabling dynamic state tracking across the session.",Yes,No,No,Yes,No,No,No,No,Yes,No,Yes,Yes,"COUNSELINGEVAL (Understanding, Interpersonal Effectiveness, Collaboration, Guided Discovery, Focus) rated on a scale from 0 to 6; WAI-based Client Alliance (Goal, Approach, Affective Bond) scored from 1 to 5; Response Length (average and maximum tokens per turn); Pairwise comparison win rates from domain experts",Strong,Static,Yes,Extended Dialogue,Full Disclosure,Strong,Cognitive Behavioral Therapy (CBT),No,,No,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,No,Yes,
+97,Kim2025Can,"@inproceedings{kim-etal-2025-share-story,
+    title = ""Can You Share Your Story? Modeling Clients' Metacognition and Openness for {LLM} Therapist Evaluation"",
+    author = ""Kim, Minju  and
+      Yoo, Dongje  and
+      Hwang, Yeonjun  and
+      Kang, Minseok  and
+      Kim, Namyoung  and
+      Gwak, Minju  and
+      Kwak, Beong-woo  and
+      Chae, Hyungjoo  and
+      Kim, Harim  and
+      Lee, Yunjoong  and
+      Kim, Min Hee  and
+      Jung, Dayi  and
+      Chung, Kyong-Mee  and
+      Yeo, Jinyoung"",
+    editor = ""Che, Wanxiang  and
+      Nabende, Joyce  and
+      Shutova, Ekaterina  and
+      Pilehvar, Mohammad Taher"",
+    booktitle = ""Findings of the Association for Computational Linguistics: ACL 2025"",
+    month = jul,
+    year = ""2025"",
+    address = ""Vienna, Austria"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.findings-acl.1332/"",
+    doi = ""10.18653/v1/2025.findings-acl.1332"",
+    pages = ""25943--25962"",
+    ISBN = ""979-8-89176-256-5"",
+    abstract = ""Understanding clients' thoughts and beliefs is fundamental in counseling, yet current evaluations of LLM therapists often fail to assess this ability. Existing evaluation methods rely on client simulators that clearly disclose internal states to the therapist, making it difficult to determine whether an LLM therapist can uncover unexpressed perspectives. To address this limitation, we introduce MindVoyager, a novel evaluation framework featuring a controllable and realistic client simulator which dynamically adapts itself based on the ongoing counseling session, offering a more realistic and challenging evaluation environment. We further introduce evaluation metrics that assess the exploration ability of LLM therapists by measuring their thorough understanding of client{'}s beliefs and thoughts.""
+}",Can You Share Your Story? Modeling Clients' Metacognition and Openness for LLM Therapist Evaluation,2025,ACL 2025,"Counseling, Therapy, Mental Health",EvaluationFramework,Client Agent,Cognitive Model,Yes,"The cognitive diagram of the client simulator is updated throughout the counseling sessions based on two criteria evaluated every k or l turns: (1) Has rapport been established between the client and the LLM therapist? (2) Has the LLM therapist helped the client explore themselves? The cognitive mediator evaluates the ongoing session to judge rapport and determines the number of accessible elements in the external diagram E. Based on metacognition level, the number of turns l determines how frequently the cognitive mediator evaluates therapist utterances to progressively unmask parts of the internal cognitive diagram.",Yes,No,No,Yes,Yes,No,Yes,No,Yes,No,Yes,Yes,"Cognitive Diagram Exposure Rate (CDER), Induced Diagram Similarity Score (IDSS), Cognitive Therapy Rating Scale (CTRS)",Strong,Pattern-level,Yes,Extended Dialogue,Full Disclosure,Strong,"Cognitive Behavioral Therapy (CBT), Cognitive Conceptualization Diagram (CCD)",No,,No,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Yes,No,
+99,Liu2025Eeyore,"@inproceedings{liu-etal-2025-eeyore,
+    title = ""Eeyore: Realistic Depression Simulation via Expert-in-the-Loop Supervised and Preference Optimization"",
+    author = ""Liu, Siyang  and
+      Brie, Bianca  and
+      Li, Wenda  and
+      Biester, Laura  and
+      Lee, Andrew  and
+      Pennebaker, James  and
+      Mihalcea, Rada"",
+    editor = ""Che, Wanxiang  and
+      Nabende, Joyce  and
+      Shutova, Ekaterina  and
+      Pilehvar, Mohammad Taher"",
+    booktitle = ""Findings of the Association for Computational Linguistics: ACL 2025"",
+    month = jul,
+    year = ""2025"",
+    address = ""Vienna, Austria"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.findings-acl.707/"",
+    doi = ""10.18653/v1/2025.findings-acl.707"",
+    pages = ""13750--13770"",
+    ISBN = ""979-8-89176-256-5"",
+    abstract = ""Large Language Models (LLMs) have been previously explored for mental healthcare training and therapy client simulation, but they still fall short in authentically capturing diverse client traits and psychological conditions. We introduce \textbf{Eeyore} , an 8B model optimized for realistic depression simulation through a structured alignment framework, incorporating expert input at every stage.First, we systematically curate real-world depression-related conversations, extracting depressive traits to guide data filtering and psychological profile construction, and use this dataset to instruction-tune Eeyore for profile adherence. Next, to further enhance realism, Eeyore undergoes iterative preference optimization{---}first leveraging model-generated preferences and then calibrating with a small set of expert-annotated preferences.Throughout the entire pipeline, we actively collaborate with domain experts, developing interactive interfaces to validate trait extraction and iteratively refine structured psychological profiles for clinically meaningful role-play customization.Despite its smaller model size, the Eeyore depression simulation outperforms GPT-4o with SOTA prompting strategies, both in linguistic authenticity and profile adherence.""
+}",Eeyore: Realistic Depression Simulation via Expert-in-the-Loop Supervised and Preference Optimization,2025,ACL,Mental Health,SimulationFramework,Client Agent,Cognitive Model,No,,Yes,No,Yes,Yes,No,No,Yes,Yes,Yes,No,No,Yes,"Expert Evaluation: 5-point Likert scale on Contrast with AI-Like Responses, Linguistic Authenticity, Cognitive Pattern Authenticity, Subtle Emotional Expression, Profile Adherence and Personalization. Automatic Evaluation: 5-point Likert scale on Symptom Severity, Cognitive Distortion, Depression Severity, and Full Alignment Percentage.",Strong,Static,Yes,Extended Dialogue,Partial Disclosure,Strong,"DSM-V, Beck's cognitive theory, PHQ-9, DBI",No,Cohen's Kappa、Correlation Metrics、Win Rate with Expert Calibration,No,Yes,No,Yes,Yes,Yes,No,No,No,Yes,Yes,
+100,Wang2025Feel,"@inproceedings{wang-etal-2025-feel,
+    title = ""Feel the Difference? A Comparative Analysis of Emotional Arcs in Real and {LLM}-Generated {CBT} Sessions"",
+    author = ""Wang, Xiaoyi  and
+      Zhang, Jiwei  and
+      Zhang, Guangtao  and
+      Guo, Honglei"",
+    editor = ""Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet"",
+    booktitle = ""Findings of the Association for Computational Linguistics: EMNLP 2025"",
+    month = Nov,
+    year = ""2025"",
+    address = ""Suzhou, China"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.findings-emnlp.1089/"",
+    doi = ""10.18653/v1/2025.findings-emnlp.1089"",
+    pages = ""19999--20017"",
+    ISBN = ""979-8-89176-335-7"",
+    abstract = ""Synthetic therapy dialogues generated by large language models (LLMs) are increasingly used in mental health NLP to simulate counseling scenarios, train models, and supplement limited real-world data. However, it remains unclear whether these synthetic conversations capture the nuanced emotional dynamics of real therapy. In this work, we introduce RealCBT, a dataset of authentic cognitive behavioral therapy (CBT) dialogues, and conduct the first comparative analysis of emotional arcs between real and LLM-generated CBT sessions. We adapt the Utterance Emotion Dynamics framework to analyze fine-grained affective trajectories across valence, arousal, and dominance dimensions. Our analysis spans both full dialogues and individual speaker roles (counselor and client), using real sessions from the RealCBT dataset and synthetic dialogues from the CACTUS dataset. We find that while synthetic dialogues are fluent and structurally coherent, they diverge from real conversations in key emotional properties: real sessions exhibit greater emotional variability, more emotion-laden language, and more authentic patterns of reactivity and regulation. Moreover, emotional arc similarity remains low across all pairings, with especially weak alignment between real and synthetic speakers. These findings underscore the limitations of current LLM-generated therapy data and highlight the importance of emotional fidelity in mental health applications. To support future research, our dataset RealCBT is released at https://gitlab.com/xiaoyi.wang/realcbt-dataset.""
+}",Feel the Difference? A Comparative Analysis of Emotional Arcs in Real and LLM-Generated CBT Sessions,2025, EMNLP ,"Mental Health, Counseling, Therapy",Dataset / Benchmark/ComparativeAnalysis,Dual-Agent,Expert Principles,Yes,"10-word rolling window, advancing one word at a time; utterance-level aggregation for each speaker role separately",No,No,No,No,Yes,No,Yes,No,Yes,No,No,Yes,"Emotion Mean, Emotion Variability, Average Displacement Length, Emotion Rise Rate, Emotion Recovery Rate, Spearman correlation, Mann–Whitney U test",Mentioned,Dynamic,No,Extended Dialogue,No Disclosure,Strong,Cognitive Behavioral Therapy (CBT),,Majority voting among 3 LLMs; manual verification on 30% subset,,No,No,Yes,Yes,Yes,No,Yes,Yes,No,Yes,
+101,Samuel2025PersonaGym,"@inproceedings{samuel-etal-2025-personagym,
+    title = ""{P}ersona{G}ym: Evaluating Persona Agents and {LLM}s"",
+    author = ""Samuel, Vinay  and
+      Zou, Henry Peng  and
+      Zhou, Yue  and
+      Chaudhari, Shreyas  and
+      Kalyan, Ashwin  and
+      Rajpurohit, Tanmay  and
+      Deshpande, Ameet  and
+      Narasimhan, Karthik R  and
+      Murahari, Vishvak"",
+    editor = ""Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet"",
+    booktitle = ""Findings of the Association for Computational Linguistics: EMNLP 2025"",
+    month = Nov,
+    year = ""2025"",
+    address = ""Suzhou, China"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.findings-emnlp.368/"",
+    doi = ""10.18653/v1/2025.findings-emnlp.368"",
+    pages = ""6999--7022"",
+    ISBN = ""979-8-89176-335-7"",
+    abstract = ""Persona agents, which are LLM agents conditioned to act according to an assigned persona, enable contextually rich and user-aligned interactions across domains like education and healthcare.However, evaluating how faithfully these agents adhere to their personas remains a significant challenge, particularly in free-form settings that demand consistency across diverse, persona-relevant environments.We introduce PersonaGym, the first dynamic evaluation framework for persona agents, and PersonaScore, a human-aligned automatic metric grounded in decision theory that enables comprehensive large-scale evaluation. Our evaluation of 10 leading LLMs across 200 personas and 10,000 questions reveals significant advancement opportunities.For example, GPT-4.1 had the exact same PersonaScore as LLaMA-3-8b despite being a more recent and advanced closed-source model. Importantly, increased model size and complexity do Not necessarily enhance persona agent capabilities, underscoring the need for algorithmic and architectural inNovation toward faithful, performant persona agents.""
+}",PersonaGym: Evaluating Persona Agents and LLMs,2025, EMNLP ,LLM Evaluation / Persona Agent / AI Safety,EvaluationFramework/Benchmark,Persona Agent,Surface Persona,No,,Yes,No,No,Yes,Yes,Yes,Yes,No,Yes,No,No,No,"PersonaScore, Action Justification, Expected Action, Linguistic Habits, Persona Consistency, Toxicity Control",Strong,Static,No,Single-turn,Full Disclosure,Strong,Decision Theory（决策理论）/Persona Consistency Theory（角色扮演一致性理论）/G-Eval Framwork,Yes,Fleiss' Kappa；Spearman ρ、Kendall-Tau τ（人机对齐）；Bootstrap + Fisher's z transformation,Yes,Yes,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,
+102,Chen2025MIND,"@inproceedings{chen-etal-2025-mind,
+    title = ""{MIND}: Towards Immersive Psychological Healing with Multi-Agent Inner Dialogue"",
+    author = ""Chen, Yujia  and
+      Li, Changsong  and
+      Wang, Yiming  and
+      Ju, Tianjie  and
+      Xiao, Qingqing  and
+      Zhang, Nan  and
+      Kong, Zifan  and
+      Wang, Peng  and
+      Yan, Binyu"",
+    editor = ""Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet"",
+    booktitle = ""Findings of the Association for Computational Linguistics: EMNLP 2025"",
+    month = Nov,
+    year = ""2025"",
+    address = ""Suzhou, China"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2025.findings-emnlp.499/"",
+    doi = ""10.18653/v1/2025.findings-emnlp.499"",
+    pages = ""9380--9413"",
+    ISBN = ""979-8-89176-335-7"",
+    abstract = ""Mental health issues are worsening in today{'}s competitive society, such as depression and anxiety. Traditional healings like counseling and chatbots fail to engage effectively, they often provide generic responses lacking emotional depth. Although large language models (LLMs) have the potential to create more human-like interactions, they still struggle to capture subtle emotions. This requires LLMs to be equipped with human-like adaptability and warmth. To fill this gap, we propose the $MIND$ ($M$ulti-agent $IN$ner $D$ialogue), a Novel paradigm that provides more immersive psychological healing environments. Considering the strong generative and role-playing ability of LLM agents, we predefine an interactive healing framework and assign LLM agents different roles within the framework to engage in interactive inner dialogues with users, thereby providing an immersive healing experience. We conduct extensive human experiments in various real-world healing dimensions, and find that $MIND$ provides a more user-friendly experience than traditional paradigms. This demonstrates that $MIND$ effectively leverages the significant potential of LLMs in psychological healing.""
+}",MIND: Towards Immersive Psychological Healing with Multi-Agent Inner Dialogue,2025, EMNLP ,Mental Health,SimulationFramework,Client Agent,Dynamic Traits,Yes,"Memory Summarization Mechanism: Recursively compares new and old memories, merges redundant information, and retains core therapeutic cues (e.g., ""from self-denial to initial reflection""). Storyline Progression: Strategist evaluates the Devil's mindset evolution at each round to determine whether cognitive restructuring has occurred.",Yes,Yes,Yes,No,No,No,Yes,Yes,Yes,Yes,Yes,Yes,"Dialogue Stability (DS), Coherence & Fluency (CF), Emotional Expression (EE), Personalization & Diversity (PD), Accuracy (Acc), Immersion (IM), Coherence (CO), Engagement (EN), Emotional Relief (ER), Satisfaction (SA), Interest (IN), Positive and Negative Affect Schedule (PANAS)",Partial,Pattern-level,Yes,Extended Dialogue,Full Disclosure,Weak,"Cognitive Behavioral Therapy (CBT), Dialectical Behavior Therapy (DBT)",No,,No,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Yes,No,
+104,Berrezueta-Guzman2024Future,"@Article{healthcare12060683,
+AUTHOR = {Berrezueta-Guzman, Santiago and Kandil, Mohanad and Martín-Ruiz, María-Luisa and Pau de la Cruz, Iván and Krusche, Stephan},
+TITLE = {Future of ADHD Care: Evaluating the Efficacy of ChatGPT in Therapy Enhancement},
+JOURNAL = {Healthcare},
+VOLUME = {12},
+YEAR = {2024},
+NUMBER = {6},
+ARTICLE-NUMBER = {683},
+URL = {https://www.mdpi.com/2227-9032/12/6/683},
+PubMedID = {38540647},
+ISSN = {2227-9032},
+ABSTRACT = {This study explores the integration of large language models (LLMs), like ChatGPT, to improve attention deficit hyperactivity disorder (ADHD) treatments. Utilizing the Delphi method for its systematic forecasting capabilities, we gathered a panel of child ADHD therapy experts. These experts interacted with our custom ChatGPT through a specialized interface, thus engaging in simulated therapy scenarios with behavioral prompts and commands. Using empirical tests and expert feedback, we aimed to rigorously evaluate ChatGPT’s effectiveness in therapy settings to integrate AI into healthcare responsibly. We sought to ensure that AI contributes positively and ethically to therapy and patient care, thus filling a gap in ADHD treatment methods. Findings show ChatGPT’s empathy, adaptability, and communication strengths, thereby highlighting its potential to significantly improve ADHD care. The study points to ChatGPT’s capacity to transform therapy practices through personalized and responsive patient care. However, it also Notes the need for enhancements in privacy, cultural sensitivity, and interpreting Nonverbal cues for ChatGPT’s effective healthcare integration. Our research advocates for merging techNological inNovation with a comprehensive understanding of patient needs and ethical considerations, thereby aiming to pioneer a new era of AI-assisted therapy. We emphasize the ongoing refinement of AI tools like ChatGPT to meet ADHD therapy and patient care requirements more effectively.},
+DOI = {10.3390/healthcare12060683}
+}
+
+
+
+",Future of ADHD Care: Evaluating the Efficacy of ChatGPT in Therapy Enhancement,2024,MDPI(Healthcare),Healthcare / Occupational Therapy,EvaluationFramework,Therapist Agent,Expert Principles,No,,Yes,No,Yes,No,No,Yes,Yes,Yes,No,Yes,Yes,Yes,"Emotional Understanding and Empathy (Insight into Patient's Emotional State, Empathetic Response to Emotional Indicators, Consistency and Appropriateness of Empathy, Validation of Patient's Experiences and Emotions, Facilitation of Safe Emotional Expression); Communication and Language (Clarity and Comprehensibility of Communication, Coherence and Relevance in Conversation, Clarity and Conciseness of Information Provided, Handling Misunderstandings, Multilingual Interaction Handling); Engagement and Motivation (Engaging and Motivational Language Usage, Engagement Level in Therapy Sessions, Promotion of Active Participation, Sustaining Patient Interest, Encouragement of AutoNomy and Self-expression, Positive Session Atmosphere); Adaptability and Flexibility (Adaptability to Changing Conversation Dynamics, Response to Novel or Unexpected Inputs, Ability to Redirect Conversation, Flexibility in Conversational Style, Adjustment Based on Feedback, Incorporation of Continuous Improvement Feedback); Therapeutic Effectiveness and Suitability (Overall Effectiveness as a Therapeutic Tool, Meaningful Contributions to Therapy, Suitability for Diverse Patient Groups, Recommendation for Clinical Use, Potential for Future Applications, Compatibility with Various Therapeutic Modalities); Cultural and Sensory Sensitivity (Cultural and Linguistic Sensitivity, Responsiveness to Nonverbal Cues); Stress and Coping Support (Reduction of Patient Stress Levels, Support in Developing Coping Strategies, Enhancement of Communication Skills, Tailored and Personalized Responses); Confidentiality and Privacy (Maintaining Confidentiality and Privacy); Rapport and Trust Building (Building Trust with Patient, Rapport Establishment, Creation of a Safe Environment, Respect for Patient's Boundaries, Consistent Therapeutic Presence)",Mentioned,Static,Yes,Single-turn,Partial Disclosure,Weak,ADHD Clinical Guidelines (American Academy of Pediatrics) + CBT,No,Delphi consensus method,No,Yes,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,
+106,Na2024CBT-LLM,"@inproceedings{na-2024-cbt,
+    title = ""{CBT}-{LLM}: A {C}hinese Large Language Model for Cognitive Behavioral Therapy-based Mental Health Question Answering"",
+    author = ""Na, Hongbin"",
+    editor = ""Calzolari, Nicoletta  and
+      Kan, Min-Yen  and
+      Hoste, Veronique  and
+      Lenci, Alessandro  and
+      Sakti, Sakriani  and
+      Xue, Nianwen"",
+    booktitle = ""Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024)"",
+    month = may,
+    year = ""2024"",
+    address = ""ToriNo, Italia"",
+    publisher = ""ELRA and ICCL"",
+    url = ""https://aclanthology.org/2024.lrec-main.261/"",
+    pages = ""2930--2940"",
+    abstract = ""The recent advancements in artificial intelligence highlight the potential of language models in psychological health support. While models trained on data from mental health service platform have achieved preliminary success, challenges persist in areas such as data scarcity, quality, and ensuring a solid foundation in psychological techniques. To address these challenges, this study introduces a Novel approach to enhance the precision and efficacy of psychological support through large language models. Specifically, we design a specific prompt derived from principles of Cognitive Behavioral Therapy (CBT) and have generated the CBT QA dataset, specifically for Chinese psychological health Q{\&}A based on CBT structured intervention strategies. Unlike previous methods, our dataset emphasizes professional and structured response. Utilizing this dataset, we fine-tuned the large language model, giving birth to CBT-LLM, the large-scale language model specifically designed for Cognitive Behavioral Therapy techniques. Empirical evaluations demonstrate that CBT-LLM excels in generating structured, professional, and highly relevant responses in psychological health support tasks, showcasing its practicality and quality. The model is available on Hugging Face: https://huggingface.co/Hongbin37/CBT-LLM.""
+}",CBT-LLM: A Chinese Large Language Model for Cognitive Behavioral Therapy-based Mental Health Question Answering,2024,ACL,Mental Health,MentalHealthQASystem/Dataset,Therapist Agent,Expert Principles,No,,Yes,No,No,No,Yes,No,No,No,Yes,No,Yes,No,"BLEU, METEOR, CHRF, BLEURT, BERTSCORE (automatic); Relevance Measure, CBT Structure Measure, helpfulness Measure (human); Accuracy, Recall, F1 score (cognitive distortion recognition)",Strong,,Yes,Single-turn,Full Disclosure,Strong,Cognitive Behavioral Therapy (CBT),No,,No,Yes,No,Yes,Yes,Yes,No,No,No,No,Yes,
+107,Sharma2023Cognitive,"@inproceedings{sharma-etal-2023-cognitive,
+    title = ""Cognitive Reframing of Negative Thoughts through Human-Language Model Interaction"",
+    author = ""Sharma, Ashish  and
+      Rushton, Kevin  and
+      Lin, Inna  and
+      Wadden, David  and
+      Lucas, Khendra  and
+      Miner, Adam  and
+      Nguyen, Theresa  and
+      Althoff, Tim"",
+    editor = ""Rogers, Anna  and
+      Boyd-Graber, Jordan  and
+      Okazaki, Naoaki"",
+    booktitle = ""Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"",
+    month = jul,
+    year = ""2023"",
+    address = ""Toronto, Canada"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2023.acl-long.555/"",
+    doi = ""10.18653/v1/2023.acl-long.555"",
+    pages = ""9977--10000"",
+    abstract = ""A proven therapeutic technique to overcome negative thoughts is to replace them with a more hopeful ``reframed thought.'' Although therapy can help people practice and learn this Cognitive Reframing of Negative Thoughts, clinician shortages and mental health stigma commonly limit people{'}s access to therapy. In this paper, we conduct a human-centered study of how language models may assist people in reframing negative thoughts. Based on psychology literature, we define a framework of seven linguistic attributes that can be used to reframe a thought. We develop automated metrics to measure these attributes and validate them with expert judgements from mental health practitioners. We collect a dataset of 600 situations, thoughts and reframes from practitioners and use it to train a retrieval-enhanced in-context learning model that effectively generates reframed thoughts and controls their linguistic attributes. To investigate what constitutes a ``high-quality'' reframe, we conduct an IRB-approved randomized field study on a large mental health website with over 2,000 participants. Amongst other findings, we show that people prefer highly empathic or specific reframes, as opposed to reframes that are overly positive. Our findings provide key implications for the use of LMs to assist people in overcoming negative thoughts.""
+}",Cognitive Reframing of Negative Thoughts through Human-Language Model Interaction,2023,ACL,Mental Health,CognitiveReframingFramework,Human Trainee,Expert Principles,No,,Yes,Yes,Yes,No,Yes,Yes,No,No,No,No,Yes,Yes,"BLEU, ROUGE-1, ROUGE-L, BERTScore, Relatability (1-5 scale), Helpfulness (1-5 scale), Memorability (5-point Likert scale), Pearson correlation with human judgments, attribute-specific automated metrics (addressing thinking traps classification, reasoning strength, positivity score, empathy score, actionability score, specificity score, Coleman-Liau Index readability)",Strong,,Yes,Single-turn,Full Disclosure,Strong,CBT (Cognitive Behavioral Therapy) + Cognitive Distortion Theory + Behavioral Activation,No,Pearson correlation/p-values with 95% bootstrapped CIs,No,Yes,No,Yes,Yes,Yes,No,No,Yes,No,Yes,
+108,Kang2024Can,"@inproceedings{kang-etal-2024-large,
+    title = ""Can Large Language Models be Good Emotional Supporter? Mitigating Preference Bias on Emotional Support Conversation"",
+    author = ""Kang, Dongjin  and
+      Kim, Sunghwan  and
+      Kwon, Taeyoon  and
+      Moon, Seungjun  and
+      Cho, Hyunsouk  and
+      Yu, Youngjae  and
+      Lee, Dongha  and
+      Yeo, Jinyoung"",
+    editor = ""Ku, Lun-Wei  and
+      Martins, Andre  and
+      Srikumar, Vivek"",
+    booktitle = ""Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"",
+    month = aug,
+    year = ""2024"",
+    address = ""Bangkok, Thailand"",
+    publisher = ""Association for Computational Linguistics"",
+    url = ""https://aclanthology.org/2024.acl-long.813/"",
+    doi = ""10.18653/v1/2024.acl-long.813"",
+    pages = ""15232--15261"",
+    abstract = ""Emotional Support Conversation (ESC) is a task aimed at alleviating individuals' emotional distress through daily conversation. Given its inherent complexity and Non-intuitive nature, ESConv dataset incorporates support strategies to facilitate the generation of appropriate responses. Recently, despite the remarkable conversational ability of large language models (LLMs), previous studies have suggested that they often struggle with providing useful emotional support. Hence, this work initially analyzes the results of LLMs on ESConv, revealing challenges in selecting the correct strategy and a Notable preference for a specific strategy. Motivated by these, we explore the impact of the inherent preference in LLMs on providing emotional support, and consequently, we observe that exhibiting high preference for specific strategies hinders effective emotional support, aggravating its robustness in predicting the appropriate strategy. Moreover, we conduct a methodological study to offer insights into the necessary approaches for LLMs to serve as proficient emotional supporters. Our findings emphasize that (1) low preference for specific strategies hinders the progress of emotional support, (2) external assistance helps reduce preference bias, and (3) existing LLMs alone canNot become good emotional supporters. These insights suggest promising avenues for future research to enhance the emotional intelligence of LLMs.""
+}",Can Large Language Models be Good Emotional Supporter? Mitigating Preference Bias on Emotional Support Conversation,2024,ACL,Emotional Support Conversation/ Mental Health NLP,EvaluationFramework,Therapist Agent,Expert Principles,No,,No,Yes,No,No,Yes,No,No,No,Yes,No,Yes,Yes,"Proficiency (F1 score per strategy), Macro F1 score Q, Weighted F1 score, Preference pi (Bradley-Terry model), Preference Bias B (standard deviation of preferences), BLEU-2, BLEU-4, ROUGE-L, METEOR, CIDEr, Distinct-1, Distinct-2, Acceptance, Effectiveness, Sensitivity, Alignment, Seeker's Satisfaction (Sat.)",Strong,Static,Yes,Extended Dialogue,Full Disclosure,Strong,Hill's Helping Skills Theory/ESC Framework,No,,No,Yes,No,Yes,Yes,Yes,No,Yes,Yes,No,Yes,
+109,Chen2023LLM-empowered,"@misc{chen2023llmempoweredchatbotspsychiatristpatient,
+      title={LLM-empowered Chatbots for Psychiatrist and Patient Simulation: Application and Evaluation}, 
+      author={Siyuan Chen and Mengyue Wu and Kenny Q. Zhu and Kunyao Lan and Zhiling Zhang and Lyuchun Cui},
+      year={2023},
+      eprint={2305.13614},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2305.13614}, 
+}",LLM-empowered Chatbots for Psychiatrist and Patient Simulation: Application and Evaluation,2023,arXiv,Mental Health/Medical Education,SimulationFramework,Dual-Agent,Surface Persona,No,"The patient chatbot is prompted with instructions to have emotional fluctuations and show resistance during the conversation. To maintain these behaviors consistently, reminders are dynamically appended to the most recent dialogue turn without persisting in the dialogue history, ensuring the chatbot maintains colloquial language and resistance even in later conversation rounds.",Yes,Yes,Yes,No,Yes,No,Yes,Yes,Yes,No,Yes,Yes,"Doctor Chatbot Human Evaluation: Fluency, Empathy, Expertise, Engagement. Patient Chatbot Human Evaluation: Resemblance (Mental State, Life Experience, Language Style), Rationality. Doctor Chatbot Automatic: diagNosis accuracy, symptom recall, in-depth ratio, avg question num, symptom precision. Patient Chatbot Automatic: wrong symptom ratio, Distinct-1, human-like word num, robot-like word num, unmentioned symptom ratio.",Partial,Static,Yes,Extended Dialogue,Full Disclosure,Weak,"DSM-5 (DiagNostic and Statistical Manual of Mental Disorders), Beck Depression Inventory (BDI-II)",No,,No,Yes,No,Yes,Yes,Yes,No,No,Yes,Yes,No,
+110,Schmidgall2025AgentClinic,"@misc{schmidgall2025agentclinicmultimodalagentbenchmark,
+      title={AgentClinic: a multimodal agent benchmark to evaluate AI in simulated clinical environments}, 
+      author={Samuel Schmidgall and Rojin Ziaei and Carl Harris and Eduardo Reis and Jeffrey Jopling and Michael Moor},
+      year={2025},
+      eprint={2405.07960},
+      archivePrefix={arXiv},
+      primaryClass={cs.HC},
+      url={https://arxiv.org/abs/2405.07960}, 
+}",AgentClinic: a multimodal agent benchmark to evaluate AI in simulated clinical environments,2025,arXiv,Clinical Decision Making/LLM Evaluation,SimulationFramework/Benchmark,Dual-Agent,Surface Persona,No,"Doctor agents are limited to N=20 interaction turns before a diagNosis must be made. The Notebook tool enables experiential learning that persists across patient cases—agents can write, edit, and retrieve Notes from prior interactions to improve future diagNostic performance. Biases are introduced via system prompts that persistently affect agent behavior throughout the dialogue. Experiments vary interaction time (N=10, 15, 20, 25, 30) to test the effect of limited vs. extended interaction on diagNostic accuracy.",Yes,No,No,Yes,Yes,No,Yes,No,Yes,No,Yes,Yes,"DiagNostic accuracy, Patient confidence (1-10), Patient compliance (1-10), Patient consultation rating (1-10), Normalized accuracy (Accuracybias/AccuracyNo Bias), Clinician ratings for Doctor realism, Patient realism, Measurement realism, and Empathy (1-10)",Mentioned,Static,Yes,Extended Dialogue,Full Disclosure,Strong,OSCE + Cognitive Bias + Implicit Bias,No,95% CI via bootstrap,No,Yes,No,Yes,Yes,Yes,No,Yes,Yes,Yes,Yes,
+111,Wang2025Psychological,"@misc{wang2025psychologicalcounselingachievedovernight,
+      title={Psychological Counseling CanNot Be Achieved Overnight: Automated Psychological Counseling Through Multi-Session Conversations}, 
+      author={Junzhe Wang and Bichen Wang and Xing Fu and Yixin Sun and Yanyan Zhao and Bing Qin},
+      year={2025},
+      eprint={2506.06626},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2506.06626}, 
+}",Psychological Counseling CanNot Be Achieved Overnight: Automated Psychological Counseling Through Multi-Session Conversations,2025,arXiv,"Mental Health, Psychological Counseling/Multi-Session","SimulationFramework, Dataset",Therapist Agent,Dynamic Traits,Yes,"Dynamic states capture session-by-session changes including the client's evolving recent life events, emotional state, and cognitive state. These are updated for each counseling session to reflect the client's progression. The model also uses session-level memory (Counseling Notes, Counseling Summary) to track and update client state across multiple sessions.",Yes,No,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,"Helpfulness, Empathy, Guidance, Coherence, Working Alliance Inventory (WAI) - Goal Agreement, Task Agreement, Emotional Bond, Positive and Negative Affect Schedule (PANAS), BLEU-1, BLEU-2, F1",Strong,Dynamic,Yes,Longitudinal,Full Disclosure,Strong,Cognitive Behavioral Therapy (CBT)/Working Alliance Theory,No,,No,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,No,
+112,Tanana2019Development,"@Article{info:doi/10.2196/12529,
+author=""Tanana, Michael J
+and Soma, Christina S
+and Srikumar, Vivek
+and Atkins, David C
+and Imel, Zac E"",
+title=""Development and Evaluation of ClientBot: Patient-Like Conversational Agent to Train Basic Counseling Skills"",
+journal=""J Med Internet Res"",
+year=""2019"",
+month=""Jul"",
+day=""15"",
+volume=""21"",
+number=""7"",
+pages=""e12529"",
+keywords=""psychotherapy training; interactive learning; conversational agents; deep learning"",
+abstract=""Background: Training therapists is both expensive and time-consuming. Degree--based training can require tens of thousands of dollars and hundreds of hours of expert instruction. Counseling skills practice often involves role-plays, standardized patients, or practice with real clients. Performance--based feedback is critical for skill development and expertise, but trainee therapists often receive minimal and subjective feedback, which is distal to their skill practice. Objective: In this study, we developed and evaluated a patient-like neural conversational agent, which provides real-time feedback to trainees via chat--based interaction. Methods: The text--based conversational agent was trained on an archive of 2354 psychotherapy transcripts and provided specific feedback on the use of basic interviewing and counseling skills (ie, open questions and reflections---summary statements of what a client has said). A total of 151 Nontherapists were randomized to either (1) immediate feedback on their use of open questions and reflections during practice session with ClientBot or (2) initial education and encouragement on the skills. Results: Participants in the ClientBot condition used 91{\%} (21.4/11.2) more reflections during practice with feedback (P<.001) and 76{\%} (14.1/8) more reflections after feedback was removed (P<.001) relative to the control group. The treatment group used more open questions during training but Not after feedback was removed, suggesting that certain skills may Not improve with performance--based feedback. Finally, after feedback was removed, the ClientBot group used 31{\%} (32.5/24.7) more listening skills overall (P<.001). Conclusions: This proof-of-concept study demonstrates that practice and feedback can improve trainee use of basic counseling skills. "",
+issn=""1438-8871"",
+doi=""10.2196/12529"",
+url=""https://www.jmir.org/2019/7/e12529/"",
+url=""https://doi.org/10.2196/12529"",
+url=""http://www.ncbi.nlm.nih.gov/pubmed/31309929""
+}
+
+",Development and Evaluation of ClientBot: Patient-Like Conversational Agent to Train Basic Counseling Skills,2019,JMIR,"Counseling, Psychotherapy Training, Mental Health/Conversational Agents",SimulationFramework/Training Tool,Client Agent,Surface Persona,No,,No,Yes,Yes,No,Yes,No,Yes,No,Yes,Yes,Yes,No,"Percentage of reflections, percentage of open questions, percentage of unique utterances, satisfaction scores",Strong,Dynamic,Yes,Extended Dialogue,Partial Disclosure,Strong,Motivational Interviewing (MI)+MISC,,,Yes,No,No,Yes,Yes,No,No,No,Yes,No,No
