@@ -57,13 +57,39 @@ def triple_tab(rows: list[dict], col1: str, col2: str, col3: str) -> dict[tuple[
     return {k: sorted(v) for k, v in result.items()}
 
 
-def empty_depth_papers(rows: list[dict], level: str) -> list[str]:
-    """Papers with given Interaction_Level but empty Behavior_Eval_Depth."""
-    return sorted(
+def _classify_paper_row(row: dict, longi_keys: set[str]) -> str:
+    """Classify paper into Interaction Level row, handling longitudinal override."""
+    ck = row.get("Citation_Key", "").strip()
+    if ck in longi_keys:
+        return "Longitudinal"
+    return row.get("Interaction_Level", "").strip()
+
+
+def _classify_paper_col(row: dict) -> str:
+    """Classify paper into column: Static, Pattern-level, Dynamic, or (unspecified)."""
+    uds = row.get("Uses_Dynamic_State", "").strip().lower()
+    bed = row.get("Behavior_Eval_Depth", "").strip()
+    if uds == "yes":
+        return "Dynamic"
+    if bed == "Static":
+        return "Static"
+    if bed == "Pattern-level":
+        return "Pattern-level"
+    return "(unspecified)"
+
+
+def _table4_data(rows: list[dict]) -> dict[tuple[str, str], list[str]]:
+    """Build cross-tab for Table 4 using Uses_Dynamic_State and Has_Longitudinal_Eval."""
+    longi_keys = {
         r["Citation_Key"] for r in rows
-        if r.get("Interaction_Level", "").strip() == level
-        and r.get("Behavior_Eval_Depth", "").strip() == ""
-    )
+        if r.get("Has_Longitudinal_Eval", "").strip() == "Yes"
+    }
+    result: dict[tuple[str, str], list[str]] = {}
+    for r in rows:
+        row_label = _classify_paper_row(r, longi_keys)
+        col_label = _classify_paper_col(r)
+        result.setdefault((row_label, col_label), []).append(r["Citation_Key"])
+    return {k: sorted(v) for k, v in result.items()}
 
 
 # ---------------------------------------------------------------------------
@@ -282,7 +308,8 @@ def generate_table3_cite(rows: list[dict]) -> str:
 
 def generate_table4_main(rows: list[dict]) -> str:
     levels = ["Single-turn", "Short Multi-turn", "Extended Dialogue", "Longitudinal"]
-    tab = cross_tab(rows, "Interaction_Level", "Behavior_Eval_Depth")
+    cols = ["Static", "Pattern-level", "Dynamic", "(unspecified)"]
+    tab = _table4_data(rows)
 
     latex = r"""\begin{table*}[tbp]
 \centering
@@ -293,11 +320,8 @@ def generate_table4_main(rows: list[dict]) -> str:
 \midrule
 """
     for level in levels:
-        static_n = len(tab.get((level, "Static"), []))
-        pattern_n = len(tab.get((level, "Pattern-level"), []))
-        dynamic_n = len(tab.get((level, "Dynamic"), []))
-        unspec_n = len(empty_depth_papers(rows, level))
-        latex += f"{level} & {static_n} & {pattern_n} & {dynamic_n} & {unspec_n} \\\\\n"
+        cells = [str(len(tab.get((level, col), []))) for col in cols]
+        latex += f"{level} & {' & '.join(cells)} \\\\\n"
 
     latex += r"""\bottomrule
 \end{tabular}
@@ -310,8 +334,8 @@ def generate_table4_main(rows: list[dict]) -> str:
 
 def generate_table4_cite(rows: list[dict]) -> str:
     levels = ["Single-turn", "Short Multi-turn", "Extended Dialogue", "Longitudinal"]
-    depths = ["Static", "Pattern-level", "Dynamic"]
-    tab = cross_tab(rows, "Interaction_Level", "Behavior_Eval_Depth")
+    cols = ["Static", "Pattern-level", "Dynamic", "(unspecified)"]
+    tab = _table4_data(rows)
 
     latex = r"""\begin{table*}[tbp]
 \centering
@@ -322,13 +346,10 @@ def generate_table4_cite(rows: list[dict]) -> str:
 \midrule
 """
     for level in levels:
-        for depth in depths:
-            papers = tab.get((level, depth), [])
+        for col in cols:
+            papers = tab.get((level, col), [])
             if papers:
-                latex += f"{level} / {depth} & {cite_keys(papers)} \\\\\n\\midrule\n"
-        unspec = empty_depth_papers(rows, level)
-        if unspec:
-            latex += f"{level} / (unspecified) & {cite_keys(unspec)} \\\\\n\\midrule\n"
+                latex += f"{level} / {col} & {cite_keys(papers)} \\\\\n\\midrule\n"
 
     latex = latex.rstrip().removesuffix("\\midrule") + "\n"
 
@@ -346,73 +367,65 @@ def generate_table4_cite(rows: list[dict]) -> str:
 # ---------------------------------------------------------------------------
 
 def generate_table5_main(rows: list[dict]) -> str:
-    tab = triple_tab(rows, "Human Learning / Outcomes", "Eval_Lay_Users", "Eval_User_Study")
-    order = [
-        ("Yes", "Yes", "Yes"),
-        ("Yes", "Yes", "No"),
-        ("Yes", "No", "Yes"),
-        ("Yes", "No", "No"),
-        ("No", "Yes", "Yes"),
-        ("No", "Yes", "No"),
-        ("No", "No", "Yes"),
-        ("No", "No", "No"),
+    variables = [
+        ("Human Learning / Outcomes", "Human Learning"),
+        ("Eval_Lay_Users", "Lay Users"),
+        ("Eval_User_Study", "User Study"),
     ]
+    total = len(rows)
 
     latex = r"""\begin{table*}[tbp]
 \centering
 \small
-\begin{tabular}{lllc}
+\begin{tabular}{lcc}
 \toprule
-\textbf{Human Learning} & \textbf{Lay Users} & \textbf{User Study} & \textbf{Count} \\
+\textbf{Variable} & \textbf{Yes} & \textbf{No} \\
 \midrule
 """
-    for hl, lu, us in order:
-        papers = tab.get((hl, lu, us), [])
-        if papers:
-            latex += f"{hl} & {lu} & {us} & {len(papers)} \\\\\n"
+    for col, label in variables:
+        yes_n = len(yes_papers(rows, col))
+        no_n = total - yes_n
+        latex += f"{label} & {yes_n} & {no_n} \\\\\n"
 
     latex += r"""\bottomrule
 \end{tabular}
-\caption{Human Learning Outcomes by Lay User Involvement and User Study Design ($N=%d$)}
-\label{tab:human-learning}
+\caption{Human-Facing Evaluation Coverage ($N=%d$)}
+\label{tab:human-facing}
 \end{table*}
-""" % len(rows)
+""" % total
     return latex
 
 
 def generate_table5_cite(rows: list[dict]) -> str:
-    tab = triple_tab(rows, "Human Learning / Outcomes", "Eval_Lay_Users", "Eval_User_Study")
-    order = [
-        ("Yes", "Yes", "Yes"),
-        ("Yes", "Yes", "No"),
-        ("Yes", "No", "Yes"),
-        ("Yes", "No", "No"),
-        ("No", "Yes", "Yes"),
-        ("No", "Yes", "No"),
-        ("No", "No", "Yes"),
-        ("No", "No", "No"),
+    variables = [
+        ("Human Learning / Outcomes", "Human Learning"),
+        ("Eval_Lay_Users", "Lay Users"),
+        ("Eval_User_Study", "User Study"),
     ]
 
     latex = r"""\begin{table*}[tbp]
 \centering
 \small
-\begin{tabular}{p{5cm}p{10cm}}
+\begin{tabular}{p{4cm}p{11cm}}
 \toprule
 \textbf{Category} & \textbf{Papers} \\
 \midrule
 """
-    for hl, lu, us in order:
-        papers = tab.get((hl, lu, us), [])
-        if papers:
-            label = f"HL={hl}, LU={lu}, US={us}"
-            latex += f"{label} & {cite_keys(papers)} \\\\\n\\midrule\n"
+    for col, label in variables:
+        yes_list = yes_papers(rows, col)
+        no_list = sorted(
+            r["Citation_Key"] for r in rows
+            if r.get(col, "").strip() == "No"
+        )
+        latex += f"{label} = Yes ({len(yes_list)}) & {cite_keys(yes_list)} \\\\\n\\midrule\n"
+        latex += f"{label} = No ({len(no_list)}) & {cite_keys(no_list)} \\\\\n\\midrule\n"
 
     latex = latex.rstrip().removesuffix("\\midrule") + "\n"
 
     latex += r"""\bottomrule
 \end{tabular}
-\caption{Papers by Human Learning, Lay Users, and User Study}
-\label{tab:human-learning-cite}
+\caption{Papers by Human-Facing Evaluation Variables}
+\label{tab:human-facing-cite}
 \end{table*}
 """
     return latex
