@@ -1,0 +1,3 @@
+# Methodological Summary
+
+Two researchers independently coded all 52 papers using a predefined 38-field codebook. Inter-rater agreement was assessed on the original pre-adjudication labels across 32 coded fields. We report both raw agreement and Cohen's kappa, using weighted kappa (linear weighting scheme) for ordinal variables (Persona_Model_Depth, Theory_Operationalized, Behavior_Eval_Depth, Interaction_Level, Prompt_Disclosure, Theory_Grounding) and standard kappa for binary and nominal variables. Across all coded dimensions, raw agreement ranged from 50.0% to 96.2%, and kappa ranged from 0.178 to 0.915. Remaining disagreements were resolved through discussion with the faculty lead to produce the final consensus coding.

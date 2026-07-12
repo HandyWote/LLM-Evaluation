@@ -1,0 +1,46 @@
+﻿Field,定义,类型,可选值/判断规则
+Paper_ID,论文编号,文本,"1, 2, 3, ..."
+Citation_Key,自动生成的 BibTeX 引用键,自动生成,—
+Bibtex,自动生成的 BibTeX 完整引用,自动生成,—
+Title,论文标题,文本,—
+Year,发表年份,数字,—
+Venue,发表会议/期刊,文本,—
+Domain,论文的研究领域,文本,Counseling / Healthcare / Education / General
+Focus_Type,论文的主要研究焦点类型,开放分类,SimulationFramework: 提出模拟框架 / EvaluationFramework: 提出评估框架 / Dataset: 构建数据集 / Training System: 训练系统 / Tool: 工具
+Simulation_Target,论文模拟的对象,单选,Client Agent: 模拟来访者 / Therapist Agent: 模拟咨询师 / Dual-Agent: 双方都模拟 / Human Trainee: 人类受训者
+Persona_Model_Depth,模拟用户画像的建模深度,单选,Surface Persona: 表层描述(如用文字profile) / Behavioral State Model: 行为状态模型 / Cognitive Model: 认知模型(含信念/动机等) / Dynamic Traits: 动态特质(随对话变化) / Expert Principles: 专家定义的原则
+Uses_Dynamic_State,模拟系统是否追踪并更新来访者/用户的心理状态,Yes/No,Yes: 有明确的动态状态追踪机制（如TTM阶段转换、状态转移、会话记忆等） / No: 无状态追踪，行为不随对话变化
+Temporal_Modeling_Details,动态状态建模的具体方式描述,自由文本,如 State transitions / Session memory / Dynamic openness / Conversation principles update / Limited
+Eval_Human_Experts,领域专家进行的评估,Yes/No,标 Yes: 治疗师、临床医生、领域专家、受过训练的标注员 / 标 No: 众包工人、无专业知识的学生、LLM评估。核心判断规则: 评估者具备与任务相关的领域专业知识。
+Eval_Lay_Users,非专家/普通用户评估,Yes/No,标 Yes: MTurk/Prolific众包工人、普通用户、未提及专业背景的参与者 / 标 No: 领域专家、受过训练的标注员。核心判断规则: 参与者是没有领域专业知识的普通用户。
+Eval_User_Study,结构化实验,Yes/No,标 Yes: 用户与系统发生交互，有明确任务、协议或实验设计 / 标 No: 简单的打分任务（无交互）、静态输出评估。核心判断规则: 参与者在实验环境中主动与系统发生了交互。
+Eval_LLM_Judge,大模型作为裁判,Yes/No,标 Yes: 使用 GPT-4/Claude 等进行打分、比较、排序 / 标 No: 提取向量相似度、特征提取、计算指标。核心判断规则: LLM 被提示去评估、打分或比较输出结果。
+Eval_Automatic,算法/数学自动计算,Yes/No,"标 Yes: BLEU, ROUGE, Accuracy, F1, Cosine相似度, 任务成功率 / 标 No: LLM打分、人类打分。核心判断规则: 通过公式或算法计算得出，无人类或LLM主观判断。"
+Safety,是否避免有害/偏见输出（安全性）,Yes/No,"关键词: Safety, harmful, bias, ethical。排除项: 有用性。核心判断规则: 评估有害性或伦理问题。"
+Realism,输出是否像人类或自然（真实性）,Yes/No,"关键词: Realistic, human-like, natural, believable。排除项: 正确性、任务成功率。核心判断规则: 评估输出是否类似于人类的行为或语言。"
+Consistency,跨轮次行为是否稳定（一致性）,Yes/No,"关键词: Consistency, persona stability, drift, trait alignment。排除项: 单轮质量。核心判断规则: 评估在多轮交互中的稳定性。"
+Fidelity,是否符合预设角色/目标（保真度）,Yes/No,"关键词: Alignment, fidelity, adherence, match to persona。排除项: 一般的真实性。核心判断规则: 评估输出与预设身份或模型匹配的程度。"
+Human Learning / Outcomes,是否带来人类进步/改变（人类学习）,Yes/No,"关键词: Learning, skill improvement, confidence, outcomes。排除项: 仅评估感知。核心判断规则: 测量人类在知识、技能或行为上的实质变化。"
+Utility,对任务是否有用/有效（实用性）,Yes/No,"关键词: Helpful, useful, effective, performance。排除项: 仅评估真实性。核心判断规则: 评估系统的有用性或有效性。"
+Emotional Plausibility,情绪反应是否真实/恰当（情绪合理性）,Yes/No,"关键词: Empathy, emotion, affect, emotional realism。排除项: 事实正确性。核心判断规则: 评估情绪行为或共情能力。"
+Raw Eval Metrics,论文中实际使用的评估指标名称清单,自由文本,"如 ROUGE-L, BERTScore, GPT-4 Likert, Empathy Scale 等。按原文记录。"
+Theory_Operationalized,理论操作化程度（理论是否被用于定义评估标准或指标，而不仅仅是提及。与 Theory_Grounding 互补: Theory_Grounding 判断有没有理论，本字段判断理论用了多深）,单选,Strong: 评估标准明确源于理论（评估rubric直接来自CBT量表；共情评分维度对应临床定义）/ Partial: 理论被提及并部分操作化（提到了CBT框架，但只用了其中1-2个维度作为评估项）/ Mentioned: 理论仅被提及，未操作化（引言提到基于CBT，但评估指标与理论无关）/ None: 没有使用任何理论（仅用BLEU/ROUGE等自动指标，或LLM自由打分）
+Behavior_Eval_Depth,论文对交互过程中行为变化的评估深度。核心分界线: 有没有评估行为 → 有没有跨轮次汇总 → 有没有追踪变化趋势,单选,Dynamic: 分析了行为如何随轮次变化（如系统在第3轮后从支持转向挑战、共情水平逐轮下降）/ Pattern-level: 统计了行为出现的频率/模式，但不关心变化（如系统在60%的轮次使用了反映性倾听）/ Static: 对行为打了分，但每轮独立评分，不看轮次间关系（如每轮回复的共情度1-5分，取平均）/ None: 完全不涉及行为，只看输出质量（BLEU、ROUGE、流畅度打分、偏好排序）
+Intervention_Sensitivity,系统行为是否根据输入/干预发生适当变化。仅当论文明确测试了不同输入下行为的变化时标 Yes,Yes/No,Yes: 论文明确测试了系统在不同输入/干预条件下的行为差异 / No: 未测试或未报告系统对不同输入的响应差异
+Interaction_Level,评估包含了多少对话上下文。单轮为表面质量，多轮测行为,单选,Single-turn (单轮): 一次只评估一个回复，无历史记录，仅测量表面合理性 / Short Multi-turn (短多轮): 包含简短交流(2-5轮)，有一定上下文但交互深度有限 / Extended Dialogue (长对话): 基于较长对话的评估（通常6+轮，经验性划分），时间动态、一致性重要，可以评估行为有效性 / Longitudinal (纵向): 跨越多个会话/较长时间的评估，最接近真实的心理咨询场景
+Prompt_Disclosure,评估实验的可复现性（提示词披露度）,单选,Full Disclosure (完全披露): 清晰提供了所有必要提示词（论文正文、附录或GitHub中给出了系统提示词、用户模板、评估提示词），原则上可复现 / Partial Disclosure (部分披露): 展示了部分提示词不足以复现（仅给1-2个例子，或只用文字描述如让模型扮演治疗师），缺失评估提示词 / No Disclosure (未披露): 没有可用的提示词信息（仅说使用GPT-4生成/评估，无任何细节），不可复现
+Theory_Grounding,评估标准是否与公认的心理学/咨询/社会科学理论挂钩。不要仅因为提到了心理健康就打分,单选,Strong (强): 明确使用公认理论来定义或测量（使用了CBT概念、MI编码、经过验证的临床量表、明确的共情维度定义）。例: 使用经过验证的量表评估共情 / Weak (弱): 提及了概念但未在评估中实际操作化（引言中提到CBT/共情，但评估只是让用户打分1-5 helpfulness；使用共情词汇但无理论评分标准）/ None (无): 没有真正的理论支撑（仅评估流畅度、偏好、真实性；LLM打分没有基于理论的评分标准；把共情当成一个直觉标签）
+Clinical_Theory,具体使用的临床理论或框架名称,自由文本,"如 CBT-inspired, Motivational Interviewing, Person-Centered Therapy。若无则留空"
+Reliability_Reported,人类评估者之间的评分一致性是否被报告,单选,"Yes: 明确报告了评估者间的一致性（Cohen's kappa, Krippendorff's alpha, Fleiss' kappa, Inter-rater agreement, 一致性百分比如85%）/ No: 使用了人类评估但未报告一致性（三位标注员打分...后面没提一致性）。注意: 报告人数≠信度，取平均分≠信度 / N/A: 没有使用人类评估（仅使用了自动指标或 LLM Judge）"
+Agreement Method,具体使用的一致性评测方法,自由文本,"如 Cohen's kappa, Krippendorff's alpha。若无则留空"
+Coding Options,是否明确报告了评估者之间的一致性,单选,Yes / No / N/A。判断规则同 Reliability_Reported
+Has_Rubric,是否提供了明确的评分标准/评分指引,Yes/No,标 Yes: 有明确的评分量表、rubric、评分指南 / 标 No: 仅说让标注员打分但无标准
+LLM_Judge_Validated,LLM裁判是否经过验证（与人类评估对比等）,Yes/No,标 Yes: 论文将LLM评分与人类评分做过任何形式的对比（包括相关性分析、一致性检验、均值差异检验、IAA表、甚至定性描述如高度一致）。只要做了对比就标Yes / 标 No: 未使用LLM judge，或使用了LLM judge但完全没有与人类评分做任何对比。注意: 仅报告人工编码者间信度（如Fleiss' kappa）不算，必须是LLM vs 人类的对比
+Uses_Standard_Metrics,是否使用了标准/公认的评估指标（非自创）,Yes/No,标 Yes: 使用BLEU、ROUGE、BERTScore等公认指标 / 标 No: 仅用自创指标且未与标准指标对比
+Metric_Interpretable,评估指标的含义是否清晰可解释,Yes/No,标 Yes: 分数含义明确，读者能理解好坏 / 标 No: 自创指标无法理解分数意义
+Comparable_To_Prior_Work,评估是否可与先前研究进行对比,Yes/No,标 Yes: 使用了与先前工作相同的指标或数据集 / 标 No: 自创数据集+自创指标+无基线
+Has_Longitudinal_Eval,是否包含纵向/长期评估,Yes/No,标 Yes: 跨多个会话或较长时间的评估 / 标 No: 仅单次会话评估
+Has_Robustness_Testing,是否在不同条件下进行了鲁棒性测试,Yes/No,标 Yes: 在多种条件/数据集下测试 / 标 No: 仅在理想条件下测试
+Has_Failure_Analysis,是否分析了失败案例,Yes/No,标 Yes: 有专门的失败案例分析章节或表格 / 标 No: 未讨论系统失败情况
+Sim_Behavior_Realistic,模拟行为是否真实（非过于顺从或简化）,Yes/No,标 Yes: 模拟用户有抵抗、情绪波动等真实行为 / 标 No: 模拟用户过度配合、机械应答
+Dataset_Available,数据集是否公开可用,Yes/No,标 Yes: 提供了下载链接或公开仓库 / 标 No: 未公开或需申请
