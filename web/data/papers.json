@@ -86,7 +86,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "6",
@@ -133,7 +134,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "10",
@@ -180,7 +182,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "13",
@@ -227,7 +230,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "15",
@@ -274,7 +278,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "18",
@@ -321,7 +326,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "21",
@@ -368,7 +374,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "23",
@@ -415,6 +422,14 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "No"
+   },
+   "gate_overrides": {
+    "LLM_Judge_Validated": {
+     "field": "LLM_Judge_Validated",
+     "coded_value": "Yes",
+     "gate_field": "Eval_LLM_Judge",
+     "gate_value": "Yes"
+    }
    }
   },
   {
@@ -462,7 +477,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "31",
@@ -509,7 +525,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "34",
@@ -556,7 +573,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "38",
@@ -603,7 +621,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "39",
@@ -650,7 +669,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "45",
@@ -697,7 +717,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "47",
@@ -744,7 +765,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "49",
@@ -791,7 +813,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "56",
@@ -838,7 +861,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "58",
@@ -885,7 +909,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "60",
@@ -932,7 +957,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "63",
@@ -979,7 +1005,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "65",
@@ -1026,7 +1053,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "68",
@@ -1073,7 +1101,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "69",
@@ -1120,7 +1149,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "71",
@@ -1167,7 +1197,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "72",
@@ -1214,7 +1245,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "75",
@@ -1261,7 +1293,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "77",
@@ -1308,7 +1341,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "80",
@@ -1355,7 +1389,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "81",
@@ -1402,7 +1437,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "83",
@@ -1449,7 +1485,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "84",
@@ -1496,7 +1533,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "86",
@@ -1543,7 +1581,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "87",
@@ -1590,7 +1629,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "89",
@@ -1637,7 +1677,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "91",
@@ -1684,7 +1725,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "92",
@@ -1731,7 +1773,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "93",
@@ -1778,7 +1821,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "94",
@@ -1825,7 +1869,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "95",
@@ -1872,7 +1917,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "97",
@@ -1919,7 +1965,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "99",
@@ -1966,7 +2013,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "100",
@@ -2013,7 +2061,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "101",
@@ -2060,7 +2109,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "102",
@@ -2107,7 +2157,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "104",
@@ -2154,7 +2205,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "106",
@@ -2201,7 +2253,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "107",
@@ -2248,7 +2301,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "108",
@@ -2295,7 +2349,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "109",
@@ -2342,7 +2397,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "110",
@@ -2389,7 +2445,8 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "Yes",
     "Dataset_Available": "Yes"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "111",
@@ -2436,7 +2493,8 @@
     "Has_Failure_Analysis": "No",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "112",
@@ -2483,7 +2541,18 @@
     "Has_Failure_Analysis": "Yes",
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "No"
-   }
+   },
+   "gate_overrides": {}
+  }
+ ],
+ "gate_overrides": [
+  {
+   "Paper_ID": "23",
+   "Citation_Key": "Sungarda2025GenAI",
+   "field": "LLM_Judge_Validated",
+   "coded_value": "Yes",
+   "gate_field": "Eval_LLM_Judge",
+   "gate_value": "Yes"
   }
  ]
 }

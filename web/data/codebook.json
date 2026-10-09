@@ -187,11 +187,7 @@
     "values": "Yes / No / N/A",
     "type": "single-choice",
     "definition": "Whether evaluator agreement or inter-rater reliability is explicitly reported. Yes indicates a reported agreement statistic or percentage; No indicates human evaluation without reported agreement; N/A applies when no human evaluation is used.",
-    "gate": {
-     "gate_field": "Has_Rubric",
-     "gate_value": "Yes",
-     "gate_note": "Only interpretable for the 45 papers that provide a rubric or scoring criteria (Has_Rubric = Yes). A count over all 52 papers mixes in papers where the question does not apply and must never be shown without stating that denominator."
-    }
+    "note": "Coded for all 52 papers (N/A means no human evaluation was used). The rubric cross-tabulation — 13 of the 45 papers that provide a rubric or scoring criteria — is a derived intersection, not a field gate."
    },
    {
     "name": "Agreement Method",
@@ -226,7 +222,8 @@
     "gate": {
      "gate_field": "Eval_LLM_Judge",
      "gate_value": "Yes",
-     "gate_note": "Only interpretable for the 30 papers that use an LLM judge (Eval_LLM_Judge = Yes). A count over all 52 papers mixes in papers where the question does not apply and must never be shown without stating that denominator."
+     "gate_note": "Only interpretable for the 30 papers that use an LLM judge (Eval_LLM_Judge = Yes). A count over all 52 papers mixes in papers where the question does not apply and must never be shown without stating that denominator.",
+     "display_rule": "The site always shows the released coded value. When the gate is not met but the value asserts the gated property (Yes), the cell is marked and explains that the paper is excluded from the conditional count; the coded value is never rewritten in the data bundle."
     }
    },
    {

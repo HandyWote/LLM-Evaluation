@@ -327,7 +327,7 @@
             'and the subject of the case study. Its coded record and first claim\u2013evidence slot are ' +
             'shown below.</p>' +
         '</div>' +
-        '<a class="record-link" href="index.html#corpus">Full record in the Corpus Explorer \u2192</a>' +
+        '<a class="record-link" href="index.html">Full record in the coded corpus table \u2192</a>' +
       '</div>' +
       record +
       '<h4 class="record-sub">C1 claim\u2013evidence slot</h4>' +

@@ -3,133 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>From Surface Realism to Behavioral Validity — Coded Corpus Explorer</title>
-<meta name="description" content="Interactive overview of a 52-paper coded survey on evaluation practice in LLM-based mental-health simulation and counseling systems. Anonymous supplementary material.">
+<title>From Surface Realism to Behavioral Validity — Coded Corpus Table</title>
+<meta name="description" content="The coded corpus of 52 papers on evaluation practice in LLM-based mental-health simulation and counseling, folded into seven coding groups. Anonymous supplementary material.">
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="hero">
-  <p class="kicker">Anonymous supplementary material · Coded survey</p>
+  <p class="kicker">Anonymous supplementary material &middot; Coded corpus</p>
   <h1>From Surface Realism to Behavioral Validity</h1>
-  <p class="sub">How 52 studies of LLM-based mental-health simulation and counseling evaluate their systems &mdash;
-    and where evaluation stops short of behavior, theory, and human outcomes.</p>
+  <p class="sub">The coded corpus of 52 studies of LLM-based mental-health simulation and counseling &mdash;
+    one table, 38 coded fields folded into the seven coding groups.</p>
   <div class="badges" id="hero-badges">
-    <span class="badge">52 papers &middot; 40 coded fields</span>
+    <span class="badge">52 papers &middot; 38 coded fields</span>
     <span class="badge">7 coding groups</span>
     <span class="badge">72 claim&ndash;evidence slots</span>
-    <span class="badge">Evidence-linked coding</span>
   </div>
 </header>
 
-<nav class="site-nav" id="site-nav" aria-label="Section navigation">
-  <div class="nav-inner">
-    <a href="#overview" class="nav-link">Overview</a>
-    <a href="#g1" class="nav-link">G1 System Design</a>
-    <a href="#g2" class="nav-link">G2 Methods</a>
-    <a href="#g3" class="nav-link">G3 Dimensions</a>
-    <a href="#g4" class="nav-link">G4 Interaction</a>
-    <a href="#g5" class="nav-link">G5 Theory</a>
-    <a href="#g6" class="nav-link">G6 Additional</a>
-    <a href="#g7" class="nav-link">G7 Claim&ndash;Evidence</a>
-    <a href="framework.html" class="nav-link">Behavior-Grounded Evaluation</a>
-    <a href="#corpus" class="nav-link">Corpus Explorer</a>
-    <a href="#downloads" class="nav-link">Downloads</a>
-  </div>
-</nav>
-
 <main id="main" class="wrap">
 
-  <section id="overview" class="section">
-    <div class="sec-head"><span class="sec-num">01</span><h2>Overview</h2></div>
-    <p class="lead">Corpus-wide counts computed from the coded table. Every number below is drawn from the
-      released coding files and the codebook in the appendix.</p>
-    <div id="overview-kpis" class="kpi-row"></div>
-    <div id="overview-charts" class="chart-grid"></div>
+  <section class="section" id="key-figures">
+    <p class="keyline" id="keyline">Loading the coded corpus&hellip;</p>
+    <p class="keyline-note" id="keyline-note"></p>
   </section>
 
-  <section id="groups" class="section">
-    <div class="sec-head"><span class="sec-num">02</span><h2>Codebook by group</h2></div>
-    <p class="lead">Seven groups cover 40 fields. Each group lists its field names, allowed values, and coding
-      definition, together with a distribution chart where the coded data support one.</p>
-    <div id="group-sections"></div>
-  </section>
-
-  <section id="corpus" class="section">
-    <div class="sec-head"><span class="sec-num">03</span><h2>Corpus Explorer</h2></div>
-    <p class="lead">All <span id="corpus-n">52</span> papers &times; <span id="corpus-f">38</span> coded fields.
-      Search by title or citation key, then select a row or any cell to inspect the paper's full coding.</p>
-    <div class="panel">
-      <div class="explorer-controls">
-        <label class="search-field">
-          <span class="sr-only">Search papers</span>
-          <input type="search" id="corpus-search" placeholder="Search by title or citation key&hellip;" autocomplete="off">
+  <section class="section" id="sheet-section">
+    <div class="sheetbar" id="sheetbar">
+      <div class="tabs" id="tabs" role="tablist" aria-label="Coding groups"></div>
+      <div class="tools">
+        <label class="tool-search">
+          <span class="sr-only">Search the coded corpus</span>
+          <input type="search" id="search" placeholder="Search title, key, or coded value&hellip;" autocomplete="off">
         </label>
-        <label class="check-field">
-          <input type="checkbox" id="corpus-search-values">
-          <span>also search coded values</span>
+        <label class="tool-field">Rows
+          <select id="page-size">
+            <option value="26" selected>26</option>
+            <option value="52">52</option>
+            <option value="0">All</option>
+          </select>
         </label>
-        <span class="result-count" id="corpus-count"></span>
+        <button type="button" class="tool-btn" id="expand-all" aria-pressed="false">Expand all column groups</button>
+        <details class="tool-downloads" id="downloads-details">
+          <summary>Downloads <span class="tool-count">4</span></summary>
+          <div class="dl-list" id="dl-list"></div>
+        </details>
       </div>
-      <div class="corpus-wrap" id="corpus-wrap">
-        <table class="corpus-table" id="corpus-table">
-          <caption class="sr-only">Coded corpus of papers with all coded field values</caption>
-          <thead id="corpus-head"></thead>
-          <tbody id="corpus-body"></tbody>
-        </table>
-      </div>
-      <p class="note">Boolean cells use a colour dot: <span class="dot yes"></span> Yes,
-        <span class="dot no"></span> No. Hover any cell for its codebook definition; select a row to see the
-        full record, including that paper's claim&ndash;evidence alignment.</p>
+      <div class="filters" id="claim-filters" hidden></div>
     </div>
-  </section>
 
-  <section id="downloads" class="section">
-    <div class="sec-head"><span class="sec-num">04</span><h2>Downloads</h2></div>
-    <p class="lead">The four released source files are <strong>bundled with this page</strong> under
-      <code>web/downloads/</code>. The links below work both when the page is opened directly from
-      <code>file://</code> and when it is served from GitHub Pages.</p>
-    <div class="download-grid" id="download-grid"></div>
-  </section>
-
-  <section id="framework" class="section">
-    <div class="sec-head"><span class="sec-num">05</span><h2>Behavior-Grounded Evaluation</h2></div>
-    <p class="lead">This page reports what the 52 studies evaluate. A companion page sets out the
-      framework used to read those results: the seven-component evidence chain (Claim, Construct,
-      Behavioral Markers, Trajectory, Intervention, Evaluator, Evidence Boundary), a case study of one
-      coded system, and the corpus-construction and reliability record.</p>
-    <div class="framework-cta">
-      <p>See how an evaluation claim travels from construct to evidence boundary &mdash; and where it breaks.</p>
-      <a class="cta-link" href="framework.html">Open the Behavior-Grounded Evaluation page &rarr;</a>
+    <div class="tablewrap" id="tablewrap">
+      <table class="sheet-table" id="sheet-table">
+        <thead id="sheet-head"></thead>
+        <tbody id="sheet-body"></tbody>
+      </table>
     </div>
+
+    <div class="sheetfoot" id="sheetfoot"></div>
+    <p class="caption" id="sheet-caption"></p>
+    <p class="legend">
+      <span class="bmark yes">&#10003;</span> Yes &nbsp;&middot;&nbsp;
+      <span class="bmark no">&#10007;</span> No &nbsp;&middot;&nbsp;
+      <span class="dash">&mdash;</span> not reported / not applicable &nbsp;&middot;&nbsp;
+      <span class="na">N/A</span> coded not applicable &nbsp;&middot;&nbsp;
+      <span class="bmark yes">&#10003;</span><span class="gate-mark">&#8224;</span> coded Yes although the
+      governing question does not apply (excluded from the conditional count shown in the key figures)
+      &nbsp;&middot;&nbsp;
+      hover a column name for its codebook definition, or click it to open the definition panel.
+      Click any row (or its chevron) for that paper&rsquo;s complete 38-field record and its claim&ndash;evidence slots.
+    </p>
   </section>
 
 </main>
 
 <footer class="footer">
-  <p><strong>Data.</strong> Coded corpus of 52 papers, bundled with this page under <code>web/downloads/</code>:
-    <code>final-table.csv</code> (paper-level coding), <code>theory_eval_refined_coding_refined.csv</code>
-    (refined theory coding), and <code>claim_level_FINAL_analysis_ready.csv</code> (claim&ndash;evidence alignment);
-    the codebook is bundled as <code>09_appendices.tex</code> and parsed into this page. This page is generated
-    from the bundled data file <code>web/data/data.js</code>; the companion framework page is
+  <p><strong>Data.</strong> The four released source files are bundled with this page under
+    <code>web/downloads/</code>: <code>final-table.csv</code> (paper-level coding),
+    <code>theory_eval_refined_coding_refined.csv</code> (refined theory coding),
+    <code>claim_level_FINAL_analysis_ready.csv</code> (claim&ndash;evidence alignment), and
+    <code>09_appendices.tex</code> (codebook appendix). This page renders them from the bundled
+    <code>web/data/data.js</code>. The companion framework page is
     <a href="framework.html">framework.html</a>.</p>
-  <p>Anonymous supplementary material. Dataset snapshot: 52 papers, 40 fields, 72 claim&ndash;evidence slots.
-    No personal or institutional information is included.</p>
+  <p>Anonymous supplementary material. Dataset snapshot: 52 papers, 38 coded fields across 7 coding groups,
+    72 claim&ndash;evidence slots. No personal or institutional information is included.</p>
 </footer>
 
-<div class="modal" id="modal" hidden>
-  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-head">
-      <div>
-        <h3 id="modal-title"></h3>
-        <p class="modal-sub" id="modal-sub"></p>
-      </div>
-      <button type="button" class="modal-close" id="modal-close" aria-label="Close details">Close</button>
-    </div>
-    <div class="modal-body" id="modal-body"></div>
-  </div>
-</div>
+<div class="field-pop" id="field-pop" hidden></div>
 
 <script src="data/data.js"></script>
 <script src="assets/app.js"></script>

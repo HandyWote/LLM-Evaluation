@@ -132,17 +132,25 @@ GATES = {
             "where the question does not apply and must never be shown without "
             "stating that denominator."
         ),
-    },
-    "Reliability_Reported": {
-        "gate_field": "Has_Rubric",
-        "gate_value": "Yes",
-        "gate_note": (
-            "Only interpretable for the 45 papers that provide a rubric or "
-            "scoring criteria (Has_Rubric = Yes). A count over all 52 papers "
-            "mixes in papers where the question does not apply and must never "
-            "be shown without stating that denominator."
+        "display_rule": (
+            "The site always shows the released coded value. When the gate is not "
+            "met but the value asserts the gated property (Yes), the cell is "
+            "marked and explains that the paper is excluded from the conditional "
+            "count; the coded value is never rewritten in the data bundle."
         ),
     },
+}
+
+# Fields that need a clarification but are NOT gated. Reliability_Reported is
+# coded for all 52 papers (N/A means no human evaluation was used, not that a
+# rubric is absent); the 13 of 45 rubric cross-tabulation is a derived
+# intersection reported in stats.gated, not a field gate.
+FIELD_NOTES = {
+    "Reliability_Reported": (
+        "Coded for all 52 papers (N/A means no human evaluation was used). The "
+        "rubric cross-tabulation \u2014 13 of the 45 papers that provide a rubric "
+        "or scoring criteria \u2014 is a derived intersection, not a field gate."
+    ),
 }
 
 
@@ -151,6 +159,27 @@ def _attach_gates(groups: list[dict]) -> None:
         for f in g["fields"]:
             if f["name"] in GATES:
                 f["gate"] = GATES[f["name"]]
+            if f["name"] in FIELD_NOTES:
+                f["note"] = FIELD_NOTES[f["name"]]
+
+
+def _gate_contradiction(row: dict, name: str, value: str) -> dict | None:
+    """Flag a gate-unmet cell whose released code asserts the gated property.
+
+    This is metadata for the UI only: the coded value in ``values`` stays exactly
+    as released. Affects exactly Paper 23 / LLM_Judge_Validated in this corpus.
+    """
+    gate = GATES.get(name)
+    if not gate or _strip(row.get(gate["gate_field"])).casefold() == gate["gate_value"].casefold():
+        return None
+    if _strip(value).casefold() != "yes":
+        return None
+    return {
+        "field": name,
+        "coded_value": _strip(value),
+        "gate_field": gate["gate_field"],
+        "gate_value": gate["gate_value"],
+    }
 
 
 # ------------------------------------------------------- value normalization --
@@ -218,9 +247,11 @@ def build_papers(codebook: list[dict]) -> dict:
     }
 
     papers = []
+    gate_overrides: list[dict] = []
     for r in rows:
         ck = r["Citation_Key"]
         values: dict[str, str] = {}
+        overrides: dict[str, dict] = {}
         for name in field_names:
             if name in g7:
                 continue
@@ -235,6 +266,10 @@ def build_papers(codebook: list[dict]) -> dict:
                 val = _strip(r.get(col))
             if name in normalizers:
                 val = _normalize_value(val, normalizers[name])
+            flag = _gate_contradiction(r, name, val)
+            if flag:
+                overrides[name] = flag
+                gate_overrides.append({"Paper_ID": r["Paper_ID"], "Citation_Key": ck, **flag})
             values[name] = val
         papers.append(
             {
@@ -244,10 +279,16 @@ def build_papers(codebook: list[dict]) -> dict:
                 "Year": _strip(r.get("Year")),
                 "Venue": _strip(r.get("Venue")),
                 "values": values,
+                "gate_overrides": overrides,
             }
         )
     papers.sort(key=lambda p: int(p["Paper_ID"]) if p["Paper_ID"].isdigit() else 999)
-    return {"n": len(papers), "fields": [f for f in field_names if f not in g7], "papers": papers}
+    return {
+        "n": len(papers),
+        "fields": [f for f in field_names if f not in g7],
+        "papers": papers,
+        "gate_overrides": gate_overrides,
+    }
 
 
 # ---------------------------------------------------------------- claims ------
