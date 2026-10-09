@@ -150,8 +150,8 @@ h3 { font-size: 1rem; font-weight: 700; }
 .bars { display: flex; flex-direction: column; gap: 9px; }
 .bar-row { display: grid; grid-template-columns: minmax(110px, 42%) 1fr auto; align-items: center; gap: 10px; }
 .bar-label { font-size: .8rem; color: var(--ink-soft); overflow-wrap: anywhere; }
-.bar-track { background: #f1f5f9; border-radius: 6px; height: 16px; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 6px; min-width: 3px; transition: width .5s ease; }
+.bar-track { display: block; background: #f1f5f9; border-radius: 6px; height: 16px; overflow: hidden; }
+.bar-fill { display: block; height: 100%; border-radius: 6px; min-width: 3px; transition: width .5s ease; }
 .bar-value { font-size: .8rem; font-weight: 800; font-variant-numeric: tabular-nums; min-width: 34px; text-align: right; }
 .bar-value .bar-pct { font-weight: 500; color: var(--faint); font-size: .72rem; }
 .bar-row.is-empty .bar-label, .bar-row.is-empty .bar-value { color: var(--faint); }
