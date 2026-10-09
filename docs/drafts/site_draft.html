@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Surface Realism to Behavioral Validity — Survey Visual Overview</title>
+<style>
+:root{
+  --ink:#1e293b; --muted:#64748b; --faint:#cbd5e1; --paper:#f8fafc;
+  --teal:#0d9488; --teal-soft:#99f6e4; --amber:#d97706; --rose:#e11d48;
+  --indigo:#4f46e5;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--paper);color:var(--ink);line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 80px}
+header{background:linear-gradient(135deg,#134e4a 0%,#0f766e 60%,#0d9488 100%);color:#fff;
+  padding:56px 24px 48px;text-align:center}
+header .kicker{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;opacity:.85;margin-bottom:10px}
+header h1{font-size:1.9rem;font-weight:800;max-width:860px;margin:0 auto 12px;line-height:1.25}
+header .sub{max-width:760px;margin:0 auto;opacity:.92;font-size:.98rem}
+.badges{margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);
+  border-radius:999px;padding:6px 14px;font-size:.8rem}
+section{margin-top:56px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-num{font-size:.8rem;font-weight:800;color:var(--teal);letter-spacing:.12em;flex:none}
+h2{font-size:1.3rem;font-weight:800}
+.lead{color:var(--muted);max-width:860px;margin-bottom:20px;font-size:.95rem}
+.panel{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px 24px 16px;
+  box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.note{font-size:.82rem;color:var(--muted);margin-top:12px}
+.footer{margin-top:64px;padding-top:24px;border-top:1px solid #e2e8f0;color:var(--muted);
+  font-size:.82rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* FIG1 funnel */
+.funnel-row{display:flex;align-items:center;gap:14px;margin:12px 0}
+.funnel-label{width:290px;flex:none;font-size:.88rem}
+.funnel-bar{height:38px;border-radius:8px;color:#fff;display:flex;align-items:center;
+  padding:0 12px;font-weight:800;font-size:.9rem;min-width:60px;transition:width .6s ease}
+.funnel-pct{font-size:.78rem;color:var(--muted);flex:none;width:170px}
+.funnel-pct b{color:var(--ink)}
+.funnel-drop{font-size:.75rem;color:var(--rose);font-weight:700}
+
+/* FIG2 upset */
+.upset{display:grid;grid-template-columns:190px 1fr;gap:0 22px}
+.set-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.set-name{font-size:.85rem;font-weight:600}
+.set-row .bar-bg{flex:1;height:12px;background:#f1f5f9;border-radius:6px;margin:0 10px}
+.set-row .bar-fg{height:100%;border-radius:6px}
+.set-row .n{font-weight:800;font-variant-numeric:tabular-nums;width:26px;text-align:right}
+.dot-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;align-items:end;padding-top:8px}
+.combo{display:flex;flex-direction:column;align-items:center;gap:6px}
+.combo .size{height:64px;display:flex;align-items:flex-end;position:relative}
+.combo .size-bar{width:24px;background:#5eead4;border-radius:4px 4px 0 0}
+.combo .size-num{position:absolute;top:-22px;width:100%;text-align:center;font-weight:800;font-size:.85rem}
+.combo .dot{width:14px;height:14px;border-radius:50%;border:2px solid #94a3b8;background:#fff}
+.combo .dot.on{background:var(--ink);border-color:var(--ink)}
+.combo .c-label{font-size:.68rem;color:var(--muted);white-space:nowrap}
+
+/* FIG3 dumbbell */
+.dumb{margin:22px 0}
+.dumb-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px}
+.dumb-title .t{font-weight:700;font-size:.92rem}
+.dumb-title .g{font-size:.8rem;font-weight:800;color:var(--rose)}
+.dumb .track{position:relative;height:28px;background:#f8fafc;border-radius:14px;
+  border:1px dashed #e2e8f0}
+.dumb .seg{position:absolute;top:7px;height:14px;border-radius:7px;opacity:.25;background:var(--ink)}
+.dumb .pt{position:absolute;top:3px;width:22px;height:22px;border-radius:50%;border:3px solid #fff;
+  box-shadow:0 1px 3px rgba(0,0,0,.3);color:#fff;font-size:.6rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center}
+.dumb .pt.a{background:var(--teal)}
+.dumb .pt.b{background:var(--rose)}
+.dumb .lbls{display:flex;justify-content:space-between;font-size:.76rem;color:var(--muted);margin-top:6px}
+.axis{display:flex;justify-content:space-between;font-size:.72rem;color:var(--faint);
+  border-top:1px dashed var(--faint);margin-top:8px;padding-top:4px}
+
+/* FIG4 heatmap rows */
+table.hm{width:100%;border-collapse:separate;border-spacing:3px;font-size:.8rem}
+table.hm th{font-weight:700;color:var(--muted);padding:4px 6px;text-align:left;font-size:.75rem}
+table.hm td{border-radius:6px;padding:8px 6px}
+table.hm td.name{font-weight:600;background:#f8fafc}
+table.hm td.num{font-weight:800;text-align:center;background:#f8fafc;font-variant-numeric:tabular-nums}
+table.hm td.heat{text-align:center;font-weight:800;color:#134e4a}
+
+/* FIG5 stacked */
+.stack{margin:16px 0}
+.stack .field{font-weight:700;font-size:.9rem;margin-bottom:5px;display:flex;justify-content:space-between}
+.stack .field span.r{color:var(--muted);font-weight:400;font-size:.8rem}
+.stack .bar{display:flex;height:32px;border-radius:8px;overflow:hidden}
+.stack .seg{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.78rem;min-width:0;white-space:nowrap}
+.stack .legend{display:flex;gap:14px;font-size:.75rem;color:var(--muted);margin-top:8px;flex-wrap:wrap}
+.stack .legend .sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+
+/* evidence demo */
+.ev-demo{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.ev-cell{display:flex;align-items:center;gap:12px;background:#f8fafc;border:1px solid #e2e8f0;
+  border-radius:10px;padding:10px 14px;cursor:pointer;transition:all .15s}
+.ev-cell:hover{border-color:var(--teal);background:var(--teal-soft)}
+.ev-cell .field{font-size:.85rem;font-weight:600;flex:1}
+.ev-cell .val{font-size:.72rem;font-weight:800;letter-spacing:.05em;border-radius:999px;padding:3px 10px}
+.ev-cell .val.yes{background:var(--teal-soft);color:#0f766e}
+.ev-cell .val.no{background:#ffe4e6;color:#9f1239}
+.ev-cell .chev{color:var(--muted);font-size:.8rem}
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:24px}
+.modal.open{display:flex}
+.modal .card{background:#fff;border-radius:16px;max-width:620px;width:100%;max-height:80vh;overflow:auto;padding:28px}
+.modal .m-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.modal .m-title{font-weight:800;font-size:1.05rem}
+.modal .m-close{cursor:pointer;border:none;background:#f1f5f9;border-radius:8px;padding:6px 12px;font-size:.85rem}
+.modal .paper{font-size:.85rem;color:var(--muted);margin-bottom:14px}
+.modal blockquote{border-left:4px solid var(--teal);background:#f0fdfa;padding:14px 18px;border-radius:0 10px 10px 0;
+  font-size:.92rem;font-style:italic;margin:10px 0}
+.modal .pg{font-size:.78rem;color:var(--muted);margin-top:4px}
+.modal .rule{margin-top:16px;font-size:.85rem;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px}
+.modal .rule b{color:#92400e}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">Survey · N = 52 papers · 2019–2026</div>
+  <h1>From Surface Realism to Behavioral Validity:<br>Rethinking Evaluation for Repurposed Interactive LLM Systems</h1>
+  <div class="sub">How 52 studies of LLM-based mental-health simulation &amp; counseling evaluate their systems —
+    and where evaluation stops short of behavior, theory, and human outcomes.</div>
+  <div class="badges">
+    <span class="badge">52 papers × 38 coded fields</span>
+    <span class="badge">Evidence-verified coding</span>
+    <span class="badge">Public codebook + coded corpus</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ============ FIG 1: FUNNEL ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">FIG 1</span><h2>Dialogue gets longer; evaluation stays at the surface</h2></div>
+  <p class="lead">Systems increasingly model dynamic user state, yet evaluation rarely follows beyond a single
+    session. Each narrowing stage is an ingredient of behavioral validity — and each stage sheds papers.</p>
+  <div class="panel">
+    <div id="funnel"></div>
+    <p class="note">Stages: all papers → evaluating extended dialogues (6+ turns) → system has an explicit dynamic
+      user-state model → longitudinal (cross-session) evaluation. Percentages relative to N&nbsp;=&nbsp;52.</p>
+  </div>
+</section>
+
+<!-- ============ FIG 2: UPSET ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">FIG 2</span><h2>Everyone evaluates — but with different judges</h2></div>
+  <p class="lead">Evaluator types are not mutually exclusive. Most papers mix two or three evaluator types;
+    only 15 (28.8%) combine human experts, LLM judges, and automatic metrics — and 3 papers use none of the three.</p>
+  <div class="panel">
+    <div class="upset">
+      <div id="upset-sets"></div>
+      <div class="dot-grid" id="upset-grid"></div>
+    </div>
+    <p class="note">Left: set sizes (papers using each evaluator type). Right: each column is one combination —
+      filled dots mark membership, bar height = number of papers in that combination.</p>
+  </div>
+</section>
+
+<!-- ============ FIG 3: DUMBBELLS ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">FIG 3</span><h2>Four gaps between practice and evidence</h2></div>
+  <p class="lead">Each track pairs a common practice (teal) with its scarcer, more rigorous counterpart (rose).
+    The distance between the dots is the gap this survey documents.</p>
+  <div class="panel">
+    <div id="dumbs"></div>
+    <div class="axis"><span>0</span><span>13</span><span>26</span><span>39</span><span>52 papers</span></div>
+  </div>
+</section>
+
+<!-- ============ FIG 4: DIMENSION × DEPTH ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">FIG 4</span><h2>Local quality is measured; behavior is not</h2></div>
+  <p class="lead">Left: how often each evaluation dimension is assessed at all. Right: the deepest level of
+    behavioral evaluation each paper reaches (N = 52).</p>
+  <div class="panel">
+    <table class="hm"><tbody id="hm-body"></tbody></table>
+    <p class="note">50/52 papers assess ≥1 local-quality dimension and 41 assess ≥3 — yet only 9 reach dynamic
+      behavioral analysis and 6 evaluate no behavior at all. Color intensity = paper count.</p>
+  </div>
+</section>
+
+<!-- ============ FIG 5: THEORY GRADIENT ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">FIG 5</span><h2>Theory is invoked more often than it is measured</h2></div>
+  <p class="lead">Graded coding of theoretical grounding across the corpus — from fully operationalized theory
+    (rubrics derived from clinical constructs) to name-dropping only.</p>
+  <div class="panel" id="stacks"></div>
+</section>
+
+<!-- ============ FIG 6: EVIDENCE DEMO ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">INTERACTIVE</span><h2>Every coded cell links back to the paper's own words</h2></div>
+  <p class="lead">This is the core of the planned corpus explorer: click any coded field to see the exact passage
+    (with page number) that justified the code — the same evidence our verification pipeline checks against the PDF.</p>
+  <div class="panel">
+    <div style="font-weight:700;font-size:.9rem;margin-bottom:4px">Paper 1 — HealMe (ACL 2024)</div>
+    <div class="ev-demo" id="ev-demo"></div>
+    <p class="note">Demo with three real coded fields; in the full explorer, all 52 × 38 cells work this way,
+      next to the downloadable codebook and coded corpus.</p>
+  </div>
+</section>
+
+<div class="footer">
+  <div>Data: compare/final-table.csv (52 papers × 38 fields) · Codebook: docs/codebook.csv</div>
+  <div>Draft visualization · single-file, dependency-free</div>
+</div>
+</div>
+
+<!-- modal -->
+<div class="modal" id="modal">
+  <div class="card">
+    <div class="m-head"><div class="m-title" id="m-title"></div><button class="m-close" onclick="closeModal()">Close</button></div>
+    <div class="paper" id="m-paper"></div>
+    <div id="m-body"></div>
+    <div class="rule" id="m-rule"></div>
+  </div>
+</div>
+
+<script>
+/* ====== real counts from compare/final-table.csv (N=52) ====== */
+const N = 52;
+
+/* FIG 1 — funnel */
+const funnel = [
+  {label:"All reviewed papers", n:52, color:"#134e4a"},
+  {label:"Evaluate extended dialogues (6+ turns)", n:31, color:"#0f766e"},
+  {label:"System models dynamic user state", n:13, color:"#0d9488"},
+  {label:"Longitudinal (cross-session) evaluation", n:3, color:"#2dd4bf"},
+];
+document.getElementById('funnel').innerHTML = funnel.map((s,i)=>{
+  const w = (s.n/N*100).toFixed(1);
+  const pct = i===0 ? "100%" : (s.n/N*100).toFixed(1)+"%";
+  const drop = i>0 ? ` · <span class="funnel-drop">−${funnel[i-1].n - s.n} vs. previous stage</span>` : "";
+  return `<div class="funnel-row">
+    <div class="funnel-label">${s.label}</div>
+    <div class="funnel-bar" style="width:${w}%;background:${s.color}">${s.n}</div>
+    <div class="funnel-pct"><b>${pct}</b> of corpus${drop}</div>
+  </div>`;
+}).join('');
+
+/* FIG 2 — upset */
+const sets = [
+  {name:"Human experts", n:34, color:"#0d9488"},
+  {name:"LLM judges", n:30, color:"#d97706"},
+  {name:"Automatic metrics", n:35, color:"#4f46e5"},
+];
+document.getElementById('upset-sets').innerHTML =
+  sets.map(s=>`<div class="set-row"><span class="set-name">${s.name}</span>
+    <div class="bar-bg"><div class="bar-fg" style="width:${(s.n/35*100).toFixed(0)}%;background:${s.color}"></div></div>
+    <span class="n">${s.n}</span></div>`).join('');
+
+const combos = [
+  {m:[1,0,0], n:5,  label:"H only"},
+  {m:[0,1,0], n:1,  label:"L only"},
+  {m:[0,0,1], n:8,  label:"A only"},
+  {m:[1,1,0], n:8,  label:"H+L"},
+  {m:[1,0,1], n:6,  label:"H+A"},
+  {m:[0,1,1], n:6,  label:"L+A"},
+  {m:[1,1,1], n:15, label:"All three"},
+  {m:[0,0,0], n:3,  label:"None"},
+];
+document.getElementById('upset-grid').innerHTML = combos.map(c=>{
+  const dots = sets.map((s,i)=>`<span class="dot ${c.m[i]?'on':''}" style="${c.m[i]?'background:'+s.color+';border-color:'+s.color:''}"></span>`).join('<span style="width:4px"></span>');
+  return `<div class="combo">
+    <div class="size"><div class="size-bar" style="height:${Math.max(6,c.n/15*56)}px"></div><span class="size-num">${c.n}</span></div>
+    <div class="dots" style="display:flex;gap:4px">${dots}</div>
+    <span class="c-label">${c.label}</span>
+  </div>`;
+}).join('');
+
+/* FIG 3 — dumbbells */
+const dumbs = [
+  {t:"Rubric → reliability reported",        a:45, b:16, la:"45 use rubrics",            ra:"16 report reliability"},
+  {t:"LLM judge → validated LLM judge",      a:30, b:24, la:"30 use LLM judges",         ra:"24 validate them vs. humans"},
+  {t:"Utility → human learning / outcomes",  a:44, b:10, la:"44 evaluate utility",       ra:"10 measure human outcomes"},
+  {t:"User study → lay users → outcomes",    a:17, b:10, la:"17 run user studies",       ra:"10 measure outcomes (13 involve lay users)"},
+];
+document.getElementById('dumbs').innerHTML = dumbs.map(d=>{
+  const x = v => (v/N*100).toFixed(1);
+  return `<div class="dumb">
+    <div class="dumb-title"><span class="t">${d.t}</span><span class="g">gap = ${d.a-d.b} papers</span></div>
+    <div class="track">
+      <div class="seg" style="left:${x(d.b)}%;width:${(x(d.a)-x(d.b)).toFixed(1)}%"></div>
+      <div class="pt a" style="left:calc(${x(d.a)}% - 11px)">${d.a}</div>
+      <div class="pt b" style="left:calc(${x(d.b)}% - 11px)">${d.b}</div>
+    </div>
+    <div class="lbls"><span>${d.la}</span><span style="text-align:right">${d.ra}</span></div>
+  </div>`;
+}).join('');
+
+/* FIG 4 — dimension × depth heat rows */
+const dims = [
+  ["Utility",44],["Fidelity",33],["Realism",29],["Emotional plausibility",28],
+  ["Consistency",20],["Safety",14],["Human learning / outcomes",10],
+];
+const beds = [["Static scoring",30],["Pattern-level",7],["Dynamic trajectory",9],["No behavior assessed",6]];
+const heat = v => {
+  const t = v/44;
+  if(t>0.75) return "#0f766e";
+  if(t>0.5)  return "#14b8a6";
+  if(t>0.25) return "#5eead4";
+  if(t>0.12) return "#99f6e4";
+  return "#ccfbf1";
+};
+const rows = Math.max(dims.length, beds.length);
+let hm = `<tr><th style="width:38%">Evaluation dimension</th><th style="width:10%">Papers</th>
+          <th style="width:38%">Behavioral evaluation depth</th><th style="width:14%">Papers</th></tr>`;
+for(let i=0;i<rows;i++){
+  const d = dims[i], b = beds[i];
+  hm += `<tr>
+    <td class="name">${d?d[0]:''}</td>
+    <td class="heat" style="background:${d?heat(d[1]):'#f8fafc'};${d?'':'opacity:.25'}">${d?d[1]:''}</td>
+    <td class="name">${b?b[0]:''}</td>
+    <td class="heat" style="background:${b?heat(b[1]/30*44):'#f8fafc'};${b?'':'opacity:.25'}">${b?b[1]:''}</td>
+  </tr>`;
+}
+document.getElementById('hm-body').innerHTML = hm;
+
+/* FIG 5 — theory gradients */
+const stacks = [
+  {field:"Theory operationalized in evaluation", note:"how deeply theory defines the metrics", total:50,
+   segs:[["Strong",35,"#0f766e"],["Partial",10,"#14b8a6"],["Mentioned",5,"#99f6e4"],["Not coded",2,"#e2e8f0"]] },
+  {field:"Theory grounding", note:"whether evaluation ties to recognized clinical theory", total:52,
+   segs:[["Strong",36,"#0f766e"],["Weak",15,"#99f6e4"],["Not coded",1,"#e2e8f0"]] },
+  {field:"Prompt disclosure (reproducibility)", note:"can the evaluation be reproduced", total:52,
+   segs:[["Full",40,"#0f766e"],["Partial",9,"#99f6e4"],["None",3,"#fecdd3"]] },
+];
+document.getElementById('stacks').innerHTML = stacks.map(s=>{
+  const bar = s.segs.map(([lab,n,c])=>{
+    const w = (n/s.total*100).toFixed(1);
+    const show = n/s.total > 0.07;
+    return `<div class="seg" style="width:${w}%;background:${c};${c==='#e2e8f0'?'color:#64748b':''}" title="${lab}: ${n}">${show?`${lab} ${n}`:''}</div>`;
+  }).join('');
+  const leg = s.segs.map(([lab,n,c])=>`<span><span class="sw" style="background:${c}"></span>${lab} (${n})</span>`).join('');
+  return `<div class="stack">
+    <div class="field">${s.field}<span class="r">${s.note} · N=${s.total}</span></div>
+    <div class="bar">${bar}</div>
+    <div class="legend">${leg}</div>
+  </div>`;
+}).join('');
+
+/* FIG 6 — evidence demo (real quotes from eval_reports/1.md) */
+const evidence = [
+  {field:"eval_llm_judge", val:"YES", paper:"Paper 1 — HealMe (ACL 2024)",
+   quote:"we use these manually scored examples and the corresponding evaluation metrics as prompts to guide GPT-4 (gpt-4-0613) in scoring the entire training set.",
+   page:"p.4",
+   rule:"Eval_LLM_Judge = YES — an LLM was prompted to evaluate/score outputs (vs. embeddings or formula-based metrics)."},
+  {field:"eval_human_experts", val:"YES", paper:"Paper 1 — HealMe (ACL 2024)",
+   quote:"Our evaluation team consists of two experts. Our main evaluator, a seasoned mental health professional with 11 years of experience in psychological counseling research…",
+   page:"p.5",
+   rule:"Eval_Human_Experts = YES — evaluators hold domain expertise relevant to the task (rules out crowdworkers, untrained students, LLMs)."},
+  {field:"uses_dynamic_state", val:"NO", paper:"Paper 1 — HealMe (ACL 2024)",
+   quote:"This limitation stems from our model supporting only three rounds of dialogue, potentially leaving clients with unresolved feelings after the conversation.",
+   page:"p.9",
+   rule:"Uses_Dynamic_State = NO — no mechanism tracks/updates the client's psychological state across turns."},
+];
+document.getElementById('ev-demo').innerHTML = evidence.map((e,i)=>
+  `<div class="ev-cell" onclick="openModal(${i})">
+     <span class="field">${e.field}</span>
+     <span class="val ${e.val==='YES'?'yes':'no'}">${e.val}</span>
+     <span class="chev">view evidence →</span>
+   </div>`).join('');
+
+const modal = document.getElementById('modal');
+function openModal(i){
+  const e = evidence[i];
+  document.getElementById('m-title').textContent = e.field + " = " + e.val;
+  document.getElementById('m-paper').textContent = e.paper;
+  document.getElementById('m-body').innerHTML =
+    `<blockquote>“${e.quote}”</blockquote><div class="pg">Evidence location: ${e.page}</div>`;
+  document.getElementById('m-rule').innerHTML = "<b>Codebook rule — </b>" + e.rule;
+  modal.classList.add('open');
+}
+function closeModal(){ modal.classList.remove('open'); }
+modal.addEventListener('click', ev=>{ if(ev.target===modal) closeModal(); });
+</script>
+</body>
+</html>

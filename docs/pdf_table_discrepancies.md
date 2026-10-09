@@ -1,6 +1,7 @@
 # PDF 正文与附表数据不一致对照表
 
 > 论文：*From Surface Realism to Behavioral Validity: Rethinking Evaluation for Repurposed Interactive LLM Systems*
+> 说明：数据源权威对照见 [`docs/DATA_SOURCES.md`](DATA_SOURCES.md)。
 > 检查日期：2026-05-26
 > 检查范围：PDF §4.1–§4.5 正文叙述 vs Table 5–9 附表数据 vs LaTeX `eval_tables.tex`
 

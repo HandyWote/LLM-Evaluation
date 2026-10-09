@@ -3,6 +3,7 @@
 > 论文：*From Surface Realism to Behavioral Validity: Rethinking Evaluation for Repurposed Interactive LLM Systems*
 > 数据源：`compare/final-table.csv`（52 篇论文，NaN 已全部修复）
 > Theory 数据源：`table/theory_eval_refined_coding_refined.csv`（三级分类，与正文一致）
+> 说明：数据源权威对照见 [`docs/DATA_SOURCES.md`](DATA_SOURCES.md)。`final-table.csv` 的理论两列是旧值，理论与 claim 数据分别以 `theory_eval_refined_coding_refined.csv` / `claim_level_FINAL_analysis_ready.csv` 为准。
 > 检查日期：2026-05-26
 > LaTeX 表格：已从 `final-table.csv` 重新生成（`table/eval_tables.tex`）
 
