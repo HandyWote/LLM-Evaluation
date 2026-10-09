@@ -145,7 +145,7 @@
     "Focus_Type": "Multimodal Emotion-Guided Generative Intervention",
     "Simulation_Target": "Therapist Agent",
     "Persona_Model_Depth": "Behavioral State Model",
-    "Uses_Dynamic_State": "NO",
+    "Uses_Dynamic_State": "No",
     "Temporal_Modeling_Details": "",
     "Eval_Human_Experts": "Yes",
     "Eval_Lay_Users": "No",

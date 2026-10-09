@@ -60,6 +60,15 @@
     g.fields.forEach(function (f) { FIELD_DEF[f.name] = f.definition || ''; });
   });
 
+  // Optional gate metadata published by the build: a field is only meaningful
+  // for the subset of papers where gate_field === gate_value.
+  var FIELD_GATE = {};
+  codebook.forEach(function (g) {
+    g.fields.forEach(function (f) {
+      if (f.gate && f.gate.gate_field) FIELD_GATE[f.name] = f.gate;
+    });
+  });
+
   function yesCount(field) {
     return papers.filter(function (p) { return isYes(p.values ? p.values[field] : ''); }).length;
   }
@@ -181,19 +190,222 @@
     '</div>';
   }
 
-  function funnelHTML(items) {
-    if (!items.length) return '';
-    var top = items[0].n || 1;
-    return items.map(function (s, i) {
-      var w = Math.max(9, pct(s.n, top));
-      var color = SCALE[Math.min(i * 2, SCALE.length - 1)];
-      var drop = i > 0 ? ' <span class="funnel-drop">\u2212' + (items[i - 1].n - s.n) + '</span>' : '';
-      return '<div class="funnel-row">' +
-        '<span class="funnel-label">' + esc(s.name) + '</span>' +
-        '<span class="funnel-bar" style="width:' + w + '%;background:' + color + '">' + s.n + '</span>' +
-        '<span class="funnel-meta"><b>' + pct(s.n, top) + '%</b> of corpus' + drop + '</span>' +
+  /* ------------------------- behavioral validity (non-nested criteria) -- */
+
+  // The three criteria are measured by independent fields. They are NOT a
+  // funnel: a paper can satisfy any subset, so each keeps its own denominator.
+  var BVE_SPEC = [
+    { id: 'extended_dialogue', label: 'evaluate extended dialogues', field: 'Interaction_Level',
+      rule: 'Interaction_Level = \u2018Extended Dialogue\u2019',
+      test: function (v) { return clean(v).toLowerCase() === 'extended dialogue'; } },
+    { id: 'dynamic_state', label: 'model a dynamic user state', field: 'Uses_Dynamic_State',
+      rule: 'Uses_Dynamic_State = Yes', test: isYes },
+    { id: 'longitudinal', label: 'include longitudinal evaluation', field: 'Has_Longitudinal_Eval',
+      rule: 'Has_Longitudinal_Eval = Yes', test: isYes }
+  ];
+
+  function bveIds(match) {
+    return papers.filter(function (p) { return match(p.values || {}); })
+      .map(function (p) { return String(p.Paper_ID); });
+  }
+
+  // Fallback if stats.behavioral_validity has not landed yet: recompute from
+  // the per-paper coding so the card always shows real numbers.
+  function bveFallback() {
+    var criteria = BVE_SPEC.map(function (c) {
+      return { id: c.id, label: c.label, field: c.field, rule: c.rule,
+        n: bveIds(function (v) { return c.test(v[c.field]); }).length,
+        definition: FIELD_DEF[c.field] || '' };
+    });
+    var combos = [];
+    for (var m = 7; m >= 0; m--) {
+      var flags = [!!(m & 4), !!(m & 2), !!(m & 1)];
+      var ids = bveIds(function (v) {
+        return BVE_SPEC.every(function (c, k) { return c.test(v[c.field]) === flags[k]; });
+      });
+      combos.push({ extended_dialogue: flags[0], dynamic_state: flags[1], longitudinal: flags[2],
+        n: ids.length, paper_ids: ids });
+    }
+    return { n: N, nested: false, criteria: criteria, combinations: combos, caveats: [] };
+  }
+
+  function bveData() {
+    var bv = stats.behavioral_validity;
+    if (bv && bv.criteria && bv.criteria.length && bv.combinations && bv.combinations.length) return bv;
+    return bveFallback();
+  }
+
+  function idList(ids) {
+    if (!ids || !ids.length) return '';
+    return 'Paper' + (ids.length > 1 ? 's ' : ' ') + ids.join(', ');
+  }
+
+  function bveCaveats(bv) {
+    if (bv.caveats && bv.caveats.length) return bv.caveats;
+    var dyn = 0, lon = 0;
+    (bv.criteria || []).forEach(function (c) {
+      if (c.id === 'dynamic_state') dyn = c.n;
+      if (c.id === 'longitudinal') lon = c.n;
+    });
+    function pick(fn) {
+      return (bv.combinations || []).filter(fn).reduce(function (acc, c) {
+        return acc.concat(c.paper_ids || []);
+      }, []);
+    }
+    var dynNotExt = pick(function (c) { return c.dynamic_state && !c.extended_dialogue; });
+    var lonNotExt = pick(function (c) { return c.longitudinal && !c.extended_dialogue; });
+    var out = ['The three criteria are independent, not nested: a study can evaluate long dialogues, ' +
+      'model a dynamic user state, or run a longitudinal evaluation in any combination.'];
+    if (dynNotExt.length) out.push(dynNotExt.length + ' of the ' + dyn + ' dynamic-state papers (' +
+      idList(dynNotExt) + ') do not evaluate extended dialogues.');
+    if (lonNotExt.length) out.push(lonNotExt.length + ' of the ' + lon + ' longitudinal papers (' +
+      idList(lonNotExt) + ') do not evaluate extended dialogues.');
+    out.push('A longer dialogue does not by itself provide trajectory-level evidence (paper Sec. 4.2).');
+    return out;
+  }
+
+  function bveInd(v) {
+    return '<td class="bve-ind ' + (v ? 'yes' : 'no') + '" title="' + (v ? 'Yes' : 'No') + '">' +
+      (v ? '\u25cf' : '\u25cb') + '</td>';
+  }
+
+  function bveHTML(bv) {
+    bv = bv || bveData();
+    if (!bv || !bv.criteria || !bv.criteria.length) {
+      return '<p class="note">Behavioral-validity breakdown is not available in this data bundle.</p>';
+    }
+    var total = bv.n || N || 0;
+    var bars = bv.criteria.map(function (c, i) {
+      var w = total ? Math.max(2, Math.min(100, pct(c.n, total))) : 0;
+      return '<div class="bve-bar">' +
+        '<div class="bve-bar-head"><span class="bve-bar-count">' + c.n + ' / ' + total + '</span>' +
+          '<span class="bve-bar-label">' + esc(c.label) + '</span></div>' +
+        '<span class="bve-bar-track"><span class="bve-bar-fill" style="width:' + w + '%;background:' +
+          colorFor(c.id, i) + '"></span></span>' +
+        '<div class="bve-bar-meta"><code>' + esc(c.rule || c.field) + '</code>' +
+          (c.definition ? ' \u00b7 ' + esc(c.definition) : '') + '</div>' +
       '</div>';
     }).join('');
+    var combos = (bv.combinations || []).slice().sort(function (a, b) {
+      if (b.n !== a.n) return b.n - a.n;
+      return (b.extended_dialogue - a.extended_dialogue) || (b.dynamic_state - a.dynamic_state) ||
+        (b.longitudinal - a.longitudinal);
+    });
+    var rows = combos.map(function (c) {
+      var ids = (c.paper_ids || []).map(String);
+      return '<tr' + (c.n ? '' : ' class="zero"') + '>' +
+        bveInd(c.extended_dialogue) + bveInd(c.dynamic_state) + bveInd(c.longitudinal) +
+        '<td class="bve-n">' + c.n + '</td>' +
+        '<td class="bve-ids">' + (ids.length ? esc(ids.join(', ')) : '\u2014') + '</td></tr>';
+    }).join('');
+    return '<div class="bve">' +
+      '<div class="bve-bars">' + bars + '</div>' +
+      '<div class="bve-matrix-wrap"><table class="bve-matrix">' +
+        '<caption>All 8 Yes/No combinations of the three criteria across ' + total + ' papers. ' +
+          'Rows are intersections, not stages; each criterion keeps its own denominator.</caption>' +
+        '<thead><tr><th>Extended<br>dialogue</th><th>Dynamic<br>state</th><th>Longitudinal</th>' +
+          '<th>Papers</th><th>Paper IDs</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+      '<p class="bve-caveat"><strong>Caution.</strong> ' + bveCaveats(bv).map(esc).join(' ') + '</p>' +
+    '</div>';
+  }
+
+  /* ------------------------------------------------------- gated stats -- */
+
+  function gatedFallback() {
+    return [
+      { id: 'llm_judge_validation', field: 'LLM_Judge_Validated', gate_field: 'Eval_LLM_Judge',
+        gate_value: 'Yes', label: 'Validate the LLM judge against human judgments',
+        n: stats.llm_judge ? stats.llm_judge.validated : yesCount('LLM_Judge_Validated'),
+        denominator: stats.llm_judge ? stats.llm_judge.used : yesCount('Eval_LLM_Judge') },
+      { id: 'rubric_reliability', field: 'Reliability_Reported', gate_field: 'Has_Rubric',
+        gate_value: 'Yes', label: 'Report inter-rater reliability',
+        n: stats.rubric ? stats.rubric.reported_reliability : yesCount('Reliability_Reported'),
+        denominator: stats.rubric ? stats.rubric.has : yesCount('Has_Rubric') }
+    ].filter(function (g) { return g.denominator; });
+  }
+
+  function gatedData() {
+    if (stats.gated && stats.gated.length) return stats.gated;
+    return gatedFallback();
+  }
+
+  // Conditional counts only. The unconditional numerator is deliberately never
+  // printed on its own: 23/30 and 13/45 are the counts the paper reports.
+  function gatedHTML(items) {
+    items = items || gatedData();
+    if (!items || !items.length) return '<p class="note">No gated statistics available.</p>';
+    return '<div class="gated">' + items.map(function (g) {
+      var gate = FIELD_GATE[g.field] || g;
+      var n = g.n || 0, den = g.denominator || 0;
+      var w = den ? Math.max(2, Math.min(100, pct(n, den))) : 0;
+      return '<div class="gated-row">' +
+        '<div class="gated-head"><span class="gated-count">' + n + ' of ' + den + '</span>' +
+          '<span class="gated-label">' + esc(g.label || '') + '</span></div>' +
+        '<span class="gated-track"><span class="gated-fill" style="width:' + w + '%"></span></span>' +
+        '<div class="gated-caption">Conditional on <code>' +
+          esc(gate.gate_field || g.gate_field || '') + ' = ' + esc(gate.gate_value || g.gate_value || '') +
+          '</code> \u2014 ' + n + ' of ' + den + ' eligible papers.</div>' +
+      '</div>';
+    }).join('') + '</div>';
+  }
+
+  /* ---------------------------------------------------- clinical theory -- */
+
+  function clinicalHTML(ct) {
+    if (!ct || !ct.families) {
+      var raw = valueCounts('Clinical_Theory', { multi: true });
+      var missing = papers.filter(function (p) {
+        return clean(p.values ? p.values.Clinical_Theory : '') === '';
+      }).length;
+      ct = { denominator: N, multi_label: true, families: raw,
+        unclassified: { n: 0, paper_ids: [] },
+        not_specified: { n: missing, paper_ids: [] }, raw: raw,
+        mapping_note: 'Family grouping is produced by the data build step; until it is available ' +
+          'the entries below are the coded strings exactly as reported.' };
+    }
+    var den = ct.denominator || N || 0;
+    var fams = (ct.families || []).filter(function (f) { return f && f.n; })
+      .slice().sort(function (a, b) { return b.n - a.n; });
+    var bars = fams.length
+      ? barsHTML(fams.map(function (f) { return { name: f.name, n: f.n }; }), { total: den })
+      : '';
+    var extras = [];
+    if (ct.unclassified && ct.unclassified.n) {
+      extras.push({ label: 'Other / unclassified', n: ct.unclassified.n, color: '#5eead4' });
+    }
+    if (ct.not_specified && ct.not_specified.n) {
+      extras.push({ label: 'Not specified', n: ct.not_specified.n, color: '#e2e8f0', muted: true });
+    }
+    var extraHTML = extras.map(function (e) {
+      var w = den ? Math.max(2, Math.min(100, pct(e.n, den))) : 0;
+      return '<div class="bar-row' + (e.muted ? ' is-empty' : '') + '">' +
+        '<span class="bar-label">' + esc(e.label) + '</span>' +
+        '<span class="bar-track"><span class="bar-fill" style="width:' + w + '%;background:' +
+          e.color + '"></span></span>' +
+        '<span class="bar-value">' + e.n + ' <span class="bar-pct">' + w + '%</span></span></div>';
+    }).join('');
+    var rawList = (ct.raw || []).filter(function (r) { return r && clean(r.value); });
+    var rawHTML = rawList.length
+      ? '<details class="ct-raw"><summary>Raw reported strings (' + rawList.length + ')</summary><ul>' +
+        rawList.map(function (r) {
+          return '<li><span class="ct-raw-val">' + esc(r.value) + '</span>' +
+            '<span class="ct-raw-n">' + r.n + '</span></li>';
+        }).join('') + '</ul></details>'
+      : '';
+    return '<div class="ct">' +
+      '<div class="ct-denom">Denominator: <strong>' + den + '</strong> papers' +
+        (ct.multi_label ? ' \u00b7 multi-label (a paper can name several frameworks, so families may sum above ' +
+          den + ')' : '') + '.</div>' +
+      '<div class="ct-bars">' + bars + extraHTML + '</div>' +
+      (ct.mapping_note ? '<p class="ct-mapping">' + esc(ct.mapping_note) + '</p>' : '') +
+      rawHTML +
+    '</div>';
+  }
+
+  function reliabilityItems() {
+    var rr = stats.reliability_reporting;
+    if (rr && rr.value_counts) return distItems(rr.value_counts, ['Yes', 'No', 'N/A']);
+    return valueCounts('Reliability_Reported', { order: ['Yes', 'No', 'N/A'] });
   }
 
   function chainHTML(steps) {
@@ -206,38 +418,41 @@
     }).join('');
   }
 
-  function chartCardHTML(spec, wide) {
-    var body;
+  function chartBodyHTML(spec) {
     if (spec.type === 'stack') {
-      body = spec.rows.map(function (r) { return stackHTML(r); }).join('');
-    } else if (spec.type === 'funnel') {
-      body = funnelHTML(spec.items);
-    } else if (spec.type === 'chain') {
-      body = '<div class="chain">' + chainHTML(spec.steps) + '</div>';
-    } else {
-      body = barsHTML(spec.items, spec);
+      return spec.rows.map(function (r) { return stackHTML(r); }).join('');
     }
+    if (spec.type === 'chain') {
+      return '<div class="chain">' + chainHTML(spec.steps) + '</div>';
+    }
+    if (spec.type === 'bve') {
+      return bveHTML(spec.data);
+    }
+    if (spec.type === 'gated') {
+      return gatedHTML(spec.data);
+    }
+    if (spec.type === 'clinical') {
+      return clinicalHTML(spec.data || stats.clinical_theory);
+    }
+    return barsHTML(spec.items, spec);
+  }
+
+  function chartCardHTML(spec, wide) {
     return '<div class="chart-card' + (wide ? ' wide' : '') + '">' +
       '<div class="chart-title">' + esc(spec.title) + '</div>' +
       (spec.sub ? '<div class="chart-sub">' + esc(spec.sub) + '</div>' : '') +
-      body + '</div>';
+      chartBodyHTML(spec) +
+      (spec.note ? '<p class="chart-note">' + spec.note + '</p>' : '') +
+    '</div>';
   }
 
   function miniChartHTML(spec) {
-    var body;
-    if (spec.type === 'stack') {
-      body = spec.rows.map(function (r) { return stackHTML(r); }).join('');
-    } else if (spec.type === 'funnel') {
-      body = funnelHTML(spec.items);
-    } else if (spec.type === 'chain') {
-      body = '<div class="chain">' + chainHTML(spec.steps) + '</div>';
-    } else {
-      body = barsHTML(spec.items, spec);
-    }
-    return '<div class="mini-chart">' +
+    return '<div class="mini-chart' + (spec.wide ? ' wide' : '') + '">' +
       '<div class="chart-title">' + esc(spec.title) + '</div>' +
       (spec.sub ? '<div class="chart-sub">' + esc(spec.sub) + '</div>' : '') +
-      body + '</div>';
+      chartBodyHTML(spec) +
+      (spec.note ? '<p class="chart-note">' + spec.note + '</p>' : '') +
+    '</div>';
   }
 
   /* ------------------------------------------------------------ header --- */
@@ -265,7 +480,8 @@
       { n: stats.dims_ge1 || 0, l: 'Assess \u2265 1 local-quality dimension', s: 'of ' + N },
       { n: (summary.all && summary.all.ALIGNED) || 0, l: 'Claim slots aligned', s: 'of ' + (claimSlots.length || 0) + ' slots' },
       { n: stats.rubric ? stats.rubric.has : 0, l: 'Use a scoring rubric', s: 'of ' + N },
-      { n: stats.rubric ? stats.rubric.reported_reliability : 0, l: 'Report rubric reliability', s: 'of ' + N }
+      { n: stats.rubric ? stats.rubric.reported_reliability : 0, l: 'Report rubric reliability',
+        s: 'of ' + (stats.rubric ? stats.rubric.has : yesCount('Has_Rubric')) + ' rubric papers' }
     ];
     $('overview-kpis').innerHTML = kpis.map(function (k) {
       return '<div class="kpi"><div class="kpi-n">' + k.n + '</div>' +
@@ -291,10 +507,10 @@
     });
 
     specs.push({
-      title: 'Behavioral-validity funnel',
-      sub: 'Each stage narrows the corpus',
-      type: 'funnel',
-      items: statItems(stats.funnel)
+      title: 'Behavioral validity: independent criteria, not a nested funnel',
+      sub: 'Three separately coded criteria, each with its own denominator; intersections below',
+      type: 'bve',
+      wide: true
     });
 
     specs.push({
@@ -364,6 +580,8 @@
 
   function groupChartSpecs(g) {
     var yesno = ['Yes', 'No'];
+    var rubricDen = stats.rubric ? stats.rubric.has : yesCount('Has_Rubric');
+    var rubricN = stats.rubric ? stats.rubric.reported_reliability : yesCount('Reliability_Reported');
     switch (g.id) {
       case 'G1':
         return [
@@ -390,7 +608,9 @@
         ];
       case 'G4':
         return [
-          { title: 'Behavioral-validity funnel', sub: 'All papers \u2192 extended dialogue \u2192 dynamic state \u2192 longitudinal', type: 'funnel', items: statItems(stats.funnel) },
+          { title: 'Behavioral validity: independent criteria, not a nested funnel',
+            sub: 'Each criterion has its own denominator and is coded independently of the others',
+            type: 'bve', wide: true },
           { title: 'Interaction level in evaluation', sub: 'Interaction_Level', items: valueCounts('Interaction_Level'), total: N },
           { title: 'Behavioral evaluation depth', sub: 'Behavior_Eval_Depth (all papers)', items: valueCounts('Behavior_Eval_Depth', { order: ['Dynamic', 'Pattern-level', 'Static', 'None'] }), total: N },
           { title: 'Intervention sensitivity tested', sub: 'Intervention_Sensitivity', items: valueCounts('Intervention_Sensitivity', { order: yesno }), total: N }
@@ -403,12 +623,18 @@
             colorMap: { Strong: '#134e4a', Partial: '#14b8a6', None: '#fda4af' } },
           { title: 'Prompt disclosure', sub: 'Reproducibility of system and evaluation prompts', items: distItems(stats.prompt_disclosure, ['Full Disclosure', 'Partial Disclosure', 'No Disclosure']), total: N,
             colorMap: { 'Full Disclosure': '#0f766e', 'Partial Disclosure': '#99f6e4', 'No Disclosure': '#fda4af' } },
-          { title: 'Reliability reporting', sub: 'Reliability_Reported', items: valueCounts('Reliability_Reported', { order: yesno }), total: N },
+          { title: 'Reliability reporting', sub: 'Reliability_Reported across all ' + N + ' papers',
+            items: reliabilityItems(), total: N,
+            note: 'Denominator: ' + N + ' reviewed papers (unconditional). The conditional count \u2014 ' +
+              rubricN + ' of ' + rubricDen + ' papers that use a rubric \u2014 is reported under G6.' },
           { title: 'Theory-linked evaluation instruments', sub: 'Papers using each instrument type (multi-label)', items: distItems(stats.theory_eval_types), total: N },
-          { title: 'Clinical theories referenced', sub: 'Top named frameworks (multi-label)', items: valueCounts('Clinical_Theory', { multi: true, limit: 8 }) }
+          { title: 'Clinical theories referenced', sub: 'Canonical therapy families (multi-label)', type: 'clinical', wide: true }
         ];
       case 'G6':
         return [
+          { title: 'Gated statistics: conditional counts',
+            sub: 'Each count is shown only against its eligible denominator',
+            type: 'gated', wide: true },
           { title: 'Rubric \u2192 reliability reported', sub: 'Reported evidence for scoring criteria', type: 'chain',
             steps: [
               { n: stats.rubric ? stats.rubric.has : 0, label: 'papers use a scoring rubric', tone: 'a' },
@@ -420,7 +646,7 @@
               { n: stats.llm_judge ? stats.llm_judge.validated : 0, label: 'validate it against humans', tone: 'b' }
             ] },
           { title: 'Additional transparency and robustness checks', sub: 'Papers coding each field as Yes', total: N, wide: true,
-            items: ['Has_Rubric', 'LLM_Judge_Validated', 'Uses_Standard_Metrics', 'Metric_Interpretable',
+            items: ['Has_Rubric', 'Uses_Standard_Metrics', 'Metric_Interpretable',
               'Comparable_To_Prior_Work', 'Has_Longitudinal_Eval', 'Has_Robustness_Testing', 'Has_Failure_Analysis',
               'Sim_Behavior_Realistic', 'Dataset_Available']
               .map(function (f) { return { name: f, n: yesCount(f) }; }) }
@@ -442,9 +668,12 @@
 
   function fieldTableHTML(g) {
     var rows = g.fields.map(function (f) {
+      var gate = f.gate;
       return '<tr>' +
         '<td class="field-name-cell"><span class="field-name">' + esc(f.name) + '</span>' +
-          '<span class="type-chip">' + esc(f.type || 'other') + '</span></td>' +
+          '<span class="type-chip">' + esc(f.type || 'other') + '</span>' +
+          (gate ? '<span class="gate-chip">conditional on ' + esc(gate.gate_field) + ' = ' +
+            esc(gate.gate_value) + '</span>' : '') + '</td>' +
         '<td class="field-values">' + esc(f.values) + '</td>' +
         '<td class="field-def">' + esc(f.definition) + '</td>' +
       '</tr>';
@@ -503,25 +732,38 @@
     return '<span class="chip ' + cls + '">' + esc(ALIGN_LABEL[key] || key || 'Unknown') + '</span>';
   }
 
-  function quoteBlock(label, text, page, section, detail) {
+  function pageLinkHTML(page, url) {
+    var label = page ? 'Page ' + page : 'Open in paper';
+    if (!url) return esc(label);
+    return '<a class="page-link" href="' + esc(url) + '" target="_blank" rel="noopener">' +
+      esc(label) + ' \u2192 open in paper</a>';
+  }
+
+  function quoteBlock(label, text, page, section, detail, url) {
     var meta = [];
-    if (page) meta.push('Page ' + page);
-    if (section) meta.push(section);
-    if (detail) meta.push(detail);
+    if (page) meta.push(pageLinkHTML(page, url));
+    else if (url) meta.push(pageLinkHTML('', url));
+    if (section) meta.push(esc(section));
+    if (detail) meta.push(esc(detail));
     return '<div class="quote-block' + (label === 'Evidence' ? ' evidence' : '') + '">' +
       '<div class="quote-label">' + esc(label) + '</div>' +
       '<div class="quote-text">\u201c' + esc(clean(text) || 'Not reported') + '\u201d</div>' +
-      (meta.length ? '<div class="quote-meta">' + esc(meta.join(' \u00b7 ')) + '</div>' : '') +
+      (meta.length ? '<div class="quote-meta">' + meta.join(' \u00b7 ') + '</div>' : '') +
     '</div>';
   }
 
   function claimCardHTML(s) {
     var review = isYes(s.Human_Review_Flag);
+    var paperName = esc(s.Citation_Key || '');
+    if (s.Paper_URL) {
+      paperName = '<a class="paper-link" href="' + esc(s.Paper_URL) +
+        '" target="_blank" rel="noopener">' + paperName + '</a>';
+    }
     return '<details class="claim-card">' +
       '<summary>' +
         '<span class="chip slot">' + esc(s.Claim_Slot || 'C') + '</span>' +
         alignChip(s.Final_Alignment) +
-        '<span class="claim-paper">' + esc(s.Citation_Key || '') +
+        '<span class="claim-paper">' + paperName +
           ' <span class="cid">#' + esc(s.Paper_ID || '') + '</span></span>' +
         '<span class="chip ' + (review ? 'review-yes' : 'review-no') + '">human review: ' +
           (review ? 'YES' : 'NO') + '</span>' +
@@ -529,13 +771,15 @@
       '</summary>' +
       '<div class="claim-body">' +
         '<div class="claim-paper-title">' + esc(clean(s.Title)) + '</div>' +
-        quoteBlock('Claim', s.Claim_Quote, s.Claim_Page, s.Claim_Section, '') +
+        quoteBlock('Claim', s.Claim_Quote, s.Claim_Page, s.Claim_Section, '', s.Claim_URL) +
         '<div class="claim-arrow">\u25bc supporting evidence</div>' +
-        quoteBlock('Evidence', s.Evidence_Quote, s.Evidence_Page, s.Evidence_Section, s.Evidence_Location_Detail) +
+        quoteBlock('Evidence', s.Evidence_Quote, s.Evidence_Page, s.Evidence_Section, s.Evidence_Location_Detail, s.Evidence_URL) +
         '<div class="claim-foot">' +
           '<span>Alignment: <strong>' + esc(ALIGN_LABEL[clean(s.Final_Alignment).toUpperCase()] || s.Final_Alignment) + '</strong></span>' +
           '<span>Decision: ' + esc(s.Final_Decision_Type || 'n/a') + '</span>' +
           '<span>Review flag: ' + (review ? 'yes' : 'no') + '</span>' +
+          (s.Paper_URL ? '<span><a class="page-link" href="' + esc(s.Paper_URL) +
+            '" target="_blank" rel="noopener">Open paper \u2192</a></span>' : '') +
         '</div>' +
       '</div>' +
     '</details>';
@@ -580,16 +824,16 @@
   /* --------------------------------------------------------- downloads --- */
 
   var DOWNLOADS = [
-    { href: '../compare/final-table.csv', title: 'Paper-level coding table',
-      desc: '52 papers \u00d7 38 coded fields, G1\u2013G6.', path: 'compare/final-table.csv' },
-    { href: '../table/theory_eval_refined_coding_refined.csv', title: 'Refined theory coding',
+    { href: 'downloads/final-table.csv', title: 'Paper-level coding table',
+      desc: '52 papers \u00d7 38 coded fields, G1\u2013G6.', path: 'web/downloads/final-table.csv' },
+    { href: 'downloads/theory_eval_refined_coding_refined.csv', title: 'Refined theory coding',
       desc: 'Theory grounding, operationalization, and evaluation instruments.',
-      path: 'table/theory_eval_refined_coding_refined.csv' },
-    { href: '../compare/claim_level_FINAL_analysis_ready.csv', title: 'Claim\u2013evidence alignment',
+      path: 'web/downloads/theory_eval_refined_coding_refined.csv' },
+    { href: 'downloads/claim_level_FINAL_analysis_ready.csv', title: 'Claim\u2013evidence alignment',
       desc: '72 claim slots with quotes, pages, and final alignment decisions.',
-      path: 'compare/claim_level_FINAL_analysis_ready.csv' },
-    { href: '../docs/09_appendices.tex', title: 'Codebook appendix (LaTeX)',
-      desc: 'The 7 groups and 40 field definitions used for coding.', path: 'docs/09_appendices.tex' }
+      path: 'web/downloads/claim_level_FINAL_analysis_ready.csv' },
+    { href: 'downloads/09_appendices.tex', title: 'Codebook appendix (LaTeX)',
+      desc: 'The 7 groups and 40 field definitions used for coding.', path: 'web/downloads/09_appendices.tex' }
   ];
 
   function renderDownloads() {
@@ -756,7 +1000,9 @@
   /* ---------------------------------------------------------------- nav -- */
 
   function initNavHighlight() {
-    var links = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav-link')).filter(function (l) {
+      return (l.getAttribute('href') || '').charAt(0) === '#';
+    });
     if (!links.length || !('IntersectionObserver' in window)) return;
     var byId = {};
     links.forEach(function (l) {

@@ -16,7 +16,10 @@
    "Evidence_Location_Detail": "Table 4; evaluation design pp. 5–6",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2024.acl-long.93/",
+   "Claim_URL": "https://aclanthology.org/2024.acl-long.93.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2024.acl-long.93.pdf#page=6"
   },
   {
    "Paper_ID": "1",
@@ -32,7 +35,10 @@
    "Evidence_Location_Detail": "Table 6 p. 7; Appendix C.3–C.4",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2024.acl-long.93/",
+   "Claim_URL": "https://aclanthology.org/2024.acl-long.93.pdf#page=9",
+   "Evidence_URL": "https://aclanthology.org/2024.acl-long.93.pdf#page=8"
   },
   {
    "Paper_ID": "6",
@@ -48,7 +54,10 @@
    "Evidence_Location_Detail": "Figure 2; subgroup results pp. 6–8",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2024.findings-emnlp.120/",
+   "Claim_URL": "https://aclanthology.org/2024.findings-emnlp.120.pdf#page=8",
+   "Evidence_URL": "https://aclanthology.org/2024.findings-emnlp.120.pdf#page=8"
   },
   {
    "Paper_ID": "10",
@@ -64,7 +73,10 @@
    "Evidence_Location_Detail": "Figure 5; ANOVA and post-hoc tests p. 6",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.emnlp-main.1664/",
+   "Claim_URL": "https://aclanthology.org/2025.emnlp-main.1664.pdf#page=8",
+   "Evidence_URL": "https://aclanthology.org/2025.emnlp-main.1664.pdf#page=6"
   },
   {
    "Paper_ID": "13",
@@ -80,7 +92,10 @@
    "Evidence_Location_Detail": "Figure 5; Tables 1–2",
    "Final_Alignment": "EXCEEDS",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.emnlp-main.594/",
+   "Claim_URL": "https://aclanthology.org/2025.emnlp-main.594.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.emnlp-main.594.pdf#page=7"
   },
   {
    "Paper_ID": "13",
@@ -96,7 +111,10 @@
    "Evidence_Location_Detail": "Figure 6 p. 8; Appendix E",
    "Final_Alignment": "EXCEEDS",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.emnlp-main.594/",
+   "Claim_URL": "https://aclanthology.org/2025.emnlp-main.594.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.emnlp-main.594.pdf#page=9"
   },
   {
    "Paper_ID": "15",
@@ -112,7 +130,10 @@
    "Evidence_Location_Detail": "Model results Tables 2–3; abstract/results metric-name inconsistency",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.findings-acl.1292/",
+   "Claim_URL": "https://aclanthology.org/2025.findings-acl.1292.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.findings-acl.1292.pdf#page=8"
   },
   {
    "Paper_ID": "15",
@@ -128,7 +149,10 @@
    "Evidence_Location_Detail": "Tables 2–3; conclusion p. 9",
    "Final_Alignment": "EXCEEDS",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.findings-acl.1292/",
+   "Claim_URL": "https://aclanthology.org/2025.findings-acl.1292.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.findings-acl.1292.pdf#page=8"
   },
   {
    "Paper_ID": "18",
@@ -144,7 +168,10 @@
    "Evidence_Location_Detail": "Table 2 p. 8; Figures 4–5; Tables 3–4",
    "Final_Alignment": "EXCEEDS",
    "Final_Decision_Type": "ADOPT_CODEX_DISAGREEMENT",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.findings-acl.1192/",
+   "Claim_URL": "https://aclanthology.org/2025.findings-acl.1192.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.findings-acl.1192.pdf#page=7"
   },
   {
    "Paper_ID": "18",
@@ -160,7 +187,10 @@
    "Evidence_Location_Detail": "Table 2; Figures 4–5",
    "Final_Alignment": "EXCEEDS",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.findings-acl.1192/",
+   "Claim_URL": "https://aclanthology.org/2025.findings-acl.1192.pdf#page=9",
+   "Evidence_URL": "https://aclanthology.org/2025.findings-acl.1192.pdf#page=7"
   },
   {
    "Paper_ID": "21",
@@ -176,7 +206,10 @@
    "Evidence_Location_Detail": "Table 2; Table 4 p. 6 evaluates six counseling models",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://ojs.aaai.org/index.php/AAAI/article/view/41287",
+   "Claim_URL": "https://ojs.aaai.org/index.php/AAAI/article/view/41287",
+   "Evidence_URL": "https://ojs.aaai.org/index.php/AAAI/article/view/41287"
   },
   {
    "Paper_ID": "23",
@@ -192,7 +225,10 @@
    "Evidence_Location_Detail": "Tables VI–VII p. 8; VI Deployment p. 7",
    "Final_Alignment": "EXCEEDS",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://doi.org/10.1109/BigData66926.2025.11402062",
+   "Claim_URL": "https://doi.org/10.1109/BigData66926.2025.11402062",
+   "Evidence_URL": "https://doi.org/10.1109/BigData66926.2025.11402062"
   },
   {
    "Paper_ID": "23",
@@ -208,7 +244,10 @@
    "Evidence_Location_Detail": "Tables VI–VII p. 8 support skill classification",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "ADOPT_CODEX_DISAGREEMENT",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://doi.org/10.1109/BigData66926.2025.11402062",
+   "Claim_URL": "https://doi.org/10.1109/BigData66926.2025.11402062",
+   "Evidence_URL": "https://doi.org/10.1109/BigData66926.2025.11402062"
   },
   {
    "Paper_ID": "29",
@@ -224,7 +263,10 @@
    "Evidence_Location_Detail": "Figure 7 p. 5; benchmark/judging design p. 4",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://arxiv.org/abs/2309.15461",
+   "Claim_URL": "https://arxiv.org/pdf/2309.15461#page=1",
+   "Evidence_URL": "https://arxiv.org/pdf/2309.15461#page=4"
   },
   {
    "Paper_ID": "29",
@@ -240,7 +282,10 @@
    "Evidence_Location_Detail": "Figure 7 p. 5",
    "Final_Alignment": "EXCEEDS",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://arxiv.org/abs/2309.15461",
+   "Claim_URL": "https://arxiv.org/pdf/2309.15461#page=5",
+   "Evidence_URL": "https://arxiv.org/pdf/2309.15461#page=4"
   },
   {
    "Paper_ID": "31",
@@ -256,7 +301,10 @@
    "Evidence_Location_Detail": "Figures 2–4; supplementary Tables S11–S16",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://arxiv.org/abs/2401.00820",
+   "Claim_URL": "https://arxiv.org/pdf/2401.00820#page=1",
+   "Evidence_URL": "https://arxiv.org/pdf/2401.00820#page=7"
   },
   {
    "Paper_ID": "34",
@@ -272,7 +320,10 @@
    "Evidence_Location_Detail": "Table 3; Appendix Tables 6–7",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://arxiv.org/abs/2402.11958",
+   "Claim_URL": "https://arxiv.org/pdf/2402.11958#page=1",
+   "Evidence_URL": "https://arxiv.org/pdf/2402.11958#page=7"
   },
   {
    "Paper_ID": "34",
@@ -288,7 +339,10 @@
    "Evidence_Location_Detail": "Table 9",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://arxiv.org/abs/2402.11958",
+   "Claim_URL": "https://arxiv.org/pdf/2402.11958#page=2",
+   "Evidence_URL": "https://arxiv.org/pdf/2402.11958#page=21"
   },
   {
    "Paper_ID": "38",
@@ -304,7 +358,10 @@
    "Evidence_Location_Detail": "Figure 2; Table 3; Appendix B.4 Table 17",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "ADOPT_CODEX_WORDING",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://arxiv.org/abs/2406.12266",
+   "Claim_URL": "https://arxiv.org/pdf/2406.12266#page=8",
+   "Evidence_URL": "https://arxiv.org/pdf/2406.12266#page=6"
   },
   {
    "Paper_ID": "39",
@@ -320,7 +377,10 @@
    "Evidence_Location_Detail": "Tables IV–VI pp. 8–9; Table VII general-task check p. 11",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://doi.org/10.1109/TCSS.2024.3497725",
+   "Claim_URL": "https://doi.org/10.1109/TCSS.2024.3497725",
+   "Evidence_URL": "https://doi.org/10.1109/TCSS.2024.3497725"
   },
   {
    "Paper_ID": "45",
@@ -336,7 +396,10 @@
    "Evidence_Location_Detail": "Table 2, p. 4; static-evaluation and safety limitations p. 7",
    "Final_Alignment": "EXCEEDS",
    "Final_Decision_Type": "ADOPT_CODEX_DISAGREEMENT",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "",
+   "Claim_URL": "",
+   "Evidence_URL": ""
   },
   {
    "Paper_ID": "47",
@@ -352,7 +415,10 @@
    "Evidence_Location_Detail": "Table 4 p. 7; Table 5 p. 8; Appendix A.6",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://arxiv.org/abs/2508.08236",
+   "Claim_URL": "https://arxiv.org/pdf/2508.08236#page=1",
+   "Evidence_URL": "https://arxiv.org/pdf/2508.08236#page=7"
   },
   {
    "Paper_ID": "49",
@@ -368,7 +434,10 @@
    "Evidence_Location_Detail": "Figure 3; task design pp. 6–7; Appendix E.2",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://arxiv.org/abs/2601.07312",
+   "Claim_URL": "https://arxiv.org/pdf/2601.07312#page=1",
+   "Evidence_URL": "https://arxiv.org/pdf/2601.07312#page=8"
   },
   {
    "Paper_ID": "49",
@@ -384,7 +453,10 @@
    "Evidence_Location_Detail": "Table 2 p. 7; Appendix E.3",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://arxiv.org/abs/2601.07312",
+   "Claim_URL": "https://arxiv.org/pdf/2601.07312#page=1",
+   "Evidence_URL": "https://arxiv.org/pdf/2601.07312#page=8"
   },
   {
    "Paper_ID": "56",
@@ -400,7 +472,10 @@
    "Evidence_Location_Detail": "Sections 6–7; Appendix Table A13",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.findings-naacl.418/",
+   "Claim_URL": "https://aclanthology.org/2025.findings-naacl.418.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.findings-naacl.418.pdf#page=5"
   },
   {
    "Paper_ID": "58",
@@ -416,7 +491,10 @@
    "Evidence_Location_Detail": "Task results pp. 5–7; generation evaluation Table 4",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.naacl-long.196/",
+   "Claim_URL": "https://aclanthology.org/2025.naacl-long.196.pdf#page=9",
+   "Evidence_URL": "https://aclanthology.org/2025.naacl-long.196.pdf#page=7"
   },
   {
    "Paper_ID": "58",
@@ -432,7 +510,10 @@
    "Evidence_Location_Detail": "Task results pp. 5–7; limitations p. 9",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.naacl-long.196/",
+   "Claim_URL": "https://aclanthology.org/2025.naacl-long.196.pdf#page=2",
+   "Evidence_URL": "https://aclanthology.org/2025.naacl-long.196.pdf#page=7"
   },
   {
    "Paper_ID": "60",
@@ -448,7 +529,10 @@
    "Evidence_Location_Detail": "Tables 3–5 pp. 7–8; Appendix K",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.naacl-long.541/",
+   "Claim_URL": "https://aclanthology.org/2025.naacl-long.541.pdf#page=2",
+   "Evidence_URL": "https://aclanthology.org/2025.naacl-long.541.pdf#page=8"
   },
   {
    "Paper_ID": "60",
@@ -464,7 +548,10 @@
    "Evidence_Location_Detail": "Table 5; Table 22",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.naacl-long.541/",
+   "Claim_URL": "https://aclanthology.org/2025.naacl-long.541.pdf#page=8",
+   "Evidence_URL": "https://aclanthology.org/2025.naacl-long.541.pdf#page=8"
   },
   {
    "Paper_ID": "63",
@@ -480,7 +567,10 @@
    "Evidence_Location_Detail": "Tables 7–9; Appendix F",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "ADOPT_CODEX_WORDING",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.sigdial-1.59/",
+   "Claim_URL": "https://aclanthology.org/2025.sigdial-1.59.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.sigdial-1.59.pdf#page=7"
   },
   {
    "Paper_ID": "65",
@@ -496,7 +586,10 @@
    "Evidence_Location_Detail": "Complete one-page paper",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://doi.org/10.1145/3698587.3701489",
+   "Claim_URL": "https://doi.org/10.1145/3698587.3701489",
+   "Evidence_URL": "https://doi.org/10.1145/3698587.3701489"
   },
   {
    "Paper_ID": "65",
@@ -512,7 +605,10 @@
    "Evidence_Location_Detail": "Complete one-page paper",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://doi.org/10.1145/3698587.3701489",
+   "Claim_URL": "https://doi.org/10.1145/3698587.3701489",
+   "Evidence_URL": "https://doi.org/10.1145/3698587.3701489"
   },
   {
    "Paper_ID": "68",
@@ -528,7 +624,10 @@
    "Evidence_Location_Detail": "Table 3; significance analysis pp. 7–8; Appendix A.2",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://doi.org/10.1145/3711896.3737393",
+   "Claim_URL": "https://doi.org/10.1145/3711896.3737393",
+   "Evidence_URL": "https://doi.org/10.1145/3711896.3737393"
   },
   {
    "Paper_ID": "69",
@@ -544,7 +643,10 @@
    "Evidence_Location_Detail": "Table 1, p. 5; Section 6.4",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://doi.org/10.1145/3716553.3750759",
+   "Claim_URL": "https://doi.org/10.1145/3716553.3750759",
+   "Evidence_URL": "https://doi.org/10.1145/3716553.3750759"
   },
   {
    "Paper_ID": "71",
@@ -560,7 +662,10 @@
    "Evidence_Location_Detail": "Results pp. 14–16; Figure 4; perceived empathy Section 8.3",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://doi.org/10.1145/3743724",
+   "Claim_URL": "https://doi.org/10.1145/3743724",
+   "Evidence_URL": "https://doi.org/10.1145/3743724"
   },
   {
    "Paper_ID": "72",
@@ -576,7 +681,10 @@
    "Evidence_Location_Detail": "Table 2; Figures 4–6; rationale architecture pp. 3–4, 7",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://doi.org/10.1145/3746252.3761164",
+   "Claim_URL": "https://doi.org/10.1145/3746252.3761164",
+   "Evidence_URL": "https://doi.org/10.1145/3746252.3761164"
   },
   {
    "Paper_ID": "72",
@@ -592,7 +700,10 @@
    "Evidence_Location_Detail": "Figures 5–6; conclusion p. 8",
    "Final_Alignment": "EXCEEDS",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://doi.org/10.1145/3746252.3761164",
+   "Claim_URL": "https://doi.org/10.1145/3746252.3761164",
+   "Evidence_URL": "https://doi.org/10.1145/3746252.3761164"
   },
   {
    "Paper_ID": "75",
@@ -608,7 +719,10 @@
    "Evidence_Location_Detail": "Behavioral classification methods pp. 9–10; Appendix classifier validation p. 23",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://doi.org/10.1145/3772318.3791821",
+   "Claim_URL": "https://doi.org/10.1145/3772318.3791821",
+   "Evidence_URL": "https://doi.org/10.1145/3772318.3791821"
   },
   {
    "Paper_ID": "75",
@@ -624,7 +738,10 @@
    "Evidence_Location_Detail": "Section 6 Discussion; limitations pp. 18–19",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "ADOPT_CODEX_WORDING",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://doi.org/10.1145/3772318.3791821",
+   "Claim_URL": "https://doi.org/10.1145/3772318.3791821",
+   "Evidence_URL": "https://doi.org/10.1145/3772318.3791821"
   },
   {
    "Paper_ID": "77",
@@ -640,7 +757,10 @@
    "Evidence_Location_Detail": "Tables 2–3; discussion p. 7",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://doi.org/10.1080/10447318.2024.2385001",
+   "Claim_URL": "https://doi.org/10.1080/10447318.2024.2385001",
+   "Evidence_URL": "https://doi.org/10.1080/10447318.2024.2385001"
   },
   {
    "Paper_ID": "77",
@@ -656,7 +776,10 @@
    "Evidence_Location_Detail": "Tables 2–3; study limitations p. 7",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "ADOPT_CODEX_WORDING",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://doi.org/10.1080/10447318.2024.2385001",
+   "Claim_URL": "https://doi.org/10.1080/10447318.2024.2385001",
+   "Evidence_URL": "https://doi.org/10.1080/10447318.2024.2385001"
   },
   {
    "Paper_ID": "80",
@@ -672,7 +795,10 @@
    "Evidence_Location_Detail": "Table 1; Appendix G agreement analyses",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2024.emnlp-main.591/",
+   "Claim_URL": "https://aclanthology.org/2024.emnlp-main.591.pdf#page=2",
+   "Evidence_URL": "https://aclanthology.org/2024.emnlp-main.591.pdf#page=7"
   },
   {
    "Paper_ID": "81",
@@ -688,7 +814,10 @@
    "Evidence_Location_Detail": "Table 3; Figure 3; Appendix E",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2024.emnlp-main.711/",
+   "Claim_URL": "https://aclanthology.org/2024.emnlp-main.711.pdf#page=9",
+   "Evidence_URL": "https://aclanthology.org/2024.emnlp-main.711.pdf#page=6"
   },
   {
    "Paper_ID": "81",
@@ -704,7 +833,10 @@
    "Evidence_Location_Detail": "Table 4; Figure 3; Appendix E Table 13",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2024.emnlp-main.711/",
+   "Claim_URL": "https://aclanthology.org/2024.emnlp-main.711.pdf#page=9",
+   "Evidence_URL": "https://aclanthology.org/2024.emnlp-main.711.pdf#page=7"
   },
   {
    "Paper_ID": "83",
@@ -720,7 +852,10 @@
    "Evidence_Location_Detail": "Table 2 p. 6; Appendix F/G human comparisons",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2024.findings-emnlp.832/",
+   "Claim_URL": "https://aclanthology.org/2024.findings-emnlp.832.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2024.findings-emnlp.832.pdf#page=7"
   },
   {
    "Paper_ID": "84",
@@ -736,7 +871,10 @@
    "Evidence_Location_Detail": "Figure 2; ranking evaluation Section 5.2",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2024.hucllm-1.4/",
+   "Claim_URL": "https://aclanthology.org/2024.hucllm-1.4.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2024.hucllm-1.4.pdf#page=6"
   },
   {
    "Paper_ID": "86",
@@ -752,7 +890,10 @@
    "Evidence_Location_Detail": "Tables 4–5 pp. 8–9; Appendix C.6 ablations",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.acl-long.1021/",
+   "Claim_URL": "https://aclanthology.org/2025.acl-long.1021.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.acl-long.1021.pdf#page=8"
   },
   {
    "Paper_ID": "87",
@@ -768,7 +909,10 @@
    "Evidence_Location_Detail": "Tables 3–5; Appendix B",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "ADOPT_CODEX_WORDING",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.acl-long.1024/",
+   "Claim_URL": "https://aclanthology.org/2025.acl-long.1024.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.acl-long.1024.pdf#page=8"
   },
   {
    "Paper_ID": "87",
@@ -784,7 +928,10 @@
    "Evidence_Location_Detail": "Table 3; Table 5",
    "Final_Alignment": "EXCEEDS",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.acl-long.1024/",
+   "Claim_URL": "https://aclanthology.org/2025.acl-long.1024.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.acl-long.1024.pdf#page=8"
   },
   {
    "Paper_ID": "89",
@@ -800,7 +947,10 @@
    "Evidence_Location_Detail": "Figure 6; Figure 4 p. 5; Table 2 p. 8",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.acl-long.55/",
+   "Claim_URL": "https://aclanthology.org/2025.acl-long.55.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.acl-long.55.pdf#page=6"
   },
   {
    "Paper_ID": "91",
@@ -816,7 +966,10 @@
    "Evidence_Location_Detail": "Table 3; Figure 4",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.clpsych-1.14/",
+   "Claim_URL": "https://aclanthology.org/2025.clpsych-1.14.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.clpsych-1.14.pdf#page=6"
   },
   {
    "Paper_ID": "92",
@@ -832,7 +985,10 @@
    "Evidence_Location_Detail": "Figure 2; independent evaluation pp. 5–6; content analysis p. 8",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.coling-main.135/",
+   "Claim_URL": "https://aclanthology.org/2025.coling-main.135.pdf#page=9",
+   "Evidence_URL": "https://aclanthology.org/2025.coling-main.135.pdf#page=7"
   },
   {
    "Paper_ID": "93",
@@ -848,7 +1004,10 @@
    "Evidence_Location_Detail": "Tables 2–3 p. 6; Appendix C/D",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.emnlp-main.1245/",
+   "Claim_URL": "https://aclanthology.org/2025.emnlp-main.1245.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.emnlp-main.1245.pdf#page=7"
   },
   {
    "Paper_ID": "93",
@@ -864,7 +1023,10 @@
    "Evidence_Location_Detail": "Table 3; IM coding protocol pp. 5–7 and Appendix D",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.emnlp-main.1245/",
+   "Claim_URL": "https://aclanthology.org/2025.emnlp-main.1245.pdf#page=9",
+   "Evidence_URL": "https://aclanthology.org/2025.emnlp-main.1245.pdf#page=7"
   },
   {
    "Paper_ID": "94",
@@ -880,7 +1042,10 @@
    "Evidence_Location_Detail": "Table 2; Figure 3; GPT-4o judgments Section 5.3",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.emnlp-main.232/",
+   "Claim_URL": "https://aclanthology.org/2025.emnlp-main.232.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.emnlp-main.232.pdf#page=7"
   },
   {
    "Paper_ID": "95",
@@ -896,7 +1061,10 @@
    "Evidence_Location_Detail": "Figure 5; Tables 2–3; Appendix E",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.emnlp-main.751/",
+   "Claim_URL": "https://aclanthology.org/2025.emnlp-main.751.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.emnlp-main.751.pdf#page=8"
   },
   {
    "Paper_ID": "95",
@@ -912,7 +1080,10 @@
    "Evidence_Location_Detail": "Figure 5; real-scenario qualitative examples Figure 6",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "ADOPT_CODEX_WORDING",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.emnlp-main.751/",
+   "Claim_URL": "https://aclanthology.org/2025.emnlp-main.751.pdf#page=9",
+   "Evidence_URL": "https://aclanthology.org/2025.emnlp-main.751.pdf#page=8"
   },
   {
    "Paper_ID": "97",
@@ -928,7 +1099,10 @@
    "Evidence_Location_Detail": "Tables 6–7 pp. 12–13; main exploration results pp. 6–7",
    "Final_Alignment": "PARTIAL",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.findings-acl.1332/",
+   "Claim_URL": "https://aclanthology.org/2025.findings-acl.1332.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.findings-acl.1332.pdf#page=12"
   },
   {
    "Paper_ID": "99",
@@ -944,7 +1118,10 @@
    "Evidence_Location_Detail": "Figure 4; results continuation p. 9; Table 2 automatic checks",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "ADOPT_CODEX_DISAGREEMENT",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.findings-acl.707/",
+   "Claim_URL": "https://aclanthology.org/2025.findings-acl.707.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.findings-acl.707.pdf#page=8"
   },
   {
    "Paper_ID": "100",
@@ -960,7 +1137,10 @@
    "Evidence_Location_Detail": "Sections 6.1.2–6.1.6 pp. 5–7; arc similarity pp. 8–9",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.findings-emnlp.1089/",
+   "Claim_URL": "https://aclanthology.org/2025.findings-emnlp.1089.pdf#page=9",
+   "Evidence_URL": "https://aclanthology.org/2025.findings-emnlp.1089.pdf#page=6"
   },
   {
    "Paper_ID": "101",
@@ -976,7 +1156,10 @@
    "Evidence_Location_Detail": "Table 2 model comparisons; Table 3 human agreement; cross-evaluation Figure 5",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2025.findings-emnlp.368/",
+   "Claim_URL": "https://aclanthology.org/2025.findings-emnlp.368.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.findings-emnlp.368.pdf#page=8"
   },
   {
    "Paper_ID": "102",
@@ -992,7 +1175,10 @@
    "Evidence_Location_Detail": "Tables 3–4; Appendix C",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.findings-emnlp.499/",
+   "Claim_URL": "https://aclanthology.org/2025.findings-emnlp.499.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2025.findings-emnlp.499.pdf#page=7"
   },
   {
    "Paper_ID": "102",
@@ -1008,7 +1194,10 @@
    "Evidence_Location_Detail": "Tables 3–4; Appendix C; ethics population restrictions p. 9",
    "Final_Alignment": "EXCEEDS",
    "Final_Decision_Type": "ADOPT_CODEX_DISAGREEMENT",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2025.findings-emnlp.499/",
+   "Claim_URL": "https://aclanthology.org/2025.findings-emnlp.499.pdf#page=9",
+   "Evidence_URL": "https://aclanthology.org/2025.findings-emnlp.499.pdf#page=7"
   },
   {
    "Paper_ID": "104",
@@ -1024,7 +1213,10 @@
    "Evidence_Location_Detail": "Table 1, metrics and mean ratings; Delphi procedure pp. 6–9",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://www.mdpi.com/2227-9032/12/6/683",
+   "Claim_URL": "https://www.mdpi.com/2227-9032/12/6/683",
+   "Evidence_URL": "https://www.mdpi.com/2227-9032/12/6/683"
   },
   {
    "Paper_ID": "106",
@@ -1040,7 +1232,10 @@
    "Evidence_Location_Detail": "Tables 4–5",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://aclanthology.org/2024.lrec-main.261/",
+   "Claim_URL": "https://aclanthology.org/2024.lrec-main.261.pdf#page=1",
+   "Evidence_URL": "https://aclanthology.org/2024.lrec-main.261.pdf#page=7"
   },
   {
    "Paper_ID": "107",
@@ -1056,7 +1251,10 @@
    "Evidence_Location_Detail": "Figures 2–3; Table 2; Sections 5.3 and 6.3 control evaluation",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2023.acl-long.555/",
+   "Claim_URL": "https://aclanthology.org/2023.acl-long.555.pdf#page=2",
+   "Evidence_URL": "https://aclanthology.org/2023.acl-long.555.pdf#page=8"
   },
   {
    "Paper_ID": "108",
@@ -1072,7 +1270,10 @@
    "Evidence_Location_Detail": "Tables 3–5; Appendix E",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://aclanthology.org/2024.acl-long.813/",
+   "Claim_URL": "https://aclanthology.org/2024.acl-long.813.pdf#page=9",
+   "Evidence_URL": "https://aclanthology.org/2024.acl-long.813.pdf#page=8"
   },
   {
    "Paper_ID": "109",
@@ -1088,7 +1289,10 @@
    "Evidence_Location_Detail": "Tables 4–7 pp. 6–8; recruitment Section 4.1",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://arxiv.org/abs/2305.13614",
+   "Claim_URL": "https://arxiv.org/pdf/2305.13614#page=1",
+   "Evidence_URL": "https://arxiv.org/pdf/2305.13614#page=8"
   },
   {
    "Paper_ID": "110",
@@ -1104,7 +1308,10 @@
    "Evidence_Location_Detail": "Figure 3; Appendix J patient-backbone/content-coverage tests pp. 24–26",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://arxiv.org/abs/2405.07960",
+   "Claim_URL": "https://arxiv.org/pdf/2405.07960#page=1",
+   "Evidence_URL": "https://arxiv.org/pdf/2405.07960#page=5"
   },
   {
    "Paper_ID": "111",
@@ -1120,7 +1327,10 @@
    "Evidence_Location_Detail": "Figure 6; Table 3 p. 7; Appendix G ablations",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "ADOPT_CODEX_WORDING",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://arxiv.org/abs/2506.06626",
+   "Claim_URL": "https://arxiv.org/pdf/2506.06626#page=1",
+   "Evidence_URL": "https://arxiv.org/pdf/2506.06626#page=8"
   },
   {
    "Paper_ID": "111",
@@ -1136,7 +1346,10 @@
    "Evidence_Location_Detail": "Figure 6; simulation design p. 7",
    "Final_Alignment": "EXCEEDS",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "YES"
+   "Human_Review_Flag": "YES",
+   "Paper_URL": "https://arxiv.org/abs/2506.06626",
+   "Claim_URL": "https://arxiv.org/pdf/2506.06626#page=2",
+   "Evidence_URL": "https://arxiv.org/pdf/2506.06626#page=8"
   },
   {
    "Paper_ID": "112",
@@ -1152,7 +1365,10 @@
    "Evidence_Location_Detail": "Tables 2–3 p. 9; limitations p. 10",
    "Final_Alignment": "ALIGNED",
    "Final_Decision_Type": "RETAIN_VERIFIED",
-   "Human_Review_Flag": "NO"
+   "Human_Review_Flag": "NO",
+   "Paper_URL": "https://www.jmir.org/2019/7/e12529/",
+   "Claim_URL": "https://www.jmir.org/2019/7/e12529/",
+   "Evidence_URL": "https://www.jmir.org/2019/7/e12529/"
   }
  ],
  "summary": {
@@ -1179,5 +1395,10 @@
    "EXCEEDS": 12,
    "UNCLEAR": 0
   }
- }
+ },
+ "papers_with_url": 51,
+ "papers_without_url": 1,
+ "papers_without_url_ids": [
+  "45"
+ ]
 }

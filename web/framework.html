@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Behavior-Grounded Evaluation — Framework, Case Study, and Corpus Provenance</title>
+<meta name="description" content="Behavior-Grounded Evaluation: seven linked components for evaluating interactive LLM systems, an applied case study, and the coded corpus's construction and reliability record. Anonymous supplementary material.">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/framework.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <p class="kicker">Anonymous supplementary material &middot; Framework</p>
+  <h1>Behavior-Grounded Evaluation</h1>
+  <p class="sub">Evaluating interactive LLM systems through an explicit evidence chain &mdash; from the
+    behavioral claim, to the construct and its markers, to the expected trajectory, diagnostic
+    interventions, evaluators, and the boundary of what the evidence can support.</p>
+  <div class="badges" id="framework-badges">
+    <span class="badge">7 linked components</span>
+    <span class="badge">3 guiding questions</span>
+    <span class="badge">Evidence chain &mdash; not a scorecard</span>
+    <span class="badge">Applied case study</span>
+  </div>
+</header>
+
+<nav class="site-nav" id="site-nav" aria-label="Section navigation">
+  <div class="nav-inner">
+    <a href="#bge" class="nav-link">Framework</a>
+    <a href="#case-study" class="nav-link">Case Study</a>
+    <a href="#corpus-construction" class="nav-link">Corpus &amp; Reliability</a>
+    <a href="index.html" class="nav-link nav-back">&#8592; Coded Corpus Explorer</a>
+  </div>
+</nav>
+
+<main id="main" class="wrap">
+
+  <!-- ============================================================ 01 BGE == -->
+  <section id="bge" class="section">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Behavior-Grounded Evaluation</h2></div>
+    <p class="lead">Behavior-Grounded Evaluation organizes behavioral evaluation as an explicit
+      <strong>evidence chain</strong>. It is guided by three questions &mdash; <em>What behavior is being
+      measured?</em> <em>How should that behavior develop across interaction?</em> and <em>What conclusions
+      can the resulting evidence support?</em> &mdash; operationalized through seven linked components:</p>
+
+    <p class="bge-chain-line" aria-label="Component chain">Claim &#8594; Construct &#8594; Behavioral Markers
+      &#8594; Trajectory &#8594; Intervention &#8594; Evaluator &#8594; Evidence Boundary</p>
+
+    <div class="panel key-panel">
+      <p class="key-point"><strong>These components are not independent evaluation dimensions.</strong>
+        Rather, they form an evidence chain: the claim identifies the construct that must be measured; the
+        construct determines the observable markers; the expected trajectory specifies how those markers
+        should evolve; interventions test whether that evolution is sensitive to meaningful interaction;
+        evaluators provide judgments about the resulting evidence; and the evidence boundary specifies which
+        conclusions those judgments can support. <strong>Weakness at an earlier link cannot generally be
+        repaired by adding more metrics or evaluators downstream.</strong></p>
+      <p class="note">Source: paper &sect;5, p.&nbsp;5.</p>
+    </div>
+
+    <h3 class="sub-head">Three guiding questions</h3>
+    <div class="q-grid">
+      <div class="q-card">
+        <span class="q-tag">Q1 &middot; &sect;5.1, pp.&nbsp;5&ndash;6</span>
+        <p class="q-text">What behavior is being measured?</p>
+        <p class="q-note">Translate the behavioral claim into a construct and observable markers, and pick
+          evaluators able to judge those markers.</p>
+      </div>
+      <div class="q-card">
+        <span class="q-tag">Q2 &middot; &sect;5.2, p.&nbsp;6</span>
+        <p class="q-text">How should the behavior develop across interaction?</p>
+        <p class="q-note">Specify an ordered expectation for the markers and test it with interventions that
+          vary a meaningful counselor action.</p>
+      </div>
+      <div class="q-card">
+        <span class="q-tag">Q3 &middot; &sect;5.3, p.&nbsp;6</span>
+        <p class="q-text">What conclusions can the resulting evidence support?</p>
+        <p class="q-note">State the strongest conclusion the evaluation actually warrants &mdash; and what
+          stronger claim it does not yet support.</p>
+      </div>
+    </div>
+
+    <h3 class="sub-head">The evidence chain</h3>
+    <div id="bge-chain" class="panel chain-panel"><noscript>Enable JavaScript to view the component
+      chain.</noscript></div>
+    <div id="bge-components" class="comp-grid"></div>
+  </section>
+
+  <!-- ====================================================== 02 CASE STUDY == -->
+  <section id="case-study" class="section">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Case Study: Roleplay-doh</h2></div>
+    <p class="lead">Roleplay-doh (Louie et al., 2024) is examined as a case study of how
+      Behavior-Grounded Evaluation can extend the evaluation of an interactive LLM system. The system
+      enables counseling experts to create simulated patients by translating qualitative feedback into
+      behavioral principles, and evaluates the patients through creator and third-party ratings as well as
+      principle-adherence tests. Table&nbsp;2 contrasts its existing evaluation with the proposed
+      extensions.</p>
+
+    <div id="roleplay-record" class="panel record-panel"></div>
+
+    <h3 class="sub-head">Table 2 &mdash; Roleplay-doh grounding vs. Behavior-Grounded extension</h3>
+    <figure class="table-figure">
+      <div class="table-scroll">
+        <table class="t2-table">
+          <caption>Table 2: Case study of Behavior-Grounded Evaluation applied to Roleplay-doh, contrasting
+            its reported evaluation with proposed extensions.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Component</th>
+              <th scope="col">Roleplay-doh grounding</th>
+              <th scope="col">Behavior-Grounded extension</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Claim</th>
+              <td>Simulated patients should follow expert-defined principles, remain consistent with their
+                description and context, and resemble real cases.</td>
+              <td>Separate claims about behavioral simulation from broader conclusions about training
+                effectiveness or novice-counselor outcomes.</td>
+            </tr>
+            <tr>
+              <th scope="row">Construct</th>
+              <td>Principles describe hesitation, skepticism toward help, reluctance toward suggestions, and
+                disclosure.</td>
+              <td>Define a focal construct, such as help-seeking resistance or guardedness, that groups
+                related principles.</td>
+            </tr>
+            <tr>
+              <th scope="row">Markers</th>
+              <td>Principles specify observable behaviors such as limited disclosure, skepticism toward
+                suggestions, and hesitation following encouragement.</td>
+              <td>Treat these as explicit markers of the construct and distinguish them from related
+                behaviors such as negativity or disagreement.</td>
+            </tr>
+            <tr>
+              <th scope="row">Trajectory</th>
+              <td>Multi-turn dialogues are collected, and properties such as role consistency are
+                evaluated.</td>
+              <td>Track how the markers persist or change across turns rather than only whether they occur or
+                whether the dialogue is globally consistent.</td>
+            </tr>
+            <tr>
+              <th scope="row">Intervention</th>
+              <td>Some principles are conditional on counselor inputs, and their situational applicability
+                is checked.</td>
+              <td>Hold the patient profile constant, vary meaningful counselor actions, and pre-specify the
+                expected behavioral consequences.</td>
+            </tr>
+            <tr>
+              <th scope="row">Evaluator</th>
+              <td>Creator counselors, third-party counselors, and expert rankings are used.</td>
+              <td>Use expert-coded markers and, where appropriate, a calibrated LLM judge for scalable marker
+                and trajectory coding.</td>
+            </tr>
+            <tr>
+              <th scope="row">Evidence boundary</th>
+              <td>The evaluation measures authenticity, resemblance, principle adherence, role consistency,
+                and perceived readiness for training.</td>
+              <td>Support conclusions about behavioral simulation and perceived suitability, while reserving
+                conclusions about trainee learning or therapeutic benefit for direct human-outcome
+                evidence.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <figcaption>Paper &sect;6 and Table&nbsp;2 (pp.&nbsp;6&ndash;8).</figcaption>
+    </figure>
+
+    <div class="panel case-notes">
+      <h3>What the case study adds</h3>
+      <ul class="case-list">
+        <li><strong>What behavior is being measured?</strong> Behavior-Grounded Evaluation would use expert
+          judgment to define a candidate construct, such as guardedness, and examine whether the proposed
+          markers distinguish it from distrust, anxiety, or disengagement.</li>
+        <li><strong>How should the behavior develop across interaction?</strong> The same markers can be
+          examined as a trajectory &mdash; e.g. a guarded patient might remain hesitant after generic
+          encouragement but disclose more gradually as the counselor explores the problem. Operationally,
+          the evaluation could track the occurrence and timing of guardedness-related markers across turns,
+          identify abrupt changes in resistance or disclosure, and compare behavioral trajectories following
+          different counselor actions.</li>
+        <li><strong>What conclusions can the evidence support?</strong> Roleplay-doh evaluates whether
+          simulated patients appear authentic, resemble real cases, and are perceived as ready for training.
+          These measures support conclusions about behavioral plausibility and perceived suitability for
+          training, but they do not directly establish that novice counselors improve their skills after
+          using the system. A conclusion about training effectiveness would require evidence of trainee
+          learning or skill development.</li>
+      </ul>
+      <p class="note">Paraphrased from paper &sect;6, pp.&nbsp;6&ndash;7.</p>
+    </div>
+  </section>
+
+  <!-- ================================================= 03 CORPUS PROVENANCE = -->
+  <section id="corpus-construction" class="section">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Corpus Construction and Coding Reliability</h2></div>
+    <p class="lead">The framework is grounded in a coded corpus of 52 papers, assembled by a documented
+      screening process and validated by independent double coding. This section records how the corpus was
+      built and how reliably it was coded.</p>
+
+    <div class="split-grid">
+      <div class="panel">
+        <h3>Identification &rarr; inclusion</h3>
+        <p class="chart-sub">Corpus construction and screening process (paper Figure&nbsp;1).</p>
+        <div id="corpus-funnel"><noscript>Enable JavaScript to view the screening funnel.</noscript></div>
+        <p class="note">From 900 identified records, 112 advanced to full-text assessment and 52 were
+          included in the final synthesis; 788 records were excluded at title/abstract screening, none were
+          unretrievable, and 60 full-text articles were excluded. Source: paper &sect;3.1 and Figure&nbsp;1
+          (pp.&nbsp;2&ndash;4).</p>
+      </div>
+
+      <div class="panel">
+        <h3>Records by source</h3>
+        <p class="chart-sub">Databases and registers searched (n&nbsp;=&nbsp;900).</p>
+        <div id="corpus-sources"></div>
+      </div>
+    </div>
+
+    <div class="panel reliability-panel">
+      <h3>Coding scheme and reliability</h3>
+      <p>A 40-field codebook covers simulation design, evaluation methods, human-centered targets, theory
+        grounding, reliability/transparency, and claim&ndash;evidence alignment.</p>
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-n">40</div>
+          <div class="stat-l">coded fields in the shared codebook</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n">2</div>
+          <div class="stat-l">researchers coded every paper independently</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n">82.5%</div>
+          <div class="stat-l">mean raw agreement across fields, before adjudication</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n">&kappa;&nbsp;=&nbsp;0.61</div>
+          <div class="stat-l">mean Cohen&rsquo;s &kappa; where computable</div>
+        </div>
+      </div>
+      <p class="note">Two researchers independently coded the papers using the shared codebook. Before
+        adjudication, mean raw agreement across fields was 82.5%; for fields where Cohen&rsquo;s &kappa; was
+        computable, mean &kappa; was 0.61. Disagreements and ambiguous cases were resolved by discussion.
+        Source: paper &sect;3.3, p.&nbsp;3.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p><strong>Behavior-Grounded Evaluation.</strong> Framework, applied case study, and corpus provenance
+    for the 52-paper coded review of evaluation practice in LLM-based mental-health simulation and
+    counseling systems.</p>
+  <p>Content is drawn from the submitted paper (sections 2, 3, 5, 6; Figure&nbsp;1; Table&nbsp;2). Corpus
+    figures are rendered from the bundled coding bundle <code>web/data/data.js</code>. Anonymous
+    supplementary material. No personal or institutional information is included.</p>
+</footer>
+
+<script src="data/data.js"></script>
+<script src="assets/framework.js"></script>
+</body>
+</html>

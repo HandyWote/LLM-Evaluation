@@ -1,0 +1,180 @@
+/* ==========================================================================
+   Behavior-Grounded Evaluation — page-specific styles
+   Layered on top of assets/styles.css (shell, palette, chart primitives).
+   Only rules used by framework.html live here.
+   ========================================================================== */
+
+.nav-link.nav-back { color: var(--teal-mid); }
+.nav-link.nav-back:hover { color: var(--teal-deep); }
+
+.sub-head {
+  font-size: .95rem; font-weight: 700; color: var(--ink);
+  margin: 30px 0 12px; letter-spacing: -.005em;
+}
+
+/* --------------------------------------------------- chain + key point -- */
+
+.bge-chain-line {
+  font-size: .85rem; font-weight: 700; color: var(--teal-deep);
+  background: var(--teal-pale); border: 1px dashed var(--teal-soft);
+  border-radius: 10px; padding: 10px 14px; margin: 0 0 16px;
+  overflow-wrap: anywhere;
+}
+
+.key-panel { border-left: 4px solid var(--teal); }
+.key-point { font-size: .92rem; color: var(--ink-soft); max-width: 980px; }
+
+.chain-panel { padding: 16px 18px 12px; }
+.chain-panel .chain { margin: 2px 0 10px; }
+.chain-panel .chain-step .l { font-weight: 700; color: var(--ink-soft); }
+
+/* --------------------------------------------------------- questiuons ---- */
+
+.q-grid {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+.q-card {
+  background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--teal);
+  border-radius: 12px; padding: 16px 18px; box-shadow: var(--shadow);
+}
+.q-tag {
+  font-size: .68rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--teal-mid);
+}
+.q-text { font-size: .93rem; font-weight: 700; margin: 6px 0 6px; line-height: 1.4; }
+.q-note { font-size: .8rem; color: var(--muted); }
+
+/* ------------------------------------------------------- component grid -- */
+
+.comp-grid {
+  display: grid; gap: 14px; margin-top: 4px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.comp-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 16px 18px 14px; box-shadow: var(--shadow);
+  display: flex; flex-direction: column; scroll-margin-top: 64px;
+}
+.comp-card:hover { border-color: var(--teal-soft); }
+.comp-head { display: flex; align-items: baseline; gap: 9px; margin-bottom: 6px; }
+.comp-num {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 6px;
+  background: var(--teal-deep); color: #fff; font-size: .74rem; font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.comp-head h3 { font-size: .98rem; }
+.comp-q { font-size: .74rem; color: var(--muted); margin-bottom: 9px; }
+.q-pill {
+  display: inline-block; font-size: .66rem; font-weight: 800; letter-spacing: .05em;
+  background: var(--teal-pale); color: var(--teal-mid); border: 1px solid var(--teal-soft);
+  border-radius: 5px; padding: 1px 6px; margin-right: 4px;
+}
+.comp-quote {
+  font-size: .85rem; font-style: italic; color: var(--teal-deep);
+  border-left: 3px solid var(--teal-soft); padding-left: 10px; margin-bottom: 9px;
+}
+.comp-sum { font-size: .83rem; color: var(--ink-soft); flex: 1 1 auto; }
+.comp-anchor { margin-top: 10px; }
+.anchor-tag {
+  font-size: .72rem; font-weight: 700; color: var(--muted); text-decoration: none;
+  background: #f1f5f9; border-radius: 6px; padding: 3px 8px; display: inline-block;
+}
+.comp-anchor .anchor-tag:hover { color: var(--teal-mid); }
+
+.cx-block { margin-top: 12px; border-top: 1px dashed var(--line); padding-top: 10px; }
+.cx-title {
+  font-size: .68rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 5px;
+}
+.cx-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.cx { font-size: .79rem; }
+.cx a { text-decoration: none; }
+.cx a:hover { text-decoration: underline; }
+.cx.missing { color: var(--faint); }
+.cx-meta { color: var(--faint); font-size: .72rem; }
+
+/* ---------------------------------------------------- record / paper 80 -- */
+
+.record-panel { margin-bottom: 22px; }
+.record-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.record-intro { font-size: .84rem; color: var(--muted); margin-top: 5px; max-width: 760px; }
+.record-link { font-size: .8rem; font-weight: 700; white-space: nowrap; }
+.record-grid {
+  display: grid; gap: 10px; margin: 16px 0 6px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+.record-item {
+  background: #fbfdfd; border: 1px solid #eef2f6; border-left: 3px solid var(--teal);
+  border-radius: 9px; padding: 10px 12px;
+}
+.record-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+.record-value { font-size: .86rem; font-weight: 700; color: var(--ink); margin-top: 3px; overflow-wrap: anywhere; }
+.record-sub {
+  font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--teal-mid);
+  margin: 18px 0 2px;
+}
+.claim-foot-slot .quote-block { margin: 8px 0; }
+.page-link { font-weight: 700; }
+.claim-arrow { text-align: center; color: var(--faint); font-size: .8rem; margin: 2px 0; }
+.claim-foot { font-size: .74rem; color: var(--muted); margin-top: 10px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* --------------------------------------------------------- case study ---- */
+
+.case-notes { margin-top: 22px; }
+.case-list { margin: 10px 0 4px 20px; display: flex; flex-direction: column; gap: 10px; }
+.case-list li { font-size: .85rem; color: var(--ink-soft); }
+
+.table-figure { margin: 0; }
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+.t2-table { width: 100%; border-collapse: collapse; font-size: .82rem; min-width: 720px; }
+.t2-table caption {
+  caption-side: top; text-align: left; padding: 12px 16px;
+  font-size: .78rem; color: var(--muted); border-bottom: 1px solid var(--line);
+}
+.t2-table th, .t2-table td { padding: 11px 14px; border-bottom: 1px solid #eef2f6; vertical-align: top; text-align: left; }
+.t2-table thead th {
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted);
+  background: #f8fafc; border-bottom: 2px solid var(--line);
+}
+.t2-table tbody th { font-weight: 700; color: var(--teal-deep); white-space: nowrap; width: 150px; }
+.t2-table tbody tr:last-child th, .t2-table tbody tr:last-child td { border-bottom: none; }
+.t2-table tbody tr:hover td, .t2-table tbody tr:hover th { background: #fbfdfd; }
+.table-figure figcaption { font-size: .74rem; color: var(--muted); margin-top: 8px; }
+
+/* ------------------------------------------- corpus construction panel -- */
+
+.split-grid {
+  display: grid; gap: 16px; margin-bottom: 18px;
+  grid-template-columns: 1.4fr 1fr;
+}
+.funnel-keep { color: var(--teal-mid); font-weight: 700; }
+.reliability-panel { margin-top: 2px; }
+.stat-row {
+  display: grid; gap: 12px; margin: 16px 0 4px;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+.stat-card {
+  background: #fbfdfd; border: 1px solid #eef2f6; border-top: 3px solid var(--teal);
+  border-radius: 10px; padding: 12px 14px;
+}
+.stat-n { font-size: 1.35rem; font-weight: 800; color: var(--teal-deep); font-variant-numeric: tabular-nums; }
+.stat-l { font-size: .75rem; color: var(--muted); margin-top: 4px; }
+
+/* ----------------------------------------------------------- responsive -- */
+
+@media (max-width: 860px) {
+  .split-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .record-head { flex-direction: column; }
+  .comp-grid { grid-template-columns: 1fr; }
+  .funnel-meta { white-space: normal; }
+}
+
+@media print {
+  .site-nav { display: none; }
+  .comp-card, .q-card, .panel { break-inside: avoid; }
+}

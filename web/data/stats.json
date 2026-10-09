@@ -66,11 +66,722 @@
    "n": 3
   }
  ],
+ "behavioral_validity": {
+  "n": 52,
+  "nested": false,
+  "criteria": [
+   {
+    "id": "extended_dialogue",
+    "label": "Extended dialogue",
+    "field": "Interaction_Level",
+    "rule": "Interaction_Level == 'Extended Dialogue'",
+    "n": 31,
+    "definition": "Amount of interaction represented in the evaluation. Single-turn evaluates one response without dialogue history; Short Multi-turn contains 2--5 turns; Extended Dialogue uses longer conversations, typically 6 or more turns; Longitudinal evaluation spans multiple sessions or a longer period. When multiple interaction levels were present, the highest level demonstrated in the evaluation was coded. The six-turn threshold is a pragmatic coding convention used to distinguish short from extended within-session interactions, rather than a theoretical boundary for behavioral change."
+   },
+   {
+    "id": "dynamic_state",
+    "label": "Dynamic user state",
+    "field": "Uses_Dynamic_State",
+    "rule": "Uses_Dynamic_State == 'Yes'",
+    "n": 13,
+    "definition": "Whether the system explicitly tracks and updates a psychological or user state, such as state transitions, session memory, dynamic openness, or related mechanisms."
+   },
+   {
+    "id": "longitudinal",
+    "label": "Longitudinal evaluation",
+    "field": "Has_Longitudinal_Eval",
+    "rule": "Has_Longitudinal_Eval == 'Yes'",
+    "n": 3,
+    "definition": "Whether evaluation spans multiple sessions or a longer period. A single-session evaluation is coded No."
+   }
+  ],
+  "combinations": [
+   {
+    "extended_dialogue": false,
+    "dynamic_state": false,
+    "longitudinal": false,
+    "n": 18,
+    "paper_ids": [
+     "6",
+     "10",
+     "15",
+     "29",
+     "39",
+     "45",
+     "47",
+     "56",
+     "58",
+     "68",
+     "77",
+     "84",
+     "91",
+     "92",
+     "101",
+     "104",
+     "106",
+     "107"
+    ]
+   },
+   {
+    "extended_dialogue": false,
+    "dynamic_state": false,
+    "longitudinal": true,
+    "n": 1,
+    "paper_ids": [
+     "34"
+    ]
+   },
+   {
+    "extended_dialogue": false,
+    "dynamic_state": true,
+    "longitudinal": false,
+    "n": 1,
+    "paper_ids": [
+     "65"
+    ]
+   },
+   {
+    "extended_dialogue": false,
+    "dynamic_state": true,
+    "longitudinal": true,
+    "n": 1,
+    "paper_ids": [
+     "111"
+    ]
+   },
+   {
+    "extended_dialogue": true,
+    "dynamic_state": false,
+    "longitudinal": false,
+    "n": 20,
+    "paper_ids": [
+     "1",
+     "21",
+     "31",
+     "38",
+     "49",
+     "63",
+     "69",
+     "71",
+     "72",
+     "75",
+     "80",
+     "81",
+     "83",
+     "89",
+     "94",
+     "99",
+     "108",
+     "109",
+     "110",
+     "112"
+    ]
+   },
+   {
+    "extended_dialogue": true,
+    "dynamic_state": false,
+    "longitudinal": true,
+    "n": 0,
+    "paper_ids": []
+   },
+   {
+    "extended_dialogue": true,
+    "dynamic_state": true,
+    "longitudinal": false,
+    "n": 10,
+    "paper_ids": [
+     "18",
+     "23",
+     "60",
+     "86",
+     "87",
+     "93",
+     "95",
+     "97",
+     "100",
+     "102"
+    ]
+   },
+   {
+    "extended_dialogue": true,
+    "dynamic_state": true,
+    "longitudinal": true,
+    "n": 1,
+    "paper_ids": [
+     "13"
+    ]
+   }
+  ],
+  "pairwise": [
+   {
+    "a": "extended_dialogue",
+    "b": "dynamic_state",
+    "both": 11,
+    "only_a": 20,
+    "only_b": 2,
+    "neither": 19
+   },
+   {
+    "a": "extended_dialogue",
+    "b": "longitudinal",
+    "both": 1,
+    "only_a": 30,
+    "only_b": 2,
+    "neither": 19
+   },
+   {
+    "a": "dynamic_state",
+    "b": "longitudinal",
+    "both": 2,
+    "only_a": 11,
+    "only_b": 1,
+    "neither": 38
+   }
+  ],
+  "caveats": [
+   "The three criteria are NOT nested: extended dialogue, dynamic user state and longitudinal evaluation are independent coded fields, so their counts (31, 13, 3) must not be drawn as a funnel or otherwise imply a subset relation.",
+   "Of the 13 papers that model a dynamic user state, 2 are not extended dialogues: paper 65 (Short Multi-turn) and paper 111 (Longitudinal).",
+   "Of the 3 papers with a longitudinal evaluation, 2 are not extended dialogues: paper 34 and paper 111 (both coded Longitudinal as their highest interaction level).",
+   "10 papers are extended + dynamic but not longitudinal, and the extended + dynamic + longitudinal intersection contains a single paper (13).",
+   "A longer dialogue does not by itself provide trajectory-level evidence (paper Sec. 4.2): interaction length and evidence about behavioral change across an interaction are separate properties."
+  ]
+ },
  "behavior_depth_extended": {
   "Static": 16,
   "Dynamic": 7,
   "None": 1,
   "Pattern-level": 7
+ },
+ "gated": [
+  {
+   "id": "llm_judge_validation",
+   "field": "LLM_Judge_Validated",
+   "gate_field": "Eval_LLM_Judge",
+   "gate_value": "Yes",
+   "label": "Validate the LLM judge against human judgments",
+   "n": 23,
+   "denominator": 30,
+   "unconditional_n": 24,
+   "note": "23 of the 30 papers that use an LLM judge (Eval_LLM_Judge = Yes) also validate the judge against human judgments. The unconditional count (24 across all 52 papers) must never be shown without stating that denominator."
+  },
+  {
+   "id": "rubric_reliability",
+   "field": "Reliability_Reported",
+   "gate_field": "Has_Rubric",
+   "gate_value": "Yes",
+   "label": "Report inter-rater reliability",
+   "n": 13,
+   "denominator": 45,
+   "unconditional_n": 16,
+   "note": "13 of the 45 papers that provide a rubric or scoring criteria (Has_Rubric = Yes) also report inter-rater reliability. The unconditional count (16 across all 52 papers) must never be shown without stating that denominator."
+  }
+ ],
+ "reliability_reporting": {
+  "value_counts": {
+   "Yes": 16,
+   "No": 34,
+   "N/A": 2
+  },
+  "with_rubric": {
+   "denominator": 45,
+   "Yes": 13,
+   "No": 31,
+   "N/A": 1
+  }
+ },
+ "clinical_theory": {
+  "denominator": 52,
+  "multi_label": true,
+  "families": [
+   {
+    "name": "CBT (cognitive-behavioral therapy)",
+    "n": 20,
+    "paper_ids": [
+     "1",
+     "10",
+     "13",
+     "23",
+     "49",
+     "58",
+     "63",
+     "77",
+     "81",
+     "83",
+     "89",
+     "95",
+     "97",
+     "99",
+     "100",
+     "102",
+     "104",
+     "106",
+     "107",
+     "111"
+    ]
+   },
+   {
+    "name": "Motivational interviewing",
+    "n": 11,
+    "paper_ids": [
+     "6",
+     "23",
+     "31",
+     "38",
+     "60",
+     "63",
+     "84",
+     "86",
+     "87",
+     "92",
+     "112"
+    ]
+   },
+   {
+    "name": "Diagnostic manuals & symptom scales",
+    "n": 7,
+    "paper_ids": [
+     "13",
+     "38",
+     "45",
+     "72",
+     "91",
+     "99",
+     "109"
+    ]
+   },
+   {
+    "name": "Clinical guidelines & exams",
+    "n": 5,
+    "paper_ids": [
+     "39",
+     "49",
+     "56",
+     "104",
+     "110"
+    ]
+   },
+   {
+    "name": "Emotion / empathy constructs",
+    "n": 4,
+    "paper_ids": [
+     "10",
+     "69",
+     "77",
+     "91"
+    ]
+   },
+   {
+    "name": "Working alliance",
+    "n": 4,
+    "paper_ids": [
+     "21",
+     "34",
+     "38",
+     "111"
+    ]
+   },
+   {
+    "name": "Big Five",
+    "n": 3,
+    "paper_ids": [
+     "21",
+     "38",
+     "65"
+    ]
+   },
+   {
+    "name": "Dialectical behavior therapy",
+    "n": 2,
+    "paper_ids": [
+     "10",
+     "102"
+    ]
+   },
+   {
+    "name": "Problem-solving therapy",
+    "n": 2,
+    "paper_ids": [
+     "15",
+     "68"
+    ]
+   },
+   {
+    "name": "Crisis & suicide-risk frameworks",
+    "n": 1,
+    "paper_ids": [
+     "47"
+    ]
+   },
+   {
+    "name": "Narrative therapy / IMCS",
+    "n": 1,
+    "paper_ids": [
+     "93"
+    ]
+   },
+   {
+    "name": "Person-centered / Rogers",
+    "n": 1,
+    "paper_ids": [
+     "68"
+    ]
+   }
+  ],
+  "unclassified": {
+   "n": 7,
+   "paper_ids": [
+    "18",
+    "71",
+    "75",
+    "80",
+    "94",
+    "101",
+    "108"
+   ]
+  },
+  "not_specified": {
+   "n": 1,
+   "paper_ids": [
+    "29"
+   ]
+  },
+  "raw": [
+   {
+    "value": "Cognitive Behavioral Therapy (CBT)",
+    "n": 5,
+    "paper_ids": [
+     "58",
+     "83",
+     "95",
+     "100",
+     "106"
+    ]
+   },
+   {
+    "value": "Motivational Interviewing (MI)",
+    "n": 2,
+    "paper_ids": [
+     "31",
+     "84"
+    ]
+   },
+   {
+    "value": "ADHD Clinical Guidelines (American Academy of Pediatrics) + CBT",
+    "n": 1,
+    "paper_ids": [
+     "104"
+    ]
+   },
+   {
+    "value": "Big Five Personality Traits",
+    "n": 1,
+    "paper_ids": [
+     "65"
+    ]
+   },
+   {
+    "value": "Bordin's working alliance theory; Observer-rated Short version of Working Alliance Inventory (WAI-O-S)",
+    "n": 1,
+    "paper_ids": [
+     "34"
+    ]
+   },
+   {
+    "value": "CBT (Cognitive Behavioral Therapy) + Cognitive Distortion Theory + Behavioral Activation",
+    "n": 1,
+    "paper_ids": [
+     "107"
+    ]
+   },
+   {
+    "value": "Cognitive Behavior Therapy (CBT), Cognitive Conceptualization Diagram (CCD) from Beck (2020)",
+    "n": 1,
+    "paper_ids": [
+     "81"
+    ]
+   },
+   {
+    "value": "Cognitive Behavioral Therapy (CBT)+ PHQ-9 + PDI + PANSS",
+    "n": 1,
+    "paper_ids": [
+     "13"
+    ]
+   },
+   {
+    "value": "Cognitive Behavioral Therapy (CBT), Cognitive Conceptualization Diagram (CCD)",
+    "n": 1,
+    "paper_ids": [
+     "97"
+    ]
+   },
+   {
+    "value": "Cognitive Behavioral Therapy (CBT), Dialectical Behavior Therapy (DBT)",
+    "n": 1,
+    "paper_ids": [
+     "102"
+    ]
+   },
+   {
+    "value": "Cognitive Behavioral Therapy (CBT)/Relational Empathy",
+    "n": 1,
+    "paper_ids": [
+     "77"
+    ]
+   },
+   {
+    "value": "Cognitive Behavioral Therapy (CBT)/Working Alliance Theory",
+    "n": 1,
+    "paper_ids": [
+     "111"
+    ]
+   },
+   {
+    "value": "Cognitive Behavioral Therapy (CBT); Cognitive Reframing",
+    "n": 1,
+    "paper_ids": [
+     "1"
+    ]
+   },
+   {
+    "value": "Constitutional AI Principles、Standardized Patients evaluation",
+    "n": 1,
+    "paper_ids": [
+     "80"
+    ]
+   },
+   {
+    "value": "Crisis Intervention Theory (Baldwin, 1979), Suicide Risk Assessment Framework (Cramer et al., 2013), WHO mhGAP Intervention Guide (Organization, 2023), WHO LIVE LIFE suicide prevention framework (Organization et al., 2021)",
+    "n": 1,
+    "paper_ids": [
+     "47"
+    ]
+   },
+   {
+    "value": "DSM-5 (DiagNostic and Statistical Manual of Mental Disorders), Beck Depression Inventory (BDI-II)",
+    "n": 1,
+    "paper_ids": [
+     "109"
+    ]
+   },
+   {
+    "value": "DSM-5 (DiagNostic and Statistical Manual of Mental Disorders, Fifth Edition)",
+    "n": 1,
+    "paper_ids": [
+     "72"
+    ]
+   },
+   {
+    "value": "DSM-5-TR, ICD-10",
+    "n": 1,
+    "paper_ids": [
+     "45"
+    ]
+   },
+   {
+    "value": "DSM-V, Beck's cognitive theory, PHQ-9, DBI",
+    "n": 1,
+    "paper_ids": [
+     "99"
+    ]
+   },
+   {
+    "value": "DSM/Emotion Theory",
+    "n": 1,
+    "paper_ids": [
+     "91"
+    ]
+   },
+   {
+    "value": "Decision Theory（决策理论）/Persona Consistency Theory（角色扮演一致性理论）/G-Eval Framwork",
+    "n": 1,
+    "paper_ids": [
+     "101"
+    ]
+   },
+   {
+    "value": "Emotional Labor (Hochschild, 1983), Cognitive Behavioral Therapy (CBT), Dialectical Behavior Therapy (DBT)",
+    "n": 1,
+    "paper_ids": [
+     "10"
+    ]
+   },
+   {
+    "value": "Empathic Resonance",
+    "n": 1,
+    "paper_ids": [
+     "69"
+    ]
+   },
+   {
+    "value": "Hill's Helping Skills Theory/ESC Framework",
+    "n": 1,
+    "paper_ids": [
+     "108"
+    ]
+   },
+   {
+    "value": "Hill's Helping Skills framework",
+    "n": 1,
+    "paper_ids": [
+     "75"
+    ]
+   },
+   {
+    "value": "Motivational Interviewing (Bundy, 2004), Cognitive Behavioral Therapy (CBT) (Beck, 1963)",
+    "n": 1,
+    "paper_ids": [
+     "63"
+    ]
+   },
+   {
+    "value": "Motivational Interviewing (MI) and Motivational Interviewing Skills Code (MISC)",
+    "n": 1,
+    "paper_ids": [
+     "92"
+    ]
+   },
+   {
+    "value": "Motivational Interviewing (MI)+MISC",
+    "n": 1,
+    "paper_ids": [
+     "112"
+    ]
+   },
+   {
+    "value": "Motivational Interviewing (MI), Transtheoretical Model of Health Behavior Change",
+    "n": 1,
+    "paper_ids": [
+     "87"
+    ]
+   },
+   {
+    "value": "Motivational Interviewing (MI)/CBT",
+    "n": 1,
+    "paper_ids": [
+     "23"
+    ]
+   },
+   {
+    "value": "Motivational Interviewing (MI)/MITI/DARN Change Talk",
+    "n": 1,
+    "paper_ids": [
+     "60"
+    ]
+   },
+   {
+    "value": "Motivational Interviewing (MI)/Working Alliance Theory + Session Impact Theory + Big Five + PHQ-9/GAD-7/OQ-45",
+    "n": 1,
+    "paper_ids": [
+     "38"
+    ]
+   },
+   {
+    "value": "Motivational Interviewing/MITI 4.2.1",
+    "n": 1,
+    "paper_ids": [
+     "6"
+    ]
+   },
+   {
+    "value": "NCMHCE (National Clinical Mental Health Counseling Examination) competency framework",
+    "n": 1,
+    "paper_ids": [
+     "56"
+    ]
+   },
+   {
+    "value": "Narrative Therapy (White and Epston, 1990; White, 2007); InNovative Moments Coding System / IMCS (Gonçalves et al., 2011, 2012; MontesaNo et al., 2017)",
+    "n": 1,
+    "paper_ids": [
+     "93"
+    ]
+   },
+   {
+    "value": "Nonverbal Communication",
+    "n": 1,
+    "paper_ids": [
+     "71"
+    ]
+   },
+   {
+    "value": "Not specified",
+    "n": 1,
+    "paper_ids": [
+     "29"
+    ]
+   },
+   {
+    "value": "OSCE + Cognitive Bias + Implicit Bias",
+    "n": 1,
+    "paper_ids": [
+     "110"
+    ]
+   },
+   {
+    "value": "Problem-Solving Therapy (PST), ADAPT model of PST, Conceptual Metaphor Theory",
+    "n": 1,
+    "paper_ids": [
+     "15"
+    ]
+   },
+   {
+    "value": "Problem-solving therapy/Rogers Principles",
+    "n": 1,
+    "paper_ids": [
+     "68"
+    ]
+   },
+   {
+    "value": "Psychological Counseling Examination Standards (China)",
+    "n": 1,
+    "paper_ids": [
+     "39"
+    ]
+   },
+   {
+    "value": "Rational Emotive Behavior Therapy (REBT)",
+    "n": 1,
+    "paper_ids": [
+     "89"
+    ]
+   },
+   {
+    "value": "SOAP Note (Subjective, Objective, Assessment, and Plan), CBT (Cognitive Behavioral Therapy) case conceptualization framework, case conceptualization (Hill, 2020)",
+    "n": 1,
+    "paper_ids": [
+     "49"
+    ]
+   },
+   {
+    "value": "Social interdependence theory (Johnson, 2003); Helping Skills Theory (Hill and O'Brien, 1999)",
+    "n": 1,
+    "paper_ids": [
+     "94"
+    ]
+   },
+   {
+    "value": "Transtheoretical Model of health behavior change (Prochaska and Velicer, 1997); Motivational Interviewing (Miller and Rollnick, 2012)",
+    "n": 1,
+    "paper_ids": [
+     "86"
+    ]
+   },
+   {
+    "value": "WAI + BLRI + CCS-R + Big Five + Erikson",
+    "n": 1,
+    "paper_ids": [
+     "21"
+    ]
+   },
+   {
+    "value": "memory theory、the characterization prompt framework",
+    "n": 1,
+    "paper_ids": [
+     "18"
+    ]
+   }
+  ],
+  "mapping_note": "Each free-text Clinical_Theory string is split on ';', ',', '+', '/', '、' and ' and ', then each fragment is matched (case-insensitively) against the documented alias table in web/build/build_data.py. A paper is counted once per family. Counts are multi-label and use the full corpus (n = 52) as the denominator, so families may sum to more than 52. Fragments that match no family are reported as 'Unclassified'; the single paper that reports 'Not specified' is listed separately. The unmodified raw strings are preserved under 'raw'."
  },
  "rubric": {
   "has": 45,

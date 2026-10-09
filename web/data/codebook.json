@@ -185,8 +185,13 @@
    {
     "name": "Reliability_Reported",
     "values": "Yes / No / N/A",
-    "type": "boolean",
-    "definition": "Whether evaluator agreement or inter-rater reliability is explicitly reported. Yes indicates a reported agreement statistic or percentage; No indicates human evaluation without reported agreement; N/A applies when no human evaluation is used."
+    "type": "single-choice",
+    "definition": "Whether evaluator agreement or inter-rater reliability is explicitly reported. Yes indicates a reported agreement statistic or percentage; No indicates human evaluation without reported agreement; N/A applies when no human evaluation is used.",
+    "gate": {
+     "gate_field": "Has_Rubric",
+     "gate_value": "Yes",
+     "gate_note": "Only interpretable for the 45 papers that provide a rubric or scoring criteria (Has_Rubric = Yes). A count over all 52 papers mixes in papers where the question does not apply and must never be shown without stating that denominator."
+    }
    },
    {
     "name": "Agreement Method",
@@ -217,7 +222,12 @@
     "name": "LLM_Judge_Validated",
     "values": "Yes / No",
     "type": "boolean",
-    "definition": "Whether LLM-judge scores are compared with human judgments in any form, including correlation, agreement tests, mean comparisons, inter-rater tables, or qualitative statements of agreement. Human--human reliability alone does not count. This field records whether any comparison with human judgments was reported and does not imply formal psychometric validation."
+    "definition": "Whether LLM-judge scores are compared with human judgments in any form, including correlation, agreement tests, mean comparisons, inter-rater tables, or qualitative statements of agreement. Human--human reliability alone does not count. This field records whether any comparison with human judgments was reported and does not imply formal psychometric validation.",
+    "gate": {
+     "gate_field": "Eval_LLM_Judge",
+     "gate_value": "Yes",
+     "gate_note": "Only interpretable for the 30 papers that use an LLM judge (Eval_LLM_Judge = Yes). A count over all 52 papers mixes in papers where the question does not apply and must never be shown without stating that denominator."
+    }
    },
    {
     "name": "Uses_Standard_Metrics",
