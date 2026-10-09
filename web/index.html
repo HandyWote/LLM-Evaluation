@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From Surface Realism to Behavioral Validity — Coded Corpus Explorer</title>
+<meta name="description" content="Interactive overview of a 52-paper coded survey on evaluation practice in LLM-based mental-health simulation and counseling systems. Anonymous supplementary material.">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <p class="kicker">Anonymous supplementary material · Coded survey</p>
+  <h1>From Surface Realism to Behavioral Validity</h1>
+  <p class="sub">How 52 studies of LLM-based mental-health simulation and counseling evaluate their systems &mdash;
+    and where evaluation stops short of behavior, theory, and human outcomes.</p>
+  <div class="badges" id="hero-badges">
+    <span class="badge">52 papers &middot; 40 coded fields</span>
+    <span class="badge">7 coding groups</span>
+    <span class="badge">72 claim&ndash;evidence slots</span>
+    <span class="badge">Evidence-linked coding</span>
+  </div>
+</header>
+
+<nav class="site-nav" id="site-nav" aria-label="Section navigation">
+  <div class="nav-inner">
+    <a href="#overview" class="nav-link">Overview</a>
+    <a href="#g1" class="nav-link">G1 System Design</a>
+    <a href="#g2" class="nav-link">G2 Methods</a>
+    <a href="#g3" class="nav-link">G3 Dimensions</a>
+    <a href="#g4" class="nav-link">G4 Interaction</a>
+    <a href="#g5" class="nav-link">G5 Theory</a>
+    <a href="#g6" class="nav-link">G6 Additional</a>
+    <a href="#g7" class="nav-link">G7 Claim&ndash;Evidence</a>
+    <a href="#corpus" class="nav-link">Corpus Explorer</a>
+    <a href="#downloads" class="nav-link">Downloads</a>
+  </div>
+</nav>
+
+<main id="main" class="wrap">
+
+  <section id="overview" class="section">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Overview</h2></div>
+    <p class="lead">Corpus-wide counts computed from the coded table. Every number below is drawn from the
+      released coding files and the codebook in the appendix.</p>
+    <div id="overview-kpis" class="kpi-row"></div>
+    <div id="overview-charts" class="chart-grid"></div>
+  </section>
+
+  <section id="groups" class="section">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Codebook by group</h2></div>
+    <p class="lead">Seven groups cover 40 fields. Each group lists its field names, allowed values, and coding
+      definition, together with a distribution chart where the coded data support one.</p>
+    <div id="group-sections"></div>
+  </section>
+
+  <section id="corpus" class="section">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Corpus Explorer</h2></div>
+    <p class="lead">All <span id="corpus-n">52</span> papers &times; <span id="corpus-f">38</span> coded fields.
+      Search by title or citation key, then select a row or any cell to inspect the paper's full coding.</p>
+    <div class="panel">
+      <div class="explorer-controls">
+        <label class="search-field">
+          <span class="sr-only">Search papers</span>
+          <input type="search" id="corpus-search" placeholder="Search by title or citation key&hellip;" autocomplete="off">
+        </label>
+        <label class="check-field">
+          <input type="checkbox" id="corpus-search-values">
+          <span>also search coded values</span>
+        </label>
+        <span class="result-count" id="corpus-count"></span>
+      </div>
+      <div class="corpus-wrap" id="corpus-wrap">
+        <table class="corpus-table" id="corpus-table">
+          <caption class="sr-only">Coded corpus of papers with all coded field values</caption>
+          <thead id="corpus-head"></thead>
+          <tbody id="corpus-body"></tbody>
+        </table>
+      </div>
+      <p class="note">Boolean cells use a colour dot: <span class="dot yes"></span> Yes,
+        <span class="dot no"></span> No. Hover any cell for its codebook definition; select a row to see the
+        full record, including that paper's claim&ndash;evidence alignment.</p>
+    </div>
+  </section>
+
+  <section id="downloads" class="section">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Downloads</h2></div>
+    <p class="lead">Source data files released with this material. Paths are relative to the repository root.</p>
+    <div class="download-grid" id="download-grid"></div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p><strong>Data.</strong> Coded corpus of 52 papers: paper-level coding
+    (<code>compare/final-table.csv</code>), refined theory coding
+    (<code>table/theory_eval_refined_coding_refined.csv</code>), and claim&ndash;evidence alignment
+    (<code>compare/claim_level_FINAL_analysis_ready.csv</code>); codebook parsed from <code>docs/09_appendices.tex</code>.
+    This page is generated from the bundled data file <code>web/data/data.js</code>.</p>
+  <p>Anonymous supplementary material. Dataset snapshot: 52 papers, 40 fields, 72 claim&ndash;evidence slots.
+    No personal or institutional information is included.</p>
+</footer>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-head">
+      <div>
+        <h3 id="modal-title"></h3>
+        <p class="modal-sub" id="modal-sub"></p>
+      </div>
+      <button type="button" class="modal-close" id="modal-close" aria-label="Close details">Close</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script src="data/data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

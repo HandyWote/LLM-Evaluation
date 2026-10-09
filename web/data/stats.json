@@ -1,0 +1,110 @@
+{
+ "n": 52,
+ "evaluators": [
+  {
+   "name": "Human experts",
+   "n": 34
+  },
+  {
+   "name": "LLM judges",
+   "n": 30
+  },
+  {
+   "name": "Automatic metrics",
+   "n": 35
+  },
+  {
+   "name": "All three",
+   "n": 15
+  }
+ ],
+ "dimensions": [
+  {
+   "name": "Utility",
+   "n": 44
+  },
+  {
+   "name": "Fidelity",
+   "n": 33
+  },
+  {
+   "name": "Realism",
+   "n": 29
+  },
+  {
+   "name": "Emotional Plausibility",
+   "n": 28
+  },
+  {
+   "name": "Consistency",
+   "n": 20
+  },
+  {
+   "name": "Safety",
+   "n": 14
+  },
+  {
+   "name": "Human Learning / Outcomes",
+   "n": 10
+  }
+ ],
+ "funnel": [
+  {
+   "name": "All reviewed papers",
+   "n": 52
+  },
+  {
+   "name": "Evaluate extended dialogues",
+   "n": 31
+  },
+  {
+   "name": "Model dynamic user state",
+   "n": 13
+  },
+  {
+   "name": "Longitudinal evaluation",
+   "n": 3
+  }
+ ],
+ "behavior_depth_extended": {
+  "Static": 16,
+  "Dynamic": 7,
+  "None": 1,
+  "Pattern-level": 7
+ },
+ "rubric": {
+  "has": 45,
+  "reported_reliability": 13
+ },
+ "llm_judge": {
+  "used": 30,
+  "validated": 23
+ },
+ "prompt_disclosure": {
+  "Full Disclosure": 40,
+  "Partial Disclosure": 9,
+  "No Disclosure": 3
+ },
+ "theory_grounding": {
+  "Strong": 40,
+  "Partial": 10,
+  "Mentioned": 2
+ },
+ "theory_operationalized": {
+  "Strong": 30,
+  "Partial": 16,
+  "None": 6
+ },
+ "theory_eval_types": {
+  "Validated scale": 9,
+  "Established therapy/counseling coding system": 7,
+  "Theory-specific rubric": 35,
+  "Custom expert rating": 19,
+  "Affective/emotional dynamics metric": 3,
+  "Clinical diagnostic benchmark": 8,
+  "Theory-specific benchmark/task": 26,
+  "LLM judge with theory-specific criteria": 10
+ },
+ "dims_ge1": 50,
+ "dims_ge3": 40
+}

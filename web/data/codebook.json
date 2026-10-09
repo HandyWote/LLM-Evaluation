@@ -1,0 +1,291 @@
+[
+ {
+  "id": "G1",
+  "name": "System and Simulation Design",
+  "description": "These fields characterize the primary role and design of the simulated system, including what is simulated, how personas or behavioral states are represented, and whether those states change over interaction. Table summarizes the corresponding fields and coding rules.",
+  "fields": [
+   {
+    "name": "Focus_Type",
+    "values": "Open classification",
+    "type": "other",
+    "definition": "Primary research focus of the paper. Examples in the codebook include Simulation Framework, Evaluation Framework, Dataset, Training System, and Tool."
+   },
+   {
+    "name": "Simulation_Target",
+    "values": "Client Agent / Therapist Agent / Dual-Agent / Human Trainee",
+    "type": "single-choice",
+    "definition": "Object or participant role simulated by the system."
+   },
+   {
+    "name": "Persona_Model_Depth",
+    "values": "Surface Persona / Behavioral State Model / Cognitive Model / Dynamic Traits / Expert Principles",
+    "type": "single-choice",
+    "definition": "Depth of the simulated user or client model. Surface Persona uses profile-level descriptions; Behavioral State Model represents behavioral states; Cognitive Model includes beliefs or motivations; Dynamic Traits change over interaction; Expert Principles use expert-defined behavioral principles."
+   },
+   {
+    "name": "Uses_Dynamic_State",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether the system explicitly tracks and updates a psychological or user state, such as state transitions, session memory, dynamic openness, or related mechanisms."
+   },
+   {
+    "name": "Temporal_Modeling_Details",
+    "values": "Free text",
+    "type": "text",
+    "definition": "Description of how dynamic or temporal state is modeled, such as state transitions, session memory, dynamic openness, or updates to conversational principles."
+   }
+  ]
+ },
+ {
+  "id": "G2",
+  "name": "Evaluation Methods",
+  "description": "These fields record who or what performs the evaluation, distinguishing domain experts, lay users, interactive user studies, LLM judges, and automatic metrics. Table provides the definitions and coding rules.",
+  "fields": [
+   {
+    "name": "Eval_Human_Experts",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Evaluation by domain experts such as therapists, clinicians, domain specialists, or trained annotators. Excludes crowd workers, participants without domain expertise, and LLM evaluators."
+   },
+   {
+    "name": "Eval_Lay_Users",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Evaluation by ordinary users or participants without relevant domain expertise, including crowd workers or participants whose professional expertise is not specified."
+   },
+   {
+    "name": "Eval_User_Study",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Participants actively interact with the system under a defined task, protocol, or experimental design. Static output-rating tasks without interaction are excluded."
+   },
+   {
+    "name": "Eval_LLM_Judge",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "An LLM such as GPT-4 or Claude is prompted to evaluate, score, compare, or rank system outputs. Embedding similarity, feature extraction, or algorithmic metrics alone do not count."
+   },
+   {
+    "name": "Eval_Automatic",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Evaluation calculated automatically through an algorithm or formula, such as BLEU, ROUGE, Accuracy, F1, cosine similarity, or task success rate. Human and LLM judgments are excluded."
+   }
+  ]
+ },
+ {
+  "id": "G3",
+  "name": "Evaluation Dimensions",
+  "description": "These fields capture what aspects of system performance are explicitly evaluated, including safety, realism, consistency, fidelity, human outcomes, utility, and emotional plausibility. Table also includes the free-text field used to record reported evaluation metrics.",
+  "fields": [
+   {
+    "name": "Safety",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether the evaluation assesses harmful, biased, unsafe, or ethically problematic outputs. General usefulness alone does not count."
+   },
+   {
+    "name": "Realism",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether outputs or behaviors are evaluated as realistic, human-like, natural, or believable. Correctness or task success alone does not count."
+   },
+   {
+    "name": "Consistency",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether behavior is evaluated for stability across turns, such as persona consistency, behavioral drift, or trait alignment. Single-turn quality alone does not count."
+   },
+   {
+    "name": "Fidelity",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether outputs conform to a predefined identity, profile, role, or target model. General realism alone does not count."
+   },
+   {
+    "name": "Human Learning / Outcomes",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether evaluation measures substantive change in human knowledge, skills, or behavior. Perception-only measures are excluded."
+   },
+   {
+    "name": "Utility",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether the system is evaluated for usefulness, effectiveness, helpfulness, or task performance. Realism alone does not count."
+   },
+   {
+    "name": "Emotional Plausibility",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether emotional behavior or empathic responses are evaluated as realistic or appropriate. Factual correctness alone does not count."
+   },
+   {
+    "name": "Raw Eval Metrics",
+    "values": "Free text",
+    "type": "text",
+    "definition": "Evaluation metrics reported by the paper, recorded verbatim or in normalized form for descriptive analysis."
+   }
+  ]
+ },
+ {
+  "id": "G4",
+  "name": "Interaction and Behavioral Evaluation",
+  "description": "These fields characterize how much interaction is represented in the evaluation, how deeply behavior is analyzed across interaction, and whether behavior is tested under different input or intervention conditions. Table defines these fields and their coding categories.",
+  "fields": [
+   {
+    "name": "Interaction_Level",
+    "values": "Single-turn / Short Multi-turn / Extended Dialogue / Longitudinal",
+    "type": "single-choice",
+    "definition": "Amount of interaction represented in the evaluation. Single-turn evaluates one response without dialogue history; Short Multi-turn contains 2--5 turns; Extended Dialogue uses longer conversations, typically 6 or more turns; Longitudinal evaluation spans multiple sessions or a longer period. When multiple interaction levels were present, the highest level demonstrated in the evaluation was coded. The six-turn threshold is a pragmatic coding convention used to distinguish short from extended within-session interactions, rather than a theoretical boundary for behavioral change."
+   },
+   {
+    "name": "Behavior_Eval_Depth",
+    "values": "Dynamic / Pattern-level / Static / None",
+    "type": "single-choice",
+    "definition": "Depth of behavioral evaluation. Dynamic examines how behavior develops across ordered observations within an interaction, such as turn-by-turn trends, transitions between dialogue phases, or systematic qualitative analysis of behavioral progression. Pattern-level summarizes behavioral frequencies or patterns without tracking change; Static scores behavior independently without examining cross-turn relations; None evaluates output quality without behavioral analysis. Independent response ratings, aggregate behavioral frequencies, and pre--post endpoint comparisons without analysis of the intervening interaction do not by themselves qualify as Dynamic. When multiple forms of behavioral evaluation were present, the highest demonstrated evaluation depth was coded."
+   },
+   {
+    "name": "Intervention_Sensitivity",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether the paper explicitly tests differences in system behavior under different inputs or intervention conditions. Papers that do not test or report such behavioral differences are coded No."
+   }
+  ]
+ },
+ {
+  "id": "G5",
+  "name": "Theory, Transparency, and Reliability",
+  "description": "These fields capture theory grounding and operationalization, the types of theory-related evaluation used, prompt disclosure, clinical theory, and reporting of evaluator agreement or reliability. Theory grounding captures whether established theory substantively informs the system or study, whereas theory operationalization captures whether that theory is translated into measurable evaluation constructs, criteria, or procedures. Table summarizes the corresponding definitions and coding rules.",
+  "fields": [
+   {
+    "name": "Theory_Operationalized",
+    "values": "Strong / Partial / None",
+    "type": "single-choice",
+    "definition": "Degree to which theory is translated into measurable constructs, rubrics, behavioral criteria, or evaluation procedures. Strong indicates that theory explicitly defines substantial parts of the evaluation; Partial indicates that theory is translated into evaluation criteria only incompletely or for a subset of the theoretically relevant constructs; None indicates that theory may inform the system or study but is not operationalized in the evaluation."
+   },
+   {
+    "name": "Prompt_Disclosure",
+    "values": "Full / Partial / No Disclosure",
+    "type": "single-choice",
+    "definition": "Extent to which prompts needed to understand or reproduce the system and evaluation are reported. Full Disclosure provides the necessary prompts; Partial Disclosure provides incomplete prompts or examples; No Disclosure provides no usable prompt information."
+   },
+   {
+    "name": "Theory_Grounding",
+    "values": "Strong / Partial / Mentioned",
+    "type": "single-choice",
+    "definition": "Extent to which established psychological, clinical, counseling, or related theory substantively informs the system or study. Strong indicates that theory clearly shapes the system design, target constructs, or study rationale; Partial indicates that theory informs the work but only incompletely or indirectly; Mentioned indicates that theory appears mainly as background or motivation without substantively shaping the system or study."
+   },
+   {
+    "name": "Clinical_Theory",
+    "values": "Free text",
+    "type": "text",
+    "definition": "Specific psychological, clinical, or counseling theory or framework identified in the paper, such as Cognitive Behavioral Therapy or Motivational Interviewing."
+   },
+   {
+    "name": "Reliability_Reported",
+    "values": "Yes / No / N/A",
+    "type": "boolean",
+    "definition": "Whether evaluator agreement or inter-rater reliability is explicitly reported. Yes indicates a reported agreement statistic or percentage; No indicates human evaluation without reported agreement; N/A applies when no human evaluation is used."
+   },
+   {
+    "name": "Agreement Method",
+    "values": "Free text",
+    "type": "text",
+    "definition": "Specific agreement or reliability method reported in the paper, such as Cohen's kappa, Krippendorff's alpha, Fleiss' kappa, or percentage agreement. Left blank when no method is reported."
+   },
+   {
+    "name": "Theory_Eval_Type",
+    "values": "Multi-label categorical",
+    "type": "multi-label",
+    "definition": "Type or types of theory-related evaluation used in the paper. Categories are not mutually exclusive; the evaluation types relevant to the reported analyses are summarized in Table ."
+   }
+  ]
+ },
+ {
+  "id": "G6",
+  "name": "Additional Evaluation Characteristics",
+  "description": "These fields capture additional characteristics of evaluation practice and transparency, including rubric use, LLM-judge validation, comparability, longitudinal and robustness testing, failure analysis, simulation realism, and dataset availability. Table provides the corresponding coding rules.",
+  "fields": [
+   {
+    "name": "Has_Rubric",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether the evaluation provides explicit scoring criteria, a rating scale, rubric, or scoring guidance. Merely stating that annotators provided ratings without criteria is coded No."
+   },
+   {
+    "name": "LLM_Judge_Validated",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether LLM-judge scores are compared with human judgments in any form, including correlation, agreement tests, mean comparisons, inter-rater tables, or qualitative statements of agreement. Human--human reliability alone does not count. This field records whether any comparison with human judgments was reported and does not imply formal psychometric validation."
+   },
+   {
+    "name": "Uses_Standard_Metrics",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether established evaluation metrics such as BLEU, ROUGE, or BERTScore are used. Papers using only custom metrics without comparison to standard metrics are coded No."
+   },
+   {
+    "name": "Metric_Interpretable",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether the meaning of the evaluation metric and the interpretation of its scores are clear to the reader."
+   },
+   {
+    "name": "Comparable_To_Prior_Work",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether the evaluation uses metrics or datasets that permit comparison with prior work. A custom dataset combined with custom metrics and no baseline is coded No."
+   },
+   {
+    "name": "Has_Longitudinal_Eval",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether evaluation spans multiple sessions or a longer period. A single-session evaluation is coded No."
+   },
+   {
+    "name": "Has_Robustness_Testing",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether the system is tested under multiple conditions or datasets rather than only under ideal conditions."
+   },
+   {
+    "name": "Has_Failure_Analysis",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether the paper explicitly analyzes failure cases, for example in a dedicated failure-analysis section or table."
+   },
+   {
+    "name": "Sim_Behavior_Realistic",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether simulated behavior includes realistic characteristics such as resistance or emotional fluctuation rather than being overly compliant or mechanical."
+   },
+   {
+    "name": "Dataset_Available",
+    "values": "Yes / No",
+    "type": "boolean",
+    "definition": "Whether the dataset is publicly available through a download link or repository."
+   }
+  ]
+ },
+ {
+  "id": "G7",
+  "name": "Claim--Evidence Alignment",
+  "description": "app:claim-coding The final two fields capture the relationship between the conclusions drawn in a paper and the evidence reported to support them. Unlike the other paper-level fields, these fields were applied to predefined claim roles: the primary empirical or system-level claim (C1) and, where present, an explicit higher-scope inferential extension beyond C1 (C2).",
+  "fields": [
+   {
+    "name": "Claim",
+    "values": "C1 / C2; free text",
+    "type": "multi-label",
+    "definition": "Selected empirical claim and its inferential role. C1 captures the paper's primary empirical or system-level conclusion. C2 is optional and captures the strongest explicit, non-speculative inferential extension beyond C1. Motivational statements, design goals, hypotheses, recommendations, future work, and purely speculative statements are excluded."
+   },
+   {
+    "name": "Claim_Evidence_Alignment",
+    "values": "Aligned / Partial / Exceeds / Unclear",
+    "type": "single-choice",
+    "definition": "Degree to which the strongest reported evidence supports the selected claim. Aligned indicates that the evidence directly evaluates the claimed target at the claimed scope and evidential level. Partial indicates directly relevant evidence for the same fundamental target, but with narrower scope, population, duration, or outcome. Exceeds indicates that the claim extends to a materially different construct, population, outcome, or evidential level. Unclear indicates insufficient or contradictory reporting for a reliable judgment."
+   }
+  ]
+ }
+]
