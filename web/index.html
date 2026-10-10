@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>From Surface Realism to Behavioral Validity — Coded Corpus Table</title>
-<meta name="description" content="The coded corpus of 52 papers on evaluation practice in LLM-based mental-health simulation and counseling, folded into seven coding groups. Anonymous supplementary material.">
+<title>From Surface Realism to Behavioral Validity — Coded Corpus</title>
+<meta name="description" content="The coded corpus of 52 papers on evaluation practice in LLM-based mental-health simulation and counseling, shown as seven stacked coding-group tables. Anonymous supplementary material.">
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="hero">
+<header class="hero" id="top">
   <p class="kicker">Anonymous supplementary material &middot; Coded corpus</p>
   <h1>From Surface Realism to Behavioral Validity</h1>
   <p class="sub">The coded corpus of 52 studies of LLM-based mental-health simulation and counseling &mdash;
-    one table, 38 coded fields folded into the seven coding groups.</p>
+    one long document, 38 coded fields folded into seven stacked coding-group tables.</p>
   <div class="badges" id="hero-badges">
     <span class="badge">52 papers &middot; 38 coded fields</span>
     <span class="badge">7 coding groups</span>
@@ -22,58 +22,43 @@
   </div>
 </header>
 
+<nav class="jumpbar" id="jumpbar" aria-label="Coding groups">
+  <div class="jb-inner">
+    <div class="jb-links" id="jump-links"></div>
+    <div class="jb-tools">
+      <label class="tool-search">
+        <span class="sr-only">Search the coded corpus</span>
+        <input type="search" id="search" placeholder="Search all 52 papers and 72 claims&hellip;" autocomplete="off">
+      </label>
+      <span class="match-count" id="match-count" role="status" aria-live="polite"></span>
+      <details class="tool-downloads" id="downloads-details">
+        <summary>Downloads <span class="tool-count">4</span></summary>
+        <div class="dl-list" id="dl-list"></div>
+      </details>
+    </div>
+  </div>
+</nav>
+
 <main id="main" class="wrap">
 
-  <section class="section" id="key-figures">
+  <section class="section keyfig" id="key-figures">
     <p class="keyline" id="keyline">Loading the coded corpus&hellip;</p>
     <p class="keyline-note" id="keyline-note"></p>
   </section>
 
-  <section class="section" id="sheet-section">
-    <div class="sheetbar" id="sheetbar">
-      <div class="tabs" id="tabs" role="tablist" aria-label="Coding groups"></div>
-      <div class="tools">
-        <label class="tool-search">
-          <span class="sr-only">Search the coded corpus</span>
-          <input type="search" id="search" placeholder="Search title, key, or coded value&hellip;" autocomplete="off">
-        </label>
-        <label class="tool-field">Rows
-          <select id="page-size">
-            <option value="26" selected>26</option>
-            <option value="52">52</option>
-            <option value="0">All</option>
-          </select>
-        </label>
-        <button type="button" class="tool-btn" id="expand-all" aria-pressed="false">Expand all column groups</button>
-        <details class="tool-downloads" id="downloads-details">
-          <summary>Downloads <span class="tool-count">4</span></summary>
-          <div class="dl-list" id="dl-list"></div>
-        </details>
-      </div>
-      <div class="filters" id="claim-filters" hidden></div>
-    </div>
+  <p class="legend" id="legend">
+    <span class="bmark yes">&#10003;</span> Yes &nbsp;&middot;&nbsp;
+    <span class="bmark no">&#10007;</span> No &nbsp;&middot;&nbsp;
+    <span class="dash">&mdash;</span> not reported / not applicable &nbsp;&middot;&nbsp;
+    <span class="na">N/A</span> coded not applicable &nbsp;&middot;&nbsp;
+    <span class="bmark yes">&#10003;</span><span class="gate-mark">&#8224;</span> coded Yes although the
+    governing question does not apply (excluded from the conditional count, e.g. 23 of 30)
+    &nbsp;&middot;&nbsp; hover a column name for its values and codebook definition, or click it to open the
+    definition panel and pin it while you scroll. The tally row at the foot of each table is computed over
+    all 52 coded papers.
+  </p>
 
-    <div class="tablewrap" id="tablewrap">
-      <table class="sheet-table" id="sheet-table">
-        <thead id="sheet-head"></thead>
-        <tbody id="sheet-body"></tbody>
-      </table>
-    </div>
-
-    <div class="sheetfoot" id="sheetfoot"></div>
-    <p class="caption" id="sheet-caption"></p>
-    <p class="legend">
-      <span class="bmark yes">&#10003;</span> Yes &nbsp;&middot;&nbsp;
-      <span class="bmark no">&#10007;</span> No &nbsp;&middot;&nbsp;
-      <span class="dash">&mdash;</span> not reported / not applicable &nbsp;&middot;&nbsp;
-      <span class="na">N/A</span> coded not applicable &nbsp;&middot;&nbsp;
-      <span class="bmark yes">&#10003;</span><span class="gate-mark">&#8224;</span> coded Yes although the
-      governing question does not apply (excluded from the conditional count shown in the key figures)
-      &nbsp;&middot;&nbsp;
-      hover a column name for its codebook definition, or click it to open the definition panel.
-      Click any row (or its chevron) for that paper&rsquo;s complete 38-field record and its claim&ndash;evidence slots.
-    </p>
-  </section>
+  <div id="groups"></div>
 
 </main>
 
