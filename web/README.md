@@ -30,8 +30,8 @@ This writes / overwrites `web/data/` and `web/downloads/`:
 | Output | Contents |
 | --- | --- |
 | `data/codebook.json` | 7 groups × 40 fields: name, verbatim allowed-values string, type, definition, and `gate` metadata where the field is conditional |
-| `data/papers.json` | 52 papers × 38 fields (per-paper coded values, normalized — see below) |
-| `data/claims.json` | 72 claim–evidence rows (52 papers) with final alignment plus `Paper_URL` / `Claim_URL` / `Evidence_URL` deep links and top-level URL counts |
+| `data/papers.json` | 52 papers × 38 paper-level values plus `Author_Year` (display citation, e.g. "Chandra et al., 2025") — see below |
+| `data/claims.json` | 72 claim–evidence rows (52 papers) with final alignment plus `Author_Year`, `Paper_URL` / `Claim_URL` / `Evidence_URL` deep links and top-level URL counts |
 | `data/stats.json` | Overview counts / legacy `funnel` / **non-nested `behavioral_validity`** / **`gated`** / **`reliability_reporting`** / **`clinical_theory`** / distributions |
 | `data/data.js` | All of the above as one `window.SURVEY_DATA` bundle |
 | `downloads/final-table.csv` | Byte-for-byte copy of `compare/final-table.csv` (G1–G6 coded corpus) |
@@ -42,9 +42,9 @@ This writes / overwrites `web/data/` and `web/downloads/`:
 The script is read-only with respect to its inputs: it never modifies the CSV
 or TeX files below. It only reads them and writes JSON under `web/data/` plus
 byte-for-byte copies under `web/downloads/` (no header is injected, so the
-bundled files are identical to the released archival files). The Downloads
-section of the site serves those bundled copies, and the links work both from
-`file://` and from GitHub Pages.
+bundled files are identical to the released archival files). The copies under
+`web/downloads/` are kept for release purposes but are **no longer linked from
+the page** (the page carries no download UI).
 **Run it again whenever a source file changes**, and make sure
 `web/data/data.js` exists before deploying — the deployment workflow
 (`.github/workflows/pages.yml`) runs the script in CI and uploads `web/` as the

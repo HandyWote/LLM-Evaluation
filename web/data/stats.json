@@ -261,7 +261,7 @@
    "label": "Validate the LLM judge against human judgments",
    "n": 23,
    "denominator": 30,
-   "unconditional_n": 24,
+   "unconditional_n": 23,
    "note": "23 of the 30 papers that use an LLM judge (Eval_LLM_Judge = Yes) also validate the judge against human judgments. The unconditional count (24 across all 52 papers) must never be shown without stating that denominator."
   },
   {

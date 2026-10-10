@@ -49,17 +49,6 @@
   ];
   var VALUE_PRIORITY = { yes: 0, no: 1, 'n/a': 2 };
 
-  var DOWNLOADS = [
-    { href: 'downloads/final-table.csv', title: 'Paper-level coding table',
-      desc: '52 papers \u00d7 38 coded fields, groups G1\u2013G6.', size: '137 KB' },
-    { href: 'downloads/theory_eval_refined_coding_refined.csv', title: 'Refined theory coding',
-      desc: 'Theory grounding, operationalization and instrument types.', size: '57 KB' },
-    { href: 'downloads/claim_level_FINAL_analysis_ready.csv', title: 'Claim\u2013evidence alignment',
-      desc: 'The 72 claim\u2013evidence slots coded in G7.', size: '119 KB' },
-    { href: 'downloads/09_appendices.tex', title: 'Codebook appendix (LaTeX)',
-      desc: 'The 7 coding groups and their field definitions.', size: '49 KB' }
-  ];
-
   var state = {
     q: '',
     textOpen: {},
@@ -243,7 +232,7 @@
   /* -------------------------------------------------------- paper tables -- */
 
   function searchTextPaper(p) {
-    var hay = [p.Title, p.Citation_Key, p.Paper_ID];
+    var hay = [p.Title, p.Author_Year, p.Citation_Key, p.Paper_ID];
     Object.keys(p.values).forEach(function (k) { hay.push(p.values[k]); });
     return clean(hay.join(' ')).toLowerCase();
   }
@@ -265,7 +254,7 @@
       return '<tr class="row" data-paper="' + esc(p.Paper_ID) + '" data-search="' + esc(searchTextPaper(p)) + '">' +
         '<td class="col-idx idx">' + esc(p.Paper_ID) + '</td>' +
         '<td class="col-paper paper"><span class="paper-title">' + esc(clean(p.Title)) + '</span>' +
-          '<span class="citation-key">' + esc(p.Citation_Key) + '</span></td>' +
+          '<span class="citation-key">' + esc(clean(p.Author_Year || p.Citation_Key)) + '</span></td>' +
         fields.map(function (f) { return cellHTML(p, f); }).join('') + '</tr>';
     }).join('') + '</tbody>';
     var tfoot = '<tfoot><tr><td class="col-idx"></td>' +
@@ -276,39 +265,15 @@
       head + lead +
       '<div class="tablewrap"><table class="sheet-table" id="table-' + sid + '">' +
       thead + tbody + tfoot + '</table></div>' +
-      '<p class="caption" data-caption="' + esc(group.id) + '">' + captionHTML(group, fields.length) + '</p>' +
       '<p class="section-empty" hidden>No paper matches the current search.</p>' +
       '</section>';
-  }
-
-  function captionHTML(group, fieldCount) {
-    var base = 'Tallies in the footer cover all ' + N + ' coded papers, and every paper is shown, ' +
-      'so no row is omitted.';
-    if (group.id === 'G4') {
-      return '<strong>' + esc(group.name) + '.</strong> Extended dialogue, dynamic user state and ' +
-        'longitudinal evaluation are three <em>independent</em> coded fields, not a nested funnel: ' +
-        'paper 34 is longitudinal without extended dialogue, and papers 65 and 111 model a dynamic user ' +
-        'state without extended dialogue. ' + base;
-    }
-    if (group.id === 'G5') {
-      return '<strong>Reliability_Reported</strong> is coded for all ' + N + ' papers (N/A means no human ' +
-        'evaluation was used). The 13 of 45 figure is a derived intersection between Has_Rubric and ' +
-        'Reliability_Reported, not a field gate. ' + base;
-    }
-    if (group.id === 'G6') {
-      return '<strong>LLM_Judge_Validated</strong> is conditional on Eval_LLM_Judge = Yes: 23 of the 30 ' +
-        'eligible papers validate the judge against humans. The grid still shows the released codes ' +
-        '(24 Yes, one of them flagged \u2020 because the governing question does not apply). ' + base;
-    }
-    return '<strong>' + esc(group.id) + ' \u00b7 ' + esc(group.name) + '</strong> \u2014 ' + fieldCount +
-      ' of 38 coded fields. ' + base;
   }
 
   /* --------------------------------------------------------- claim table -- */
 
   function searchTextClaim(s) {
     return clean([
-      s.Title, s.Citation_Key, s.Paper_ID, s.Claim_Slot, s.Claim_Quote, s.Claim_Section,
+      s.Title, s.Author_Year, s.Citation_Key, s.Paper_ID, s.Claim_Slot, s.Claim_Quote, s.Claim_Section,
       s.Evidence_Quote, s.Evidence_Section, s.Evidence_Location_Detail, s.Final_Alignment,
       s.Final_Decision_Type, s.Human_Review_Flag
     ].join(' ')).toLowerCase();
@@ -324,21 +289,6 @@
     return clean(a.Claim_Slot).localeCompare(clean(b.Claim_Slot));
   }
 
-  function claimQuoteCell(s, which) {
-    var quote = which === 'claim' ? s.Claim_Quote : s.Evidence_Quote;
-    var page = which === 'claim' ? s.Claim_Page : s.Evidence_Page;
-    var section = which === 'claim' ? s.Claim_Section : s.Evidence_Section;
-    var detail = which === 'claim' ? '' : clean(s.Evidence_Location_Detail);
-    var key = s.Paper_ID + '|' + s.Claim_Slot + '|' + which;
-    var open = !!state.textOpen[key];
-    var body = '<button type="button" class="txt-btn quote-btn' + (open ? ' open' : '') + '"' +
-      ' data-text-key="' + esc(key) + '" aria-expanded="' + (open ? 'true' : 'false') + '"' +
-      ' title="' + esc(clean(quote)) + '">' + esc(clean(quote)) + '</button>';
-    var meta = 'p. ' + esc(clean(page)) + ' \u00b7 ' + esc(clean(section)) +
-      (detail ? ' \u00b7 ' + esc(detail) : '');
-    return '<td class="quote-cell">' + body + '<p class="meta">' + meta + '</p></td>';
-  }
-
   function claimDetailHTML(s, key) {
     var items = PROCESS_FIELDS.map(function (name) {
       var v = clean(s[name]);
@@ -347,11 +297,11 @@
         '<span class="rec-value">' + esc(v) + '</span></li>';
     }).join('');
     var links = [];
-    if (s.Paper_URL) links.push('Paper: <a class="page-link" href="' + esc(s.Paper_URL) + '" target="_blank" rel="noopener">' + esc(s.Citation_Key) + '</a>');
+    if (s.Paper_URL) links.push('Paper: <a class="page-link" href="' + esc(s.Paper_URL) + '" target="_blank" rel="noopener">' + esc(clean(s.Author_Year || s.Citation_Key)) + '</a>');
     if (s.Claim_URL) links.push('Claim: <a class="page-link" href="' + esc(s.Claim_URL) + '" target="_blank" rel="noopener">PDF p. ' + esc(clean(s.Claim_Page)) + '</a>');
     if (s.Evidence_URL) links.push('Evidence: <a class="page-link" href="' + esc(s.Evidence_URL) + '" target="_blank" rel="noopener">PDF p. ' + esc(clean(s.Evidence_Page)) + '</a>');
-    return '<tr class="claim-detail-row" id="cd-' + esc(key) + '" hidden><td colspan="7"><div class="claim-detail">' +
-      '<h4>Coding process for ' + esc(s.Citation_Key) + ' \u00b7 ' + esc(s.Claim_Slot) + '</h4>' +
+    return '<tr class="claim-detail-row" id="cd-' + esc(key) + '" hidden><td colspan="5"><div class="claim-detail">' +
+      '<h4>Coding process for ' + esc(clean(s.Author_Year || s.Citation_Key)) + ' \u00b7 ' + esc(s.Claim_Slot) + '</h4>' +
       (items ? '<ul class="rec">' + items + '</ul>'
              : '<p class="note">No coding-process columns are bundled for this claim.</p>') +
       (links.length ? '<div class="claim-links">' + links.join('') + '</div>' : '') +
@@ -372,10 +322,8 @@
           ' aria-controls="cd-' + esc(key) + '">' +
           '<span class="chev" aria-hidden="true">\u25b8</span>' +
           '<span class="pt"><span class="paper-title">' + esc(clean(s.Title)) + '</span>' +
-          '<span class="citation-key">' + esc(s.Citation_Key) + '</span></span></button></td>' +
+          '<span class="citation-key">' + esc(clean(s.Author_Year || s.Citation_Key)) + '</span></span></button></td>' +
         '<td><span class="chip slot">' + esc(s.Claim_Slot) + '</span></td>' +
-        claimQuoteCell(s, 'claim') +
-        claimQuoteCell(s, 'evidence') +
         '<td>' + (align ? chipHTML('Final_Alignment', align) : '<span class="dash">&mdash;</span>') + '</td>' +
         '<td>' + (review ? chipHTML('Human_Review_Flag', review) : '<span class="dash">&mdash;</span>') + '</td>' +
         '</tr>' + claimDetailHTML(s, key);
@@ -398,14 +346,9 @@
       '<th scope="col" class="col-idx">#</th>' +
       '<th scope="col" class="col-paper">Paper</th>' +
       '<th scope="col">Slot</th>' +
-      '<th scope="col">Claim quote \u00b7 page \u00b7 section</th>' +
-      '<th scope="col">Evidence quote \u00b7 page \u00b7 section \u00b7 location</th>' +
       '<th scope="col">Alignment</th>' +
       '<th scope="col">Review flag</th>' +
       '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
-      '<p class="caption" data-caption="G7"><strong>G7 &middot; Claim&ndash;evidence alignment.</strong> ' +
-      'All ' + SLOTS.length + ' slots are shown; the alignment, slot and review filters only narrow the ' +
-      'view and never remove a paper from the corpus.</p>' +
       '<p class="section-empty" hidden>No claim&ndash;evidence slot matches the current search or filters.</p>' +
       '</section>';
   }
@@ -434,50 +377,6 @@
         esc(g.id + ' ' + (SHORT[g.id] || g.name) + ' (' + count + ')') + '</a>';
     }).join('') +
       '<a class="jump-link" href="#g7" data-target="G7">G7 Claim\u2013Evidence (' + SLOTS.length + ')</a>';
-  }
-
-  function renderDownloads() {
-    $id('dl-list').innerHTML = DOWNLOADS.map(function (d) {
-      return '<a class="dl-item" href="' + esc(d.href) + '">' +
-        '<span class="dl-title">' + esc(d.title) + '</span>' +
-        '<span class="dl-desc">' + esc(d.desc) + '</span>' +
-        '<span class="dl-meta"><code>' + esc(d.href) + '</code> \u00b7 ' + esc(d.size) + '</span></a>';
-    }).join('');
-  }
-
-  /* -------------------------------------------------------- key figures --- */
-
-  function yesCount(field) {
-    return PAPERS.filter(function (p) { return isYes(p.values[field]); }).length;
-  }
-  function bvCount(id) {
-    var bv = STATS.behavioral_validity;
-    var hit = bv && bv.criteria && bv.criteria.filter(function (c) { return c.id === id; })[0];
-    if (hit && hit.n != null) return hit.n;
-    if (id === 'extended_dialogue') {
-      return PAPERS.filter(function (p) {
-        return clean(p.values.Interaction_Level).toLowerCase() === 'extended dialogue';
-      }).length;
-    }
-    return yesCount(id === 'dynamic_state' ? 'Uses_Dynamic_State' : 'Has_Longitudinal_Eval');
-  }
-
-  function renderKeyFigures() {
-    var rubric = STATS.rubric || {};
-    var judge = STATS.llm_judge || {};
-    var rubricN = rubric.has != null ? rubric.has : yesCount('Has_Rubric');
-    var relN = rubric.reported_reliability != null ? rubric.reported_reliability : 13;
-    var judgeN = judge.used != null ? judge.used : yesCount('Eval_LLM_Judge');
-    var validN = judge.validated != null ? judge.validated : 23;
-    $id('keyline').innerHTML =
-      '<strong>' + N + ' papers</strong> &middot; ' +
-      '<strong>' + rubricN + '</strong> use a rubric &rarr; <strong>' + relN + '</strong> report inter-rater reliability &middot; ' +
-      '<strong>' + judgeN + '</strong> use an LLM judge &rarr; <strong>' + validN + '</strong> validate against humans &middot; ' +
-      '<strong>' + bvCount('extended_dialogue') + '</strong> evaluate extended dialogues / ' +
-      '<strong>' + bvCount('dynamic_state') + '</strong> model a dynamic user state / ' +
-      '<strong>' + bvCount('longitudinal') + '</strong> include longitudinal evaluation';
-    $id('keyline-note').textContent = 'Extended dialogue, dynamic user state and longitudinal evaluation are ' +
-      'three independent coded fields (of ' + N + ' papers each), not a nested funnel.';
   }
 
   /* ----------------------------------------------------------- filtering -- */
@@ -685,8 +584,6 @@
 
   function bind() {
     $id('jump-links').innerHTML = jumpLinksHTML();
-    renderDownloads();
-    renderKeyFigures();
 
     $id('search').addEventListener('input', function () {
       state.q = this.value;

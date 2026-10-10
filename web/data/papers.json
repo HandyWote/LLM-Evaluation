@@ -47,6 +47,7 @@
    "Title": "HealMe: Harnessing Cognitive Reframing in Large Language Models for\nPsychotherapy",
    "Year": "2024",
    "Venue": "ACL",
+   "Author_Year": "Xiao et al., 2024",
    "values": {
     "Focus_Type": "PsychotherapyModel",
     "Simulation_Target": "Therapist Agent",
@@ -95,6 +96,7 @@
    "Title": "Can AI Relate: Testing Large Language Model Response for Mental Health Support",
    "Year": "2024",
    "Venue": "EMNLP",
+   "Author_Year": "Gabriel et al., 2024",
    "values": {
     "Focus_Type": "EvaluationFramework",
     "Simulation_Target": "Therapist Agent",
@@ -143,6 +145,7 @@
    "Title": "Towards AI-Assisted Psychotherapy: Emotion-Guided Generative Interventions",
    "Year": "2025",
    "Venue": "EMNLP",
+   "Author_Year": "Haydarov et al., 2025",
    "values": {
     "Focus_Type": "Multimodal Emotion-Guided Generative Intervention",
     "Simulation_Target": "Therapist Agent",
@@ -191,6 +194,7 @@
    "Title": "EmoAgent: Assessing and Safeguarding Human-AI Interaction for Mental Health Safety",
    "Year": "2025",
    "Venue": "EMNLP",
+   "Author_Year": "Qiu et al., 2025",
    "values": {
     "Focus_Type": "EvaluationFramework",
     "Simulation_Target": "Client Agent",
@@ -239,6 +243,7 @@
    "Title": "From Conversation to Automation: Leveraging LLMs for Problem-Solving Therapy Analysis",
    "Year": "2025",
    "Venue": "ACL",
+   "Author_Year": "Aghakhani et al., 2025",
    "values": {
     "Focus_Type": "AnNotationFramework",
     "Simulation_Target": "Human Trainee",
@@ -287,6 +292,7 @@
    "Title": "AnnaAgent: Dynamic Evolution Agent System with Multi-Session Memory for Realistic Seeker Simulation",
    "Year": "2025",
    "Venue": "ACL",
+   "Author_Year": "Wang et al., 2025",
    "values": {
     "Focus_Type": "Simulator Design / Dynamic Evolution/Conversational Agent",
     "Simulation_Target": "Client Agent",
@@ -335,6 +341,7 @@
    "Title": "CARE-Bench: A Benchmark of Diverse Client Simulations Guided by Expert Principles for Evaluating LLMs in Psychological Counseling",
    "Year": "2025",
    "Venue": "AAAI",
+   "Author_Year": "Wang et al., 2025",
    "values": {
     "Focus_Type": "EvaluationFramework/Benchmark",
     "Simulation_Target": "Client Agent",
@@ -383,6 +390,7 @@
    "Title": "GenAI for Social Work Field Education: Client Simulation with Real-Time Feedback",
    "Year": "2025",
    "Venue": "IEEE BigData",
+   "Author_Year": "Sungarda et al., 2025",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Client Agent",
@@ -413,7 +421,7 @@
     "Agreement Method": "",
     "Theory_Eval_Type": "Theory-specific benchmark/task; Theory-specific rubric; LLM judge with theory-specific criteria",
     "Has_Rubric": "Yes",
-    "LLM_Judge_Validated": "Yes",
+    "LLM_Judge_Validated": "No",
     "Uses_Standard_Metrics": "Yes",
     "Metric_Interpretable": "Yes",
     "Comparable_To_Prior_Work": "Yes",
@@ -423,14 +431,7 @@
     "Sim_Behavior_Realistic": "No",
     "Dataset_Available": "No"
    },
-   "gate_overrides": {
-    "LLM_Judge_Validated": {
-     "field": "LLM_Judge_Validated",
-     "coded_value": "Yes",
-     "gate_field": "Eval_LLM_Judge",
-     "gate_value": "Yes"
-    }
-   }
+   "gate_overrides": {}
   },
   {
    "Paper_ID": "29",
@@ -438,6 +439,7 @@
    "Title": "ChatCounselor: A Large Language Models for Mental Health Support",
    "Year": "2023",
    "Venue": "CIKM 2023",
+   "Author_Year": "Liu et al., 2023",
    "values": {
     "Focus_Type": "SimulationFramework/Dataset",
     "Simulation_Target": "Therapist Agent",
@@ -486,6 +488,7 @@
    "Title": "A Computational Framework for Behavioral Assessment of LLM Therapists",
    "Year": "2024",
    "Venue": "arXiv",
+   "Author_Year": "Chiu et al., 2024",
    "values": {
     "Focus_Type": "EvaluationFramework",
     "Simulation_Target": "Therapist Agent",
@@ -534,6 +537,7 @@
    "Title": "Understanding the Therapeutic Relationship between Counselors and Clients in Online Text-based Counseling using LLMs",
    "Year": "2024",
    "Venue": "arXiv",
+   "Author_Year": "Li et al., 2024",
    "values": {
     "Focus_Type": "EvaluationFramework",
     "Simulation_Target": "Human Trainee",
@@ -582,6 +586,7 @@
    "Title": "Towards a Client-Centered Assessment of LLM Therapists by Client Simulation",
    "Year": "2024",
    "Venue": "arXiv",
+   "Author_Year": "Wang et al., 2024",
    "values": {
     "Focus_Type": "EvaluationFramework",
     "Simulation_Target": "Client Agent",
@@ -630,6 +635,7 @@
    "Title": "PsycoLLM: Enhancing LLM for Psychological Understanding and Evaluation",
    "Year": "2024",
    "Venue": "IEEE",
+   "Author_Year": "Hu et al., 2024",
    "values": {
     "Focus_Type": "EvaluationFramework/Dataset/Benchmark",
     "Simulation_Target": "Therapist Agent",
@@ -678,6 +684,7 @@
    "Title": "PsychiatryBench: a multi-task benchmark for LLMs in psychiatry",
    "Year": "2026",
    "Venue": "Nature",
+   "Author_Year": "Fouda et al., 2026",
    "values": {
     "Focus_Type": "EvaluationFramework/Benchmark",
     "Simulation_Target": "Human Trainee",
@@ -726,6 +733,7 @@
    "Title": "Exploring Safety Alignment Evaluation of LLMs in Chinese Mental Health Dialogues via LLM-as-Judge",
    "Year": "2026",
    "Venue": "arXiv",
+   "Author_Year": "Cai et al., 2026",
    "values": {
     "Focus_Type": "EvaluationFramework",
     "Simulation_Target": "Human Trainee",
@@ -774,6 +782,7 @@
    "Title": "PsyCLIENT: Client Simulation via Conversational Trajectory Modeling for Trainee Practice and Model Evaluation in Mental Health Counseling",
    "Year": "2026",
    "Venue": "arXiv",
+   "Author_Year": "Qiu et al., 2026",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Client Agent",
@@ -822,6 +831,7 @@
    "Title": "Do Large Language Models Align with Core Mental Health Counseling Competencies?",
    "Year": "2025",
    "Venue": "NAACL 2025",
+   "Author_Year": "Nguyen et al., 2025",
    "values": {
     "Focus_Type": "EvaluationFramework/Benchmark",
     "Simulation_Target": "Human Trainee",
@@ -870,6 +880,7 @@
    "Title": "CBT-BENCH: Evaluating Large Language Models on Assisting Cognitive Behavior Therapy",
    "Year": "2025",
    "Venue": "ACL",
+   "Author_Year": "Zhang et al., 2025",
    "values": {
     "Focus_Type": "Benchmark，Evaluation Framework",
     "Simulation_Target": "Therapist Agent",
@@ -918,6 +929,7 @@
    "Title": "KMI: A Dataset of Korean Motivational Interviewing Dialogues for Psychotherapy",
    "Year": "2025",
    "Venue": "ACL",
+   "Author_Year": "Kim et al., 2025",
    "values": {
     "Focus_Type": "Dataset",
     "Simulation_Target": "Dual-Agent",
@@ -966,6 +978,7 @@
    "Title": "Evaluating Large Language Models for Enhancing Live Chat Therapy: A Comparative Study with Psychotherapists",
    "Year": "2025",
    "Venue": "ACL",
+   "Author_Year": "Deshpande et al., 2025",
    "values": {
     "Focus_Type": "EvaluationFramework",
     "Simulation_Target": "Therapist Agent",
@@ -1014,6 +1027,7 @@
    "Title": "Building Personality-Adaptive Conversational AI for Mental Health Therapy",
    "Year": "2024",
    "Venue": "ACM BCB '24",
+   "Author_Year": "Jaiswal et al., 2024",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Therapist Agent",
@@ -1062,6 +1076,7 @@
    "Title": "MentalChat16K: A Benchmark Dataset for Conversational Mental Health Assistance",
    "Year": "2025",
    "Venue": "ACM KDD‘25",
+   "Author_Year": "Xu et al., 2025",
    "values": {
     "Focus_Type": "Dataset/ Evaluation",
     "Simulation_Target": "Therapist Agent",
@@ -1110,6 +1125,7 @@
    "Title": "Using a Secondary Channel to Display the Internal Empathic Resonance of LLM-Driven Agents for Mental Health Support",
    "Year": "2025",
    "Venue": "ACM ICMI-MLMI'25",
+   "Author_Year": "Schmidmaier et al., 2025",
    "values": {
     "Focus_Type": "EmpathicFeedbackSystem",
     "Simulation_Target": "Therapist Agent",
@@ -1158,6 +1174,7 @@
    "Title": "Using Nonverbal Cues in Empathic Multi-Modal LLM-Driven Chatbots for Mental Health Support",
    "Year": "2025",
    "Venue": "ACM",
+   "Author_Year": "Schmidmaier et al., 2025",
    "values": {
     "Focus_Type": "SystemDesign",
     "Simulation_Target": "Therapist Agent",
@@ -1206,6 +1223,7 @@
    "Title": "Trustworthy AI Psychotherapy: Multi-Agent LLM Workflow for Counseling and Explainable Mental Disorder DiagNosis",
    "Year": "2025",
    "Venue": "ACM CIKM '25",
+   "Author_Year": "Ozgun et al., 2025",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Dual-Agent",
@@ -1254,6 +1272,7 @@
    "Title": "Can LLM-Simulated Practice and Feedback Upskill Human Counselors? A Randomized Study with 90+ Novice Counselors",
    "Year": "2026",
    "Venue": "ACM CHI '26",
+   "Author_Year": "Louie et al., 2026",
    "values": {
     "Focus_Type": "TrainingFramework",
     "Simulation_Target": "Client Agent",
@@ -1302,6 +1321,7 @@
    "Title": "Human-Human vs Human-AI Therapy: An Empirical Study",
    "Year": "2025",
    "Venue": "IJHCI",
+   "Author_Year": "Kuhail et al., 2025",
    "values": {
     "Focus_Type": "SimulationFramework/Empirical Study",
     "Simulation_Target": "Therapist Agent",
@@ -1350,6 +1370,7 @@
    "Title": "Roleplay-doh: Enabling Domain-Experts to Create LLM-simulated Patients via Eliciting and Adhering to Principles",
    "Year": "2024",
    "Venue": "EMNLP",
+   "Author_Year": "Louie et al., 2024",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Client Agent",
@@ -1398,6 +1419,7 @@
    "Title": "PATIENT-Ψ: Using Large Language Models to Simulate Patients for Training Mental Health Professionals",
    "Year": "2024",
    "Venue": "EMNLP",
+   "Author_Year": "Wang et al., 2024",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Client Agent",
@@ -1446,6 +1468,7 @@
    "Title": "CACTUS: Towards Psychological Counseling Conversations using Cognitive Behavioral Theory",
    "Year": "2024",
    "Venue": "EMNLP",
+   "Author_Year": "Lee et al., 2024",
    "values": {
     "Focus_Type": "Dataset",
     "Simulation_Target": "Dual-Agent",
@@ -1494,6 +1517,7 @@
    "Title": "To What Extent Are Large Language Models Capable of Generating Substantial Reflections for Motivational Interviewing Counseling Chatbots?A Human Evaluation",
    "Year": "2024",
    "Venue": "ACL",
+   "Author_Year": "Basar et al., 2024",
    "values": {
     "Focus_Type": "EvaluationFramework",
     "Simulation_Target": "Therapist Agent",
@@ -1542,6 +1566,7 @@
    "Title": "Consistent Client Simulation for Motivational Interviewing-based Counseling",
    "Year": "2025",
    "Venue": "ACL",
+   "Author_Year": "Yang et al., 2025",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Client Agent",
@@ -1590,6 +1615,7 @@
    "Title": "CAMI: A Counselor Agent Supporting Motivational Interviewing through State Inference and Topic Exploration",
    "Year": "2025",
    "Venue": "ACL",
+   "Author_Year": "Yang et al., 2025",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Therapist Agent",
@@ -1638,6 +1664,7 @@
    "Title": "PsyDT: Using LLMs to Construct the Digital Twin of Psychological Counselor with Personalized Counseling Style for Psychological Counseling",
    "Year": "2025",
    "Venue": "ACL",
+   "Author_Year": "Xie et al., 2025",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Therapist Agent",
@@ -1686,6 +1713,7 @@
    "Title": "A Systematic Evaluation of LLM Strategies for Mental Health Text Analysis: Fine-tuning vs. Prompt Engineering vs. RAG",
    "Year": "2025",
    "Venue": "ACL CLPsych 2025",
+   "Author_Year": "Kermani et al., 2025",
    "values": {
     "Focus_Type": "EvaluationFramework",
     "Simulation_Target": "Human Trainee",
@@ -1734,6 +1762,7 @@
    "Title": "How Well Can Large Language Models Reflect? A Human Evaluation of LLM-generated Reflections for Motivational Interviewing Dialogues",
    "Year": "2025",
    "Venue": "ACL COLING",
+   "Author_Year": "Basar et al., 2025",
    "values": {
     "Focus_Type": "EvaluationFramework",
     "Simulation_Target": "Therapist Agent",
@@ -1782,6 +1811,7 @@
    "Title": "Reframe Your Life Story: Interactive Narrative Therapist and InNovative Moment Assessment with Large Language Models",
    "Year": "2025",
    "Venue": "EMNLP 2025",
+   "Author_Year": "Feng et al., 2025",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Therapist Agent",
@@ -1830,6 +1860,7 @@
    "Title": "MultiAgentESC: A LLM-based Multi-Agent Collaboration Framework for Emotional Support Conversation",
    "Year": "2025",
    "Venue": "EMNLP 2025",
+   "Author_Year": "Xu et al., 2025",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Therapist Agent",
@@ -1878,6 +1909,7 @@
    "Title": "MIRROR: Multimodal Cognitive Reframing Therapy for Rolling with Resistance",
    "Year": "2025",
    "Venue": "EMNLP 2025",
+   "Author_Year": "Kim et al., 2025",
    "values": {
     "Focus_Type": "SimulationFramework/Dataset",
     "Simulation_Target": "Client Agent",
@@ -1926,6 +1958,7 @@
    "Title": "Can You Share Your Story? Modeling Clients' Metacognition and Openness for LLM Therapist Evaluation",
    "Year": "2025",
    "Venue": "ACL 2025",
+   "Author_Year": "Kim et al., 2025",
    "values": {
     "Focus_Type": "EvaluationFramework",
     "Simulation_Target": "Client Agent",
@@ -1974,6 +2007,7 @@
    "Title": "Eeyore: Realistic Depression Simulation via Expert-in-the-Loop Supervised and Preference Optimization",
    "Year": "2025",
    "Venue": "ACL",
+   "Author_Year": "Liu et al., 2025",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Client Agent",
@@ -2022,6 +2056,7 @@
    "Title": "Feel the Difference? A Comparative Analysis of Emotional Arcs in Real and LLM-Generated CBT Sessions",
    "Year": "2025",
    "Venue": "EMNLP",
+   "Author_Year": "Wang et al., 2025",
    "values": {
     "Focus_Type": "Dataset / Benchmark/ComparativeAnalysis",
     "Simulation_Target": "Dual-Agent",
@@ -2070,6 +2105,7 @@
    "Title": "PersonaGym: Evaluating Persona Agents and LLMs",
    "Year": "2025",
    "Venue": "EMNLP",
+   "Author_Year": "Samuel et al., 2025",
    "values": {
     "Focus_Type": "EvaluationFramework/Benchmark",
     "Simulation_Target": "Persona Agent",
@@ -2118,6 +2154,7 @@
    "Title": "MIND: Towards Immersive Psychological Healing with Multi-Agent Inner Dialogue",
    "Year": "2025",
    "Venue": "EMNLP",
+   "Author_Year": "Chen et al., 2025",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Client Agent",
@@ -2166,6 +2203,7 @@
    "Title": "Future of ADHD Care: Evaluating the Efficacy of ChatGPT in Therapy Enhancement",
    "Year": "2024",
    "Venue": "MDPI(Healthcare)",
+   "Author_Year": "Berrezueta-Guzman et al., 2024",
    "values": {
     "Focus_Type": "EvaluationFramework",
     "Simulation_Target": "Therapist Agent",
@@ -2214,6 +2252,7 @@
    "Title": "CBT-LLM: A Chinese Large Language Model for Cognitive Behavioral Therapy-based Mental Health Question Answering",
    "Year": "2024",
    "Venue": "ACL",
+   "Author_Year": "Na, 2024",
    "values": {
     "Focus_Type": "MentalHealthQASystem/Dataset",
     "Simulation_Target": "Therapist Agent",
@@ -2262,6 +2301,7 @@
    "Title": "Cognitive Reframing of Negative Thoughts through Human-Language Model Interaction",
    "Year": "2023",
    "Venue": "ACL",
+   "Author_Year": "Sharma et al., 2023",
    "values": {
     "Focus_Type": "CognitiveReframingFramework",
     "Simulation_Target": "Human Trainee",
@@ -2310,6 +2350,7 @@
    "Title": "Can Large Language Models be Good Emotional Supporter? Mitigating Preference Bias on Emotional Support Conversation",
    "Year": "2024",
    "Venue": "ACL",
+   "Author_Year": "Kang et al., 2024",
    "values": {
     "Focus_Type": "EvaluationFramework",
     "Simulation_Target": "Therapist Agent",
@@ -2358,6 +2399,7 @@
    "Title": "LLM-empowered Chatbots for Psychiatrist and Patient Simulation: Application and Evaluation",
    "Year": "2023",
    "Venue": "arXiv",
+   "Author_Year": "Chen et al., 2023",
    "values": {
     "Focus_Type": "SimulationFramework",
     "Simulation_Target": "Dual-Agent",
@@ -2406,6 +2448,7 @@
    "Title": "AgentClinic: a multimodal agent benchmark to evaluate AI in simulated clinical environments",
    "Year": "2025",
    "Venue": "arXiv",
+   "Author_Year": "Schmidgall et al., 2025",
    "values": {
     "Focus_Type": "SimulationFramework/Benchmark",
     "Simulation_Target": "Dual-Agent",
@@ -2454,6 +2497,7 @@
    "Title": "Psychological Counseling CanNot Be Achieved Overnight: Automated Psychological Counseling Through Multi-Session Conversations",
    "Year": "2025",
    "Venue": "arXiv",
+   "Author_Year": "Wang et al., 2025",
    "values": {
     "Focus_Type": "SimulationFramework, Dataset",
     "Simulation_Target": "Therapist Agent",
@@ -2502,6 +2546,7 @@
    "Title": "Development and Evaluation of ClientBot: Patient-Like Conversational Agent to Train Basic Counseling Skills",
    "Year": "2019",
    "Venue": "JMIR",
+   "Author_Year": "Tanana et al., 2019",
    "values": {
     "Focus_Type": "SimulationFramework/Training Tool",
     "Simulation_Target": "Client Agent",
@@ -2545,14 +2590,5 @@
    "gate_overrides": {}
   }
  ],
- "gate_overrides": [
-  {
-   "Paper_ID": "23",
-   "Citation_Key": "Sungarda2025GenAI",
-   "field": "LLM_Judge_Validated",
-   "coded_value": "Yes",
-   "gate_field": "Eval_LLM_Judge",
-   "gate_value": "Yes"
-  }
- ]
+ "gate_overrides": []
 }

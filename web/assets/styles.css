@@ -201,12 +201,6 @@ h3 { font-size: 1rem; font-weight: 700; }
 
 .wrap { max-width: 1320px; }
 
-/* ------------------------------------------------------------ key figures -- */
-
-.keyfig { margin-top: 30px; }
-.keyline { font-size: .9rem; color: var(--ink-soft); }
-.keyline strong { color: var(--teal-deep); font-variant-numeric: tabular-nums; }
-.keyline-note { font-size: .78rem; color: var(--muted); margin-top: 7px; }
 
 .legend {
   font-size: .76rem; color: var(--muted); margin: 14px 0 4px;
@@ -248,27 +242,6 @@ h3 { font-size: 1rem; font-weight: 700; }
 .match-count { font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .match-count b { color: var(--ink-soft); }
 
-.tool-downloads { position: relative; }
-.tool-downloads summary {
-  cursor: pointer; font-size: .76rem; font-weight: 700; color: var(--teal-mid);
-  border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; background: #fff;
-  list-style: none; white-space: nowrap;
-}
-.tool-downloads summary::-webkit-details-marker { display: none; }
-.tool-downloads[open] summary { background: var(--teal-pale); border-color: var(--teal-soft); }
-.tool-count { background: var(--teal-pale); color: var(--teal-mid); border-radius: 999px; padding: 0 6px; font-size: .7rem; }
-.dl-list {
-  position: absolute; right: 0; top: calc(100% + 6px); width: min(440px, 92vw);
-  background: #fff; border: 1px solid var(--line); border-radius: 12px;
-  box-shadow: 0 14px 34px rgba(15, 23, 42, .16); padding: 8px; z-index: 70;
-  display: grid; gap: 4px;
-}
-.dl-item { display: block; text-decoration: none; color: inherit; padding: 9px 10px; border-radius: 9px; }
-.dl-item:hover { background: var(--teal-pale); }
-.dl-item:focus-visible { outline: 2px solid var(--teal-soft); }
-.dl-title { display: block; font-size: .82rem; font-weight: 700; }
-.dl-desc { display: block; font-size: .74rem; color: var(--muted); }
-.dl-meta { display: block; font-family: var(--mono); font-size: .68rem; color: var(--teal-mid); margin-top: 3px; overflow-wrap: anywhere; }
 
 /* --------------------------------------------------------- group sections -- */
 
@@ -314,12 +287,8 @@ h3 { font-size: 1rem; font-weight: 700; }
 .sheet-table tbody tr.row:hover td { background: #fbfdfd; }
 .sheet-table tbody tr.row:hover td.col-idx, .sheet-table tbody tr.row:hover td.col-paper { background: #f7fbfb; }
 
-.paper-title {
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-  overflow: hidden; font-weight: 600; color: var(--ink); overflow-wrap: anywhere;
-  line-height: 1.25; font-size: .74rem;
-}
-.citation-key { display: block; font-family: var(--mono); font-size: .64rem; color: var(--teal-mid); margin-top: 1px; }
+.paper-title { display: block; font-weight: 600; color: var(--ink); overflow-wrap: anywhere; line-height: 1.25; }
+.citation-key { display: block; font-size: .72rem; color: var(--muted); margin-top: 2px; }
 
 .sheet-table th.col-cell { min-width: 116px; max-width: 176px; vertical-align: bottom; }
 .col-btn {
@@ -363,9 +332,6 @@ h3 { font-size: 1rem; font-weight: 700; }
 .txt-btn:hover { color: var(--teal-mid); }
 .txt-btn:focus-visible { outline: 2px solid var(--teal-soft); outline-offset: 1px; border-radius: 3px; }
 .txt-btn.open { white-space: normal; max-width: 520px; }
-
-.caption { font-size: .78rem; color: var(--muted); margin-top: 10px; max-width: 1080px; }
-.caption strong { color: var(--ink-soft); }
 
 .section-empty {
   margin-top: 10px; padding: 16px 18px; border: 1px dashed var(--line);

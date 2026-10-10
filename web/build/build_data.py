@@ -278,6 +278,7 @@ def build_papers(codebook: list[dict]) -> dict:
                 "Title": _strip(r.get("Title")),
                 "Year": _strip(r.get("Year")),
                 "Venue": _strip(r.get("Venue")),
+                "Author_Year": _author_year(r.get("Bibtex"), r.get("Year")),
                 "values": values,
                 "gate_overrides": overrides,
             }
@@ -324,6 +325,21 @@ def _bib_field(bib: str, name: str) -> str:
     if not m:
         return ""
     return re.sub(r"\s+", " ", m.group(1)).strip().strip("{}").strip()
+
+
+def _author_year(bib: str, year: str) -> str:
+    """Display citation: first author surname + et al. + year (e.g. "Chandra et al., 2025")."""
+    authors = [a.strip() for a in re.split(r"\s+and\s+", _bib_field(bib, "author")) if a.strip()]
+    year = _strip(year)
+    if not authors:
+        return year
+    first = authors[0]
+    if "," in first:                      # "Surname, Given"
+        surname = first.split(",")[0].strip()
+    else:                                 # "Given Middle Surname"
+        surname = first.split()[-1]
+    suffix = " et al." if len(authors) > 1 else ""
+    return f"{surname}{suffix}, {year}" if year else f"{surname}{suffix}"
 
 
 ARXIV_ID_RE = re.compile(r"(?:\d{4}\.\d{4,5}(?:v\d+)?|[a-z-]+(?:\.[A-Z]{2})?/\d{7})", re.IGNORECASE)
@@ -382,13 +398,16 @@ def _deep_link(url: str, page: str) -> str:
 
 def build_claims() -> dict:
     rows = read_csv(CLAIM_CSV)
-    bib_by_key = {r["Citation_Key"]: _strip(r.get("Bibtex")) for r in read_csv(FINAL_TABLE)}
+    meta_by_key = {r["Citation_Key"]: r for r in read_csv(FINAL_TABLE)}
+    bib_by_key = {k: _strip(r.get("Bibtex")) for k, r in meta_by_key.items()}
     url_by_key = {k: _paper_url(b) for k, b in bib_by_key.items()}
 
     slots = []
     for r in rows:
         slot = {k: _strip(r.get(k)) for k in CLAIM_FIELDS}
         url = url_by_key.get(slot["Citation_Key"], "")
+        meta = meta_by_key.get(slot["Citation_Key"], {})
+        slot["Author_Year"] = _author_year(bib_by_key.get(slot["Citation_Key"], ""), meta.get("Year", ""))
         slot["Paper_URL"] = url
         slot["Claim_URL"] = _deep_link(url, slot["Claim_Page"])
         slot["Evidence_URL"] = _deep_link(url, slot["Evidence_Page"])
