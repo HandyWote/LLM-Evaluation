@@ -42,23 +42,15 @@
     G6: 'Additional Characteristics'
   };
   var SECTION_IDS = GROUPS.map(function (g) { return g.id; }).concat(['G7']);
-  var ALIGN_ORDER = ['EXCEEDS', 'PARTIAL', 'ALIGNED', 'UNCLEAR'];
-  var PROCESS_FIELDS = [
-    'Provisional_Alignment', 'Codex_Alignment', 'Agreement_Status',
-    'Rationale', 'Final_Rationale', 'Final_Decision_Type', 'Human_Review_Flag'
-  ];
+  var ALIGN_ORDER = ['ALIGNED', 'PARTIAL', 'EXCEEDS', 'UNCLEAR'];
+  var ALIGN_COLORS = { ALIGNED: '#16a34a', PARTIAL: '#d97706', EXCEEDS: '#dc2626', UNCLEAR: '#64748b' };
+  var ALIGN_CLASS = { ALIGNED: 'aligned', PARTIAL: 'partial', EXCEEDS: 'exceeds', UNCLEAR: 'unclear' };
   var VALUE_PRIORITY = { yes: 0, no: 1, 'n/a': 2 };
 
   var state = {
-    q: '',
     textOpen: {},
-    claimOpen: {},
-    pop: { field: null, pinned: false },
-    claim: { align: 'ALL', slot: 'ALL', review: 'ALL' }
+    pop: { field: null, pinned: false }
   };
-
-  var paperRowsByGroup = {};
-  var claimRows = [];
 
   /* --------------------------------------------------------------- utils -- */
 
@@ -79,7 +71,7 @@
 
   /* --------------------------------------------------------- chip colours -- */
 
-  var PALETTE = ['#0f766e', '#0d9488', '#0e7490', '#4f46e5', '#7c3aed', '#b45309', '#be123c', '#15803d', '#c2410c', '#1d4ed8'];
+  var PALETTE = ['#3f5f91', '#2f6f6b', '#7a5a2e', '#5b4b8a', '#8a4b3f', '#2e6b4f', '#8a5a1e', '#3a6e8f', '#6b4a7a', '#5a6b2e'];
   function chipColor(field, value) {
     var s = field + '|' + value, h = 0;
     for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
@@ -116,11 +108,6 @@
   function gateMet(paper, gate) {
     return clean(paper.values[gate.gate_field]).toLowerCase() === clean(gate.gate_value).toLowerCase();
   }
-  function gateFlag(paper, name) {
-    var gate = gateOf(name);
-    if (!gate || gateMet(paper, gate)) return null;
-    return isYes(paper.values[name]) ? gate : null;
-  }
   function gateCounts(name) {
     var published = (STATS.gated || []).filter(function (g) { return g.field === name; })[0];
     if (published && published.n != null && published.denominator != null) {
@@ -142,17 +129,6 @@
     return 'Conditional on ' + gate.gate_field + ' = ' + gate.gate_value + ': ' +
       counts.n + ' of ' + counts.denominator + '.';
   }
-  function gateFlagTitle(paper, name) {
-    var gate = gateFlag(paper, name);
-    if (!gate) return '';
-    var counts = gateCounts(name);
-    return 'Coded "' + clean(paper.values[name]) + '", but ' + gate.gate_field + ' = ' +
-      gate.gate_value + ' is not met for this paper, so it is excluded from the conditional count' +
-      (counts ? ' (' + counts.n + ' of ' + counts.denominator + ')' : '') + '.';
-  }
-
-  var GATE_MARK = '<span class="gate-mark" aria-hidden="true">\u2020</span>';
-
   /* -------------------------------------------------------- cell renders -- */
 
   function cellTd(name, cls, title, body, extraAttr) {
@@ -170,10 +146,6 @@
       return cellTd(name, 'focus', raw, focusChipsHTML(raw));
     }
     if (isBool(f)) {
-      if (gateFlag(paper, name)) {
-        return cellTd(name, 'bool flagged', gateFlagTitle(paper, name) + ' ' + defTitle(f),
-          '<span class="bmark yes">&#10003;</span>' + GATE_MARK, ' data-gate-flag="1"');
-      }
       if (isNA(raw)) return cellTd(name, 'na', defTitle(f), 'N/A');
       return isYes(raw)
         ? cellTd(name, 'bool', 'Yes. ' + defTitle(f), '<span class="bmark yes" title="Yes">&#10003;</span>')
@@ -231,17 +203,11 @@
 
   /* -------------------------------------------------------- paper tables -- */
 
-  function searchTextPaper(p) {
-    var hay = [p.Title, p.Author_Year, p.Citation_Key, p.Paper_ID];
-    Object.keys(p.values).forEach(function (k) { hay.push(p.values[k]); });
-    return clean(hay.join(' ')).toLowerCase();
-  }
-
-  function paperSectionHTML(group, index) {
+  function paperSectionHTML(group) {
     var sid = group.id.toLowerCase();
     var fields = group.fields;
     var head = '<div class="sec-head"><span class="sec-num">' + esc(group.id) + '</span>' +
-      '<h2>' + esc(group.name) + ' <span class="gcount">' + fields.length + ' fields</span></h2></div>';
+      '<h2 id="' + sid + '-h">' + esc(group.name) + ' <span class="gcount">' + fields.length + ' fields</span></h2></div>';
     var lead = '<p class="lead">' + esc(clean(group.description)) + '</p>';
     var thead = '<thead><tr><th scope="col" class="col-idx">#</th>' +
       '<th scope="col" class="col-paper">Paper</th>' +
@@ -250,9 +216,9 @@
           '<button type="button" class="col-btn" data-field="' + esc(f.name) + '"' +
           ' aria-expanded="false" title="' + esc(defTitle(f)) + '">' + esc(f.name) + '</button></th>';
       }).join('') + '</tr></thead>';
-    var tbody = '<tbody>' + PAPERS.slice().sort(byPaperId).map(function (p) {
-      return '<tr class="row" data-paper="' + esc(p.Paper_ID) + '" data-search="' + esc(searchTextPaper(p)) + '">' +
-        '<td class="col-idx idx">' + esc(p.Paper_ID) + '</td>' +
+    var tbody = '<tbody>' + PAPERS.slice().sort(byPaperId).map(function (p, i) {
+      return '<tr class="row">' +
+        '<td class="col-idx idx">' + (i + 1) + '</td>' +
         '<td class="col-paper paper"><span class="paper-title">' + esc(clean(p.Title)) + '</span>' +
           '<span class="citation-key">' + esc(clean(p.Author_Year || p.Citation_Key)) + '</span></td>' +
         fields.map(function (f) { return cellHTML(p, f); }).join('') + '</tr>';
@@ -265,179 +231,93 @@
       head + lead +
       '<div class="tablewrap"><table class="sheet-table" id="table-' + sid + '">' +
       thead + tbody + tfoot + '</table></div>' +
-      '<p class="section-empty" hidden>No paper matches the current search.</p>' +
       '</section>';
   }
 
   /* --------------------------------------------------------- claim table -- */
 
-  function searchTextClaim(s) {
-    return clean([
-      s.Title, s.Author_Year, s.Citation_Key, s.Paper_ID, s.Claim_Slot, s.Claim_Quote, s.Claim_Section,
-      s.Evidence_Quote, s.Evidence_Section, s.Evidence_Location_Detail, s.Final_Alignment,
-      s.Final_Decision_Type, s.Human_Review_Flag
-    ].join(' ')).toLowerCase();
+  var SLOT_BY = {};
+  SLOTS.forEach(function (s) { SLOT_BY[clean(s.Paper_ID) + '|' + clean(s.Claim_Slot).toUpperCase()] = s; });
+
+  function slotOf(paperId, slot) { return SLOT_BY[clean(paperId) + '|' + slot]; }
+  function alignValue(s) { return s ? clean(s.Final_Alignment) : ''; }
+
+  function alignChipHTML(value) {
+    var key = clean(value).toUpperCase();
+    if (!key || !ALIGN_CLASS[key]) return '<span class="dash">&mdash;</span>';
+    return '<span class="chip align ' + ALIGN_CLASS[key] + '" title="' + esc(key) + '">' + esc(key) + '</span>';
   }
 
-  function claimOrder(a, b) {
-    var ra = ALIGN_ORDER.indexOf(clean(a.Final_Alignment));
-    var rb = ALIGN_ORDER.indexOf(clean(b.Final_Alignment));
-    if (ra < 0) ra = 99;
-    if (rb < 0) rb = 99;
-    if (ra !== rb) return ra - rb;
-    if (byPaperId(a, b) !== 0) return byPaperId(a, b);
-    return clean(a.Claim_Slot).localeCompare(clean(b.Claim_Slot));
+  // The full claim sentence is always present in the DOM: it is clamped to two
+  // lines by CSS and expanded on click, so nothing is hidden from find-in-page.
+  function claimTextHTML(s) {
+    var txt = s ? clean(s.Claim_Quote) : '';
+    if (!txt) return '<span class="dash">&mdash;</span>';
+    return '<span class="claim-text clamp2" role="button" tabindex="0" aria-expanded="false"' +
+      ' title="Click to show the full claim">' + esc(txt) + '</span>';
   }
 
-  function claimDetailHTML(s, key) {
-    var items = PROCESS_FIELDS.map(function (name) {
-      var v = clean(s[name]);
-      if (!v) return '';
-      return '<li class="rec-item"><span class="rec-label">' + esc(name) + '</span>' +
-        '<span class="rec-value">' + esc(v) + '</span></li>';
-    }).join('');
-    var links = [];
-    if (s.Paper_URL) links.push('Paper: <a class="page-link" href="' + esc(s.Paper_URL) + '" target="_blank" rel="noopener">' + esc(clean(s.Author_Year || s.Citation_Key)) + '</a>');
-    if (s.Claim_URL) links.push('Claim: <a class="page-link" href="' + esc(s.Claim_URL) + '" target="_blank" rel="noopener">PDF p. ' + esc(clean(s.Claim_Page)) + '</a>');
-    if (s.Evidence_URL) links.push('Evidence: <a class="page-link" href="' + esc(s.Evidence_URL) + '" target="_blank" rel="noopener">PDF p. ' + esc(clean(s.Evidence_Page)) + '</a>');
-    return '<tr class="claim-detail-row" id="cd-' + esc(key) + '" hidden><td colspan="5"><div class="claim-detail">' +
-      '<h4>Coding process for ' + esc(clean(s.Author_Year || s.Citation_Key)) + ' \u00b7 ' + esc(s.Claim_Slot) + '</h4>' +
-      (items ? '<ul class="rec">' + items + '</ul>'
-             : '<p class="note">No coding-process columns are bundled for this claim.</p>') +
-      (links.length ? '<div class="claim-links">' + links.join('') + '</div>' : '') +
-      '</div></td></tr>';
+  function alignCountsHTML(slots) {
+    var counts = {};
+    slots.forEach(function (s) {
+      var v = clean(s.Final_Alignment).toUpperCase();
+      if (v) counts[v] = (counts[v] || 0) + 1;
+    });
+    var keys = ALIGN_ORDER.filter(function (k) { return counts[k]; });
+    return keys.length ? keys.map(function (k) { return k + ' ' + counts[k]; }).join(' \u00b7 ') : '\u2014';
   }
 
   function claimSectionHTML() {
-    var rows = SLOTS.slice().sort(claimOrder).map(function (s) {
-      var key = s.Paper_ID + '|' + s.Claim_Slot;
-      var align = clean(s.Final_Alignment);
-      var review = clean(s.Human_Review_Flag);
-      return '<tr class="claim-row" data-key="' + esc(key) + '" id="cr-' + esc(key) + '"' +
-        ' data-paper="' + esc(s.Paper_ID) + '" data-align="' + esc(align) + '"' +
-        ' data-slot="' + esc(s.Claim_Slot) + '" data-review="' + esc(review) + '"' +
-        ' data-search="' + esc(searchTextClaim(s)) + '">' +
-        '<td class="col-idx idx">' + esc(s.Paper_ID) + '</td>' +
-        '<td class="col-paper paper"><button type="button" class="claim-toggle" aria-expanded="false"' +
-          ' aria-controls="cd-' + esc(key) + '">' +
-          '<span class="chev" aria-hidden="true">\u25b8</span>' +
-          '<span class="pt"><span class="paper-title">' + esc(clean(s.Title)) + '</span>' +
-          '<span class="citation-key">' + esc(clean(s.Author_Year || s.Citation_Key)) + '</span></span></button></td>' +
-        '<td><span class="chip slot">' + esc(s.Claim_Slot) + '</span></td>' +
-        '<td>' + (align ? chipHTML('Final_Alignment', align) : '<span class="dash">&mdash;</span>') + '</td>' +
-        '<td>' + (review ? chipHTML('Human_Review_Flag', review) : '<span class="dash">&mdash;</span>') + '</td>' +
-        '</tr>' + claimDetailHTML(s, key);
+    var ordered = PAPERS.slice().sort(byPaperId);
+
+    var rows = ordered.map(function (p, i) {
+      var c1 = slotOf(p.Paper_ID, 'C1');
+      var c2 = slotOf(p.Paper_ID, 'C2');
+      return '<tr class="claim-row">' +
+        '<td class="col-idx idx">' + (i + 1) + '</td>' +
+        '<td class="col-paper paper"><span class="paper-title">' + esc(clean(p.Title)) + '</span>' +
+          '<span class="citation-key">' + esc(clean(p.Author_Year || p.Citation_Key)) + '</span></td>' +
+        '<td class="claim-cell">' + claimTextHTML(c1) + '</td>' +
+        '<td class="value-cell">' + alignChipHTML(alignValue(c1)) + '</td>' +
+        '<td class="claim-cell">' + claimTextHTML(c2) + '</td>' +
+        '<td class="value-cell">' + alignChipHTML(alignValue(c2)) + '</td>' +
+        '</tr>';
     }).join('');
 
-    var filters = '<div class="filters" id="claim-filters">' +
-      selectHTML('cf-align', 'Alignment', 'align', distinct('Final_Alignment')) +
-      selectHTML('cf-slot', 'Slot', 'slot', distinct('Claim_Slot')) +
-      selectHTML('cf-review', 'Review flag', 'review', distinct('Human_Review_Flag')) +
-      '</div>';
+    var c1Slots = SLOTS.filter(function (s) { return clean(s.Claim_Slot).toUpperCase() === 'C1'; });
+    var c2Slots = SLOTS.filter(function (s) { return clean(s.Claim_Slot).toUpperCase() === 'C2'; });
+    var tfoot = '<tfoot><tr><td class="col-idx"></td>' +
+      '<td class="col-paper"><span class="tfoot-label">Tally \u00b7 all ' + SLOTS.length + ' claim rows</span></td>' +
+      '<td class="claim-cell"><span class="tally">' + c1Slots.length + ' slots</span></td>' +
+      '<td class="value-cell"><span class="tally">' + alignCountsHTML(c1Slots) + '</span></td>' +
+      '<td class="claim-cell"><span class="tally">' + c2Slots.length + ' slots</span></td>' +
+      '<td class="value-cell"><span class="tally">' + alignCountsHTML(c2Slots) + '</span></td>' +
+      '</tr></tfoot>';
 
     return '<section class="group-section" id="g7" aria-labelledby="g7-h">' +
       '<div class="sec-head"><span class="sec-num">G7</span>' +
-      '<h2>Claim&ndash;Evidence Alignment <span class="gcount">' + SLOTS.length + ' claim rows</span></h2></div>' +
-      '<p class="lead">One row per claim&ndash;evidence slot (72 rows across ' + N + ' papers), ordered ' +
-      'Exceeds first, then Partial, Aligned and Unclear. Click a row to reveal its coding-process columns ' +
-      'and the page-level links.</p>' +
-      filters +
-      '<div class="tablewrap"><table class="sheet-table" id="table-g7"><thead><tr>' +
+      '<h2 id="g7-h">Claim&ndash;Evidence Alignment <span class="gcount">' + SLOTS.length + ' claim slots</span></h2></div>' +
+      '<p class="lead">One row per paper. C1 is the paper\u2019s primary claim; C2 is an explicit extension ' +
+      'beyond it, shown where the paper makes one. The value columns give the claim\u2013evidence alignment coding.</p>' +
+      '<div class="tablewrap"><table class="sheet-table claim-table" id="table-g7"><thead><tr>' +
       '<th scope="col" class="col-idx">#</th>' +
       '<th scope="col" class="col-paper">Paper</th>' +
-      '<th scope="col">Slot</th>' +
-      '<th scope="col">Alignment</th>' +
-      '<th scope="col">Review flag</th>' +
-      '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
-      '<p class="section-empty" hidden>No claim&ndash;evidence slot matches the current search or filters.</p>' +
+      '<th scope="col" class="col-claim">C1</th>' +
+      '<th scope="col" class="col-value">C1 value</th>' +
+      '<th scope="col" class="col-claim">C2</th>' +
+      '<th scope="col" class="col-value">C2 value</th>' +
+      '</tr></thead><tbody>' + rows + '</tbody>' + tfoot + '</table></div>' +
       '</section>';
-  }
-
-  function distinct(field) {
-    var seen = {};
-    SLOTS.forEach(function (s) { var v = clean(s[field]); if (v) seen[v] = true; });
-    return Object.keys(seen).sort();
-  }
-  function selectHTML(id, label, key, values) {
-    return '<label class="tool-field">' + esc(label) +
-      '<select id="' + id + '" data-claim="' + esc(key) + '">' +
-      '<option value="ALL">All</option>' +
-      values.map(function (v) {
-        return '<option value="' + esc(v) + '"' + (state.claim[key] === v ? ' selected' : '') + '>' +
-          esc(v) + '</option>';
-      }).join('') + '</select></label>';
   }
 
   /* ------------------------------------------------------------ jump bar -- */
 
   function jumpLinksHTML() {
     return GROUPS.map(function (g) {
-      var count = g.fields.length;
       return '<a class="jump-link" href="#' + g.id.toLowerCase() + '" data-target="' + esc(g.id) + '">' +
-        esc(g.id + ' ' + (SHORT[g.id] || g.name) + ' (' + count + ')') + '</a>';
+        esc(g.id + ' ' + (SHORT[g.id] || g.name)) + '</a>';
     }).join('') +
-      '<a class="jump-link" href="#g7" data-target="G7">G7 Claim\u2013Evidence (' + SLOTS.length + ')</a>';
-  }
-
-  /* ----------------------------------------------------------- filtering -- */
-
-  function paperMatches(tr, q) {
-    return !q || tr.getAttribute('data-search').indexOf(q) >= 0;
-  }
-  function claimMatches(tr, q) {
-    var c = state.claim;
-    if (c.align !== 'ALL' && tr.getAttribute('data-align') !== c.align) return false;
-    if (c.slot !== 'ALL' && tr.getAttribute('data-slot') !== c.slot) return false;
-    if (c.review !== 'ALL' && tr.getAttribute('data-review') !== c.review) return false;
-    return !q || tr.getAttribute('data-search').indexOf(q) >= 0;
-  }
-
-  function syncClaimDetail(tr, visible) {
-    var det = tr.nextElementSibling;
-    if (!det || !det.classList.contains('claim-detail-row')) return;
-    var open = !!state.claimOpen[tr.getAttribute('data-key')];
-    det.hidden = !(visible && open);
-    var btn = tr.querySelector('.claim-toggle');
-    var chev = tr.querySelector('.chev');
-    if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    if (chev) chev.textContent = open ? '\u25be' : '\u25b8';
-    tr.classList.toggle('open', open && visible);
-  }
-
-  function applyFilters() {
-    var q = clean(state.q).toLowerCase();
-    var paperHits = 0, claimHits = 0;
-
-    SECTION_IDS.forEach(function (gid) {
-      var sec = $id(gid.toLowerCase());
-      if (!sec) return;
-      var rows = paperRowsByGroup[gid] || [];
-      var visible = 0;
-      rows.forEach(function (tr) {
-        var ok = paperMatches(tr, q);
-        tr.classList.toggle('row-hidden', !ok);
-        if (ok) visible++;
-      });
-      if (gid === 'G1') paperHits = visible;
-      var empty = sec.querySelector('.section-empty');
-      if (empty) empty.hidden = visible > 0 || !rows.length;
-    });
-
-    claimRows.forEach(function (tr) {
-      var ok = claimMatches(tr, q);
-      tr.classList.toggle('row-hidden', !ok);
-      if (ok) claimHits++;
-      syncClaimDetail(tr, ok);
-    });
-    var claimEmpty = $id('g7') && $id('g7').querySelector('.section-empty');
-    if (claimEmpty) claimEmpty.hidden = claimHits > 0;
-
-    var mc = $id('match-count');
-    if (mc) {
-      mc.innerHTML = q
-        ? '<b>' + paperHits + '</b> of ' + N + ' papers match \u00b7 <b>' + claimHits + '</b> of ' + SLOTS.length + ' claims match'
-        : '';
-    }
+      '<a class="jump-link" href="#g7" data-target="G7">G7 Claim\u2013Evidence</a>';
   }
 
   /* ---------------------------------------------------------- definition -- */
@@ -526,11 +406,10 @@
     if (td) td.classList.toggle('open', open);
   }
 
-  function toggleClaimRow(tr) {
-    var key = tr.getAttribute('data-key');
-    var open = !state.claimOpen[key];
-    if (open) state.claimOpen[key] = true; else delete state.claimOpen[key];
-    syncClaimDetail(tr, !tr.classList.contains('row-hidden'));
+  function toggleClaimText(el) {
+    var open = !el.classList.contains('expanded');
+    el.classList.toggle('expanded', open);
+    el.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
 
   /* --------------------------------------------------------- scroll-spy --- */
@@ -568,16 +447,9 @@
   /* ---------------------------------------------------------------- build -- */
 
   function build() {
-    var html = GROUPS.map(function (g, i) { return paperSectionHTML(g, i); }).join('');
+    var html = GROUPS.map(function (g) { return paperSectionHTML(g); }).join('');
     html += claimSectionHTML();
     $id('groups').innerHTML = html;
-
-    paperRowsByGroup = {};
-    GROUPS.forEach(function (g) {
-      paperRowsByGroup[g.id] = Array.prototype.slice.call(
-        document.querySelectorAll('#table-' + g.id.toLowerCase() + ' tbody tr.row'));
-    });
-    claimRows = Array.prototype.slice.call(document.querySelectorAll('.claim-row'));
   }
 
   /* --------------------------------------------------------------- events -- */
@@ -585,27 +457,21 @@
   function bind() {
     $id('jump-links').innerHTML = jumpLinksHTML();
 
-    $id('search').addEventListener('input', function () {
-      state.q = this.value;
-      applyFilters();
-    });
-
-    $id('claim-filters').addEventListener('change', function (e) {
-      var sel = e.target.closest('[data-claim]');
-      if (!sel) return;
-      state.claim[sel.getAttribute('data-claim')] = sel.value;
-      applyFilters();
-    });
-
     $id('groups').addEventListener('click', function (e) {
       var colBtn = e.target.closest('.col-btn');
       if (colBtn) { openPopover(colBtn.getAttribute('data-field'), colBtn); return; }
       var txt = e.target.closest('.txt-btn');
       if (txt) { toggleText(txt.getAttribute('data-text-key'), txt); return; }
-      var toggle = e.target.closest('.claim-toggle');
-      if (toggle) { toggleClaimRow(toggle.closest('tr.claim-row')); return; }
-      var row = e.target.closest('tr.claim-row');
-      if (row) { toggleClaimRow(row); return; }
+      var claim = e.target.closest('.claim-text');
+      if (claim) toggleClaimText(claim);
+    });
+
+    $id('groups').addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+      var claim = e.target.closest('.claim-text');
+      if (!claim) return;
+      e.preventDefault();
+      toggleClaimText(claim);
     });
 
     document.addEventListener('click', function (e) {
@@ -634,7 +500,6 @@
   syncJumpbarHeight();
   build();
   bind();
-  applyFilters();
   syncJumpbarHeight();
   spy();
   setTimeout(function () { syncJumpbarHeight(); spy(); }, 0);

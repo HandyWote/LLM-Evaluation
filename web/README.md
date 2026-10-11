@@ -19,6 +19,32 @@ The page reads a single generated bundle (`web/data/data.js`) that assigns
   # then open http://localhost:8000/
   ```
 
+## Page structure and presentation
+
+The page is one linear document: seven stacked tables (G1–G6 = 52 paper rows
+each, G7 = 52 claim rows) under a sticky jump bar, with column-header definition
+popovers and a tally footer row per table.
+
+- **Numbering.** The `#` column is a positional index (1…52), not a source
+  identifier; internal `Paper_ID` values are never displayed.
+- **Tables G1–G6.** One row per paper, one column per coded field. Long free-text
+  cells expand on click; the `Tally · all 52 papers` footer row is computed over
+  all 52 papers.
+- **Table G7 (claim–evidence alignment).** One row per *paper* with four data
+  columns: `C1`, `C1 value`, `C2`, `C2 value` — the claim sentence as coded plus
+  its final alignment verdict (`ALIGNED` / `PARTIAL` / `EXCEEDS` / `UNCLEAR`).
+  C2 is shown only where the paper makes an explicit extension beyond C1, so 20
+  of the 52 rows carry a C2. The footer row tallies the 72 claim slots
+  (C1 = 52 slots, C2 = 20 slots). Review-flag, evidence-quote and page-link
+  columns are not rendered.
+- **No exploration UI.** No search box, no filter selects and no download links:
+  the page is meant to be read top to bottom.
+- **Palette.** Every colour comes from the CSS variables in `:root` of
+  `assets/styles.css` and `assets/framework.css` (kept identical):
+  `--brand-base #EFECE3`, `--brand-mid #8FABD4`, `--brand-accent #4A70A9`,
+  `--brand-ink #000000`. The Yes/No marks keep their semantic colours
+  (`#16a34a` / `#dc2626`) independently of the palette.
+
 ## Regenerating the data
 
 ```bash
