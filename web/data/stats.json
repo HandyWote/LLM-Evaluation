@@ -543,7 +543,7 @@
     ]
    },
    {
-    "value": "Constitutional AI Principles、Standardized Patients evaluation",
+    "value": "Constitutional AI Principles, Standardized Patients evaluation",
     "n": 1,
     "paper_ids": [
      "80"
@@ -592,7 +592,7 @@
     ]
    },
    {
-    "value": "Decision Theory（决策理论）/Persona Consistency Theory（角色扮演一致性理论）/G-Eval Framework",
+    "value": "Decision Theory/Persona Consistency Theory/G-Eval Framework",
     "n": 1,
     "paper_ids": [
      "101"
@@ -774,7 +774,7 @@
     ]
    },
    {
-    "value": "memory theory、the characterization prompt framework",
+    "value": "memory theory, the characterization prompt framework",
     "n": 1,
     "paper_ids": [
      "18"

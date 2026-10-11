@@ -275,6 +275,42 @@ QUOTE_FIXES = {
 QUOTE_PUNCT = re.compile(r"\s+([,;]|\.(?!\d))")
 QUOTE_DECIMAL = re.compile(r"(\d)\s+\.(\d)")
 
+# The manuscript is English-only, so the published page must be too. Nine coded
+# cells carried the coder's own Chinese annotations or full-width punctuation:
+# the annotation (and the whole parenthetical around it) is dropped and the
+# punctuation is written in ASCII. Nothing is invented - the Chinese notes were
+# never part of the reported value, and the archival CSV keeps them.
+CJK_PAREN = re.compile(r"[\uff08(][^\uff08()\uff09]*[\u4e00-\u9fff][^\uff08()\uff09]*[\uff09)]")
+FULLWIDTH = {
+    "\uff0c": ", ", "\u3001": ", ", "\uff1b": "; ", "\uff1a": ": ",
+    "\u3002": ". ", "\uff1f": "? ", "\uff01": "! ", "\uff08": "(", "\uff09": ")",
+    "\u3010": "[", "\u3011": "]", "\u300c": '"', "\u300d": '"',
+}
+
+
+CJK_CHAR = re.compile(r"[\u4e00-\u9fff]")
+FW_CHAR = re.compile("|".join(re.escape(c) for c in FULLWIDTH))
+
+
+def _repair_cjk(value: str, where: str) -> str:
+    """Drop Chinese annotations and write full-width punctuation in ASCII.
+
+    A value with no Chinese in it is returned untouched, character for
+    character - the repair must never rewrite an English string it happens to
+    pass through.
+    """
+    if not (CJK_CHAR.search(value) or FW_CHAR.search(value)):
+        return value
+    value, n = CJK_PAREN.subn("", value)
+    if n:
+        _repairs[f"{where} Chinese annotation removed"] += n
+    for bad, good in FULLWIDTH.items():
+        if bad in value:
+            _repairs[f"{where} full-width {bad!r} -> {good!r}"] += value.count(bad)
+            value = value.replace(bad, good)
+    value = re.sub(r"\s{2,}", " ", value).strip()
+    return value.rstrip(",;: ").strip() or value
+
 _repairs: "Counter[str]" = Counter()
 
 
@@ -284,7 +320,7 @@ def _repair_string(value: str, where: str = "text") -> str:
         if n:
             _repairs[f"{where} {bad!r} -> {good!r}"] += n
             value = value.replace(bad, good)
-    return value
+    return _repair_cjk(value, where)
 
 
 def _repair_quote(value: str) -> str:
