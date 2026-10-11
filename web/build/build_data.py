@@ -225,6 +225,75 @@ def _strip(v: str) -> str:
     return (v or "").strip()
 
 
+# --------------------------------------------------------- text repairs -----
+#
+# A handful of transcription slips survived into the release tables. None of
+# them is a coded judgement: they are a stray capital inside a word, a missing
+# space after a question mark, and PDF-extraction spacing artefacts inside
+# verbatim quotes. They are repaired here, at build time, so the archival CSVs
+# keep the adjudicated coding record untouched while the published page reads
+# correctly. Every rule is an exact find/replace - nothing is rewritten by
+# guesswork - and main() prints how many cells each rule touched.
+
+# Slips that are wrong wherever they appear - a paper title, a coded free-text
+# value or a verbatim quote. Each of these was checked against the source: the
+# published title, the source BibTeX entry or the source PDF.
+STRING_FIXES = {
+    "DiagNosis": "Diagnosis",                  # Paper 72 (Ozgun2025Trustworthy)
+    "Chatbots?A": "Chatbots? A",               # Paper 84 (Basar2024To)
+    "InNovative": "Innovative",                # Paper 93 (Feng2025Reframe): title and two coded values
+    "AnNotationFramework": "AnnotationFramework",   # Paper 15, Focus_Type
+    "G-Eval Framwork": "G-Eval Framework",          # Paper 101, Clinical_Theory
+}
+# Deliberately NOT changed: "Psychological Counseling CanNot Be Achieved
+# Overnight" (Paper 111). The source BibTeX entry spells it the same way, so it
+# is the source title's own styling rather than a transcription slip.
+
+# Verbatim quotes: artefacts of extracting text from the source PDFs.
+QUOTE_FIXES = {
+    "M IND": "MIND",
+    "T RAINER": "TRAINER",
+    "L AVAP": "LAVAP",
+    "PATIENT-\u03a8 -": "PATIENT-\u03a8-",
+    "PATIENT -": "PATIENT-",
+    "\u03a8- TRAINER": "\u03a8-TRAINER",
+    "PROBLEM -SOLVING": "PROBLEM-SOLVING",
+}
+
+# Whitespace before sentence punctuation ("CAMEL ,"), but never inside a
+# decimal: "p = .022" and "29 .60" both keep their number intact.
+QUOTE_PUNCT = re.compile(r"\s+([,;]|\.(?!\d))")
+QUOTE_DECIMAL = re.compile(r"(\d)\s+\.(\d)")
+
+_repairs: "Counter[str]" = Counter()
+
+
+def _repair_string(value: str, where: str = "text") -> str:
+    for bad, good in STRING_FIXES.items():
+        n = value.count(bad)
+        if n:
+            _repairs[f"{where} {bad!r} -> {good!r}"] += n
+            value = value.replace(bad, good)
+    return value
+
+
+def _repair_quote(value: str) -> str:
+    if not value:
+        return value
+    for bad, good in QUOTE_FIXES.items():
+        n = value.count(bad)
+        if n:
+            _repairs[f"quote {bad!r} -> {good!r}"] += n
+            value = value.replace(bad, good)
+    value, n = QUOTE_PUNCT.subn(r"\1", value)
+    if n:
+        _repairs["quote whitespace before punctuation"] += n
+    value, n = QUOTE_DECIMAL.subn(r"\1.\2", value)
+    if n:
+        _repairs["quote space inside a decimal"] += n
+    return value
+
+
 def build_papers(codebook: list[dict]) -> dict:
     rows = read_csv(FINAL_TABLE)
     theory = {r["Citation_Key"]: r for r in read_csv(THEORY_CSV)}
@@ -266,6 +335,7 @@ def build_papers(codebook: list[dict]) -> dict:
                 val = _strip(r.get(col))
             if name in normalizers:
                 val = _normalize_value(val, normalizers[name])
+            val = _repair_string(val, name)
             flag = _gate_contradiction(r, name, val)
             if flag:
                 overrides[name] = flag
@@ -275,7 +345,7 @@ def build_papers(codebook: list[dict]) -> dict:
             {
                 "Paper_ID": r["Paper_ID"],
                 "Citation_Key": ck,
-                "Title": _strip(r.get("Title")),
+                "Title": _repair_string(_strip(r.get("Title")), "Title"),
                 "Year": _strip(r.get("Year")),
                 "Venue": _strip(r.get("Venue")),
                 "Author_Year": _author_year(r.get("Bibtex"), r.get("Year")),
@@ -405,6 +475,10 @@ def build_claims() -> dict:
     slots = []
     for r in rows:
         slot = {k: _strip(r.get(k)) for k in CLAIM_FIELDS}
+        slot["Title"] = _repair_string(slot["Title"], "claim title")
+        for col in ("Claim_Quote", "Evidence_Quote"):
+            slot[col] = _repair_string(slot[col], col)
+            slot[col] = _repair_quote(slot[col])
         url = url_by_key.get(slot["Citation_Key"], "")
         meta = meta_by_key.get(slot["Citation_Key"], {})
         slot["Author_Year"] = _author_year(bib_by_key.get(slot["Citation_Key"], ""), meta.get("Year", ""))
@@ -574,7 +648,7 @@ def _clinical_theory(ft: list[dict]) -> dict:
 
     for r in ft:
         pid = r["Paper_ID"]
-        raw = _strip(r.get("Clinical_Theory"))
+        raw = _repair_string(_strip(r.get("Clinical_Theory")), "Clinical_Theory raw")
         raw_counts.setdefault(raw, []).append(pid)
         if raw.casefold() == "not specified":
             not_specified.append(pid)
@@ -898,6 +972,12 @@ def main() -> None:
         f"(unconditional {gated['rubric_reliability']['unconditional_n']})"
     )
     print(f"reliability_reporting: {stats['reliability_reporting']}")
+    if _repairs:
+        print("text repairs applied (display only; archival CSVs untouched):")
+        for rule, n in sorted(_repairs.items()):
+            print(f"  {n:>3}x  {rule}")
+    else:
+        print("text repairs applied: none")
     print(
         "behavioral_validity criteria: "
         + ", ".join(f"{c['id']}={c['n']}" for c in bv["criteria"])
