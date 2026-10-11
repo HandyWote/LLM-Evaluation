@@ -1,18 +1,17 @@
 /* ==========================================================================
    From Surface Realism to Behavioral Validity — styles
    Two parts:
-     1. the shared shell (also used by framework.html, which still links this
-        file) — marked "shared with framework.html - do not delete";
+     1. the page shell (palette, reset, typography, hero, nav, footer);
      2. the coded-corpus sheet browser (sticky jump bar, seven stacked group
         tables, type-appropriate cell widgets, the G7 claim–evidence table,
         pinned column definitions and the table tallies).
+   The palette below is the single source of colour for the whole site.
    ========================================================================== */
 
 /* ==========================================================================
-   shared with framework.html - do not delete
-   Palette, reset, typography and the shell classes that the Behavior-Grounded
-   Evaluation page renders with: hero / nav / sections / panels / chain /
-   quotes / bars / funnel / links / footer.
+   shell
+   Palette, reset, typography and the shell classes: hero / nav / sections /
+   panels / quotes / links / footer.
    ========================================================================== */
 
 :root {
@@ -202,7 +201,7 @@ h3 { font-size: 1rem; font-weight: 700; }
 .fatal { max-width: 720px; margin: 60px auto; padding: 20px 24px; border: 1px solid var(--rose); border-radius: 12px; background: #fff1f2; color: #9f1239; font-size: .9rem; }
 
 /* ==========================================================================
-   end shared with framework.html
+   end shell
    ========================================================================== */
 
 /* ==========================================================================

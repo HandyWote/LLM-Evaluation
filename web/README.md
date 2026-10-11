@@ -21,6 +21,10 @@ The page reads a single generated bundle (`web/data/data.js`) that assigns
 
 ## Page structure and presentation
 
+**Single page.** `web/index.html` is the only page of the site. There is no
+second page: the former companion page has been retired and is no longer
+published. The page carries no search box, no filter bar and no download UI.
+
 The page is one linear document: seven stacked tables (G1–G6 = 52 paper rows
 each, G7 = 52 claim rows) under a sticky jump bar, with column-header definition
 popovers and a tally footer row per table.
@@ -39,10 +43,10 @@ popovers and a tally footer row per table.
   columns are not rendered.
 - **No exploration UI.** No search box, no filter selects and no download links:
   the page is meant to be read top to bottom.
-- **Palette.** Every colour comes from the CSS variables in `:root` of
-  `assets/styles.css` and `assets/framework.css` (kept identical):
-  `--brand-base #EFECE3`, `--brand-mid #8FABD4`, `--brand-accent #4A70A9`,
-  `--brand-ink #000000`. The Yes/No marks keep their semantic colours
+- **Palette.** Every colour comes from the four CSS variables declared in
+  `:root` of `assets/styles.css` (the site's only stylesheet): `--brand-base
+  #EFECE3`, `--brand-mid #8FABD4`, `--brand-accent #4A70A9`, `--brand-ink
+  #000000`. The Yes/No marks keep their semantic colours
   (`#16a34a` / `#dc2626`) independently of the palette.
 
 ## Regenerating the data
@@ -155,7 +159,7 @@ documented alias table in `build_data.py`. Output:
 - `families: [{name, n, paper_ids}]` (CBT, motivational interviewing, DBT,
   problem-solving therapy, working alliance, person-centered/Rogers, narrative
   therapy/IMCS, diagnostic manuals & symptom scales, crisis & suicide-risk
-  frameworks, Big Five, emotion/empathy constructs, clinical guidelines & exams);
+  approaches, Big Five, emotion/empathy constructs, clinical guidelines & exams);
 - `unclassified: {n, paper_ids}` for fragments that match no family and
   `not_specified: {n: 1, paper_ids: ['29']}`;
 - `raw: [{value, n, paper_ids}]` — the unmodified reported strings, kept so the
