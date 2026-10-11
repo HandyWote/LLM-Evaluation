@@ -239,15 +239,25 @@ def _strip(v: str) -> str:
 # value or a verbatim quote. Each of these was checked against the source: the
 # published title, the source BibTeX entry or the source PDF.
 STRING_FIXES = {
-    "DiagNosis": "Diagnosis",                  # Paper 72 (Ozgun2025Trustworthy)
+    "iagN": "iagn",                            # DiagNosis / DiagNostic / diagNosis (Papers 72, 109, 110)
     "Chatbots?A": "Chatbots? A",               # Paper 84 (Basar2024To)
-    "InNovative": "Innovative",                # Paper 93 (Feng2025Reframe): title and two coded values
+    "InNovative": "Innovative",                # Paper 93 (Feng2025Reframe)
+    "anNotat": "annotat",                      # anNotator / anNotated (Papers 56, 75, 86)
     "AnNotationFramework": "AnnotationFramework",   # Paper 15, Focus_Type
     "G-Eval Framwork": "G-Eval Framework",          # Paper 101, Clinical_Theory
+    "TechNology": "Technology",                # PETS scale name (Papers 69, 71)
+    "ANoVA": "ANOVA",                          # Paper 10
+    "deNotes": "denotes",                       # Paper 93
+    "MontesaNo": "Montesano",                   # Paper 93, cited author name
+    "AutoNomy": "Autonomy",                    # Paper 104
 }
-# Deliberately NOT changed: "Psychological Counseling CanNot Be Achieved
-# Overnight" (Paper 111). The source BibTeX entry spells it the same way, so it
-# is the source title's own styling rather than a transcription slip.
+# Deliberately NOT changed:
+#   "Psychological Counseling CanNot Be Achieved Overnight" (Paper 111) - the
+#     source BibTeX entry spells it the same way, so it is the source title's
+#     own styling rather than a transcription slip.
+#   "AccuracyNo Bias" (Paper 110) - a formula variable (Accuracy_bias /
+#     Accuracy_noBias), and "CogE." / "EmoE." (Paper 89) - deliberate metric
+#     abbreviations, not misspellings.
 
 # Verbatim quotes: artefacts of extracting text from the source PDFs.
 QUOTE_FIXES = {
